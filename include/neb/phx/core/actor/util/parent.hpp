@@ -1,7 +1,7 @@
 #ifndef PHYSX_CORE_ACTOR_PARENT_HPP
 #define PHYSX_CORE_ACTOR_PARENT_HPP
 
-#include <neb/core/actor/util/Parent.hh>
+#include <neb/core/actor/util/parent.hpp>
 
 #include <PhysX/core/scene/util/decl.hpp>
 
