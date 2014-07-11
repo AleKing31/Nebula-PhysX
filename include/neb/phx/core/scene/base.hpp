@@ -32,7 +32,11 @@
 
 #define LIGHT_MAX 20
 
-namespace phx { namespace core { namespace scene {
+namespace neb { namespace phx {
+	
+	class simulation_callback;
+
+namespace core { namespace scene {
 	/** 
 	 * @ingroup group_core
 	 * @brief base
@@ -52,10 +56,12 @@ namespace phx { namespace core { namespace scene {
 		public:
 			void					create_physics();
 
-			virtual  void				serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
+			virtual  void				serialize(
+boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
 				ar & boost::serialization::make_nvp("gravity",gravity_);
 			}
-			virtual void				serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
+			virtual void				serialize(
+boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
 				ar & boost::serialization::make_nvp("gravity",gravity_);
 			}
 
@@ -73,7 +79,7 @@ namespace phx { namespace core { namespace scene {
 		public:
 			physx::PxScene*					px_scene_;
 			physx::PxSimulationFilterShader			px_filter_shader_;
-			phx::simulation_callback*			simulation_callback_;
+			neb::phx::simulation_callback*			simulation_callback_;
 
 			vec3					gravity_;
 
@@ -83,7 +89,8 @@ namespace phx { namespace core { namespace scene {
 
 	};
 
-}}}
+}}
+}}
 
 #endif
 

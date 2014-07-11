@@ -1,18 +1,18 @@
 
 
-#include <PhysX/core/scene/util/parent.hpp>
-#include <PhysX/game/map/base.hpp>
+#include <neb/phx/core/scene/util/parent.hpp>
+#include <neb/phx/game/map/base.hpp>
 
-phx::game::map::base::base(sp::shared_ptr<phx::core::scene::util::parent> parent):
+neb::phx::game::map::base::base(sp::shared_ptr<neb::phx::core::scene::util::parent> parent):
 	neb::core::scene::base(parent),
-	phx::core::scene::base(parent),
+	neb::phx::core::scene::base(parent),
 	neb::game::map::base(parent)
 {}
-void		phx::game::map::base::release() {
+void		neb::phx::game::map::base::release() {
 }
-void		phx::game::map::base::init() {
+void		neb::phx::game::map::base::init() {
 
-	phx::core::scene::base::init();
+	neb::phx::core::scene::base::init();
 	neb::game::map::base::init();
 
 }

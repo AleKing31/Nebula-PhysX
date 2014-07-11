@@ -1,11 +1,11 @@
-#ifndef PHYSX_SCENE_UTIL_PARENT_HH
-#define PHYSX_SCENE_UTIL_PARENT_HH
+#ifndef NEB_PHX_CORE_SCENE_UTIL_PARENT_HH
+#define NEB_PHX_CORE_SCENE_UTIL_PARENT_HH
 
 
 
 #include <neb/core/scene/util/Parent.hh>
 
-namespace phx { namespace core { namespace scene { namespace util {
+namespace neb { namespace phx { namespace core { namespace scene { namespace util {
 
 
 	class parent:

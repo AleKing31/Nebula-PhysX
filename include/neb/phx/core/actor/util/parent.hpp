@@ -3,30 +3,36 @@
 
 #include <neb/core/actor/util/parent.hpp>
 
-#include <PhysX/core/scene/util/decl.hpp>
 
-namespace phx { namespace core { namespace actor { namespace util {
+namespace neb { namespace phx { namespace core {
 
+	namespace scene {
+		class base;
+	}
 
-
-	/** @brief @parent
-	 * abstract class for parent of a %phx %actor
-	 */
-	class parent:
-		virtual public neb::core::actor::util::parent
-	{
-		public:
-			parent();
-			virtual ~parent();
-
-			virtual void						init();
-		public:
-			sp::shared_ptr<phx::core::scene::base>			getScene();
-	};
+	namespace actor { namespace util {
 
 
 
-}}}}
+		/** @brief @parent
+		 * abstract class for parent of a %phx %actor
+		 */
+		class parent:
+			virtual public neb::core::actor::util::parent
+		{
+			public:
+				parent();
+				virtual ~parent();
+
+				virtual void						init();
+			public:
+				sp::shared_ptr<neb::phx::core::scene::base>			getScene();
+		};
+
+
+
+	}}}
+}}
 
 #endif
 
