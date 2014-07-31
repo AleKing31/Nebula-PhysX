@@ -39,11 +39,11 @@ namespace phx { namespace app {
 
 	class base:
 		virtual public neb::app::__core,
-		virtual public phx::core::scene::util::parent,
-		virtual public phx::game::game::util::parent
+		virtual public neb::phx::core::scene::util::parent,
+		virtual public neb::phx::game::game::util::parent
 	{
 		public:
-			friend void phx::init();
+			friend void neb::phx::init();
 		public:
 			base();
 			void						init();

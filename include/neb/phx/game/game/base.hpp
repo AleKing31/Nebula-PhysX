@@ -6,7 +6,7 @@
 
 #include <PhysX/game/ai/util/parent.hpp>
 
-namespace phx { namespace game { namespace game {
+namespace neb { namespace phx { namespace game { namespace game {
 
 	class base:
 		virtual public neb::game::game::base,
@@ -21,6 +21,6 @@ namespace phx { namespace game { namespace game {
 
 	};
 
-}}}
+}}}}
 
 #endif

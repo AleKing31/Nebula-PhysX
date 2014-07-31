@@ -6,7 +6,7 @@
 
 #include <PhysX/game/ai/base.hpp>
 
-namespace phx { namespace game { namespace ai { namespace util {
+namespace neb { namespace phx { namespace game { namespace ai { namespace util {
 
 
 
@@ -22,7 +22,7 @@ namespace phx { namespace game { namespace ai { namespace util {
 		
 
 	
-}}}}
+}}}}}
 
 #endif
 

@@ -7,7 +7,7 @@
 
 #include <PhysX/core/actor/util/decl.hpp>
 
-namespace phx { namespace game { namespace ai {
+namespace neb { namespace phx { namespace game { namespace ai {
 
 
 	class base:
@@ -27,7 +27,7 @@ namespace phx { namespace game { namespace ai {
 	};
 
 
-}}}
+}}}}
 
 #endif
 

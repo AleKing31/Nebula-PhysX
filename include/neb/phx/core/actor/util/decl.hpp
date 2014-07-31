@@ -1,7 +1,7 @@
 #ifndef PX_CORE_ACTOR_UTIL_DECL_HPP
 #define PX_CORE_ACTOR_UTIL_DECL_HPP
 
-namespace phx { namespace core {
+namespace neb { namespace phx { namespace core {
 
 	/** @brief %actor */
 	namespace actor {
@@ -59,6 +59,6 @@ namespace phx { namespace core {
 
 	}
 
-}}
+}}}
 
 #endif

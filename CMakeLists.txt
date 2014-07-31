@@ -9,10 +9,12 @@ SET(nebula_physx_STATIC TRUE)
 FIND_PACKAGE(glfw)
 FIND_PACKAGE(CMakeHelper)
 FIND_PACKAGE(PhysX)
+
 FIND_PACKAGE(Galaxy COMPONENTS
 	std
 	log
 	REQUIRED)
+
 FIND_PACKAGE(Nebula COMPONENTS
 	core
 	gfx
@@ -40,12 +42,9 @@ FIND_PACKAGE(Boost 1.55 COMPONENTS program_options serialization log system thre
 
 SET(libs ${libs}
 	${PROJECT_NAME}
-	Nebula
 	maze
-	Galaxy-Standard
-	Galaxy-Network
-	Galaxy-Log
-	${PhysX_LIBRARIES}
+	${Galaxy_LIBRARIES}
+	${Nebula_LIBRARIES}
 	${PhysX_LIBRARIES}
 	${Boost_LIBRARIES}
 	glfw3
@@ -61,7 +60,6 @@ SET(libs ${libs}
 	Xi
 	Xcursor
 	Xxf86vm
-	${PhysX_LIBRARIES}
 	${PhysX_LIBRARIES}
 	)
 
