@@ -24,9 +24,9 @@
 
 //#include <neb/gfx/Camera/View/Base.hh>
 
-#include <PhysX/core/actor/util/decl.hpp>
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/simulation_callback.hh>
+#include <neb/phx/core/actor/util/decl.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/simulation_callback.hh>
 
 //#include <glutpp/shader.h>
 

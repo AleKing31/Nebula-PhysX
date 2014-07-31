@@ -4,7 +4,7 @@
 
 #include <neb/util/parent.hpp>
 
-#include <PhysX/game/weapon/base.hpp>
+#include <neb/phx/game/weapon/base.hpp>
 
 namespace neb { namespace phx { namespace game { namespace weapon { namespace util {
 

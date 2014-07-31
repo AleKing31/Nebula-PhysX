@@ -1,7 +1,7 @@
 #ifndef PHYSX_GAME_WEAPON_SIMPLE_PROJECTILE_HPP
 #define PHYSX_GAME_WEAPON_SIMPLE_PROJECTILE_HPP
 
-#include <PhysX/game/weapon/base.hpp>
+#include <neb/phx/game/weapon/base.hpp>
 
 namespace neb { namespace phx { namespace game { namespace weapon {
 

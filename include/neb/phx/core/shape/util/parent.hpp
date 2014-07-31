@@ -20,8 +20,8 @@
 
 #include <neb/core/Pose.hh>
 
-#include <PhysX/core/actor/util/cast.hpp>
-#include <PhysX/core/shape/util/cast.hpp>
+#include <neb/phx/core/actor/util/cast.hpp>
+#include <neb/phx/core/shape/util/cast.hpp>
 
 namespace neb { namespace phx { namespace core { namespace shape { namespace util {
 

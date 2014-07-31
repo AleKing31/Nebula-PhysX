@@ -4,12 +4,12 @@
 #include <neb/gfx/window/Base.hh>
 #include <neb/debug.hh>
 
-#include <PhysX/filter.hpp>
-#include <PhysX/app/base.hpp>
-#include <PhysX/core/actor/rigiddynamic/base.hpp>
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/core/shape/box.hpp>
-#include <PhysX/game/weapon/SimpleProjectile.hpp>
+#include <neb/phx/filter.hpp>
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/core/shape/box.hpp>
+#include <neb/phx/game/weapon/SimpleProjectile.hpp>
 
 
 phx::game::weapon::SimpleProjectile::SimpleProjectile() {

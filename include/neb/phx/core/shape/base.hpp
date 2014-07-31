@@ -7,7 +7,7 @@
 
 #include <neb/core/shape/base.hpp>
 
-#include <PhysX/core/shape/util/parent.hpp>
+#include <neb/phx/core/shape/util/parent.hpp>
 
 namespace neb { namespace phx { namespace core { namespace shape {
 

@@ -1,7 +1,7 @@
 
-#include <PhysX/core/actor/rigiddynamic/base.hpp>
-#include <PhysX/core/actor/rigidstatic/base.hpp>
-#include <PhysX/core/actor/util/cast.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
+#include <neb/phx/core/actor/rigidstatic/base.hpp>
+#include <neb/phx/core/actor/util/cast.hpp>
 
 sp::shared_ptr<phx::core::actor::base>				phx::core::actor::util::cast::isPxActorBase() {
 	return sp::dynamic_pointer_cast<phx::core::actor::base>(shared_from_this());

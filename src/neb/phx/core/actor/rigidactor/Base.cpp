@@ -1,11 +1,11 @@
 #include <Galaxy-Log/log.hpp>
 #include <neb/debug.hh>
 
-#include <PhysX/util/convert.hpp>
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/core/actor/rigidactor/base.hpp>
+#include <neb/phx/util/convert.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/core/actor/rigidactor/base.hpp>
 
-#include <PhysX/core/shape/box.hpp>
+#include <neb/phx/core/shape/box.hpp>
 
 //neb::core::actor::rigidactor::base::base() {
 //}

@@ -1,8 +1,8 @@
 
 #include <neb/core/free.hpp>
 
-#include <PhysX/app/base.hpp>
-#include <PhysX/free.hpp>
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/free.hpp>
 
 void	neb::phx::init() {
 	

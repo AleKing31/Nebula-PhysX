@@ -4,12 +4,12 @@
 #include <neb/core/shape/base.hpp>
 //#include <neb/Physics.hh>
 
-#include <PhysX/app/base.hpp>
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/core/actor/rigiddynamic/base.hpp>
-#include <PhysX/core/actor/rigiddynamic/base.hpp>
-#include <PhysX/util/convert.hpp>
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
+#include <neb/phx/util/convert.hpp>
 
 phx::core::actor::rigiddynamic::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),

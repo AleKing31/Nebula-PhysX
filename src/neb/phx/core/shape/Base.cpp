@@ -7,37 +7,37 @@
 
 //#include <neb/util/Map.hh>
 
-#include <PhysX/app/base.hpp>
-#include <PhysX/core/shape/base.hpp>
-#include <PhysX/core/actor/rigidactor/base.hpp>
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/core/shape/base.hpp>
+#include <neb/phx/core/actor/rigidactor/base.hpp>
 
 
-phx::core::shape::base::base(sp::shared_ptr<phx::core::shape::util::parent> parent):
+neb::phx::core::shape::base::base(sp::shared_ptr<phx::core::shape::util::parent> parent):
 	neb::core::shape::base(parent)
 {
 	//NEBULA_SHAPE_BASE_FUNC;
 	assert(parent);
 }
-phx::core::shape::base::~base() {}
-//void			phx::core::shape::base::release() {
+neb::phx::core::shape::base::~base() {}
+//void			neb::phx::core::shape::base::release() {
 //}
-void			phx::core::shape::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::shape::base::step(gal::std::timestep const & ts) {
 }
-void			phx::core::shape::base::init() {
+void			neb::phx::core::shape::base::init() {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	neb::core::shape::base::init();
 
 	create_physics();
 }
-void			phx::core::shape::base::release() {
+void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	neb::core::shape::base::release();
 	
 	if(px_shape_) {
 		
-		auto ra = sp::dynamic_pointer_cast<phx::core::actor::rigidactor::base>(parent_.lock());
+		auto ra = ::std::dynamic_pointer_cast<neb::phx::core::actor::rigidactor::base>(parent_.lock());
 		assert(ra);		
 
 		auto pxra = ra->px_actor_->isRigidActor();
@@ -49,7 +49,7 @@ void			phx::core::shape::base::release() {
 		px_shape_ = NULL;
 	}
 }
-void			phx::core::shape::base::create_physics() {
+void			neb::phx::core::shape::base::create_physics() {
 
 	//NEBULA_DEBUG_0_FUNCTION;
 
@@ -70,15 +70,15 @@ void			phx::core::shape::base::create_physics() {
 		}
 	}
 }
-sp::shared_ptr<phx::core::shape::util::parent>		phx::core::shape::base::getPxParent() {
+sp::shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
 	
 	auto parent = parent_.lock();
 	assert(parent);
 	
-	auto pxparent(sp::dynamic_pointer_cast<phx::core::shape::util::parent>(parent));
+	auto pxparent(::std::dynamic_pointer_cast<neb::phx::core::shape::util::parent>(parent));
 	
 	if(!pxparent) {
-		std::cout << typeid(*parent).name() << std::endl;
+		::std::cout << typeid(*parent).name() << ::std::endl;
 		abort();
 	}
 

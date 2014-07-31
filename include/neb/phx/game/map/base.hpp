@@ -4,7 +4,7 @@
 
 #include <neb/core/game/map/base.hpp>
 
-#include <PhysX/core/scene/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
 
 namespace neb { namespace phx {
 

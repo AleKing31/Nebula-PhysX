@@ -1,5 +1,5 @@
 
-#include <PhysX/game/weapon/base.hpp>
+#include <neb/phx/game/weapon/base.hpp>
 
 phx::game::weapon::base::base():
 	last_(0),

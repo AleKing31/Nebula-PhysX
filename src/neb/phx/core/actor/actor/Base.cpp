@@ -8,9 +8,9 @@
 //#include <neb/simulation_callback.hh>
 #include <neb/core/shape/base.hpp>
 
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/core/actor/actor/base.hpp>
-#include <PhysX/core/scene/base.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/core/actor/actor/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
 
 //neb::core::actor::actor::base::base() {
 //}

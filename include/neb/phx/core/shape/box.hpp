@@ -2,13 +2,13 @@
 #define PHYSX_SHAPE_BOX_HH
 
 
-#include <PhysX/core/shape/base.hpp>
+#include <neb/phx/core/shape/base.hpp>
 
-namespace phx { namespace core { namespace shape {
+namespace neb { namespace phx { namespace core { namespace shape {
 
 
 	class box:
-		virtual public phx::core::shape::base
+		virtual public neb::phx::core::shape::base
 	{
 		public:
 			box(sp::shared_ptr<phx::core::actor::rigidactor::base> parent);
@@ -23,6 +23,6 @@ namespace phx { namespace core { namespace shape {
 
 
 
-}}}
+}}}}
 
 #endif

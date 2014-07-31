@@ -1,5 +1,5 @@
 
-#include <PhysX/game/game/base.hpp>
+#include <neb/phx/game/game/base.hpp>
 
 void			phx::game::game::base::step(gal::std::timestep const & ts) {
 	

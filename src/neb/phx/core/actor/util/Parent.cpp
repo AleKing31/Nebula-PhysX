@@ -2,9 +2,9 @@
 //#include <neb/app/Base.hh>
 #include <neb/core/scene/base.hpp>
 
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/core/actor/base.hpp>
-#include <PhysX/core/actor/util/parent.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/core/actor/base.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
 
 
 phx::core::actor::util::parent::parent() {

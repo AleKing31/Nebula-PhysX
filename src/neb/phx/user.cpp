@@ -3,9 +3,9 @@
 
 #include <neb/util/config.hh>
 //#include <nebula/camera/camera.hpp>
-#include <PhysX/core/actor/control/rigidbody/base.hpp>
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
 
-#include <PhysX/user.hh>
+#include <neb/phx/user.hh>
 
 neb::phx::user::user()
 {}

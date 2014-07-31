@@ -7,9 +7,9 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/actor/control/rigidbody/base.hpp>
-#include <PhysX/util/convert.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+#include <neb/phx/util/convert.hpp>
 
 vec3		phx::core::actor::control::rigidbody::pd::getOrientationError() {
 	// get actor

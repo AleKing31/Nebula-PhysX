@@ -5,7 +5,7 @@
 
 #include <neb/util/typedef.hpp>
 
-#include <PhysX/util/convert.hpp>
+#include <neb/phx/util/convert.hpp>
 
 
 

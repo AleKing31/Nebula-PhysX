@@ -26,14 +26,14 @@
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/window/util/signals.hpp>
 
-#include <PhysX/util/convert.hpp>
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/actor/control/rigidbody/base.hpp>
+#include <neb/phx/util/convert.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
 
 
-phx::core::actor::rigidbody::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
@@ -41,7 +41,7 @@ phx::core::actor::rigidbody::base::base(sp::shared_ptr<phx::core::actor::util::p
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)
 {}
-void			phx::core::actor::rigidbody::base::add_force(real time) {
+void			neb::phx::core::actor::rigidbody::base::add_force(real time) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;;
 
@@ -75,10 +75,10 @@ void			phx::core::actor::rigidbody::base::add_force(real time) {
 
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug)
-		<< std::setw(8) << "f_global"
-		<< std::setw(8) << f_global.x
-		<< std::setw(8) << f_global.y
-		<< std::setw(8) << f_global.z
+		<< ::std::setw(8) << "f_global"
+		<< ::std::setw(8) << f_global.x
+		<< ::std::setw(8) << f_global.y
+		<< ::std::setw(8) << f_global.z
 		<< " mass " << pxrigidbody->getMass();
 
 
@@ -86,11 +86,11 @@ void			phx::core::actor::rigidbody::base::add_force(real time) {
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
-void		phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb::gfx::window::base> window) {
+void		neb::phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb::gfx::window::base> window) {
 
 	//auto me = isRigidBodyBase();
 
-	auto control(sp::make_shared<phx::core::actor::control::rigidbody::manual>());
+	auto control(sp::make_shared<neb::phx::core::actor::control::rigidbody::manual>());
 	
 	control_ = control;
 
@@ -99,7 +99,7 @@ void		phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb::gfx:
 	control->conn_.key_fun_ = window->sig_.key_fun_.connect(
 			20,
 			neb::gfx::window::signals::KeyFun::slot_type(
-				&phx::core::actor::control::rigidbody::base::key_fun,
+				&neb::phx::core::actor::control::rigidbody::base::key_fun,
 				control.get(),
 				_1,
 				_2,
@@ -111,7 +111,7 @@ void		phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb::gfx:
 
 
 }
-void		phx::core::actor::rigidbody::base::step(gal::std::timestep const & ts) {
+void		neb::phx::core::actor::rigidbody::base::step(gal::std::timestep const & ts) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;;
 

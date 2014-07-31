@@ -10,9 +10,9 @@
 #include <Galaxy-Log/log.hpp>
 #include <neb/debug.hh>
 
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/actor/control/rigidbody/base.hpp>
-#include <PhysX/util/convert.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+#include <neb/phx/util/convert.hpp>
 
 phx::core::actor::control::rigidbody::base::base() {
 

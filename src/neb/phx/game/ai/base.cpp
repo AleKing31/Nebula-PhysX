@@ -1,9 +1,9 @@
 #include <Galaxy-Log/log.hpp>
 #include <neb/debug.hh>
 
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/actor/control/rigidbody/base.hpp>
-#include <PhysX/game/ai/base.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+#include <neb/phx/game/ai/base.hpp>
 
 void						phx::game::ai::base::step(gal::std::timestep const & ts) {
 

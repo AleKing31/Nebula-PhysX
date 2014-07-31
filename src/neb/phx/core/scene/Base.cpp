@@ -2,10 +2,10 @@
 
 #include <Galaxy-Log/log.hpp>
 
-#include <PhysX/app/base.hpp>
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/util/convert.hpp>
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/util/convert.hpp>
 
 #include <neb/debug.hh>
 #include <neb/core/scene/util/Types.hh>
@@ -187,7 +187,7 @@ void		neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 			if(pxrigidbody != NULL) {
 				auto rigidbody = ::std::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(actor);
 				if(!rigidbody) {
-					std::cout << typeid(*actor).name() << std::endl;
+					::std::cout << typeid(*actor).name() << ::std::endl;
 					abort();
 				}
 

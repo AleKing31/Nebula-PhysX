@@ -21,10 +21,10 @@
 #include <neb/gfx/window/Base.hh>
 */
 
-#include <PhysX/core/actor/util/parent.hpp>
-#include <PhysX/core/actor/base.hpp>
-#include <PhysX/core/scene/base.hpp>
-#include <PhysX/game/weapon/SimpleProjectile.hpp>
+#include <neb/phx/core/actor/util/parent.hpp>
+#include <neb/phx/core/actor/base.hpp>
+#include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/game/weapon/SimpleProjectile.hpp>
 
 phx::core::actor::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),

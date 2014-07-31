@@ -3,7 +3,7 @@
 
 #include <neb/core/actor/util/Cast.hh>
 
-#include <PhysX/core/actor/util/decl.hpp>
+#include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace util {
 

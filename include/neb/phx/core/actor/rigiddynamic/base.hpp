@@ -4,8 +4,8 @@
 #include <PxPhysicsAPI.h>
 
 
-#include <PhysX/core/actor/rigidbody/base.hpp>
-#include <PhysX/core/actor/util/decl.hpp>
+#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/util/decl.hpp>
 
 namespace phx { namespace core { namespace actor { namespace rigiddynamic {
 
