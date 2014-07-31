@@ -9,7 +9,7 @@
 
 #include <PhysX/core/shape/util/parent.hpp>
 
-namespace phx { namespace core { namespace shape {
+namespace neb { namespace phx { namespace core { namespace shape {
 
 
 	class base: virtual public neb::core::shape::base {
@@ -32,7 +32,7 @@ namespace phx { namespace core { namespace shape {
 
 	};
 
-}}}
+}}}}
 
 #endif
 

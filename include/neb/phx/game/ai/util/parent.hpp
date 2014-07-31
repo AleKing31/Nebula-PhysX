@@ -4,7 +4,7 @@
 
 #include <neb/util/parent.hpp>
 
-#include <PhysX/game/ai/base.hpp>
+#include <neb/phx/game/ai/base.hpp>
 
 namespace neb { namespace phx { namespace game { namespace ai { namespace util {
 

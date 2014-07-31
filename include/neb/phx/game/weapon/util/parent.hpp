@@ -6,23 +6,22 @@
 
 #include <PhysX/game/weapon/base.hpp>
 
-namespace phx { namespace game { namespace weapon { namespace util {
+namespace neb { namespace phx { namespace game { namespace weapon { namespace util {
+
+
+	/** @brief @Parent
+	 * abstract class for parent of a shape
+	 */
+	class parent:
+		virtual public neb::util::parent<neb::phx::game::weapon::base>
+	{
+		public:
+			virtual ~parent() {}
+	};
 
 
 
-			/** @brief @Parent
-			 * abstract class for parent of a shape
-			 */
-			class parent:
-				virtual public neb::util::parent<phx::game::weapon::base>
-			{
-				public:
-					virtual ~parent() {}
-			};
-		
-
-	
-}}}}
+}}}}}
 
 #endif
 

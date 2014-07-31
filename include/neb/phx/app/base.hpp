@@ -10,9 +10,9 @@
 #include <neb/core/app/__core.hpp>
 #include <neb/core/scene/base.hpp>
 
-#include <PhysX/free.hpp>
-#include <PhysX/core/scene/util/parent.hpp>
-#include <PhysX/game/game/util/parent.hpp>
+#include <neb/phx/free.hpp>
+#include <neb/phx/core/scene/util/parent.hpp>
+#include <neb/phx/game/game/util/parent.hpp>
 
 class DefaultErrorCallback:
 	public physx::PxErrorCallback
@@ -34,7 +34,7 @@ physx::PxFilterFlags DefaultFilterShader(
 		const void* constantBlock,
 		physx::PxU32 constantBlockSize );
 
-namespace phx { namespace app {
+namespace neb { namespace phx { namespace app {
 
 
 	class base:
@@ -65,7 +65,7 @@ namespace phx { namespace app {
 	};
 
 
-}}
+}}}
 
 
 #endif

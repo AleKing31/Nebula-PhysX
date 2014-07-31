@@ -1,10 +1,12 @@
 #ifndef PHYSX_SHAPE_UTIL_DECL_HH
 #define PHYSX_SHAPE_UTIL_DECL_HH
 
-namespace phx { namespace core {
+
+namespace neb { namespace phx { namespace core {
 
 	/** @brief %shape */	
 	namespace shape {
+
 		/** @brief util */
 		namespace util {
 			class parent;
@@ -17,7 +19,7 @@ namespace phx { namespace core {
 
 
 
-}}
+}}}
 
 
 #endif

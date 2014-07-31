@@ -1,12 +1,12 @@
 
-#include <PhysX/simulation_callback.hh>
-#include <PhysX/core/actor/actor/base.hpp>
+#include <neb/phx/simulation_callback.hh>
+#include <neb/phx/core/actor/actor/base.hpp>
 
-void 	phx::simulation_callback::onConstraintBreak(
+void 	neb::phx::simulation_callback::onConstraintBreak(
 		physx::PxConstraintInfo *constraints, physx::PxU32 count) {
 	printf("%s\n", __PRETTY_FUNCTION__);
 }
-void	phx::simulation_callback::onContact(
+void	neb::phx::simulation_callback::onContact(
 		const physx::PxContactPairHeader & pairHeader,
 		const physx::PxContactPair *pairs,
 		physx::PxU32 nbPairs) {
@@ -58,13 +58,13 @@ void	phx::simulation_callback::onContact(
 		}
 	}
 }
-void 	phx::simulation_callback::onWake(physx::PxActor **actors, physx::PxU32 count) {
+void 	neb::phx::simulation_callback::onWake(physx::PxActor **actors, physx::PxU32 count) {
 	printf("%s\n", __PRETTY_FUNCTION__);
 }
-void 	phx::simulation_callback::onSleep(physx::PxActor **actors, physx::PxU32 count) {
+void 	neb::phx::simulation_callback::onSleep(physx::PxActor **actors, physx::PxU32 count) {
 	printf("%s\n", __PRETTY_FUNCTION__);
 }
-void 	phx::simulation_callback::onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count)
+void 	neb::phx::simulation_callback::onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count)
 {
 	printf("%s\n", __PRETTY_FUNCTION__);
 }

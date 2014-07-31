@@ -23,7 +23,7 @@
 #include <PhysX/core/actor/util/cast.hpp>
 #include <PhysX/core/shape/util/cast.hpp>
 
-namespace phx { namespace core { namespace shape { namespace util {
+namespace neb { namespace phx { namespace core { namespace shape { namespace util {
 
 
 
@@ -32,8 +32,8 @@ namespace phx { namespace core { namespace shape { namespace util {
 			 */
 			class parent:
 				virtual public neb::core::shape::util::parent,
-				virtual public phx::core::actor::util::cast,
-				virtual public phx::core::shape::util::cast
+				virtual public neb::phx::core::actor::util::cast,
+				virtual public neb::phx::core::shape::util::cast
 			{
 				public:
 					virtual ~parent() {}
@@ -41,7 +41,7 @@ namespace phx { namespace core { namespace shape { namespace util {
 		
 
 	
-}}}}
+}}}}}
 
 #endif
 

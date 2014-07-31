@@ -1,19 +1,16 @@
+
+
 #include <assert.h>
-
-//#include <math/free.hpp>
-
 
 #include <PxPhysicsAPI.h>
 
 #include <Galaxy-Log/log.hpp>
 
-//#include <neb/Physics.hh>
 #include <neb/core/scene/base.hpp>
 #include <neb/debug.hh>
 
-#include <PhysX/simulation_callback.hh>
-
-#include <PhysX/app/base.hpp>
+#include <neb/phx/simulation_callback.hh>
+#include <neb/phx/app/base.hpp>
 
 
 physx::PxFilterFlags	DefaultFilterShader(
@@ -70,6 +67,9 @@ void DefaultErrorCallback::reportError(
 {
 	printf("%s:%i: %s\n",file,line,message);
 }
+
+
+
 /*phx::app::base::Physics()
   {
 //	jess::clog << neb_FUNCSIG << std::endl;
@@ -78,9 +78,9 @@ phx::app::base::~base()
 {
 //	jess::clog << neb_FUNCSIG << std::endl;
 }*/
-phx::app::base::base(): px_physics_(NULL) {
+neb::phx::app::base::base(): px_physics_(NULL) {
 }
-void	phx::app::base::init() {
+void						neb::phx::app::base::init() {
 	
 	
 	// Physx
@@ -125,7 +125,7 @@ void	phx::app::base::init() {
 	PxVehicleSetBasisVectors(physx::PxVec3(0,1,0), physx::PxVec3(0,0,-1));
 	PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::Enum::eACCELERATION);
 }
-void				phx::app::base::release() {
+void						neb::phx::app::base::release() {
 	//jess::clog << neb_FUNCSIG << std::endl;
 	printf("%s\n",__PRETTY_FUNCTION__);
 
@@ -134,16 +134,16 @@ void				phx::app::base::release() {
 	px_physics_->release();
 	px_foundation_->release();
 }
-sp::shared_ptr<phx::app::base>			phx::app::base::global() {
-	auto app(::std::dynamic_pointer_cast<phx::app::base>(g_app_));
+sp::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global() {
+	auto app(::std::dynamic_pointer_cast<neb::phx::app::base>(g_app_));
 	assert(app);
 	return app;
 }
-void				phx::app::base::step(gal::std::timestep const & ts) {
+void						neb::phx::app::base::step(gal::std::timestep const & ts) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx app", debug) << __PRETTY_FUNCTION__;
 
-	phx::game::game::util::parent::step(ts);
+	neb::phx::game::game::util::parent::step(ts);
 
 }
 

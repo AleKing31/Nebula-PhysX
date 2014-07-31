@@ -6,7 +6,8 @@
 
 #include <PxPhysicsAPI.h>
 
-namespace phx {
+namespace neb { namespace phx {
+
 	class simulation_callback: public physx::PxSimulationEventCallback {
 		public:
 
@@ -26,7 +27,8 @@ namespace phx {
 			virtual void 	onTrigger (physx::PxTriggerPair *pairs, physx::PxU32 count);
 
 	};
-}
+
+}}
 
 
 #endif

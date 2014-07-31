@@ -3,9 +3,9 @@
 
 #include <PhysX/game/weapon/base.hpp>
 
-namespace phx { namespace game { namespace weapon {
+namespace neb { namespace phx { namespace game { namespace weapon {
 
-	class SimpleProjectile: virtual public phx::game::weapon::base {
+	class SimpleProjectile: virtual public neb::phx::game::weapon::base {
 		public:
 
 			SimpleProjectile();
@@ -22,6 +22,6 @@ namespace phx { namespace game { namespace weapon {
 
 	};
 
-}}}
+}}}}
 
 #endif

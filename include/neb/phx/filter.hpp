@@ -4,8 +4,10 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 
-namespace phx {
+namespace neb { namespace phx {
+
 	namespace filter {
+
 		struct filter {
 			enum type: unsigned int {
 				STATIC			= 1 << 0,
@@ -70,8 +72,10 @@ namespace phx {
 				unsigned int word2;
 				unsigned int word3;
 		};
+
 	}
-}
+
+}}
 
 
 

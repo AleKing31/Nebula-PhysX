@@ -12,17 +12,17 @@
 
 
 
-phx::core::scene::base::base(sp::shared_ptr< ::neb::core::scene::util::parent > parent):
+neb::phx::core::scene::base::base(sp::shared_ptr< ::neb::core::scene::util::parent > parent):
 	neb::core::scene::base(parent),
 	px_scene_(NULL)
 {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 }
-phx::core::scene::base::~base() {
+neb::phx::core::scene::base::~base() {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 }
-void			phx::core::scene::base::init() {
+void			neb::phx::core::scene::base::init() {
 	
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 	
@@ -30,10 +30,10 @@ void			phx::core::scene::base::init() {
 	
 	create_physics();
 }
-void			phx::core::scene::base::release() {
+void			neb::phx::core::scene::base::release() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 }
-void			phx::core::scene::base::create_physics() {
+void			neb::phx::core::scene::base::create_physics() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 	
 	if(px_scene_ != NULL) {
@@ -41,7 +41,7 @@ void			phx::core::scene::base::create_physics() {
 		return;
 	}
 
-	auto pxphysics = phx::app::base::global()->px_physics_;
+	auto pxphysics = neb::phx::app::base::global()->px_physics_;
 	
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
 
@@ -97,7 +97,7 @@ void			phx::core::scene::base::create_physics() {
 
 	px_scene_->setSimulationEventCallback(sec);
 }
-void		phx::core::scene::base::step(gal::std::timestep const & ts) {
+void		neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
@@ -178,10 +178,10 @@ void		phx::core::scene::base::step(gal::std::timestep const & ts) {
 						));
 
 			if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug)
-				<< std::setw(8) << "p"
-					<< std::setw(8) << pose.p.x
-					<< std::setw(8) << pose.p.y
-					<< std::setw(8) << pose.p.z;
+				<< ::std::setw(8) << "p"
+					<< ::std::setw(8) << pose.p.x
+					<< ::std::setw(8) << pose.p.y
+					<< ::std::setw(8) << pose.p.z;
 
 
 			if(pxrigidbody != NULL) {

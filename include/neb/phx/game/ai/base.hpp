@@ -5,7 +5,7 @@
 
 #include <neb/util/shared.hpp>
 
-#include <PhysX/core/actor/util/decl.hpp>
+#include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx { namespace game { namespace ai {
 

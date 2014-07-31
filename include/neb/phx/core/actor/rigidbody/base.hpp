@@ -8,7 +8,7 @@
 #include <PhysX/core/actor/rigidactor/base.hpp>
 #include <PhysX/core/actor/util/decl.hpp>
 
-namespace phx { namespace core { namespace actor { namespace rigidbody {
+namespace neb { namespace phx { namespace core { namespace actor { namespace rigidbody {
 
 
 	/** @brief base */
@@ -31,13 +31,12 @@ namespace phx { namespace core { namespace actor { namespace rigidbody {
 			virtual void					setPose(neb::core::pose const & pose) = 0;
 
 
-
-			void									create_control(sp::shared_ptr<neb::gfx::window::base> window);
+			void						create_control(sp::shared_ptr<neb::gfx::window::base> window);
 
 			
 		public:
 
-			sp::shared_ptr<phx::core::actor::control::rigidbody::base>	control_;
+			::std::shared_ptr<neb::phx::core::actor::control::rigidbody::base>		control_;
 
 
 			vec3		force_;
@@ -45,7 +44,7 @@ namespace phx { namespace core { namespace actor { namespace rigidbody {
 	};
 
 
-}}}}
+}}}}}
 
 #endif
 

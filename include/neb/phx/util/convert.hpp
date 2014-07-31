@@ -7,9 +7,7 @@
 
 #include <neb/util/typedef.hpp>
 
-namespace phx { namespace util {
-
-
+namespace neb { namespace phx { namespace util {
 	physx::PxVec2		convert(vec2 const & v);
 	physx::PxVec3		convert(vec3 const & v);
 	physx::PxVec4		convert(vec4 const & v);
@@ -21,7 +19,6 @@ namespace phx { namespace util {
 	quat			convert(physx::PxQuat const & v);
 	mat4			convert(physx::PxMat44 const & v);
 	mat4			convert(physx::PxTransform const & t);
-
-}}
+}}}
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <PhysX/core/shape/util/decl.hpp>
 
-namespace phx { namespace core { namespace shape { namespace util {
+namespace neb { namespace phx { namespace core { namespace shape { namespace util {
 
 
 	class cast:
@@ -14,6 +14,6 @@ namespace phx { namespace core { namespace shape { namespace util {
 	};
 
 
-}}}}
+}}}}}
 
 #endif

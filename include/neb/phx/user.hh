@@ -9,7 +9,7 @@
 
 #include <neb/core/actor/util/Types.hh>
 
-namespace phx {
+namespace neb { namespace phx {
 	class user {
 		public:
 			user();
@@ -21,6 +21,6 @@ namespace phx {
 			sp::shared_ptr<phx::core::actor::control::rigidbody::base>		control_;
 			
 	};
-}
+}}
 
 #endif

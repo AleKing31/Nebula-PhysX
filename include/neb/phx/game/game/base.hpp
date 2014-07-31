@@ -4,13 +4,13 @@
 #include <neb/util/shared.hpp>
 #include <neb/core/game/game/base.hpp>
 
-#include <PhysX/game/ai/util/parent.hpp>
+#include <neb/phx/game/ai/util/parent.hpp>
 
 namespace neb { namespace phx { namespace game { namespace game {
 
 	class base:
 		virtual public neb::game::game::base,
-		virtual public phx::game::ai::util::parent
+		virtual public neb::phx::game::ai::util::parent
 	{
 		public:
 

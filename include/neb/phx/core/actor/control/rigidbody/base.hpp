@@ -11,7 +11,7 @@
 
 #include <PhysX/core/actor/util/decl.hpp>
 
-namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
+namespace neb { namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
 
 
 
@@ -42,7 +42,7 @@ namespace phx { namespace core { namespace actor { namespace control { namespace
 			private:
 
 			public:
-				sp::weak_ptr<phx::core::actor::rigidbody::base>		actor_;
+				sp::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
 
 				quat				q_target_;
 				vec3				p_target_;
@@ -62,7 +62,7 @@ namespace phx { namespace core { namespace actor { namespace control { namespace
 				//gal::control::control		pid_;
 
 		};
-		class manual: public phx::core::actor::control::rigidbody::base {
+		class manual: public neb::phx::core::actor::control::rigidbody::base {
 			public:
 				virtual ~manual() {}
 				void				step(gal::std::timestep const & ts);
@@ -72,7 +72,7 @@ namespace phx { namespace core { namespace actor { namespace control { namespace
 				virtual vec3			t_global();
 
 		};
-		class pd: public phx::core::actor::control::rigidbody::base {
+		class pd: public neb::phx::core::actor::control::rigidbody::base {
 			public:
 				virtual ~pd() {}
 				void				step(gal::std::timestep const & ts);
@@ -86,7 +86,7 @@ namespace phx { namespace core { namespace actor { namespace control { namespace
 		};
 
 
-}}}}}
+}}}}}}
 
 
 #endif

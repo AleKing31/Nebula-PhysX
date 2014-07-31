@@ -2,11 +2,11 @@
 #define PHYSX_FREE_HPP
 
 
-namespace phx {
+namespace neb { namespace phx {
 
 
 	void	init();
 
-}
+}}
 
 #endif
