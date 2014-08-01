@@ -7,24 +7,24 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 
 
-phx::core::actor::util::parent::parent() {
+neb::phx::core::actor::util::parent::parent() {
 }
-phx::core::actor::util::parent::~parent() {
+neb::phx::core::actor::util::parent::~parent() {
 }
-void							phx::core::actor::util::parent::init() {
+void							neb::phx::core::actor::util::parent::init() {
 	neb::core::actor::util::parent::init();
 }
-sp::shared_ptr<phx::core::scene::base>			phx::core::actor::util::parent::getScene() {
+sp::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
 	
-	auto scene(sp::dynamic_pointer_cast<phx::core::scene::base>(shared_from_this()));
+	auto scene(sp::dynamic_pointer_cast<neb::phx::core::scene::base>(shared_from_this()));
 	
 	if(scene) return scene;
 
-	auto actor(sp::dynamic_pointer_cast<phx::core::actor::base>(shared_from_this()));
+	auto actor(sp::dynamic_pointer_cast<neb::phx::core::actor::base>(shared_from_this()));
 	
 	if(!actor) throw 0;
 	
-	return actor->getPxParent()->phx::core::actor::util::parent::getScene();
+	return actor->getPxParent()->neb::phx::core::actor::util::parent::getScene();
 }
 
 

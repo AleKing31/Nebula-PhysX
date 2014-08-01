@@ -1,9 +1,9 @@
 
 #include <neb/phx/game/game/base.hpp>
 
-void			phx::game::game::base::step(gal::std::timestep const & ts) {
+void			neb::phx::game::game::base::step(gal::std::timestep const & ts) {
 	
-	phx::game::ai::util::parent::step(ts);
+	neb::phx::game::ai::util::parent::step(ts);
 	
 }
 

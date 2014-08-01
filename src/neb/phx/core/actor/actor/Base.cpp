@@ -14,19 +14,19 @@
 
 //neb::core::actor::actor::base::base() {
 //}
-phx::core::actor::actor::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
-	phx::core::actor::base(parent),
+	neb::phx::core::actor::base(parent),
 	px_actor_(NULL)
 {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 }
-phx::core::actor::actor::base::~base() {
+neb::phx::core::actor::actor::base::~base() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 
 	assert(px_actor_ == NULL);
 }
-void		phx::core::actor::actor::base::releaseUp() {
+void		neb::phx::core::actor::actor::base::releaseUp() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 
 	//neb::core::actor::base::releaseUp();

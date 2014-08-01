@@ -10,15 +10,15 @@
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 
-phx::core::actor::rigidstatic::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidstatic::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
-	phx::core::actor::base(parent),
-	phx::core::actor::actor::base(parent),
-	phx::core::actor::rigidactor::base(parent)
+	neb::phx::core::actor::base(parent),
+	neb::phx::core::actor::actor::base(parent),
+	neb::phx::core::actor::rigidactor::base(parent)
 {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 }
-void			phx::core::actor::rigidstatic::base::create_physics() {
+void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	if(px_actor_ != NULL) {
@@ -32,15 +32,15 @@ void			phx::core::actor::rigidstatic::base::create_physics() {
 	auto p = getPose();
 
 	physx::PxTransform pose(
-			phx::util::convert(vec3(p.pos_)),
-			phx::util::convert(p.rot_)
+			neb::phx::util::convert(vec3(p.pos_)),
+			neb::phx::util::convert(p.rot_)
 			);
 
 	//pose.p.print();
 	//pose.q.print();
 
 	// PxActor
-	physx::PxRigidStatic* px_rigid_static = phx::app::base::global()->px_physics_->createRigidStatic(pose);
+	physx::PxRigidStatic* px_rigid_static = neb::phx::app::base::global()->px_physics_->createRigidStatic(pose);
 
 	if(px_rigid_static == NULL)
 	{
@@ -60,7 +60,7 @@ void			phx::core::actor::rigidstatic::base::create_physics() {
 
 	scene->px_scene_->addActor(*px_rigid_static);
 }
-void			phx::core::actor::rigidstatic::base::init_physics() {
+void			neb::phx::core::actor::rigidstatic::base::init_physics() {
 
 	printf("%s\n", __PRETTY_FUNCTION__);
 

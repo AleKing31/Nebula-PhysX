@@ -9,13 +9,13 @@
 
 //neb::core::actor::rigidactor::base::base() {
 //}
-phx::core::actor::rigidactor::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidactor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
-	phx::core::actor::base(parent),
-	phx::core::actor::actor::base(parent)
+	neb::phx::core::actor::base(parent),
+	neb::phx::core::actor::actor::base(parent)
 {
 }
-void		phx::core::actor::rigidactor::base::setupFiltering() {
+void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 	assert(px_actor_);
 
 	physx::PxRigidActor* actor = (physx::PxRigidActor*)px_actor_;
@@ -48,7 +48,7 @@ void		phx::core::actor::rigidactor::base::setupFiltering() {
 
 	delete[] shapes;
 }
-void								phx::core::actor::rigidactor::base::setGlobalPosition(vec3 p) {
+void								neb::phx::core::actor::rigidactor::base::setGlobalPosition(vec3 p) {
 	/** @todo if is nested actor, then this is wrong... */
 	pose_.pos_ = vec4(p,1);
 	
@@ -56,8 +56,8 @@ void								phx::core::actor::rigidactor::base::setGlobalPosition(vec3 p) {
 	auto px_rigidactor = px_actor_->isRigidActor();
 	assert(px_rigidactor);
 	px_rigidactor->setGlobalPose(physx::PxTransform(
-				phx::util::convert(p),
-				phx::util::convert(pose_.rot_)
+				neb::phx::util::convert(p),
+				neb::phx::util::convert(pose_.rot_)
 				));
 }
 

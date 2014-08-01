@@ -7,16 +7,16 @@
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 
-namespace phx { namespace core { namespace actor { namespace rigiddynamic {
+namespace neb { namespace phx { namespace core { namespace actor { namespace rigiddynamic {
 
 
 
 	class base:
-		virtual public phx::core::actor::rigidbody::base
+		virtual public neb::phx::core::actor::rigidbody::base
 	{
 
 		public:
-			base(sp::shared_ptr<phx::core::actor::util::parent>);
+			base(sp::shared_ptr<neb::phx::core::actor::util::parent>);
 
 			virtual void					init();
 			virtual void					release() = 0;
@@ -36,7 +36,7 @@ namespace phx { namespace core { namespace actor { namespace rigiddynamic {
 	};
 
 
-}}}}
+}}}}}
 
 #endif
 

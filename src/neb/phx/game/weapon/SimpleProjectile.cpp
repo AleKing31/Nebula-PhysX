@@ -12,11 +12,11 @@
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
 
 
-phx::game::weapon::SimpleProjectile::SimpleProjectile() {
+neb::phx::game::weapon::SimpleProjectile::SimpleProjectile() {
 }
-void			phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx::window::base> window) {
+void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx::window::base> window) {
 	
-	auto self(sp::dynamic_pointer_cast<phx::game::weapon::SimpleProjectile>(shared_from_this()));
+	auto self(sp::dynamic_pointer_cast<neb::phx::game::weapon::SimpleProjectile>(shared_from_this()));
 	
 	window->sig_.key_fun_.connect(
 			20,
@@ -32,7 +32,7 @@ void			phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx::win
 			);
 
 }
-int			phx::game::weapon::SimpleProjectile::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
+int			neb::phx::game::weapon::SimpleProjectile::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx game weapon", debug) << __PRETTY_FUNCTION__;;
 
 	int key_fire = GLFW_KEY_SPACE;
@@ -48,10 +48,10 @@ int			phx::game::weapon::SimpleProjectile::key_fun(sp::shared_ptr<neb::gfx::wind
 
 	return 0;
 }
-void			phx::game::weapon::SimpleProjectile::fire() {
+void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx game weapon", debug) << __PRETTY_FUNCTION__;;
 	
-	auto app(phx::app::base::global());
+	auto app(neb::phx::app::base::global());
 
 	if((app->ts_.time - last_) < cooldown_) return;
 	last_ = app->ts_.time;
@@ -63,15 +63,15 @@ void			phx::game::weapon::SimpleProjectile::fire() {
 
 	auto scene = actor->getPxParent()->getScene();
 
-	auto proj = ::std::dynamic_pointer_cast<phx::core::actor::rigiddynamic::base>(scene->createActorRigidDynamicUninitialized().lock());
+	auto proj = ::std::dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(scene->createActorRigidDynamicUninitialized().lock());
 	assert(proj);
 
 	scene->insert(proj);
 
-	proj->simulation_.word0 = phx::filter::filter::type::DYNAMIC | phx::filter::filter::type::PROJECTILE;
-	proj->simulation_.word1 = phx::filter::filter::RIGID_AGAINST;
-	proj->simulation_.word2 = phx::filter::filter::type::PROJECTILE;
-	proj->simulation_.word3 = phx::filter::filter::PROJECTILE_AGAINST;
+	proj->simulation_.word0 = neb::phx::filter::filter::type::DYNAMIC | neb::phx::filter::filter::type::PROJECTILE;
+	proj->simulation_.word1 = neb::phx::filter::filter::RIGID_AGAINST;
+	proj->simulation_.word2 = neb::phx::filter::filter::type::PROJECTILE;
+	proj->simulation_.word3 = neb::phx::filter::filter::PROJECTILE_AGAINST;
 
 
 

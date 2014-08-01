@@ -26,7 +26,7 @@
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
 
-phx::core::actor::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
 	parent_(parent),
 	health_(1.0)
@@ -36,7 +36,7 @@ phx::core::actor::base::base(sp::shared_ptr<phx::core::actor::util::parent> pare
 /*phx::core::actor::base::~base() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
 }*/
-void			phx::core::actor::base::init() {
+void			neb::phx::core::actor::base::init() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	neb::core::actor::base::init();
@@ -49,15 +49,15 @@ void			phx::core::actor::base::init() {
 	
 	neb::core::actor::base::release();
 }*/
-void			phx::core::actor::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::actor::base::step(gal::std::timestep const & ts) {
 	neb::core::actor::base::step(ts);
 }
-sp::shared_ptr<phx::core::actor::util::parent>		phx::core::actor::base::getPxParent() {
+sp::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
 	auto parent(phx::core::actor::base::parent_.lock());
 	assert(parent);
 	return parent;
 }
-void			phx::core::actor::base::hit() {
+void			neb::phx::core::actor::base::hit() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 
 	auto parent(parent_.lock()); assert(parent);
@@ -72,7 +72,7 @@ void			phx::core::actor::base::hit() {
 		damage(0.6f);
 	}
 }
-void			phx::core::actor::base::damage(float h) {
+void			neb::phx::core::actor::base::damage(float h) {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	health_ -= h;
@@ -92,7 +92,7 @@ void			phx::core::actor::base::damage(float h) {
 
 	return 0;
 }*/
-sp::weak_ptr<phx::game::weapon::SimpleProjectile>			phx::core::actor::base::createWeaponSimpleProjectile(
+sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
 		sp::shared_ptr<neb::gfx::window::base> window,
 		real size,
 		real damage,
@@ -100,7 +100,7 @@ sp::weak_ptr<phx::game::weapon::SimpleProjectile>			phx::core::actor::base::crea
 	
 	auto self(isPxActorBase());
 	
-	auto weap(sp::make_shared<phx::game::weapon::SimpleProjectile>());
+	auto weap(sp::make_shared<neb::phx::game::weapon::SimpleProjectile>());
 	
 	weap->actor_ = self;
 	weap->connect(window);
@@ -109,7 +109,7 @@ sp::weak_ptr<phx::game::weapon::SimpleProjectile>			phx::core::actor::base::crea
 	weap->size_ = size;
 	weap->damage_ = damage;
 	
-	phx::game::weapon::util::parent::insert(weap);
+	neb::phx::game::weapon::util::parent::insert(weap);
 
 	return weap;
 }

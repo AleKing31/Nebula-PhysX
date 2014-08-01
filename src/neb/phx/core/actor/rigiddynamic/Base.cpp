@@ -11,7 +11,7 @@
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
-phx::core::actor::rigiddynamic::base::base(sp::shared_ptr<phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
@@ -20,14 +20,14 @@ phx::core::actor::rigiddynamic::base::base(sp::shared_ptr<phx::core::actor::util
 {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 }
-void			phx::core::actor::rigiddynamic::base::init() {
+void			neb::phx::core::actor::rigiddynamic::base::init() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	assert(px_actor_);
 	auto pxrd = px_actor_->isRigidDynamic();
 	pxrd->setLinearDamping(0.01);
 }
-void			phx::core::actor::rigiddynamic::base::create_physics() {
+void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	if(px_actor_ != NULL) {
@@ -35,7 +35,7 @@ void			phx::core::actor::rigiddynamic::base::create_physics() {
 		return;
 	}
 
-	auto scene = sp::dynamic_pointer_cast<phx::core::scene::base>(getScene());
+	auto scene = sp::dynamic_pointer_cast<neb::phx::core::scene::base>(getScene());
 
 	auto p(getPose());	
 	physx::PxTransform pose(
@@ -45,7 +45,7 @@ void			phx::core::actor::rigiddynamic::base::create_physics() {
 	
 	
 	// PxActor
-	physx::PxRigidDynamic* px_rigid_dynamic = phx::app::base::global()->px_physics_->createRigidDynamic(pose);
+	physx::PxRigidDynamic* px_rigid_dynamic = neb::phx::app::base::global()->px_physics_->createRigidDynamic(pose);
 
 	if (!px_rigid_dynamic)
 	{
@@ -55,7 +55,7 @@ void			phx::core::actor::rigiddynamic::base::create_physics() {
 
 	px_actor_ = px_rigid_dynamic;
 
-	px_rigid_dynamic->setLinearVelocity(phx::util::convert(velocity_), true);
+	px_rigid_dynamic->setLinearVelocity(neb::phx::util::convert(velocity_), true);
 
 	// userData
 	auto sft = shared_from_this();
@@ -71,7 +71,7 @@ void			phx::core::actor::rigiddynamic::base::create_physics() {
 	assert(this == shared_from_this().get());
 	assert(this == isActorBase().get());
 	assert(this == isPxActorRigidDynamicBase().get());
-	assert(sp::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(shared_from_this()));
+	assert(sp::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(shared_from_this()));
 	
 
 	// add PxActor to PxScene
@@ -80,7 +80,7 @@ void			phx::core::actor::rigiddynamic::base::create_physics() {
 
 	assert(px_actor_);
 }
-void			phx::core::actor::rigiddynamic::base::init_physics() {
+void			neb::phx::core::actor::rigiddynamic::base::init_physics() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 
 	assert(px_actor_);	

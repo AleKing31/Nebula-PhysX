@@ -14,16 +14,16 @@
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
-phx::core::actor::control::rigidbody::base::base() {
+neb::phx::core::actor::control::rigidbody::base::base() {
 
 }
-void			phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
+void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
 	abort();
 }
-void			phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
+void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
 	abort();
 }
-int			phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
+int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
