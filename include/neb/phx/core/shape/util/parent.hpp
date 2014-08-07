@@ -1,20 +1,12 @@
-#ifndef PHYSX_CORE_SHAPE_PARENT_HPP
-#define PHYSX_CORE_SHAPE_PARENT_HPP
+#ifndef NEB_PHX_CORE_SHAPE_PARENT_HPP
+#define NEB_PHX_CORE_SHAPE_PARENT_HPP
 
 #include <map>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-//#include <galaxy/flag.hpp>
-/*
-#include <math/vec4.hpp>
-#include <math/vec3.hpp>
-#include <math/vec2.hpp>
-#include <math/transform.hpp>
-#include <math/geo/polyhedron.hpp>
-*/
-#include <neb/util/config.hh> // Nebula/config.hpp.in
+#include <neb/core/util/config.hpp>
 
 #include <neb/core/shape/util/Parent.hh>
 
@@ -23,25 +15,21 @@
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/shape/util/cast.hpp>
 
-namespace neb { namespace phx { namespace core { namespace shape { namespace util {
-
-
-
-			/** @brief @Parent
-			 * abstract class for parent of a shape
-			 */
-			class parent:
-				virtual public neb::core::shape::util::parent,
-				virtual public neb::phx::core::actor::util::cast,
-				virtual public neb::phx::core::shape::util::cast
-			{
-				public:
-					virtual ~parent() {}
-			};
-		
-
-	
-}}}}}
+namespace neb { namespace phx {
+	namespace core { namespace shape { namespace util {
+		/** @brief @Parent
+			* abstract class for parent of a shape
+			*/
+		class parent:
+			virtual public neb::core::shape::util::parent,
+			virtual public neb::phx::core::actor::util::cast,
+			virtual public neb::phx::core::shape::util::cast
+		{
+			public:
+				virtual ~parent() {}
+		};
+	}}}
+}}
 
 #endif
 

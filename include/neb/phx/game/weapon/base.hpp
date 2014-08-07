@@ -1,7 +1,7 @@
 #ifndef PHYSX_GAME_WEAPON_BASE_HPP
 #define PHYSX_GAME_WEAPON_BASE_HPP
 
-#include <neb/util/shared.hpp>
+#include <neb/core/util/shared.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 

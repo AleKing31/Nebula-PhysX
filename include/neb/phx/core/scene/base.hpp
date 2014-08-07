@@ -5,30 +5,21 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <Galaxy-Standard/flag.hpp>
-#include <Galaxy-Standard/map.hpp>
-
-
-#include <neb/util/decl.hpp>
-#include <neb/util/typedef.hpp>
-#include <neb/math/Serialization/GLM.hpp>
-
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 
-#include <neb/core/scene/base.hpp>
+#include <gal/std/flag.hpp>
+#include <gal/std/map.hpp>
 
-
-//#include <neb/core/actor/base.hpp>
+#include <neb/core/util/decl.hpp>
+#include <neb/core/util/typedef.hpp>
+#include <neb/core/math/Serialization/GLM.hpp>
 #include <neb/core/actor/util/parent.hpp>
-
-//#include <neb/gfx/Camera/View/Base.hh>
+#include <neb/core/scene/base.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/simulation_callback.hh>
-
-//#include <glutpp/shader.h>
 
 #define LIGHT_MAX 20
 

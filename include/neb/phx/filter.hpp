@@ -43,20 +43,20 @@ namespace neb { namespace phx {
 		class word {
 			public:
 				void		save(boost::archive::xml_oarchive & ar, unsigned int const & version) {
-					::std::string str = filter::Convert(word);
-					ar << boost::serialization::make_nvp("word",word);
+					::std::string str = filter::Convert(word_);
+					ar << boost::serialization::make_nvp("word",word_);
 				}
 				void		load(boost::archive::xml_iarchive & ar, unsigned int const & version) {
 					::std::string str;
-					ar >> boost::serialization::make_nvp("word",word);
-					word = filter::Convert(str);
+					ar >> boost::serialization::make_nvp("word",word_);
+					word_ = filter::Convert(str);
 				}
 				template<class Archive> void	serialize(Archive & ar, unsigned int const & version) {
 
 				}
 
 
-				unsigned int word;
+				unsigned int word_;
 		};
 		class data {
 			public:
