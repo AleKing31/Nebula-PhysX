@@ -23,27 +23,25 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			virtual void					release() = 0;
 			virtual void					step(gal::std::timestep const & ts);
 
-
+			/** @brief create physics
+			 *
+			 * @note implemented by rigidstatic and rigiddynamic
+			 */
 			virtual void					create_physics() = 0;
-			virtual void					init_physics() = 0;
+			/** @brief initialize physics
+			 *
+			 * @note implemented by rigidstatic and rigiddynamic
+			 */
+		virtual void					init_physics() = 0;
 
-			virtual void					add_force(real) = 0;
-			virtual void					setPose(neb::core::pose const & pose) = 0;
-
-
+			virtual void					add_force(double);
+			//virtual void					setPose(neb::core::pose const & pose) = 0;
 			void						create_control(sp::shared_ptr<neb::gfx::window::base> window);
-
-			
 		public:
-
-			::std::shared_ptr<neb::phx::core::actor::control::rigidbody::base>		control_;
-
-
+			shared_ptr<neb::phx::core::actor::control::rigidbody::base>		control_;
 			vec3		force_;
 			vec3		torque_;
 	};
-
-
 }}}}}
 
 #endif

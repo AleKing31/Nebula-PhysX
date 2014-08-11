@@ -1,6 +1,6 @@
 #include <Galaxy-Log/log.hpp>
 
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
 
 //#include <neb/util/Typed.hh>
 
@@ -72,7 +72,7 @@ void			neb::phx::core::actor::base::hit() {
 		damage(0.6f);
 	}
 }
-void			neb::phx::core::actor::base::damage(float h) {
+void			neb::phx::core::actor::base::damage(double h) {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 	
 	health_ -= h;
@@ -94,9 +94,9 @@ void			neb::phx::core::actor::base::damage(float h) {
 }*/
 sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
 		sp::shared_ptr<neb::gfx::window::base> window,
-		real size,
-		real damage,
-		real velocity) {
+		double size,
+		double damage,
+		double velocity) {
 	
 	auto self(isPxActorBase());
 	

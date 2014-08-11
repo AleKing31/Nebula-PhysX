@@ -1,8 +1,7 @@
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
 #include <neb/core/shape/base.hpp>
-//#include <neb/Physics.hh>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
@@ -25,6 +24,7 @@ void			neb::phx::core::actor::rigiddynamic::base::init() {
 	
 	assert(px_actor_);
 	auto pxrd = px_actor_->isRigidDynamic();
+	assert(pxrd);
 	pxrd->setLinearDamping(0.01);
 }
 void			neb::phx::core::actor::rigiddynamic::base::create_physics() {

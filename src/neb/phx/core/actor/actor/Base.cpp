@@ -1,11 +1,9 @@
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
-//#include <neb/gfx/Context/Base.hh>
 #include <neb/core/scene/base.hpp>
 
-#include <neb/debug.hh>
-#include <neb/util/typedef.hpp>
-//#include <neb/simulation_callback.hh>
+#include <neb/core/debug.hh>
+#include <neb/core/util/typedef.hpp>
 #include <neb/core/shape/base.hpp>
 
 #include <neb/phx/core/actor/util/parent.hpp>
@@ -26,7 +24,7 @@ neb::phx::core::actor::actor::base::~base() {
 
 	assert(px_actor_ == NULL);
 }
-void		neb::phx::core::actor::actor::base::releaseUp() {
+void		neb::phx::core::actor::actor::base::release() {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
 
 	//neb::core::actor::base::releaseUp();

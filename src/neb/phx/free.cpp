@@ -10,7 +10,7 @@ void	neb::phx::init() {
 	
 	auto app(sp::make_shared<neb::phx::app::base>());
 	
-	neb::app::__base::g_app_ = app;
+	neb::core::app::__base::g_app_ = app;
 
 	app->init();
 

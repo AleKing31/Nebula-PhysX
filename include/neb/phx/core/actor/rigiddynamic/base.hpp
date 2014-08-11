@@ -24,10 +24,10 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			virtual void					step(gal::std::timestep const & ts) = 0;
 
 
-			virtual void					create_physics() = 0;
-			virtual void					init_physics() = 0;
+			virtual void					create_physics();
+			virtual void					init_physics();
 
-			virtual void					add_force(real) = 0;
+			//virtual void					add_force(double) = 0;
 			//virtual void					setPose(neb::core::pose const & pose);
 
 

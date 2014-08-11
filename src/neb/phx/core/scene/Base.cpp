@@ -1,19 +1,19 @@
 #include <stdio.h>
 
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
 #include <neb/core/scene/util/Types.hh>
 
 
 
-neb::phx::core::scene::base::base(sp::shared_ptr< ::neb::core::scene::util::parent > parent):
-	neb::core::scene::base(parent),
+neb::phx::core::scene::base::base(shared_ptr<neb::core::core::scene::util::parent > parent):
+	neb::core::core::scene::base(parent),
 	px_scene_(NULL)
 {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
@@ -26,7 +26,7 @@ void			neb::phx::core::scene::base::init() {
 	
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__;
 	
-	neb::core::scene::base::init();
+	neb::core::core::scene::base::init();
 	
 	create_physics();
 }
@@ -221,7 +221,7 @@ void		neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	//send_actor_update();
 
 }
-/*sp::weak_ptr<neb::core::actor::rigiddynamic::base>		neb::core::scene::base::createActorRigidDynamicCube(neb::core::pose const & pose, real size) {
+/*sp::weak_ptr<neb::core::actor::rigiddynamic::base>		neb::core::core::scene::base::createActorRigidDynamicCube(neb::core::pose const & pose, real size) {
 
   auto actor = createActorRigidDynamicUninitialized().lock();
 

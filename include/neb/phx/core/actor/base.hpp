@@ -29,7 +29,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			virtual void		step(gal::std::timestep const & ts);
 
 			void			hit();
-			void			damage(real);
+			void			damage(double);
 
 			
 			virtual void		create_physics() = 0;
@@ -50,9 +50,9 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			 */
 			sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
 					sp::shared_ptr<neb::gfx::window::base> window,
-					real size,
-					real damage,
-					real velocity);
+					double size,
+					double damage,
+					double velocity);
 			/** @} */
 		public:
 			sp::weak_ptr<neb::phx::core::actor::util::parent>			parent_;
@@ -60,7 +60,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			phx::filter::data							simulation_;
 			phx::filter::data							scene_query_;
 
-			real									health_;
+			double									health_;
 
 	};
 

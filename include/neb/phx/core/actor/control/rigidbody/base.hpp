@@ -5,9 +5,9 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/signals2.hpp>
 
-#include <neb/util/typedef.hpp>
-//#include <neb/gfx/util/decl.hpp>
 #include <gal/std/timestep.hpp>
+
+#include <neb/core/util/typedef.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 

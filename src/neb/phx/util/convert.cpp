@@ -3,11 +3,9 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/util/typedef.hpp>
+#include <neb/core/util/typedef.hpp>
 
 #include <neb/phx/util/convert.hpp>
-
-
 
 physx::PxVec2		neb::phx::util::convert(vec2 const & v) {
 	return physx::PxVec2(v.x, v.y);

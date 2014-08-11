@@ -3,7 +3,7 @@
 
 #include <gal/std/timestep.hpp>
 
-#include <neb/util/shared.hpp>
+#include <neb/core/util/shared.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 

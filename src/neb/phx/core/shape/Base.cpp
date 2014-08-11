@@ -1,11 +1,9 @@
-#include <neb/debug.hh>
-//#include <neb/app/Base.hh>
+#include <neb/core/debug.hh>
 #include <neb/core/shape/base.hpp>
-
 #include <neb/core/light/base.hpp>
+
 #include <neb/gfx/glsl/attrib.hh>
 
-//#include <neb/util/Map.hh>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/shape/base.hpp>

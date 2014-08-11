@@ -1,5 +1,6 @@
-#include <Galaxy-Log/log.hpp>
-#include <neb/debug.hh>
+#include <gal/log/log.hpp>
+
+#include <neb/core/debug.hh>
 
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>

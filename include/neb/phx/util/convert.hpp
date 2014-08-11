@@ -5,7 +5,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/util/typedef.hpp>
+#include <neb/core/util/typedef.hpp>
 
 namespace neb { namespace phx { namespace util {
 	physx::PxVec2		convert(vec2 const & v);

@@ -22,7 +22,8 @@
 */
 #include <Galaxy-Log/log.hpp>
 
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
+
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/window/util/signals.hpp>
 
@@ -41,7 +42,7 @@ neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::acto
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)
 {}
-void			neb::phx::core::actor::rigidbody::base::add_force(real time) {
+void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;;
 

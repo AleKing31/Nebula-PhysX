@@ -1,7 +1,6 @@
 #include <Galaxy-Log/log.hpp>
 
-#include <neb/debug.hh>
-//#include <neb/Physics.hh>
+#include <neb/core/debug.hh>
 #include <neb/core/shape/base.hpp>
 
 #include <neb/phx/app/base.hpp>
