@@ -7,7 +7,7 @@
 #include <Galaxy-Log/log.hpp>
 
 #include <neb/core/scene/base.hpp>
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
 
 #include <neb/phx/simulation_callback.hh>
 #include <neb/phx/app/base.hpp>

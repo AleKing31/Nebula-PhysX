@@ -8,7 +8,7 @@
 #include <neb/phx/util/convert.hpp>
 
 #include <neb/core/debug.hh>
-#include <neb/core/scene/util/Types.hh>
+#include <neb/core/scene/util/decl.hpp>
 
 
 

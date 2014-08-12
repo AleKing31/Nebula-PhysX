@@ -50,17 +50,24 @@ namespace neb {
 								boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
 							ar & boost::serialization::make_nvp("gravity",gravity_);
 						}
-
 						/** @name convenience functions
 						 * @{
 						 */
-						/** @brief create rigidstatic
+						/** @brief create rigiddynamic
 						 *
 						 * @note typeof returned actor will be determined by final implementation of this
 						 *
 						 * @warning return actor is not initialized
 						 */
 						virtual weak_ptr<neb::core::actor::base>		createActorRigidStaticUninitialized() = 0;
+						virtual weak_ptr<neb::core::actor::base>		createActorRigidStaticCube(neb::core::pose pose, double size) = 0;
+						/** @brief create rigidstatic
+						 *
+						 * @note typeof returned actor will be determined by final implementation of this
+						 *
+						 * @warning return actor is not initialized
+						 */
+						virtual weak_ptr<neb::core::actor::base>		createActorRigidDynamicUninitialized() = 0;
 						/** @} */
 					public:
 						physx::PxScene*						px_scene_;

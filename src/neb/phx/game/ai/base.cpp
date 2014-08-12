@@ -1,5 +1,5 @@
 #include <Galaxy-Log/log.hpp>
-#include <neb/debug.hh>
+#include <neb/core/debug.hh>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>

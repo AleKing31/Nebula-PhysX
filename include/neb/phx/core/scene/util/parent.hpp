@@ -3,18 +3,21 @@
 
 #include <neb/core/scene/util/Parent.hh>
 
-namespace neb { namespace phx { namespace core { namespace scene { namespace util {
-
-
-	class parent:
-		virtual public neb::core::core::scene::util::parent
-	{
-		public:
-	};
-
-
-
-}}}}}
+namespace neb {
+	namespace phx {
+		namespace core {
+			namespace scene {
+				namespace util {
+					class parent:
+						virtual public neb::core::core::scene::util::parent
+					{
+						public:
+					};
+				}
+			}
+		}
+	}
+}
 
 #endif
 

@@ -1,8 +1,11 @@
-#include <Galaxy-Log/log.hpp>
+
+#include <gal/log/log.hpp>
 
 #include <neb/timer/Actor/Release.hpp>
+
 #include <neb/gfx/window/Base.hh>
-#include <neb/debug.hh>
+
+#include <neb/core/debug.hh>
 
 #include <neb/phx/filter.hpp>
 #include <neb/phx/app/base.hpp>
@@ -32,7 +35,7 @@ void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx
 			);
 
 }
-int			neb::phx::game::weapon::SimpleProjectile::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
+int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx game weapon", debug) << __PRETTY_FUNCTION__;;
 
 	int key_fire = GLFW_KEY_SPACE;
@@ -63,7 +66,9 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 
 	auto scene = actor->getPxParent()->getScene();
 
-	auto proj = ::std::dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(scene->createActorRigidDynamicUninitialized().lock());
+	auto proj_base = scene->createActorRigidDynamicUninitialized().lock();
+
+	auto proj = dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(proj_base);
 	assert(proj);
 
 	scene->insert(proj);
