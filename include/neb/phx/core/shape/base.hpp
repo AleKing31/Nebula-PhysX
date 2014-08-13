@@ -23,7 +23,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 
 			void				create_physics();
-			virtual physx::PxGeometry*	to_geo() = 0;
+			virtual physx::PxGeometry*	to_geo();
 		public:
 			sp::shared_ptr<phx::core::shape::util::parent>		getPxParent();
 

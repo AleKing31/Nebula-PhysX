@@ -68,7 +68,7 @@ void			neb::phx::core::shape::base::create_physics() {
 		}
 	}
 }
-sp::shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
+shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
 	
 	auto parent = parent_.lock();
 	assert(parent);
@@ -81,6 +81,9 @@ sp::shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base
 	}
 
 	return pxparent;
+}
+physx::PxGeometry*	neb::phx::core::shape::base::to_geo() {
+	return 0;
 }
 
 

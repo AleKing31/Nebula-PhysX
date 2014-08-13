@@ -14,6 +14,7 @@
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/util/convert.hpp>
+#include <neb/phx/util/log.hpp>
 
 neb::phx::core::actor::control::rigidbody::base::base() {
 
@@ -27,7 +28,7 @@ void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive
 int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 /*	long unsigned int f = flag_.val_ & (
 			neb::gfx::camera::view::util::flag::NORTH |
@@ -38,7 +39,7 @@ int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<ne
 			neb::gfx::camera::view::util::flag::DOWN);*/
 
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug)
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug)
 		<< "key = " << key
 		<< " scancode = " << scancode
 		<< " action = " << action

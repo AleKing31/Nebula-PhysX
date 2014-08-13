@@ -9,6 +9,7 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/actor/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/util/log.hpp>
 
 //neb::core::actor::actor::base::base() {
 //}
@@ -17,15 +18,15 @@ neb::phx::core::actor::actor::base::base(sp::shared_ptr<neb::phx::core::actor::u
 	neb::phx::core::actor::base(parent),
 	px_actor_(NULL)
 {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 neb::phx::core::actor::actor::base::~base() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	assert(px_actor_ == NULL);
 }
 void		neb::phx::core::actor::actor::base::release() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	//neb::core::actor::base::releaseUp();
 

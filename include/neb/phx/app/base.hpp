@@ -5,8 +5,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/util/config.hh>
-
+#include <neb/core/util/config.hpp>
 #include <neb/core/app/__core.hpp>
 #include <neb/core/scene/base.hpp>
 

@@ -9,6 +9,7 @@
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/util/convert.hpp>
+#include <neb/phx/util/log.hpp>
 
 neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
@@ -17,10 +18,10 @@ neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core
 	phx::core::actor::rigidactor::base(parent),
 	phx::core::actor::rigidbody::base(parent)
 {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 void			neb::phx::core::actor::rigiddynamic::base::init() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	assert(px_actor_);
 	auto pxrd = px_actor_->isRigidDynamic();
@@ -28,10 +29,10 @@ void			neb::phx::core::actor::rigiddynamic::base::init() {
 	pxrd->setLinearDamping(0.01);
 }
 void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	if(px_actor_ != NULL) {
-		if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << "been here!";
+		if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
 		return;
 	}
 
@@ -81,7 +82,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	assert(px_actor_);
 }
 void			neb::phx::core::actor::rigiddynamic::base::init_physics() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	assert(px_actor_);	
 	physx::PxRigidDynamic* px_rigid_dynamic = px_actor_->isRigidDynamic();

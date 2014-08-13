@@ -6,6 +6,7 @@
 #include <neb/gfx/window/Base.hh>
 
 #include <neb/core/debug.hh>
+#include <neb/core/util/log.hpp>
 
 #include <neb/phx/filter.hpp>
 #include <neb/phx/app/base.hpp>
@@ -13,6 +14,7 @@
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/core/shape/box.hpp>
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
+#include <neb/phx/util/log.hpp>
 
 
 neb::phx::game::weapon::SimpleProjectile::SimpleProjectile() {
@@ -36,7 +38,7 @@ void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx
 
 }
 int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx game weapon", debug) << __PRETTY_FUNCTION__;;
+	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
 
 	int key_fire = GLFW_KEY_SPACE;
 
@@ -52,7 +54,7 @@ int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::win
 	return 0;
 }
 void			neb::phx::game::weapon::SimpleProjectile::fire() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx game weapon", debug) << __PRETTY_FUNCTION__;;
+	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
 	
 	auto app(neb::phx::app::base::global());
 
@@ -122,7 +124,7 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	proj->init();
 
 	// shape
-	auto shape = proj->createShapeBox(vec3(size_));
+	auto shape = proj->createShapeBox(neb::core::pose(), vec3(size_));
 
 	proj->setupFiltering();
 
@@ -132,11 +134,11 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	
 	auto t = sp::make_shared<neb::Timer::actor::Release>(proj, scene->last_ + 5.0);
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "neb timer", debug) << t.use_count();
+	if(DEBUG_NEB) LOG(lg, neb::core::sl, debug) << t.use_count();
 	
 	t->activate();
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "neb timer", debug) << t.use_count();
+	if(DEBUG_NEB) LOG(lg, neb::core::sl, debug) << t.use_count();
 	
 	
 }
