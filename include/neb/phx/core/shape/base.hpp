@@ -14,7 +14,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 	class base: virtual public neb::core::shape::base {
 		public:
-			base(sp::shared_ptr<phx::core::shape::util::parent>);
+			base(shared_ptr<phx::core::shape::util::parent>);
 			virtual ~base();
 
 			virtual void		init();

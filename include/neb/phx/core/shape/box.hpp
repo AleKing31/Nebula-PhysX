@@ -11,7 +11,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 		virtual public neb::phx::core::shape::base
 	{
 		public:
-			box(sp::shared_ptr<phx::core::actor::rigidactor::base> parent);
+			box(sp::shared_ptr<neb::phx::core::shape::util::parent> parent);
 
 			virtual void				init() = 0;
 			virtual void				release() = 0;

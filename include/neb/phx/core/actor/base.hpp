@@ -32,8 +32,12 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			void			damage(double);
 
 			
-			virtual void		create_physics() = 0;
-			virtual void		init_physics() = 0;
+			/** 
+			 * empty function implemented so that base object can be allocated (for making lights for instance)
+			 * @todo in future, light actors done need to BE phx actors
+			 */
+			virtual void		create_physics() {}
+			virtual void		init_physics() {}
 
 			template<typename Archive> void		serializeTemplate(Archive & ar, unsigned int const & version) {
 				ar & boost::serialization::make_nvp("filter_data_simulation",simulation_);
