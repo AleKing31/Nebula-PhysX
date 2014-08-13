@@ -3,7 +3,8 @@
 #include <gal/log/log.hpp>
 
 #include <neb/phx/app/base.hpp>
-#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/phx/core/actor/rigidstatic/base.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
@@ -97,7 +98,7 @@ void			neb::phx::core::scene::base::create_physics() {
 
 	px_scene_->setSimulationEventCallback(sec);
 }
-void		neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 
 	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core scene", debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
@@ -201,68 +202,54 @@ void		neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 			actor->flag_.set(neb::core::actor::util::flag::E::SHOULD_UPDATE);
 		}
 	}
-
-
 	// unlock all actors
 	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
 			auto actor = sp::dynamic_pointer_cast<neb::core::actor::base>(it->ptr_);
 			assert(actor);
 			actor->mutex_.unlock();
 			});
-
-
-
-
 	// vehicle
 	//physx::PxVec3 g(0,-0.25,0);
 	//vehicle_manager_.vehicle_suspension_raycasts(px_scene_);
 	//vehicle_manager_.update((float)dt, g);
-
 	//send_actor_update();
-
 }
-/*sp::weak_ptr<neb::core::actor::rigiddynamic::base>		neb::core::core::scene::base::createActorRigidDynamicCube(neb::core::pose const & pose, real size) {
+weak_ptr<neb::phx::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
+		neb::core::pose pose,
+		double size) {
+	auto actor = createActorRigidStaticUninitialized().lock();
+	actor->pose_ = pose;
+	actor->init();
+	// shape
+	auto shape = actor->createShapeCube(size);
+	/** @todo consider implementing refresh-type function instead */
+	actor->init();
+	return actor;
+}
+weak_ptr<neb::phx::core::actor::rigiddynamic::base>			neb::phx::core::scene::base::createActorRigidDynamicCube(
+		neb::core::pose pose,
+		double size) {
+	auto actor = createActorRigidDynamicUninitialized().lock();
+	actor->pose_ = pose;
+	actor->init();
+	// shape
+	auto shape = actor->createShapeCube(size);
+	/** @todo consider implementing refresh-type function instead */
+		actor->init();
+	return actor;
+}
+/*
 
-  auto actor = createActorRigidDynamicUninitialized().lock();
+   sp::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(sp::shared_ptr<phx::core::scene::local> scene) {
 
-// set data members
+   auto actor = sp::make_shared<phx::core::actor::rigiddynamic::local>(scene);
 
-actor->pose_ = pose;
+   scene->insert(actor);
 
-// initialize (create physx)
+   actor->simulation_.word0 = phx::filter::filter::type::DYNAMIC;
+   actor->simulation_.word1 = phx::filter::filter::RIGID_AGAINST;
 
-actor->init();
-
-// create shape
-
-auto shape = actor->createShapeCube(size);
-
-// reinitialize in order to apply filtering to shape
- ** @todo consider implementing refresh-type function instead *
- actor->init();
-
- return actor;
-
-
-
-
-
-
-
-
-
-
-
- sp::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(sp::shared_ptr<phx::core::scene::local> scene) {
-
- auto actor = sp::make_shared<phx::core::actor::rigiddynamic::local>(scene);
-
- scene->insert(actor);
-
- actor->simulation_.word0 = phx::filter::filter::type::DYNAMIC;
- actor->simulation_.word1 = phx::filter::filter::RIGID_AGAINST;
-
- actor->init();
+   actor->init();
 
 // shape	
 auto shape = sp::make_shared<phx::core::shape::box>(actor);
@@ -281,8 +268,8 @@ return actor;
 
 
 
-}*/
-
+}
+*/
 
 
 

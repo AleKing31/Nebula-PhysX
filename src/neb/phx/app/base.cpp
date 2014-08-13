@@ -80,9 +80,7 @@ phx::app::base::~base()
 }*/
 neb::phx::app::base::base(): px_physics_(NULL) {
 }
-void						neb::phx::app::base::init() {
-	
-	
+void						neb::phx::app::base::__init() {
 	// Physx
 	// Foundation
 	px_foundation_ = PxCreateFoundation(
