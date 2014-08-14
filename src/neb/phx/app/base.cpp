@@ -4,14 +4,14 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
 #include <neb/core/scene/base.hpp>
 #include <neb/core/debug.hh>
 
 #include <neb/phx/simulation_callback.hh>
 #include <neb/phx/app/base.hpp>
-
+#include <neb/phx/util/log.hpp>
 
 physx::PxFilterFlags	DefaultFilterShader(
 		physx::PxFilterObjectAttributes attributes0,
@@ -139,7 +139,7 @@ sp::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global() {
 }
 void						neb::phx::app::base::step(gal::std::timestep const & ts) {
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx app", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
 
 	neb::phx::game::game::util::parent::step(ts);
 

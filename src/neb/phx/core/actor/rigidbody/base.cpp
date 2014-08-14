@@ -20,7 +20,7 @@
 #include <neb/message/Actor/Control.hh>
 #include <neb/message/Types.hh>
 */
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
 #include <neb/core/debug.hh>
 
@@ -28,6 +28,7 @@
 #include <neb/gfx/window/util/signals.hpp>
 
 #include <neb/phx/util/convert.hpp>
+#include <neb/phx/util/log.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigidbody/base.hpp>
@@ -44,7 +45,7 @@ neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::acto
 {}
 void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	// body frame
 	vec3 f_body;
@@ -75,7 +76,7 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	assert(pxrigidbody);
 
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug)
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug)
 		<< ::std::setw(8) << "f_global"
 		<< ::std::setw(8) << f_global.x
 		<< ::std::setw(8) << f_global.y
@@ -114,7 +115,7 @@ void		neb::phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb:
 }
 void		neb::phx::core::actor::rigidbody::base::step(gal::std::timestep const & ts) {
 
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	if(control_) {
 		control_->step(ts);

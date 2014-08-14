@@ -1,10 +1,11 @@
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
 #include <neb/core/debug.hh>
 #include <neb/core/shape/base.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/util/convert.hpp>
+#include <neb/phx/util/log.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
@@ -15,13 +16,13 @@ neb::phx::core::actor::rigidstatic::base::base(sp::shared_ptr<neb::phx::core::ac
 	neb::phx::core::actor::actor::base(parent),
 	neb::phx::core::actor::rigidactor::base(parent)
 {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 void			neb::phx::core::actor::rigidstatic::base::create_physics() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	if(px_actor_ != NULL) {
-		if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << "been here!";
+		if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
 		return;
 	}
 	
@@ -39,10 +40,12 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 	//pose.q.print();
 
 	// PxActor
-	physx::PxRigidStatic* px_rigid_static = neb::phx::app::base::global()->px_physics_->createRigidStatic(pose);
+	auto app = neb::phx::app::base::global();
+	auto pxph = app->px_physics_;
+	assert(pxph);
+	physx::PxRigidStatic* px_rigid_static = pxph->createRigidStatic(pose);
 
-	if(px_rigid_static == NULL)
-	{
+	if(px_rigid_static == NULL) {
 		printf("create actor failed!");
 		exit(1);
 	}

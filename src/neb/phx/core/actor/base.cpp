@@ -1,4 +1,4 @@
-#include <Galaxy-Log/log.hpp>
+#include <gal/log/log.hpp>
 
 #include <neb/core/debug.hh>
 
@@ -25,19 +25,20 @@
 #include <neb/phx/core/actor/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
+#include <neb/phx/util/log.hpp>
 
 neb::phx::core::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::actor::base(parent),
 	parent_(parent),
 	health_(1.0)
 {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 /*phx::core::actor::base::~base() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
 }*/
 void			neb::phx::core::actor::base::init() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	neb::core::actor::base::init();
 	
@@ -45,7 +46,7 @@ void			neb::phx::core::actor::base::init() {
 	init_physics();
 }
 /*void			phx::core::actor::base::release() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	neb::core::actor::base::release();
 }*/
@@ -58,7 +59,7 @@ sp::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base
 	return parent;
 }
 void			neb::phx::core::actor::base::hit() {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto parent(parent_.lock()); assert(parent);
 
@@ -73,7 +74,7 @@ void			neb::phx::core::actor::base::hit() {
 	}
 }
 void			neb::phx::core::actor::base::damage(double h) {
-	if(DEBUG_NEB) BOOST_LOG_CHANNEL_SEV(lg, "phx core actor", debug) << __PRETTY_FUNCTION__;
+	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	health_ -= h;
 	if(health_ < 0) {
