@@ -40,8 +40,8 @@ void	neb::phx::simulation_callback::onContact(
 	auto actor0 = sp::dynamic_pointer_cast<phx::core::actor::actor::base>(nactor0);
 	auto actor1 = sp::dynamic_pointer_cast<phx::core::actor::actor::base>(nactor1);
 	
-	printf("%p\n", actor0.get());
-	printf("%p\n", actor1.get());
+	printf("actor0 %p\n", actor0.get());
+	printf("actor1 %p\n", actor1.get());
 
 	assert(actor0);
 	assert(actor1);

@@ -66,6 +66,7 @@ void			neb::phx::core::actor::base::hit() {
 	physx::PxU32 w2 = simulation_.word2;
 
 	if(w2 & phx::filter::filter::PROJECTILE) {
+		LOG(lg, neb::phx::core::actor::sl, debug) << shared_from_this().get() << " is projectile, erase";
 		parent->erase(i_);
 	}
 
@@ -75,41 +76,41 @@ void			neb::phx::core::actor::base::hit() {
 }
 void			neb::phx::core::actor::base::damage(double h) {
 	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	health_ -= h;
 	if(health_ < 0) {
 		get_parent()->erase(i_);
 	}
 }
 /*int			phx::core::actor::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
-	switch(action) {
-		case GLFW_PRESS:
-			switch(key) {
-				case GLFW_KEY_SPACE:
-					fire();
-					return 1;
-			}
-	}
+  switch(action) {
+  case GLFW_PRESS:
+  switch(key) {
+  case GLFW_KEY_SPACE:
+  fire();
+  return 1;
+  }
+  }
 
-	return 0;
-}*/
+  return 0;
+  }*/
 sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
 		sp::shared_ptr<neb::gfx::window::base> window,
 		double size,
 		double damage,
 		double velocity) {
-	
+
 	auto self(isPxActorBase());
-	
+
 	auto weap(sp::make_shared<neb::phx::game::weapon::SimpleProjectile>());
-	
+
 	weap->actor_ = self;
 	weap->connect(window);
-	
+
 	weap->velocity_ = velocity;
 	weap->size_ = size;
 	weap->damage_ = damage;
-	
+
 	neb::phx::game::weapon::util::parent::insert(weap);
 
 	return weap;
