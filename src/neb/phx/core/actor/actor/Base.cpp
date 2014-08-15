@@ -28,14 +28,9 @@ neb::phx::core::actor::actor::base::~base() {
 void		neb::phx::core::actor::actor::base::release() {
 	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
-	//neb::core::actor::base::releaseUp();
-
 	if(px_actor_ != NULL) {	
 		px_actor_->release();
 		px_actor_ = NULL;
 	}
-	
-	//assert(!scene_.expired());
-
 }
 
