@@ -21,6 +21,8 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/simulation_callback.hh>
 
+typedef weak_ptr<neb::core::actor::base> wbase;
+
 namespace neb {
 	namespace phx {
 		//class simulation_callback;
@@ -59,22 +61,14 @@ namespace neb {
 						 *
 						 * @warning return actor is not initialized
 						 */
-						virtual weak_ptr<neb::phx::core::actor::rigidstatic::base>		createActorRigidStaticUninitialized() = 0;
+						virtual weak_ptr<neb::core::actor::base>				createActorRigidStaticUninitialized() = 0;
 						/** @brief create rigidstatic
 						 *
 						 * @note typeof returned actor will be determined by final implementation of this
 						 *
 						 * @warning return actor is not initialized
 						 */
-						virtual weak_ptr<neb::phx::core::actor::rigiddynamic::base>		createActorRigidDynamicUninitialized() = 0;
-						/** @brief rigidstatic cube
-						 */
-						virtual weak_ptr<neb::phx::core::actor::rigidstatic::base>		createActorRigidStaticCube(
-								neb::core::pose pose, double size);
-						/** @brief rigiddynamic cube
-						 */
-						virtual weak_ptr<neb::phx::core::actor::rigiddynamic::base>		createActorRigidDynamicCube(
-								neb::core::pose pose, double size);
+						virtual weak_ptr<neb::core::actor::base>				createActorRigidDynamicUninitialized() = 0;
 						/** @} */
 					public:
 						physx::PxScene*						px_scene_;

@@ -4,8 +4,6 @@ INCLUDE($ENV{HOME}/.config.cmake)
 
 PROJECT(nebula_physx)
 
-SET(nebula_physx_STATIC TRUE)
-
 FIND_PACKAGE(glfw)
 FIND_PACKAGE(CMakeHelper)
 FIND_PACKAGE(PhysX)
@@ -13,6 +11,7 @@ FIND_PACKAGE(PhysX)
 FIND_PACKAGE(Galaxy COMPONENTS
 	std
 	log
+	console
 	REQUIRED)
 
 FIND_PACKAGE(Nebula COMPONENTS
@@ -24,11 +23,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -D_DEBUG -std=c++0x")
 
 include_directories("/usr/include/freetype2")
 include_directories("../../glm")
-include_directories("../../maze/include")
 include_directories(${physx_INCLUDE_DIR})
 
 link_directories("../Debug")
-link_directories("../maze/Debug")
 
 ADD_DEFINITIONS("-D_DEBUG -DGAL_NET_USE_BOOST -DGLM_FORCE_RADIANS")
 
@@ -47,30 +44,10 @@ SET(libs ${libs}
 	${Nebula_LIBRARIES}
 	${PhysX_LIBRARIES}
 	${Boost_LIBRARIES}
-	glfw3
-	GL
-	GLU
-	GLEW
-	freetype
-	png
-	rt
-	pthread
-	X11
-	Xrandr
-	Xi
-	Xcursor
-	Xxf86vm
 	${PhysX_LIBRARIES}
 	)
 
-
-
-# common methods for static library
-# =================================
-
-
-
-cmh_library()
+cmh_static_library()
 
 add_subdirectory(test)
 

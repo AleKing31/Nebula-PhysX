@@ -212,7 +212,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	//vehicle_manager_.update((float)dt, g);
 	//send_actor_update();
 }
-weak_ptr<neb::phx::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
+/*weak_ptr<neb::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
 		neb::core::pose pose,
 		double size) {
 	auto actor = createActorRigidStaticUninitialized().lock();
@@ -220,22 +220,11 @@ weak_ptr<neb::phx::core::actor::rigidstatic::base>			neb::phx::core::scene::base
 	actor->init();
 	// shape
 	auto shape = actor->createShapeCube(pose, size);
-	/** @todo consider implementing refresh-type function instead */
+	/// @todo consider implementing refresh-type function instead 
 	actor->init();
 	return actor;
-}
-weak_ptr<neb::phx::core::actor::rigiddynamic::base>			neb::phx::core::scene::base::createActorRigidDynamicCube(
-		neb::core::pose pose,
-		double size) {
-	auto actor = createActorRigidDynamicUninitialized().lock();
-	actor->pose_ = pose;
-	actor->init();
-	// shape
-	auto shape = actor->createShapeCube(pose, size);
-	/** @todo consider implementing refresh-type function instead */
-		actor->init();
-	return actor;
-}
+}*/
+
 /*
 
    sp::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(sp::shared_ptr<phx::core::scene::local> scene) {
