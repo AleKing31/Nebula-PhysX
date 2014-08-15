@@ -1,6 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 #include <neb/core/shape/base.hpp>
 
 #include <neb/phx/app/base.hpp>

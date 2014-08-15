@@ -1,7 +1,7 @@
 #ifndef PHYSX_CORE_ACTOR_BASE
 #define PHYSX_CORE_ACTOR_BASE
 
-#include <neb/core/actor/base.hpp>
+#include <neb/core/core/actor/base.hpp>
 
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>

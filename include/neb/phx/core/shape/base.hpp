@@ -5,7 +5,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/core/shape/base.hpp>
+#include <neb/core/core/shape/base.hpp>
 
 #include <neb/phx/core/shape/util/parent.hpp>
 
