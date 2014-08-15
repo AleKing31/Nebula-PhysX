@@ -20,7 +20,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			virtual void						init_physics() = 0;
 			//virtual void						add_force(real) = 0;
 			//virtual void						set_pose(physx::PxTransform);
-			virtual void						setGlobalPosition(vec3 p);
+			virtual void						setGlobalPosition(glm::vec3 p);
 			/** @name convenience functions
 			 * @{
 			 *

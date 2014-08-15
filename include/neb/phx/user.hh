@@ -7,7 +7,7 @@
 //#include <nebula/config.hpp>
 //#include <nebula/camera/camera.hpp>
 
-#include <neb/core/actor/util/Types.hh>
+#include <neb/core/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx {
 	class user {

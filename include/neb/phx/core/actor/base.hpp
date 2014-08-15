@@ -14,7 +14,7 @@
 namespace neb { namespace phx { namespace core { namespace actor {
 
 	class base:
-		virtual public neb::core::actor::base,
+		virtual public neb::core::core::actor::base,
 		virtual public neb::phx::core::actor::util::parent,
 		virtual public neb::phx::core::shape::util::parent,
 		virtual public neb::phx::game::weapon::util::parent,

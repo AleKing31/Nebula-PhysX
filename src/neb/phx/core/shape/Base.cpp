@@ -1,6 +1,6 @@
-#include <neb/core/debug.hh>
-#include <neb/core/shape/base.hpp>
-#include <neb/core/light/base.hpp>
+#include <neb/core/util/debug.hpp>
+#include <neb/core/core/shape/base.hpp>
+#include <neb/core/core/light/base.hpp>
 
 #include <neb/gfx/glsl/attrib.hh>
 
@@ -11,7 +11,7 @@
 
 
 neb::phx::core::shape::base::base(sp::shared_ptr<phx::core::shape::util::parent> parent):
-	neb::core::shape::base(parent)
+	neb::core::core::shape::base(parent)
 {
 	//NEBULA_SHAPE_BASE_FUNC;
 	assert(parent);
@@ -24,14 +24,14 @@ void			neb::phx::core::shape::base::step(gal::std::timestep const & ts) {
 void			neb::phx::core::shape::base::init() {
 	//NEBULA_DEBUG_0_FUNCTION;
 
-	neb::core::shape::base::init();
+	neb::core::core::shape::base::init();
 
 	create_physics();
 }
 void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;
 
-	neb::core::shape::base::release();
+	neb::core::core::shape::base::release();
 	
 	if(px_shape_) {
 		

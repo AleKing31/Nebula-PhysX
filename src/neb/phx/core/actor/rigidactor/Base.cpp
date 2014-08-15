@@ -1,6 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
@@ -11,7 +11,7 @@
 //neb::core::actor::rigidactor::base::base() {
 //}
 neb::phx::core::actor::rigidactor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::actor::base(parent),
+	neb::core::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent)
 {

@@ -22,7 +22,7 @@
 */
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/window/util/signals.hpp>
@@ -36,7 +36,7 @@
 
 
 neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::actor::base(parent),
+	neb::core::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
 	phx::core::actor::rigidactor::base(parent),
@@ -45,7 +45,7 @@ neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::acto
 {}
 void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	// body frame
 	vec3 f_body;
@@ -76,7 +76,7 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	assert(pxrigidbody);
 
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug)
+	LOG(lg, neb::phx::core::actor::sl, debug)
 		<< ::std::setw(8) << "f_global"
 		<< ::std::setw(8) << f_global.x
 		<< ::std::setw(8) << f_global.y
@@ -115,7 +115,7 @@ void		neb::phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb:
 }
 void		neb::phx::core::actor::rigidbody::base::step(gal::std::timestep const & ts) {
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	if(control_) {
 		control_->step(ts);

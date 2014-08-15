@@ -1,5 +1,6 @@
-#include <neb/core/debug.hh>
-#include <neb/core/scene/base.hpp>
+
+#include <neb/core/util/debug.hpp>
+#include <neb/core/core/scene/base.hpp>
 
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/core/actor/base.hpp>
@@ -11,7 +12,7 @@ neb::phx::core::actor::util::parent::parent() {
 neb::phx::core::actor::util::parent::~parent() {
 }
 void							neb::phx::core::actor::util::parent::init() {
-	neb::core::actor::util::parent::init();
+	neb::core::core::actor::util::parent::init();
 }
 sp::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
 	

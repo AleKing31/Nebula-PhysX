@@ -9,7 +9,7 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
@@ -28,7 +28,7 @@ void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive
 int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 /*	long unsigned int f = flag_.val_ & (
 			neb::gfx::camera::view::util::flag::NORTH |
@@ -39,7 +39,7 @@ int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<ne
 			neb::gfx::camera::view::util::flag::DOWN);*/
 
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug)
+	LOG(lg, neb::phx::core::actor::sl, debug)
 		<< "key = " << key
 		<< " scancode = " << scancode
 		<< " action = " << action

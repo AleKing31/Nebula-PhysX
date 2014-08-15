@@ -4,16 +4,12 @@
 #include <neb/phx/core/shape/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace shape { namespace util {
-
-
 	class cast:
-		virtual public neb::core::shape::util::cast
+		virtual public neb::core::core::shape::util::cast
 	{
 		public:
-			sp::shared_ptr<phx::core::shape::base>		isPxShapeBase();
+			shared_ptr<neb::phx::core::shape::base>		isPxShapeBase();
 	};
-
-
 }}}}}
 
 #endif

@@ -28,8 +28,8 @@ void	neb::phx::simulation_callback::onContact(
 	 * doing so keeps the actors alive long enough to return from the call to @c hit
 	 * allows the scene to release the actors safely during the call to @c hit
 	 */
-	auto nactor0 = static_cast<neb::core::actor::base*>(pxactor0->userData)->isActorBase();
-	auto nactor1 = static_cast<neb::core::actor::base*>(pxactor1->userData)->isActorBase();
+	auto nactor0 = static_cast<neb::core::core::actor::base*>(pxactor0->userData)->isActorBase();
+	auto nactor1 = static_cast<neb::core::core::actor::base*>(pxactor1->userData)->isActorBase();
 
 	assert(nactor0);
 	assert(nactor1);
@@ -37,8 +37,8 @@ void	neb::phx::simulation_callback::onContact(
 	//auto actor0 = static_cast<phx::core::actor::actor::base*>(pxactor0->userData)->isPxActorActorBase();
 	//auto actor1 = static_cast<phx::core::actor::actor::base*>(pxactor1->userData)->isPxActorActorBase();
 
-	auto actor0 = sp::dynamic_pointer_cast<phx::core::actor::actor::base>(nactor0);
-	auto actor1 = sp::dynamic_pointer_cast<phx::core::actor::actor::base>(nactor1);
+	auto actor0 = dynamic_pointer_cast<phx::core::actor::actor::base>(nactor0);
+	auto actor1 = dynamic_pointer_cast<phx::core::actor::actor::base>(nactor1);
 	
 	printf("actor0 %p\n", actor0.get());
 	printf("actor1 %p\n", actor1.get());

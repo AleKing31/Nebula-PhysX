@@ -1,25 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
-
-//#include <neb/util/Typed.hh>
-
-/*#include <neb/util/decl.hpp>
-#include <neb/config.hh> // Nebula/config.hpp.in
-#include <neb/timer/Actor/Base.hpp>
-#include <neb/app/Base.hh>
-#include <neb/core/scene/base.hpp>
-#include <neb/gfx/window/util/signals.hpp>
-
-#include <neb/core/actor/base.hpp>
-#include <neb/core/actor/RigidActor/Base.hh>
-#include <neb/core/actor/RigidBody/Base.hh>
-#include <neb/core/actor/Empty/Empty.hpp>
-#include <neb/core/actor/util/Types.hh>
-
-#include <neb/Filter.hh>
-#include <neb/gfx/window/Base.hh>
-*/
+#include <neb/core/util/debug.hpp>
 
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/base.hpp>
@@ -28,30 +9,30 @@
 #include <neb/phx/util/log.hpp>
 
 neb::phx::core::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::actor::base(parent),
+	neb::core::core::actor::base(parent),
 	parent_(parent),
 	health_(1.0)
 {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 /*phx::core::actor::base::~base() {
-	if(DEBUG_NEB) LOG(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
+	LOG(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
 }*/
 void			neb::phx::core::actor::base::init() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
-	neb::core::actor::base::init();
+	neb::core::core::actor::base::init();
 	
 	create_physics();
 	init_physics();
 }
 /*void			phx::core::actor::base::release() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
-	neb::core::actor::base::release();
+	neb::core::core::actor::base::release();
 }*/
 void			neb::phx::core::actor::base::step(gal::std::timestep const & ts) {
-	neb::core::actor::base::step(ts);
+	neb::core::core::actor::base::step(ts);
 }
 sp::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
 	auto parent(phx::core::actor::base::parent_.lock());
@@ -59,7 +40,7 @@ sp::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base
 	return parent;
 }
 void			neb::phx::core::actor::base::hit() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto parent(parent_.lock()); assert(parent);
 
@@ -70,12 +51,12 @@ void			neb::phx::core::actor::base::hit() {
 		parent->erase(i_);
 	}
 
-	if(flag_.any(neb::core::actor::util::flag::E::DESTRUCTIBLE)) {
+	if(flag_.any(neb::core::core::actor::util::flag::E::DESTRUCTIBLE)) {
 		damage(0.6f);
 	}
 }
 void			neb::phx::core::actor::base::damage(double h) {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
 	health_ -= h;
 	if(health_ < 0) {

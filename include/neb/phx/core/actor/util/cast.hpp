@@ -1,15 +1,14 @@
 #ifndef PHYSX_CORE_ACTOR_UTIL_CAST_HPP
 #define PHYSX_CORE_ACTOR_UTIL_CAST_HPP
 
-#include <neb/core/actor/util/Cast.hh>
+#include <neb/core/core/actor/util/cast.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace util {
 
-
 	class cast:
-		virtual public neb::core::actor::util::cast
+		virtual public neb::core::core::actor::util::cast
 	{
 		public:
 			sp::shared_ptr<neb::phx::core::actor::base>				isPxActorBase();

@@ -9,7 +9,7 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
@@ -21,19 +21,19 @@ void		neb::phx::core::actor::control::rigidbody::manual::step(gal::std::timestep
 }
 
 vec3			neb::phx::core::actor::control::rigidbody::manual::f_body() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return f_ * 10.0f;
 }
 vec3			neb::phx::core::actor::control::rigidbody::manual::t_body() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return t_ * 3.0f;
 }
 vec3			neb::phx::core::actor::control::rigidbody::manual::f_global() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return vec3();
 }
 vec3			neb::phx::core::actor::control::rigidbody::manual::t_global() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return vec3();
 }
 

@@ -1,6 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
@@ -9,7 +9,7 @@
 
 void						neb::phx::game::ai::base::step(gal::std::timestep const & ts) {
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto actor = sp::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor_.lock());
 	if(!actor) return;
@@ -41,20 +41,20 @@ void						neb::phx::game::ai::base::step(gal::std::timestep const & ts) {
 	
 	//quat q(up,look);
 	
-	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug)
+	LOG(lg, neb::phx::sl, debug)
 		<< ::std::setw(16) << "look"
 		<< ::std::setw(16) << look.x
 		<< ::std::setw(16) << look.y
 		<< ::std::setw(16) << look.z;
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug)
+	LOG(lg, neb::phx::sl, debug)
 		<< ::std::setw(16) << "q"
 		<< ::std::setw(16) << q.w
 		<< ::std::setw(16) << q.x
 		<< ::std::setw(16) << q.y
 		<< ::std::setw(16) << q.z;
 
-	//if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
+	//LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
 
 	pd->q_target_ = q;
 	

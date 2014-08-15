@@ -1,11 +1,11 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/timer/Actor/Release.hpp>
+#include <neb/core/timer/Actor/Release.hpp>
 
 #include <neb/gfx/window/Base.hh>
 
-#include <neb/core/debug.hh>
+#include <neb/core/util/debug.hpp>
 #include <neb/core/util/log.hpp>
 
 #include <neb/phx/filter.hpp>
@@ -38,7 +38,7 @@ void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx
 
 }
 int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
-	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
+	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
 
 	int key_fire = GLFW_KEY_SPACE;
 
@@ -54,7 +54,7 @@ int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::win
 	return 0;
 }
 void			neb::phx::game::weapon::SimpleProjectile::fire() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
+	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
 	
 	auto app(neb::phx::app::base::global());
 
@@ -134,11 +134,11 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	
 	auto t = sp::make_shared<neb::Timer::actor::Release>(proj, scene->last_ + 5.0);
 
-	if(DEBUG_NEB) LOG(lg, neb::core::sl, debug) << t.use_count();
+	LOG(lg, neb::core::sl, debug) << t.use_count();
 	
 	t->activate();
 
-	if(DEBUG_NEB) LOG(lg, neb::core::sl, debug) << t.use_count();
+	LOG(lg, neb::core::sl, debug) << t.use_count();
 	
 	
 }

@@ -2,8 +2,8 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/core/debug.hh>
-#include <neb/core/scene/util/decl.hpp>
+#include <neb/core/util/debug.hpp>
+#include <neb/core/core/scene/util/decl.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
@@ -16,28 +16,28 @@ neb::phx::core::scene::base::base(shared_ptr<neb::core::core::scene::util::paren
 	neb::core::core::scene::base(parent),
 	px_scene_(NULL)
 {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 }
 neb::phx::core::scene::base::~base() {
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 }
 void			neb::phx::core::scene::base::init() {
 	
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 	
 	neb::core::core::scene::base::init();
 	
 	create_physics();
 }
 void			neb::phx::core::scene::base::release() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 }
 void			neb::phx::core::scene::base::create_physics() {
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 	
 	if(px_scene_ != NULL) {
-		if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
+		LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
 		return;
 	}
 
@@ -99,7 +99,7 @@ void			neb::phx::core::scene::base::create_physics() {
 }
 void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
 	auto app = phx::app::base::global();
 
@@ -111,39 +111,39 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	// PxScene
 	assert(px_scene_ != NULL);
 
-	typedef neb::core::actor::util::parent A;
+	typedef neb::core::core::actor::util::parent A;
 
 
 	//========================================================================
 	// lock all actors
 
 	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = sp::dynamic_pointer_cast<neb::core::actor::base>(it->ptr_);
+			auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 			assert(actor);
 			actor->mutex_.lock();
-			if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
+			LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
 			});
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "actors locked";
+	LOG(lg, neb::phx::core::scene::sl, debug) << "actors locked";
 	/*A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-	  auto actor = sp::dynamic_pointer_cast<neb::core::actor::base>(it->ptr_);
+	  auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 	  assert(actor);
-	  if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
+	  LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
 	  });*/
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "simulate";
+	LOG(lg, neb::phx::core::scene::sl, debug) << "simulate";
 
 	px_scene_->simulate(ts.dt);
 	px_scene_->fetchResults(true);
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "simulation complete";
+	LOG(lg, neb::phx::core::scene::sl, debug) << "simulation complete";
 
 	// retrieve array of actors that moved
 	physx::PxU32 nb_active_transforms;
 	const physx::PxActiveTransform* active_transforms = px_scene_->getActiveTransforms(nb_active_transforms);
 
 
-	if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug)
+	LOG(lg, neb::phx::core::scene::sl, debug)
 		<< "active transforms: " << nb_active_transforms;
 
 	//physx::PxTransform pose;
@@ -161,12 +161,12 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 		void* ud = active_transforms[i].userData;
 		assert(ud);
 
-		if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug) << "ud = " << ud;
+		LOG(lg, neb::phx::core::scene::sl, debug) << "ud = " << ud;
 
 		physx::PxRigidBody* pxrigidbody = pxactor->isRigidBody();
 
 
-		neb::core::actor::base* pactor = static_cast<neb::core::actor::base*>(ud);
+		neb::core::core::actor::base* pactor = static_cast<neb::core::core::actor::base*>(ud);
 		auto actor = pactor->isActorBase();
 		assert(actor);
 
@@ -177,7 +177,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 						phx::util::convert(pose.q)
 						));
 
-			if(DEBUG_NEB) LOG(lg, neb::phx::core::scene::sl, debug)
+			LOG(lg, neb::phx::core::scene::sl, debug)
 				<< ::std::setw(8) << "p"
 					<< ::std::setw(8) << pose.p.x
 					<< ::std::setw(8) << pose.p.y
@@ -197,12 +197,12 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 				//v.print();
 			}
 
-			actor->flag_.set(neb::core::actor::util::flag::E::SHOULD_UPDATE);
+			actor->flag_.set(neb::core::core::actor::util::flag::E::SHOULD_UPDATE);
 		}
 	}
 	// unlock all actors
 	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = sp::dynamic_pointer_cast<neb::core::actor::base>(it->ptr_);
+			auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 			assert(actor);
 			actor->mutex_.unlock();
 			});
@@ -212,7 +212,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	//vehicle_manager_.update((float)dt, g);
 	//send_actor_update();
 }
-/*weak_ptr<neb::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
+/*weak_ptr<neb::core::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
 		neb::core::pose pose,
 		double size) {
 	auto actor = createActorRigidStaticUninitialized().lock();

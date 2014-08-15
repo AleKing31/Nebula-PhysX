@@ -7,7 +7,7 @@
 
 #include <neb/core/util/config.hpp>
 #include <neb/core/app/__core.hpp>
-#include <neb/core/scene/base.hpp>
+#include <neb/core/core/scene/base.hpp>
 
 #include <neb/phx/core/scene/util/parent.hpp>
 #include <neb/phx/game/game/util/parent.hpp>

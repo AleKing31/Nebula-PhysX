@@ -36,11 +36,11 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 
 			virtual void					add_force(double);
 			//virtual void					setPose(neb::core::pose const & pose) = 0;
-			void						create_control(sp::shared_ptr<neb::gfx::window::base> window);
+			void						create_control(shared_ptr<neb::gfx::window::base> window);
 		public:
 			shared_ptr<neb::phx::core::actor::control::rigidbody::base>		control_;
-			vec3		force_;
-			vec3		torque_;
+			glm::vec3		force_;
+			glm::vec3		torque_;
 	};
 }}}}}
 

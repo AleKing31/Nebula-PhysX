@@ -1,7 +1,7 @@
 #ifndef NEB_PHX_CORE_SCENE_UTIL_PARENT_HH
 #define NEB_PHX_CORE_SCENE_UTIL_PARENT_HH
 
-#include <neb/core/scene/util/Parent.hh>
+#include <neb/core/core/scene/util/parent.hpp>
 
 namespace neb {
 	namespace phx {
