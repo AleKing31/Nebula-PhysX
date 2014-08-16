@@ -36,7 +36,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 		return;
 	}
 
-	auto scene = sp::dynamic_pointer_cast<neb::phx::core::scene::base>(getScene());
+	auto scene = std::dynamic_pointer_cast<neb::phx::core::scene::base>(getScene());
 
 	auto p(getPose());	
 	physx::PxTransform pose(
@@ -72,7 +72,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	assert(this == shared_from_this().get());
 	assert(this == isActorBase().get());
 	assert(this == isPxActorRigidDynamicBase().get());
-	assert(sp::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(shared_from_this()));
+	assert(std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(shared_from_this()));
 	
 
 	// add PxActor to PxScene

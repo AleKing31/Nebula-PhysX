@@ -12,7 +12,7 @@
 
 //neb::core::actor::actor::base::base() {
 //}
-neb::phx::core::actor::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
+neb::phx::core::actor::actor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	px_actor_(NULL)

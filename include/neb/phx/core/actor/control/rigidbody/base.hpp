@@ -5,7 +5,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/signals2.hpp>
 
-#include <gal/std/timestep.hpp>
+#include <gal/etc/timestep.hpp>
 
 #include <neb/core/util/typedef.hpp>
 
@@ -29,9 +29,9 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 				virtual ~base() {}
 				base&				operator=(base const & base);
 
-				virtual int			key_fun(sp::shared_ptr<neb::gfx::window::base>, int, int, int, int);
+				virtual int			key_fun(std::shared_ptr<neb::gfx::window::base>, int, int, int, int);
 
-				virtual void			step(gal::std::timestep const & ts) = 0;
+				virtual void			step(gal::etc::timestep const & ts) = 0;
 				virtual vec3			f_body() = 0;
 				virtual vec3			t_body() = 0;
 				virtual vec3			f_global() = 0;
@@ -42,7 +42,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 			private:
 
 			public:
-				sp::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
+				std::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
 
 				quat				q_target_;
 				vec3				p_target_;
@@ -65,7 +65,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 		class manual: public neb::phx::core::actor::control::rigidbody::base {
 			public:
 				virtual ~manual() {}
-				void				step(gal::std::timestep const & ts);
+				void				step(gal::etc::timestep const & ts);
 				virtual vec3			f_body();
 				virtual vec3			t_body();
 				virtual vec3			f_global();
@@ -75,7 +75,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 		class pd: public neb::phx::core::actor::control::rigidbody::base {
 			public:
 				virtual ~pd() {}
-				void				step(gal::std::timestep const & ts);
+				void				step(gal::etc::timestep const & ts);
 
 				vec3				getOrientationError();
 

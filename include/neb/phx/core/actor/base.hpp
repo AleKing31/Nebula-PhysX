@@ -21,12 +21,12 @@ namespace neb { namespace phx { namespace core { namespace actor {
 		virtual public neb::phx::core::actor::util::cast
 	{
 		public:
-			base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent);
+			base(std::shared_ptr<neb::phx::core::actor::util::parent> parent);
 
 			
 			virtual void		init();
 			virtual void		release() = 0;
-			virtual void		step(gal::std::timestep const & ts);
+			virtual void		step(gal::etc::timestep const & ts);
 
 			void			hit();
 			void			damage(double);
@@ -45,21 +45,21 @@ namespace neb { namespace phx { namespace core { namespace actor {
 
 			}
 	
-			sp::shared_ptr<neb::phx::core::actor::util::parent>			getPxParent();
+			std::shared_ptr<neb::phx::core::actor::util::parent>			getPxParent();
 
 			/** @name convenience functions
 			 * @{
 			 */
 			/** @brief create simple projectile weapon
 			 */
-			sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
-					sp::shared_ptr<neb::gfx::window::base> window,
+			std::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
+					std::shared_ptr<neb::gfx::window::base> window,
 					double size,
 					double damage,
 					double velocity);
 			/** @} */
 		public:
-			sp::weak_ptr<neb::phx::core::actor::util::parent>			parent_;
+			std::weak_ptr<neb::phx::core::actor::util::parent>			parent_;
 
 			phx::filter::data							simulation_;
 			phx::filter::data							scene_query_;

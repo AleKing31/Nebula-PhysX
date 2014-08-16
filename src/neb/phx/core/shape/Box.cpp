@@ -3,7 +3,7 @@
 #include <neb/phx/core/shape/box.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 
-neb::phx::core::shape::box::box(shared_ptr<neb::phx::core::shape::util::parent> parent):
+neb::phx::core::shape::box::box(std::shared_ptr<neb::phx::core::shape::util::parent> parent):
 	neb::core::core::shape::base(parent),
 	neb::phx::core::shape::base(parent)
 {

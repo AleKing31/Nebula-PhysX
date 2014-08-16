@@ -16,7 +16,7 @@
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
-void		neb::phx::core::actor::control::rigidbody::manual::step(gal::std::timestep const & ts) { // 0
+void		neb::phx::core::actor::control::rigidbody::manual::step(gal::etc::timestep const & ts) { // 0
 
 }
 

@@ -23,7 +23,7 @@ vec3		neb::phx::core::actor::control::rigidbody::pd::getOrientationError() {
 	
 	return error;
 }
-void		neb::phx::core::actor::control::rigidbody::pd::step(gal::std::timestep const & ts) { // 1
+void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep const & ts) { // 1
 	//NEBULA_DEBUG_1_FUNCTION;
 
 	// step target

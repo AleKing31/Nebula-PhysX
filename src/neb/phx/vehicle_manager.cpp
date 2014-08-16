@@ -442,7 +442,7 @@ physx::PxRigidDynamic* createVehicleActor4W(
 std::shared_ptr<neb::core::actor::vehicle>	neb::vehicle_manager::create_vehicle(
 		physx::PxPhysics* physics,
 		physx::PxScene* scene,
-		sp::shared_ptr<neb::core::actor::desc> desc) {
+		std::shared_ptr<neb::core::actor::desc> desc) {
 
 	// material
 	physx::PxMaterial* material = physics->createMaterial(0.5f, 0.5f, 0.1f);

@@ -12,7 +12,7 @@
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
-neb::phx::core::scene::base::base(shared_ptr<neb::core::core::scene::util::parent > parent):
+neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
 	neb::core::core::scene::base(parent),
 	px_scene_(NULL)
 {
@@ -97,7 +97,7 @@ void			neb::phx::core::scene::base::create_physics() {
 
 	px_scene_->setSimulationEventCallback(sec);
 }
-void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
@@ -118,7 +118,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	// lock all actors
 
 	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 			assert(actor);
 			actor->mutex_.lock();
 			LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
@@ -126,7 +126,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 
 	LOG(lg, neb::phx::core::scene::sl, debug) << "actors locked";
 	/*A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-	  auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+	  auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 	  assert(actor);
 	  LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
 	  });*/
@@ -202,7 +202,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 	}
 	// unlock all actors
 	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = sp::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
 			assert(actor);
 			actor->mutex_.unlock();
 			});
@@ -227,7 +227,7 @@ void			neb::phx::core::scene::base::step(gal::std::timestep const & ts) {
 
 /*
 
-   sp::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(sp::shared_ptr<phx::core::scene::local> scene) {
+   std::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(std::shared_ptr<phx::core::scene::local> scene) {
 
    auto actor = sp::make_shared<phx::core::actor::rigiddynamic::local>(scene);
 

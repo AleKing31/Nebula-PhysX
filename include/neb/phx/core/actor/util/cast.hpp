@@ -11,12 +11,12 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace uti
 		virtual public neb::core::core::actor::util::cast
 	{
 		public:
-			sp::shared_ptr<neb::phx::core::actor::base>				isPxActorBase();
-			sp::shared_ptr<neb::phx::core::actor::actor::base>			isPxActorActorBase();
-			sp::shared_ptr<neb::phx::core::actor::rigidactor::base>			isPxActorRigidActorBase();
-			sp::shared_ptr<neb::phx::core::actor::rigidbody::base>			isPxActorRigidBodyBase();
-			sp::shared_ptr<neb::phx::core::actor::rigiddynamic::base>		isPxActorRigidDynamicBase();
-			sp::shared_ptr<neb::phx::core::actor::rigidstatic::base>		isPxActorRigidStaticBase();
+			std::shared_ptr<neb::phx::core::actor::base>				isPxActorBase();
+			std::shared_ptr<neb::phx::core::actor::actor::base>			isPxActorActorBase();
+			std::shared_ptr<neb::phx::core::actor::rigidactor::base>			isPxActorRigidActorBase();
+			std::shared_ptr<neb::phx::core::actor::rigidbody::base>			isPxActorRigidBodyBase();
+			std::shared_ptr<neb::phx::core::actor::rigiddynamic::base>		isPxActorRigidDynamicBase();
+			std::shared_ptr<neb::phx::core::actor::rigidstatic::base>		isPxActorRigidStaticBase();
 
 	};
 

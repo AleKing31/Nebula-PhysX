@@ -19,9 +19,9 @@
 
 neb::phx::game::weapon::SimpleProjectile::SimpleProjectile() {
 }
-void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx::window::base> window) {
+void			neb::phx::game::weapon::SimpleProjectile::connect(std::shared_ptr<neb::gfx::window::base> window) {
 	
-	auto self(sp::dynamic_pointer_cast<neb::phx::game::weapon::SimpleProjectile>(shared_from_this()));
+	auto self(std::dynamic_pointer_cast<neb::phx::game::weapon::SimpleProjectile>(shared_from_this()));
 	
 	window->sig_.key_fun_.connect(
 			20,
@@ -37,7 +37,7 @@ void			neb::phx::game::weapon::SimpleProjectile::connect(sp::shared_ptr<neb::gfx
 			);
 
 }
-int			neb::phx::game::weapon::SimpleProjectile::key_fun(shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
+int			neb::phx::game::weapon::SimpleProjectile::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int , int action, int mods) {
 	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;;
 
 	int key_fire = GLFW_KEY_SPACE;

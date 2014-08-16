@@ -14,13 +14,13 @@ neb::phx::core::actor::util::parent::~parent() {
 void							neb::phx::core::actor::util::parent::init() {
 	neb::core::core::actor::util::parent::init();
 }
-sp::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
+std::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
 	
-	auto scene(sp::dynamic_pointer_cast<neb::phx::core::scene::base>(shared_from_this()));
+	auto scene(std::dynamic_pointer_cast<neb::phx::core::scene::base>(shared_from_this()));
 	
 	if(scene) return scene;
 
-	auto actor(sp::dynamic_pointer_cast<neb::phx::core::actor::base>(shared_from_this()));
+	auto actor(std::dynamic_pointer_cast<neb::phx::core::actor::base>(shared_from_this()));
 	
 	if(!actor) throw 0;
 	

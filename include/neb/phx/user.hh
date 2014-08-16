@@ -14,11 +14,11 @@ namespace neb { namespace phx {
 		public:
 			user();
 			void	init();
-			void	connect(sp::shared_ptr<neb::gfx::window::base>);
-			void	set_control(sp::shared_ptr<phx::core::actor::control::rigidbody::base>);
+			void	connect(std::shared_ptr<neb::gfx::window::base>);
+			void	set_control(std::shared_ptr<phx::core::actor::control::rigidbody::base>);
 			
 			
-			sp::shared_ptr<phx::core::actor::control::rigidbody::base>		control_;
+			std::shared_ptr<phx::core::actor::control::rigidbody::base>		control_;
 			
 	};
 }}

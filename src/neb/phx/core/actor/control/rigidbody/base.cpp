@@ -25,7 +25,7 @@ void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive
 void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
 	abort();
 }
-int			neb::phx::core::actor::control::rigidbody::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
+int			neb::phx::core::actor::control::rigidbody::base::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;

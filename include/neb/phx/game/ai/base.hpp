@@ -1,9 +1,9 @@
 #ifndef PHYSX_GAME_AI_BASE_HPP
 #define PHYSX_GAME_AI_BASE_HPP
 
-#include <gal/std/timestep.hpp>
+#include <gal/etc/timestep.hpp>
 
-#include <neb/core/util/shared.hpp>
+#include <neb/core/itf/shared.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
@@ -11,16 +11,16 @@ namespace neb { namespace phx { namespace game { namespace ai {
 
 
 	class base:
-		virtual public neb::std::shared
+		virtual public neb::itf::shared
 	{
 		public:
 
-			void						step(gal::std::timestep const & ts);
+			void						step(gal::etc::timestep const & ts);
 		public:
-			sp::weak_ptr<phx::core::actor::base>		actor_;
+			std::weak_ptr<phx::core::actor::base>		actor_;
 			/** @brief target
 			 */
-			sp::weak_ptr<phx::core::actor::base>		target_;
+			std::weak_ptr<phx::core::actor::base>		target_;
 
 
 

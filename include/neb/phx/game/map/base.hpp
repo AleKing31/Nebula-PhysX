@@ -20,7 +20,7 @@ namespace neb { namespace phx {
 			virtual public neb::game::map::base
 		{
 			public:
-				base(sp::shared_ptr<neb::phx::core::scene::util::parent> parent);
+				base(std::shared_ptr<neb::phx::core::scene::util::parent> parent);
 
 				virtual void			init();
 				virtual void			release();

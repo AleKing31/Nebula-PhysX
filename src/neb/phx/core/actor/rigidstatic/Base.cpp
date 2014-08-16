@@ -10,7 +10,7 @@
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 
-neb::phx::core::actor::rigidstatic::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidstatic::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent),
@@ -26,7 +26,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 		return;
 	}
 	
-	auto scene = sp::dynamic_pointer_cast<phx::core::scene::base>(getScene());//scene_.lock();
+	auto scene = std::dynamic_pointer_cast<phx::core::scene::base>(getScene());//scene_.lock();
 	assert(scene);
 	
 	auto p = getPose();

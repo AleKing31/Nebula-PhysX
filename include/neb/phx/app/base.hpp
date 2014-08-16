@@ -43,13 +43,13 @@ namespace neb {
 				virtual public neb::phx::game::game::util::parent
 			{
 				public:
-					static sp::shared_ptr<phx::app::base>		global();
+					static std::shared_ptr<phx::app::base>		global();
 					base();
 				protected:
 					void						__init();
 				public:
 					void						release();
-					virtual void					step(gal::std::timestep const & ts);
+					virtual void					step(gal::etc::timestep const & ts);
 					DefaultErrorCallback 				px_default_error_callback_;
 					physx::PxDefaultAllocator 			px_default_allocator_callback_;
 					physx::PxFoundation*				px_foundation_;

@@ -17,11 +17,11 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 	{
 
 		public:
-			base(sp::shared_ptr<phx::core::actor::util::parent>);
+			base(std::shared_ptr<phx::core::actor::util::parent>);
 
 			virtual void					init() = 0;
 			virtual void					release() = 0;
-			virtual void					step(gal::std::timestep const & ts);
+			virtual void					step(gal::etc::timestep const & ts);
 
 			/** @brief create physics
 			 *
@@ -36,7 +36,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 
 			virtual void					add_force(double);
 			//virtual void					setPose(neb::core::pose const & pose) = 0;
-			void						create_control(shared_ptr<neb::gfx::window::base> window);
+			void						create_control(std::shared_ptr<neb::gfx::window::base> window);
 		public:
 			shared_ptr<neb::phx::core::actor::control::rigidbody::base>		control_;
 			glm::vec3		force_;

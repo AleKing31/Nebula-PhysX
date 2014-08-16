@@ -1,7 +1,7 @@
 #ifndef PHYSX_GAME_GAME_BASE_HPP
 #define PHYSX_GAME_GAME_BASE_HPP
 
-#include <neb/core/util/shared.hpp>
+#include <neb/core/itf/shared.hpp>
 #include <neb/core/game/game/base.hpp>
 
 #include <neb/phx/game/ai/util/parent.hpp>
@@ -16,7 +16,7 @@ namespace neb { namespace phx { namespace game { namespace game {
 
 			virtual void		init() {}
 			virtual void		release() {}
-			virtual void		step(gal::std::timestep const & ts);
+			virtual void		step(gal::etc::timestep const & ts);
 
 
 	};

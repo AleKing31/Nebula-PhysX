@@ -132,12 +132,12 @@ void						neb::phx::app::base::release() {
 	px_physics_->release();
 	px_foundation_->release();
 }
-sp::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global() {
+std::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global() {
 	auto app(::std::dynamic_pointer_cast<neb::phx::app::base>(g_app_));
 	assert(app);
 	return app;
 }
-void						neb::phx::app::base::step(gal::std::timestep const & ts) {
+void						neb::phx::app::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
 

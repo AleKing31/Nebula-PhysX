@@ -8,7 +8,7 @@
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
 #include <neb/phx/util/log.hpp>
 
-neb::phx::core::actor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
+neb::phx::core::actor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	parent_(parent),
 	health_(1.0)
@@ -31,10 +31,10 @@ void			neb::phx::core::actor::base::init() {
 	
 	neb::core::core::actor::base::release();
 }*/
-void			neb::phx::core::actor::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::actor::base::step(gal::etc::timestep const & ts) {
 	neb::core::core::actor::base::step(ts);
 }
-sp::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
+std::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
 	auto parent(phx::core::actor::base::parent_.lock());
 	assert(parent);
 	return parent;
@@ -63,7 +63,7 @@ void			neb::phx::core::actor::base::damage(double h) {
 		get_parent()->erase(i_);
 	}
 }
-/*int			phx::core::actor::base::key_fun(sp::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
+/*int			phx::core::actor::base::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
   switch(action) {
   case GLFW_PRESS:
   switch(key) {
@@ -75,8 +75,8 @@ void			neb::phx::core::actor::base::damage(double h) {
 
   return 0;
   }*/
-sp::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
-		sp::shared_ptr<neb::gfx::window::base> window,
+std::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
+		std::shared_ptr<neb::gfx::window::base> window,
 		double size,
 		double damage,
 		double velocity) {

@@ -14,14 +14,14 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace act
 	{
 
 		public:
-			base(sp::shared_ptr<neb::phx::core::actor::util::parent>);
+			base(std::shared_ptr<neb::phx::core::actor::util::parent>);
 			virtual ~base();
 			virtual void					init() = 0;
 			virtual void					release() = 0;
 		protected:
 			//void							releaseUp();
 		public:	
-			virtual void					step(gal::std::timestep const & ts) = 0;
+			virtual void					step(gal::etc::timestep const & ts) = 0;
 			virtual void					create_physics() = 0;
 			virtual void					init_physics() = 0;
 			//virtual void					add_force(real) = 0;

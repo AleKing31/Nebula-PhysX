@@ -10,8 +10,8 @@ namespace neb { namespace phx { namespace game { namespace weapon {
 
 			SimpleProjectile();
 			
-			virtual void					connect(sp::shared_ptr<neb::gfx::window::base> window);
-			virtual int					key_fun(sp::shared_ptr<neb::gfx::window::base> window, int, int, int, int);
+			virtual void					connect(std::shared_ptr<neb::gfx::window::base> window);
+			virtual int					key_fun(std::shared_ptr<neb::gfx::window::base> window, int, int, int, int);
 			virtual void					fire();
 		
 			double						size_;

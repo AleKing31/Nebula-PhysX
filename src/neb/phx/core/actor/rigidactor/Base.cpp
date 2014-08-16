@@ -10,7 +10,7 @@
 
 //neb::core::actor::rigidactor::base::base() {
 //}
-neb::phx::core::actor::rigidactor::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidactor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent)

@@ -8,8 +8,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 
-#include <gal/std/flag.hpp>
-#include <gal/std/map.hpp>
+#include <gal/etc/flag.hpp>
+#include <gal/stl/map.hpp>
 
 #include <neb/core/util/decl.hpp>
 #include <neb/core/util/typedef.hpp>
@@ -34,11 +34,11 @@ namespace neb { namespace phx { namespace core { namespace scene {
 		virtual public phx::core::actor::util::parent
 	{
 		public:
-			base(shared_ptr<neb::core::core::scene::util::parent> parent);
+			base(std::shared_ptr<neb::core::core::scene::util::parent> parent);
 			virtual ~base();
 			void					init();
 			void					release();
-			void					step(::gal::std::timestep const & ts);
+			void					step(::gal::etc::timestep const & ts);
 		public:
 			void					create_physics();
 			virtual  void				serialize(

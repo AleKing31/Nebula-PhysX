@@ -8,7 +8,7 @@
 
 neb::phx::user::user()
 {}
-void			neb::phx::user::connect(sp::shared_ptr<neb::gfx::window::base> w) {
+void			neb::phx::user::connect(std::shared_ptr<neb::gfx::window::base> w) {
 	printf("%s\n", __PRETTY_FUNCTION__);
 	
 	assert(control_);
@@ -36,7 +36,7 @@ void			neb::phx::user::connect(sp::shared_ptr<neb::gfx::window::base> w) {
 
 	//assert(control->conn_.key_fun_);
 }
-void			neb::phx::user::set_control(sp::shared_ptr<neb::phx::core::actor::control::rigidbody::base> control) {
+void			neb::phx::user::set_control(std::shared_ptr<neb::phx::core::actor::control::rigidbody::base> control) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	control_ = control;

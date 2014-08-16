@@ -35,7 +35,7 @@
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 
 
-neb::phx::core::actor::rigidbody::base::base(sp::shared_ptr<neb::phx::core::actor::util::parent> parent):
+neb::phx::core::actor::rigidbody::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
@@ -88,7 +88,7 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
-void		neb::phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb::gfx::window::base> window) {
+void		neb::phx::core::actor::rigidbody::base::create_control(std::shared_ptr<neb::gfx::window::base> window) {
 
 	//auto me = isRigidBodyBase();
 
@@ -113,7 +113,7 @@ void		neb::phx::core::actor::rigidbody::base::create_control(sp::shared_ptr<neb:
 
 
 }
-void		neb::phx::core::actor::rigidbody::base::step(gal::std::timestep const & ts) {
+void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 

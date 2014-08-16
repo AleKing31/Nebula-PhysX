@@ -14,7 +14,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			base(::std::shared_ptr<neb::phx::core::actor::util::parent>);
 			virtual void						init() = 0;
 			virtual void						release() = 0;
-			virtual void						step(gal::std::timestep const & ts) = 0;
+			virtual void						step(gal::etc::timestep const & ts) = 0;
 			void							setupFiltering();
 			virtual void						create_physics() = 0;
 			virtual void						init_physics() = 0;
@@ -26,7 +26,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			 *
 			 * @ note typeof returned actor will be phx::core::shape::box
 			 */
-			//virtual sp::weak_ptr<neb::core::shape::base>		createShapeBoxUninitialized();
+			//virtual std::weak_ptr<neb::core::shape::base>		createShapeBoxUninitialized();
 			/** @} */
 	};
 }}}}}

@@ -1,7 +1,7 @@
 #ifndef PHYSX_GAME_WEAPON_BASE_HPP
 #define PHYSX_GAME_WEAPON_BASE_HPP
 
-#include <neb/core/util/shared.hpp>
+#include <neb/core/itf/shared.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
@@ -14,12 +14,12 @@ namespace neb {
 
 	namespace phx { namespace game { namespace weapon {
 
-		class base: virtual public neb::std::shared {
+		class base: virtual public neb::itf::shared {
 			public:
 				base();
 
-				virtual void					connect(sp::shared_ptr<neb::gfx::window::base> window) = 0;
-				virtual int					key_fun(sp::shared_ptr<neb::gfx::window::base> window, int, int, int, int) = 0;
+				virtual void					connect(std::shared_ptr<neb::gfx::window::base> window) = 0;
+				virtual int					key_fun(std::shared_ptr<neb::gfx::window::base> window, int, int, int, int) = 0;
 				virtual void					fire() = 0;
 
 				/** @brief last
@@ -31,7 +31,7 @@ namespace neb {
 				 */
 				double						cooldown_;
 
-				sp::weak_ptr<neb::phx::core::actor::base>	actor_;
+				std::weak_ptr<neb::phx::core::actor::base>	actor_;
 
 		};
 

@@ -10,7 +10,7 @@
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 
 
-neb::phx::core::shape::base::base(sp::shared_ptr<phx::core::shape::util::parent> parent):
+neb::phx::core::shape::base::base(std::shared_ptr<phx::core::shape::util::parent> parent):
 	neb::core::core::shape::base(parent)
 {
 	//NEBULA_SHAPE_BASE_FUNC;
@@ -19,7 +19,7 @@ neb::phx::core::shape::base::base(sp::shared_ptr<phx::core::shape::util::parent>
 neb::phx::core::shape::base::~base() {}
 //void			neb::phx::core::shape::base::release() {
 //}
-void			neb::phx::core::shape::base::step(gal::std::timestep const & ts) {
+void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
 }
 void			neb::phx::core::shape::base::init() {
 	//NEBULA_DEBUG_0_FUNCTION;
