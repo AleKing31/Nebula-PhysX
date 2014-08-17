@@ -186,7 +186,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 			if(pxrigidbody != NULL) {
 				auto rigidbody = ::std::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(actor);
 				if(!rigidbody) {
-					::std::cout << typeid(*actor).name() << ::std::endl;
+					std::cout << typeid(*actor).name() << ::std::endl;
 					abort();
 				}
 
