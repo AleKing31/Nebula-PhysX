@@ -2,21 +2,24 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 
 INCLUDE($ENV{HOME}/.config.cmake)
 
+FIND_PACKAGE(CMakeHelper)
+
 PROJECT(nebula_physx)
+INCLUDE(../../config.cmake)
+INCLUDE(cmh_build_config)
 
 FIND_PACKAGE(glfw)
-FIND_PACKAGE(CMakeHelper)
 FIND_PACKAGE(PhysX)
 
-FIND_PACKAGE(Galaxy COMPONENTS
+FIND_PACKAGE(galaxy 0 COMPONENTS
 	std
 	log
 	console
 	REQUIRED)
 
-FIND_PACKAGE(Nebula COMPONENTS
-	core
+FIND_PACKAGE(nebula 0 COMPONENTS
 	gfx
+	core
 	REQUIRED)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -D_DEBUG -std=c++0x")
@@ -34,20 +37,17 @@ set(include_extensions obj)
 
 SET(GRU_VERSION 0.1.1)
 
-
+INCLUDE(cmh_boost)
 FIND_PACKAGE(Boost 1.55 COMPONENTS program_options serialization log system thread)
 
-SET(libs ${libs}
-	${PROJECT_NAME}
-	maze
-	${Galaxy_LIBRARIES}
-	${Nebula_LIBRARIES}
-	${PhysX_LIBRARIES}
+SET(libs
+	${galaxy_LIBRARIES}
+	${nebula_LIBRARIES}
 	${Boost_LIBRARIES}
 	${PhysX_LIBRARIES}
 	)
 
-cmh_static_library()
+INCLUDE(cmh_library)
 
 add_subdirectory(test)
 
