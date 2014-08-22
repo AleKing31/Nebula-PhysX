@@ -51,7 +51,7 @@ void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 }
 void								neb::phx::core::actor::rigidactor::base::setGlobalPosition(vec3 p) {
 	/** @todo if is nested actor, then this is wrong... */
-	pose_.pos_ = vec4(p,1);
+	pose_.pos_ = p;
 	
 	assert(px_actor_);
 	auto px_rigidactor = px_actor_->isRigidActor();

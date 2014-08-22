@@ -103,7 +103,7 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 
 	// translate
 
-	proj->pose_.pos_ += vec4(pos_relative,0);
+	proj->pose_.pos_ += pos_relative;
 
 	// velocity
 
