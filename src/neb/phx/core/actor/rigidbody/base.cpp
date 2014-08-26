@@ -88,16 +88,16 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
-void		neb::phx::core::actor::rigidbody::base::create_control(std::shared_ptr<neb::gfx::window::base> window) {
-
-	//auto me = isRigidBodyBase();
+void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::gfx::window::base> window)
+{
+	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
 
 	auto control(sp::make_shared<neb::phx::core::actor::control::rigidbody::manual>());
-	
+
 	control_ = control;
 
 	control->actor_ = isPxActorRigidBodyBase();
-	
+
 	control->conn_.key_fun_ = window->sig_.key_fun_.connect(
 			20,
 			neb::gfx::window::signals::KeyFun::slot_type(
@@ -113,14 +113,33 @@ void		neb::phx::core::actor::rigidbody::base::create_control(std::shared_ptr<neb
 
 
 }
-void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts) {
+void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::gfx::window::base> window)
+{
+	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;;
 
+	auto self = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(
+			shared_from_this()
+			);
+
+	auto control = std::make_shared<neb::phx::core::actor::control::rigidbody::pd>();
+
+	control_ = control;
+
+	control->actor_ = self;
+
+	control->p_target_ = vec3(0,0,5);
+
+	control->q_target_ = glm::angleAxis(1.5f, vec3(0.0,1.0,0.0));
+
+}
+void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts)
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	if(control_) {
 		control_->step(ts);
 	}
-	
+
 	add_force(ts.dt);
 }
 
