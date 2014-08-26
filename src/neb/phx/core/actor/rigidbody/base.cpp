@@ -2,7 +2,7 @@
 #include <neb/net/server.hh>
 
 #include <neb/gfx/Context/Base.hh>
-#include <neb/gfx/Camera/View/ridealong.hh>
+#include <neb/gfx/camera/view/ridealong.hh>
 
 #include <neb/debug.hh>
 #include <neb/util/decl.hpp>
