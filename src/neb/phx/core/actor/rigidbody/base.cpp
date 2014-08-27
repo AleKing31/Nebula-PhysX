@@ -113,7 +113,7 @@ void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_p
 
 
 }
-void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::gfx::window::base> window)
+void			neb::phx::core::actor::rigidbody::base::createControlPD()
 {
 	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;;
 

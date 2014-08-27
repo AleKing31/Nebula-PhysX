@@ -124,7 +124,9 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	proj->init();
 
 	// shape
-	auto shape = proj->createShapeBox(neb::core::pose(), vec3(size_));
+	auto shape = proj->createShapeCuboid(
+			neb::core::core::shape::cuboid::desc(vec3(size_))
+			);
 
 	proj->setupFiltering();
 
