@@ -15,9 +15,9 @@ neb::phx::core::actor::base::base(std::shared_ptr<neb::phx::core::actor::util::p
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
-/*phx::core::actor::base::~base() {
-	LOG(lg, "neb core actor", debug) << __PRETTY_FUNCTION__;
-}*/
+neb::phx::core::actor::base::~base() {
+	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
+}
 void			neb::phx::core::actor::base::init() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	

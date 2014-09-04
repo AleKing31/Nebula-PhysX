@@ -73,8 +73,6 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	auto proj = dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(proj_base);
 	assert(proj);
 
-	scene->insert(proj);
-
 	proj->simulation_.word0 = neb::phx::filter::filter::type::DYNAMIC | neb::phx::filter::filter::type::PROJECTILE;
 	proj->simulation_.word1 = neb::phx::filter::filter::RIGID_AGAINST;
 	proj->simulation_.word2 = neb::phx::filter::filter::type::PROJECTILE;
@@ -113,12 +111,6 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	if(rigidbody) {
 		proj->velocity_ += rigidbody->velocity_;
 	}
-
-
-
-
-
-
 
 
 	proj->init();

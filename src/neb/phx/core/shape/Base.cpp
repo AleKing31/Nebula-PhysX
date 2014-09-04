@@ -16,7 +16,11 @@ neb::phx::core::shape::base::base(std::shared_ptr<phx::core::shape::util::parent
 	//NEBULA_SHAPE_BASE_FUNC;
 	assert(parent);
 }
-neb::phx::core::shape::base::~base() {}
+neb::phx::core::shape::base::~base()
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	assert(px_shape_ == NULL);
+}
 //void			neb::phx::core::shape::base::release() {
 //}
 void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
@@ -34,8 +38,9 @@ void			neb::phx::core::shape::base::release() {
 	neb::core::core::shape::base::release();
 	
 	if(px_shape_) {
-		
-		auto ra = ::std::dynamic_pointer_cast<neb::phx::core::actor::rigidactor::base>(parent_.lock());
+		auto p = parent_.lock();
+		assert(p);
+		auto ra = std::dynamic_pointer_cast<neb::phx::core::actor::rigidactor::base>(p);
 		assert(ra);		
 
 		auto pxra = ra->px_actor_->isRigidActor();

@@ -22,7 +22,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 	{
 		public:
 			base(std::shared_ptr<neb::phx::core::actor::util::parent> parent);
-
+			virtual ~base();
 			
 			virtual void		init();
 			virtual void		release() = 0;
