@@ -22,7 +22,6 @@ FIND_PACKAGE(nebula 0 COMPONENTS
 	core
 	REQUIRED)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -D_DEBUG -std=c++0x")
 
 include_directories("/usr/include/freetype2")
 include_directories("../../glm")
@@ -30,7 +29,7 @@ include_directories(${physx_INCLUDE_DIR})
 
 link_directories("../Debug")
 
-ADD_DEFINITIONS("-D_DEBUG -DGAL_NET_USE_BOOST -DGLM_FORCE_RADIANS")
+ADD_DEFINITIONS("-DGLM_FORCE_RADIANS")
 
 # custom include extensions
 set(include_extensions obj)

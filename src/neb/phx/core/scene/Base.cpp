@@ -117,8 +117,8 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 	//========================================================================
 	// lock all actors
 
-	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+	A::map_.for_each([&] (A::map_type::pointer p) {
+			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(p);
 			assert(actor);
 			actor->mutex_.lock();
 			LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
@@ -201,8 +201,8 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 		}
 	}
 	// unlock all actors
-	A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+	A::map_.for_each([&] (A::map_type::pointer p) {
+			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(p);
 			assert(actor);
 			actor->mutex_.unlock();
 			});

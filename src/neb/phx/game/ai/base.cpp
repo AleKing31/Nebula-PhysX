@@ -58,16 +58,14 @@ void						neb::phx::game::ai::base::step(gal::etc::timestep const & ts) {
 
 	pd->q_target_ = q;
 	
-	
+	typedef neb::phx::game::weapon::util::parent W;
+
 	// fire
 	if(glm::length(pd->getOrientationError()) < 0.1) {
 		// find any weapon
-		auto it = actor->neb::phx::game::weapon::util::parent::map_.begin();
-		if(it != actor->neb::phx::game::weapon::util::parent::map_.end()) {
-			auto weap = it->ptr_;
-			if(weap) {
-				weap->fire();
-			}
+		auto weap = actor->W::map_.front();
+		if(weap) {
+			weap->fire();
 		}
 	}
 

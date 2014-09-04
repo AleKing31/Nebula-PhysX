@@ -48,7 +48,7 @@ void			neb::phx::core::actor::base::hit() {
 
 	if(w2 & phx::filter::filter::PROJECTILE) {
 		LOG(lg, neb::phx::core::actor::sl, debug) << shared_from_this().get() << " is projectile, erase";
-		parent->erase(i_);
+		parent->erase(_M_index);
 	}
 
 	if(flag_.any(neb::core::core::actor::util::flag::E::DESTRUCTIBLE)) {
@@ -60,7 +60,7 @@ void			neb::phx::core::actor::base::damage(double h) {
 
 	health_ -= h;
 	if(health_ < 0) {
-		get_parent()->erase(i_);
+		get_parent()->erase(_M_index);
 	}
 }
 /*int			phx::core::actor::base::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
