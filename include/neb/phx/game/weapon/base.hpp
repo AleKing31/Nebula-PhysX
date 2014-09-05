@@ -17,7 +17,7 @@ namespace neb {
 		class base: virtual public neb::itf::shared {
 			public:
 				base();
-
+				virtual void					step(gal::etc::timestep const &) {}
 				virtual void					connect(std::shared_ptr<neb::gfx::window::base> window) = 0;
 				virtual int					key_fun(std::shared_ptr<neb::gfx::window::base> window, int, int, int, int) = 0;
 				virtual void					fire() = 0;

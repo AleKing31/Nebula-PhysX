@@ -2,6 +2,7 @@
 
 #include <gal/log/log.hpp>
 
+#include <neb/core/util/cast.hpp>
 #include <neb/core/util/debug.hpp>
 #include <neb/core/core/scene/util/decl.hpp>
 
@@ -12,6 +13,33 @@
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
+
+
+#include <neb/core/util/log.hpp>
+#include <neb/core/util/config.hpp>
+#include <neb/core/core/light/base.hpp>
+#include <neb/core/core/light/util/light_count.hpp>
+#include <neb/core/timer/Types.hh>
+#include <neb/core/timer/Actor/Release.hpp>
+#include <neb/core/math/geo/polyhedron.hh>
+
+#include <neb/phx/core/scene/base.hpp>
+
+#include <neb/gfx/core/actor/base.hpp>
+#include <neb/gfx/core/shape/base.hpp>
+#include <neb/gfx/glsl/program/threed.hpp>
+#include <neb/gfx/glsl/program/simple3.hpp>
+#include <neb/gfx/glsl/uniform/scalar.hpp>
+#include <neb/gfx/camera/proj/perspective.hpp>
+#include <neb/gfx/camera/view/Base.hh>
+#include <neb/gfx/core/mesh_instanced.hpp>
+#include <neb/gfx/texture.hpp>
+#include <neb/gfx/app/__gfx_glsl.hpp>
+#include <neb/gfx/Context/Base.hh>
+#include <neb/gfx/environ/three.hpp>
+
+typedef neb::core::core::actor::util::parent A;
+
 neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
 	neb::core::core::scene::base(parent),
 	px_scene_(NULL)
@@ -21,28 +49,55 @@ neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::
 neb::phx::core::scene::base::~base() {
 
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+
+	assert(px_scene_ == NULL);
 }
 void			neb::phx::core::scene::base::init() {
-	
+
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	neb::core::core::scene::base::init();
-	
+
 	create_physics();
+
+	// graphics
+	// light arrays
+	light_array_[0].alloc(32);
+	light_array_[1].alloc(32);
+
+	// meshes
+	math::geo::cuboid cube(1.0,1.0,1.0);
+
+	meshes_.cuboid_.reset(new neb::gfx::mesh::instanced);
+	meshes_.cuboid_->mesh_.construct(&cube);
+
+	meshes_.cuboid_->instances_.reset(new neb::gfx::mesh::instanced::instances_type);
+	meshes_.cuboid_->instances_->alloc(2048);
+
+	unsigned int shadow_tex_size = 512;
+
+	tex_shadow_map_ = std::make_shared<neb::gfx::texture>();
+	tex_shadow_map_->init_shadow(
+			shadow_tex_size,
+			shadow_tex_size,
+			std::shared_ptr<neb::gfx::context::base>());
+
 }
 void			neb::phx::core::scene::base::release() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+
+	// release scene?!?!
 }
 void			neb::phx::core::scene::base::create_physics() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	if(px_scene_ != NULL) {
 		LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
 		return;
 	}
 
 	auto pxphysics = neb::phx::app::base::global()->px_physics_;
-	
+
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
 
 	scene_desc.gravity = phx::util::convert(gravity_);
@@ -96,6 +151,56 @@ void			neb::phx::core::scene::base::create_physics() {
 	simulation_callback_ = sec;
 
 	px_scene_->setSimulationEventCallback(sec);
+
+
+	// visualization
+	physx::PxVisualizationParameter::Enum flags[] = {
+		physx::PxVisualizationParameter::eSCALE,
+		physx::PxVisualizationParameter::eWORLD_AXES,
+		physx::PxVisualizationParameter::eBODY_AXES,
+		physx::PxVisualizationParameter::eBODY_MASS_AXES,
+		physx::PxVisualizationParameter::eBODY_LIN_VELOCITY,
+		physx::PxVisualizationParameter::eBODY_ANG_VELOCITY,
+		physx::PxVisualizationParameter::eBODY_JOINT_GROUPS,
+		physx::PxVisualizationParameter::eCONTACT_POINT,
+		physx::PxVisualizationParameter::eCONTACT_NORMAL,
+		physx::PxVisualizationParameter::eCONTACT_ERROR,
+		physx::PxVisualizationParameter::eCONTACT_FORCE,
+		physx::PxVisualizationParameter::eACTOR_AXES,
+		physx::PxVisualizationParameter::eCOLLISION_AABBS,
+		physx::PxVisualizationParameter::eCOLLISION_SHAPES,
+		physx::PxVisualizationParameter::eCOLLISION_AXES,
+		physx::PxVisualizationParameter::eCOLLISION_COMPOUNDS,
+		physx::PxVisualizationParameter::eCOLLISION_FNORMALS,
+		physx::PxVisualizationParameter::eCOLLISION_EDGES,
+		physx::PxVisualizationParameter::eCOLLISION_STATIC,
+		physx::PxVisualizationParameter::eCOLLISION_DYNAMIC,
+		physx::PxVisualizationParameter::eCOLLISION_PAIRS,
+		physx::PxVisualizationParameter::eJOINT_LOCAL_FRAMES,
+		physx::PxVisualizationParameter::eJOINT_LIMITS,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_POSITION,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_VELOCITY,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_COLLISION_NORMAL,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_BOUNDS,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_GRID,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_BROADPHASE_BOUNDS,
+		physx::PxVisualizationParameter::ePARTICLE_SYSTEM_MAX_MOTION_DISTANCE,
+		physx::PxVisualizationParameter::eCULL_BOX,
+		physx::PxVisualizationParameter::eCLOTH_VERTICAL,
+		physx::PxVisualizationParameter::eCLOTH_HORIZONTAL,
+		physx::PxVisualizationParameter::eCLOTH_BENDING,
+		physx::PxVisualizationParameter::eCLOTH_SHEARING,
+		physx::PxVisualizationParameter::eCLOTH_VIRTUAL_PARTICLES,
+		physx::PxVisualizationParameter::eMBP_REGIONS
+	};
+	
+	for(unsigned int i = 0; i < (sizeof(flags) / sizeof(unsigned int)); i++)
+	{
+		px_scene_->setVisualizationParameter(flags[i], 1.0f);
+	}
+
+
+
 }
 void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 
@@ -179,9 +284,9 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 
 			LOG(lg, neb::phx::core::scene::sl, debug)
 				<< ::std::setw(8) << "p"
-					<< ::std::setw(8) << pose.p.x
-					<< ::std::setw(8) << pose.p.y
-					<< ::std::setw(8) << pose.p.z;
+				<< ::std::setw(8) << pose.p.x
+				<< ::std::setw(8) << pose.p.y
+				<< ::std::setw(8) << pose.p.z;
 
 			if(pxrigidbody != NULL) {
 				auto rigidbody = ::std::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(actor);
@@ -206,58 +311,211 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 			assert(actor);
 			actor->mutex_.unlock();
 			});
+
+
+
+
 	// vehicle
 	//physx::PxVec3 g(0,-0.25,0);
 	//vehicle_manager_.vehicle_suspension_raycasts(px_scene_);
 	//vehicle_manager_.update((float)dt, g);
 	//send_actor_update();
 }
-/*weak_ptr<neb::core::core::actor::rigidstatic::base>			neb::phx::core::scene::base::createActorRigidStaticCube(
-		neb::core::pose pose,
-		double size) {
-	auto actor = createActorRigidStaticUninitialized().lock();
-	actor->pose_ = pose;
-	actor->init();
-	// shape
-	auto shape = actor->createShapeCube(pose, size);
-	/// @todo consider implementing refresh-type function instead 
-	actor->init();
-	return actor;
-}*/
 
-/*
+void			neb::phx::core::scene::base::draw(
+		std::shared_ptr<neb::gfx::context::base> context,
+		std::shared_ptr<neb::gfx::glsl::program::base> program) {
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-   std::shared_ptr<phx::core::actor::rigiddynamic::local>		create_actor_dynamic(std::shared_ptr<phx::core::scene::local> scene) {
+	auto app(neb::gfx::app::__gfx_glsl::global().lock());
 
-   auto actor = sp::make_shared<phx::core::actor::rigiddynamic::local>(scene);
+	assert(program);
 
-   scene->insert(actor);
+	if(1)
+	{
 
-   actor->simulation_.word0 = phx::filter::filter::type::DYNAMIC;
-   actor->simulation_.word1 = phx::filter::filter::RIGID_AGAINST;
+		auto program_3d = std::dynamic_pointer_cast<neb::gfx::glsl::program::threed>(program);
+		if(program_3d) {
+			// lights
+			light_array_[0].load_uniform(program_3d->light_locations_.location);
+		}
 
-   actor->init();
+		if(tex_shadow_map_) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
 
-// shape	
-auto shape = sp::make_shared<phx::core::shape::box>(actor);
+			GLint loc = program->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
+			neb::gfx::ogl::glUniform(loc, 0);
+		}
 
-actor->neb::core::shape::util::parent::insert(shape);
+		// meshes
+		assert(meshes_.cuboid_);
+		meshes_.cuboid_->draw(program);
 
-shape->init();
 
-actor->setupFiltering();
+	}
 
-std::cout << "actor dynamic use count = " << actor.use_count() << std::endl;
+	// visual debugging
+	if(px_scene_)
+	{
+		const physx::PxRenderBuffer& rb = px_scene_->getRenderBuffer();
 
-return actor;	
+		physx::PxU32 nblines = rb.getNbLines();
+		const physx::PxDebugLine* lines = rb.getLines();
+
+		physx::PxU32 nbtriangles = rb.getNbTriangles();
+		const physx::PxDebugTriangle* triangles = rb.getTriangles();
+		/*
+		   physx::PxU32 nblines = 6;
+		   physx::PxDebugLine* lines = new physx::PxDebugLine[6] {
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3( 90,  0,  0), 0xffffffff),
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(-90,  0,  0), 0xffffffff),
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0, 90,  0), 0xffffffff),
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,-90,  0), 0xffffffff),
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,  0, 90), 0xffffffff),
+		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,  0,-90), 0xffffffff)
+		   };
+		   */
+		/*
+		   physx::PxU32 nbtriangles = 1;
+		   physx::PxDebugTriangle* triangles = new physx::PxDebugTriangle[1] {
+		   physx::PxDebugTriangle(physx::PxVec3(0,0,0), physx::PxVec3( 100,  0,  0), physx::PxVec3(0,100,0), 0xffffffff),
+		   };
+		   */
+
+
+		auto p = app->program_simple3_;
+		p->use();
+
+		auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
+		if(e)
+		{
+			e->proj_->load(p);
+			e->view_->load(p);
+
+			glClear(GL_DEPTH_BUFFER_BIT);
+
+
+			LOG(lg, neb::phx::core::scene::sl, info) << "Debug visualization";
+			LOG(lg, neb::phx::core::scene::sl, info) << "number of points    " << rb.getNbPoints();
+			LOG(lg, neb::phx::core::scene::sl, info) << "number of lines     " << nblines;
+			LOG(lg, neb::phx::core::scene::sl, info) << "number of triangles " << nbtriangles;
+
+			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxDebugLine) " << sizeof(physx::PxDebugLine);
+			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxVec3)      " << sizeof(physx::PxVec3);
+			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxU32)       " << sizeof(physx::PxU32);
+
+			//glLineWidth(2.0f);
+			/*
+			   for(unsigned int c = 0; c < nblines; c++)
+			   {
+			   LOG(lg, neb::phx::core::scene::sl, info) << "line";
+
+			   LOG(lg, neb::phx::core::scene::sl, info)
+			   << std::setw(16) << lines[c].pos0[0]
+			   << std::setw(16) << lines[c].pos0[1]
+			   << std::setw(16) << lines[c].pos0[2]
+			   << std::setw(16) << std::hex << lines[c].color0;
+			   LOG(lg, neb::phx::core::scene::sl, info)
+			   << std::setw(16) << lines[c].pos1[0]
+			   << std::setw(16) << lines[c].pos1[1]
+			   << std::setw(16) << lines[c].pos1[2]
+			   << std::setw(16) << std::hex << lines[c].color1;
+
+			   }
+			   */
+
+			GLint i_color = p->attrib_table_[neb::gfx::glsl::attribs::COLOR];
+
+			glEnableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::POSITION]);
+			if(i_color > -1)
+				glEnableVertexAttribArray(i_color);
+
+			GLuint buf;
+			glGenBuffers(1, &buf);
+			glBindBuffer(GL_ARRAY_BUFFER, buf);
+
+
+			// lines
+			glBufferData(
+					GL_ARRAY_BUFFER,
+					sizeof(physx::PxDebugLine) * nblines,
+					lines,
+					GL_STREAM_DRAW
+				    );
+
+			glVertexAttribPointer(
+					p->attrib_table_[neb::gfx::glsl::attribs::POSITION],
+					3,
+					GL_FLOAT,
+					GL_FALSE,
+					16,
+					0);
+
+
+			if(i_color > -1)
+				glVertexAttribIPointer(
+						p->attrib_table_[neb::gfx::glsl::attribs::COLOR],
+						1,
+						GL_UNSIGNED_INT,
+						16,
+						(GLvoid*)12);
+
+			glDrawArrays(GL_LINES, 0, nblines * 2);
+
+			checkerror("");
+
+			// triangles
+			glBufferData(
+					GL_ARRAY_BUFFER,
+					sizeof(physx::PxDebugTriangle) * nbtriangles,
+					triangles,
+					GL_STREAM_DRAW
+				    );
+
+			glVertexAttribPointer(
+					p->attrib_table_[neb::gfx::glsl::attribs::POSITION],
+					3,
+					GL_FLOAT,
+					GL_FALSE,
+					16,
+					0);
+
+
+			if(i_color > -1)
+				glVertexAttribIPointer(
+						p->attrib_table_[neb::gfx::glsl::attribs::COLOR],
+						1,
+						GL_UNSIGNED_INT,
+						16,
+						(GLvoid*)12);
+
+			glDrawArrays(GL_TRIANGLES, 0, nbtriangles * 3);
+
+			checkerror("");
+
+			// cleanup
+			glDisableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::POSITION]);
+			if(i_color > -1)
+				glDisableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::COLOR]);
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+	}
+	/*
+	// meshes
+	auto la = [&] (A::map_type::iterator<0> it) {
+	auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(it->ptr_);
+	assert(actor);
+	actor->draw(context, program_3d, neb::core::pose());
+	};
+
+
+	A::map_.for_each<0>(la);
+	*/
 }
-
-
-
-
+void			neb::phx::core::scene::base::resize(int w, int h) {
 }
-*/
-
 
 
 

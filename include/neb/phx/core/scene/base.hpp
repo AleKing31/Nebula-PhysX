@@ -17,6 +17,10 @@
 #include <neb/core/core/actor/util/parent.hpp>
 #include <neb/core/core/scene/base.hpp>
 
+#include <neb/gfx/drawable/base.hpp>
+#include <neb/gfx/glsl/uniform/light_array.hpp>
+#include <neb/gfx/util/decl.hpp>
+
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/simulation_callback.hh>
@@ -31,14 +35,24 @@ namespace neb { namespace phx { namespace core { namespace scene {
 	 */
 	class base:
 		virtual public neb::core::core::scene::base,
-		virtual public phx::core::actor::util::parent
+		virtual public phx::core::actor::util::parent,
+		virtual public neb::gfx::drawable::base
 	{
 		public:
 			base(std::shared_ptr<neb::core::core::scene::util::parent> parent);
 			virtual ~base();
-			void					init();
-			void					release();
+			virtual void				init();
+			virtual void				release();
 			void					step(::gal::etc::timestep const & ts);
+
+
+			void					resize(int w, int h);
+			void					draw(
+					std::shared_ptr<neb::gfx::context::base> context,
+					std::shared_ptr<neb::gfx::glsl::program::base> p);
+
+
+
 		public:
 			void					create_physics();
 			virtual  void				serialize(
@@ -67,6 +81,32 @@ namespace neb { namespace phx { namespace core { namespace scene {
 			 */
 			virtual weak_ptr<neb::core::core::actor::base>		createActorRigidDynamicUninitialized() = 0;
 			/** @} */
+
+
+
+
+
+
+
+
+			// rendering data
+			// one for static, one for dynamic
+			neb::gfx::glsl::uniform::light_array				light_array_[2];
+
+			std::shared_ptr<neb::gfx::texture>				tex_shadow_map_;
+
+			// standard meshes
+			struct {
+				std::shared_ptr<neb::gfx::mesh::instanced>		cuboid_;
+			} meshes_;
+
+
+
+
+
+
+
+
 		public:
 			physx::PxScene*						px_scene_;
 			physx::PxSimulationFilterShader				px_filter_shader_;

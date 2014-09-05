@@ -4,10 +4,10 @@
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
-#include <neb/phx/game/ai/base.hpp>
+#include <neb/core/game/ai/base.hpp>
 #include <neb/phx/util/log.hpp>
 
-void						neb::phx::game::ai::base::step(gal::etc::timestep const & ts) {
+void						neb::game::ai::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
 

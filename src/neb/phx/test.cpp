@@ -6,8 +6,10 @@
 #include <glm/gtc/matrix_inverse.hpp>
 
 #include <neb/gfx/util/io.hpp>
+#include <neb/gfx/environ/base.hpp>
 
 #include <neb/phx/app/base.hpp>
+#include <neb/phx/test.hpp>
 
 physx::PxConvexMeshGeometry	neb::frustrum_geometry(glm::mat4 proj) {
 	
@@ -106,7 +108,7 @@ physx::PxConvexMeshGeometry	neb::frustrum_geometry(glm::mat4 proj) {
 	return g;
 }
 
-bool	query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvexMeshGeometry& g1, glm::mat4 v1)
+bool		neb::query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvexMeshGeometry& g1, glm::mat4 v1)
 {
 	assert(g0.isValid());
 	assert(g1.isValid());
@@ -147,13 +149,13 @@ bool	query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvexMeshGeo
 	return physx::PxGeometryQuery::overlap(g0, t0, g1, t1);
 
 }
-bool	neb::frustrum_overlap(neb::gfx::environ::base * const e0, neb::gfx::environ::base * const e1)
+/*bool	neb::frustrum_overlap(neb::gfx::environ::base * const e0, neb::gfx::environ::base * const e1)
 {
 	return query(
 			e0->proj_->px_geometry_,
 			e0->view_->view(),
 			e1->proj_->px_geometry_,
 			e1->view_->view());
-}
+}*/
 
 
