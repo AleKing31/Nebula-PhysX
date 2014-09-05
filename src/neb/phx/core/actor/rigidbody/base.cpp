@@ -35,11 +35,7 @@
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 
 
-neb::phx::core::actor::rigidbody::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
-	phx::core::actor::base(parent),
-	phx::core::actor::actor::base(parent),
-	phx::core::actor::rigidactor::base(parent),
+neb::phx::core::actor::rigidbody::base::base():
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)
 {}

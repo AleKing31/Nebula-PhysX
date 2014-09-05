@@ -21,7 +21,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 		virtual public neb::phx::core::actor::util::cast
 	{
 		public:
-			base(std::shared_ptr<neb::phx::core::actor::util::parent> parent);
+			base();
 			virtual ~base();
 			
 			virtual void		init();
@@ -45,7 +45,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 
 			}
 	
-			std::shared_ptr<neb::phx::core::actor::util::parent>			getPxParent();
+			//std::shared_ptr<neb::phx::core::actor::util::parent>			getPxParent();
 
 			/** @name convenience functions
 			 * @{
@@ -59,7 +59,6 @@ namespace neb { namespace phx { namespace core { namespace actor {
 					double velocity);
 			/** @} */
 		public:
-			std::weak_ptr<neb::phx::core::actor::util::parent>			parent_;
 
 			phx::filter::data							simulation_;
 			phx::filter::data							scene_query_;

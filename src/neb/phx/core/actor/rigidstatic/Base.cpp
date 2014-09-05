@@ -10,14 +10,14 @@
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 
-neb::phx::core::actor::rigidstatic::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
+/*neb::phx::core::actor::rigidstatic::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent),
 	neb::phx::core::actor::rigidactor::base(parent)
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-}
+}*/
 void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	

@@ -7,11 +7,10 @@
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
-#include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
-neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
+/*neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
 	neb::core::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
@@ -19,7 +18,7 @@ neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core
 	phx::core::actor::rigidbody::base(parent)
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-}
+}*/
 void			neb::phx::core::actor::rigiddynamic::base::init() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	

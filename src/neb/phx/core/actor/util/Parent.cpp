@@ -24,7 +24,13 @@ std::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::pare
 	
 	if(!actor) throw 0;
 	
-	return actor->getPxParent()->neb::phx::core::actor::util::parent::getScene();
+	auto s = actor->getParent()->getScene();
+
+	//return actor->getPxParent()->neb::phx::core::actor::util::parent::getScene();
+	
+	
+	
+	return std::dynamic_pointer_cast<neb::phx::core::scene::base>(s);
 }
 
 

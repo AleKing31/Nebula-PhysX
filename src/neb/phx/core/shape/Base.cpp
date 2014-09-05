@@ -1,3 +1,4 @@
+#include <neb/core/util/cast.hpp>
 #include <neb/core/util/debug.hpp>
 #include <neb/core/core/shape/base.hpp>
 #include <neb/core/core/light/base.hpp>
@@ -10,11 +11,9 @@
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 
 
-neb::phx::core::shape::base::base(std::shared_ptr<phx::core::shape::util::parent> parent):
-	neb::core::core::shape::base(parent)
+neb::phx::core::shape::base::base():
+	px_shape_(NULL)
 {
-	//NEBULA_SHAPE_BASE_FUNC;
-	assert(parent);
 }
 neb::phx::core::shape::base::~base()
 {
@@ -28,7 +27,7 @@ void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
 void			neb::phx::core::shape::base::init() {
 	//NEBULA_DEBUG_0_FUNCTION;
 
-	neb::core::core::shape::base::init();
+	//neb::core::core::shape::base::init();
 
 	create_physics();
 }
@@ -38,9 +37,9 @@ void			neb::phx::core::shape::base::release() {
 	neb::core::core::shape::base::release();
 	
 	if(px_shape_) {
-		auto p = parent_.lock();
+		auto p = getParent();
 		assert(p);
-		auto ra = std::dynamic_pointer_cast<neb::phx::core::actor::rigidactor::base>(p);
+		auto ra = dynamic_cast<neb::phx::core::actor::rigidactor::base*>(p);
 		assert(ra);		
 
 		auto pxra = ra->px_actor_->isRigidActor();
@@ -55,9 +54,9 @@ void			neb::phx::core::shape::base::release() {
 void			neb::phx::core::shape::base::create_physics() {
 
 	//NEBULA_DEBUG_0_FUNCTION;
-
-	auto actor = getPxParent()->isPxActorBase();
-
+	
+	auto actor = neb::could_be<parent_t, neb::phx::core::actor::base>(getParent());
+	
 	if(actor) {
 		auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::core::actor::Rigid_Actor>(parent_.lock());
 
@@ -73,12 +72,11 @@ void			neb::phx::core::shape::base::create_physics() {
 		}
 	}
 }
-shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
+/*shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
 	
-	auto parent = parent_.lock();
-	assert(parent);
+	auto parent = getParent();
 	
-	auto pxparent(::std::dynamic_pointer_cast<neb::phx::core::shape::util::parent>(parent));
+	auto pxparent(dynamic_cast<neb::phx::core::shape::util::parent*>(parent));
 	
 	if(!pxparent) {
 		::std::cout << typeid(*parent).name() << ::std::endl;
@@ -86,7 +84,7 @@ shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::ge
 	}
 
 	return pxparent;
-}
+}*/
 physx::PxGeometry*	neb::phx::core::shape::base::to_geo() {
 	return 0;
 }

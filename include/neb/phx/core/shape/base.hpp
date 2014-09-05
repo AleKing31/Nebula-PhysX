@@ -14,7 +14,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 	class base: virtual public neb::core::core::shape::base {
 		public:
-			base(std::shared_ptr<phx::core::shape::util::parent>);
+			base();
 			virtual ~base();
 
 			virtual void		init();
@@ -25,7 +25,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			void				create_physics();
 			virtual physx::PxGeometry*	to_geo();
 		public:
-			std::shared_ptr<phx::core::shape::util::parent>		getPxParent();
+			//std::shared_ptr<phx::core::shape::util::parent>		getPxParent();
 
 			physx::PxShape*		px_shape_;
 

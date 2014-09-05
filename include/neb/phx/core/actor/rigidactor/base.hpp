@@ -11,7 +11,8 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 		virtual public neb::phx::core::actor::actor::base
 	{
 		public:
-			base(::std::shared_ptr<neb::phx::core::actor::util::parent>);
+			//base(::std::shared_ptr<neb::phx::core::actor::util::parent>);
+			
 			virtual void						init() = 0;
 			virtual void						release() = 0;
 			virtual void						step(gal::etc::timestep const & ts) = 0;

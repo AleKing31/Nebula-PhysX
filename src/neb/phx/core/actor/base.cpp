@@ -8,9 +8,7 @@
 #include <neb/phx/game/weapon/SimpleProjectile.hpp>
 #include <neb/phx/util/log.hpp>
 
-neb::phx::core::actor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
-	parent_(parent),
+neb::phx::core::actor::base::base():
 	health_(1.0)
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
@@ -34,15 +32,15 @@ void			neb::phx::core::actor::base::init() {
 void			neb::phx::core::actor::base::step(gal::etc::timestep const & ts) {
 	neb::core::core::actor::base::step(ts);
 }
-std::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
+/*std::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
 	auto parent(phx::core::actor::base::parent_.lock());
 	assert(parent);
 	return parent;
-}
+}*/
 void			neb::phx::core::actor::base::hit() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto parent(parent_.lock()); assert(parent);
+	auto parent(getParent());
 
 	physx::PxU32 w2 = simulation_.word2;
 
@@ -60,7 +58,7 @@ void			neb::phx::core::actor::base::damage(double h) {
 
 	health_ -= h;
 	if(health_ < 0) {
-		get_parent()->erase(_M_index);
+		getParent()->erase(_M_index);
 	}
 }
 /*int			phx::core::actor::base::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
