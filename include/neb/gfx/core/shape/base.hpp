@@ -52,18 +52,18 @@ namespace neb {
 					//		neb::core::core::light::util::count& light_count,
 					//		neb::core::pose const & pose);
 					void						model_load(
-							std::shared_ptr<neb::gfx::glsl::program::threed> p,
+							std::shared_ptr<neb::gfx::glsl::program::base> p,
 							neb::core::pose const & pose);
 					void						init_buffer(
 							std::shared_ptr<neb::gfx::context::base> context,
 							std::shared_ptr<neb::gfx::glsl::program::base> p);
 					void						draw(
 							std::shared_ptr<neb::gfx::context::base>,
-							std::shared_ptr<neb::gfx::glsl::program::threed> p,
+							std::shared_ptr<neb::gfx::glsl::program::base> p,
 							neb::core::pose const & pose);
 					virtual void					draw_elements(
 							std::shared_ptr<neb::gfx::context::base> context,
-							std::shared_ptr<neb::gfx::glsl::program::threed> p,
+							std::shared_ptr<neb::gfx::glsl::program::base> p,
 							neb::core::pose const & pose);
 					/** @} */
 				public:

@@ -9,7 +9,9 @@ neb::gfx::camera::view::base::base(std::shared_ptr<neb::gfx::environ::base> pare
 }
 void		neb::gfx::camera::view::base::load(std::shared_ptr<neb::gfx::glsl::program::base> p) {
 	
-	p->get_uniform_scalar("view")->load(view());
+	auto v = view();
+
+	glUniformMatrix4fv(p->uniform_table_[neb::gfx::glsl::uniforms::VIEW], 1, GL_FALSE, &v[0][0]);
 }
 
 

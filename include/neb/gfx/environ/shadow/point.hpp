@@ -18,7 +18,7 @@ namespace neb { namespace gfx { namespace environ { namespace shadow {
 	 */
 	class point: virtual public neb::gfx::environ::base {
 		public:
-			typedef std::shared_ptr<neb::gfx::glsl::program::shadow>		program_shared;
+			typedef std::shared_ptr<neb::gfx::glsl::program::base>			program_shared;
 			typedef std::shared_ptr<neb::gfx::camera::view::shadow::point>		view_shared;
 			typedef std::shared_ptr<neb::gfx::camera::proj::perspective>		proj_shared;
 			typedef neb::gfx::core::light::point					light_type;

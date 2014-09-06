@@ -13,7 +13,7 @@
 #include <neb/gfx/environ/three.hpp>
 #include <neb/gfx/drawable/base.hpp>
 #include <neb/gfx/util/log.hpp>
-#include <neb/gfx/glsl/program/shadow.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/core/light/directional.hpp>
 #include <neb/gfx/camera/proj/base.hpp>
 
@@ -30,7 +30,7 @@ void		neb::gfx::environ::shadow::point::init() {
 //	auto light = light_.lock();
 //	assert(light);
 
-	program_ = std::make_shared<neb::gfx::glsl::program::shadow>();
+	program_.reset(new neb::gfx::glsl::program::base("shadow"));
 	program_->init();
 	
 	static const glm::vec3 look[6] = {

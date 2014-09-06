@@ -77,7 +77,7 @@ void				neb::gfx::core::actor::base::load_lights(neb::core::core::light::util::c
 }
 void				neb::gfx::core::actor::base::draw(
 		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::threed> program,
+		std::shared_ptr<neb::gfx::glsl::program::base> program,
 		neb::core::pose const & pose)
 {
 	LOG(lg, neb::core::core::actor::sl, debug) << __PRETTY_FUNCTION__;

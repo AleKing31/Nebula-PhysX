@@ -4,7 +4,7 @@
 #include <neb/gfx/glsl/uniform/vector.hpp>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 
-void		neb::gfx::glsl::uniform::light_locations::init(std::shared_ptr<neb::gfx::glsl::program::threed> program) {
+void		neb::gfx::glsl::uniform::light_locations::init(std::shared_ptr<neb::gfx::glsl::program::base> program) {
 	location[0]  = program->uniform_table_[neb::gfx::glsl::uniforms::LIGHT_POSITION];
 	location[1]  = program->uniform_table_[neb::gfx::glsl::uniforms::LIGHT_AMBIENT];
 	location[2]  = program->uniform_table_[neb::gfx::glsl::uniforms::LIGHT_DIFFUSE];

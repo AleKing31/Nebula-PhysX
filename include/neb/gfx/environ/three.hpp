@@ -17,7 +17,7 @@ namespace neb { namespace gfx { namespace environ {
 	 */
 	class three: virtual public neb::gfx::environ::base {
 		public:
-			typedef std::shared_ptr<neb::gfx::glsl::program::threed>	program_shared;
+			typedef std::shared_ptr<neb::gfx::glsl::program::base>	program_shared;
 			typedef std::shared_ptr<neb::gfx::camera::view::base>		view_shared;
 			typedef std::shared_ptr<neb::gfx::camera::proj::base>		proj_shared;
 		public:

@@ -12,7 +12,7 @@
 #include <neb/gfx/environ/vis_depth.hpp>
 #include <neb/gfx/drawable/base.hpp>
 #include <neb/gfx/util/log.hpp>
-#include <neb/gfx/glsl/program/vis_depth.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/core/light/directional.hpp>
 
 neb::gfx::environ::vis_depth::vis_depth()
@@ -26,7 +26,7 @@ void		neb::gfx::environ::vis_depth::init() {
 //	auto light = light_.lock();
 //	assert(light);
 
-	program_ = std::make_shared<neb::gfx::glsl::program::vis_depth>();
+	program_.reset(new neb::gfx::glsl::program::base("vis/depth"));
 	program_->init();
 	
 	

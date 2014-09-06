@@ -3,9 +3,7 @@
 
 #include <neb/gfx/util/config.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
-#include <neb/gfx/glsl/program/simple3.hpp>
-#include <neb/gfx/glsl/program/text.hpp>
-#include <neb/gfx/glsl/program/tex.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/core/mesh_instanced.hpp>
 
 weak_ptr<neb::gfx::app::__gfx_glsl>		neb::gfx::app::__gfx_glsl::global() {
@@ -21,13 +19,13 @@ void		neb::gfx::app::__gfx_glsl::create_programs() {
 
 	std::shared_ptr<neb::gfx::glsl::program::base> p;
 
-	program_text_.reset(new neb::gfx::glsl::program::text());
+	program_text_.reset(new neb::gfx::glsl::program::base("text"));
 	program_text_->init();
 
-	program_tex_.reset(new neb::gfx::glsl::program::tex());
+	program_tex_.reset(new neb::gfx::glsl::program::base("tex"));
 	program_tex_->init();
 
-	program_simple3_.reset(new neb::gfx::glsl::program::simple3());
+	program_simple3_.reset(new neb::gfx::glsl::program::base("simple3"));
 	program_simple3_->init();
 
 	

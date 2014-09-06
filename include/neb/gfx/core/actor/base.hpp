@@ -43,7 +43,7 @@ namespace neb {
 					public:
 						void						draw(
 								std::shared_ptr<neb::gfx::context::base> context,
-								std::shared_ptr<neb::gfx::glsl::program::threed> p,
+								std::shared_ptr<neb::gfx::glsl::program::base> p,
 								neb::core::pose const & pose);
 
 						void						load_lights(

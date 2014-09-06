@@ -28,7 +28,7 @@
 #include <neb/gfx/core/actor/base.hpp>
 #include <neb/gfx/core/shape/base.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
-#include <neb/gfx/glsl/program/simple3.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/camera/proj/perspective.hpp>
 #include <neb/gfx/camera/view/Base.hh>

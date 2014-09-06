@@ -20,7 +20,7 @@ void		neb::gfx::environ::three::init() {
 	auto self = std::dynamic_pointer_cast<neb::gfx::environ::three>(shared_from_this());
 
 
-	program_ = std::make_shared<neb::gfx::glsl::program::threed>();
+	program_.reset(new neb::gfx::glsl::program::threed("3d"));
 	program_->init();
 
 

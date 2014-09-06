@@ -55,7 +55,7 @@ void					neb::gfx::core::shape::base::setPose(neb::core::pose const & pose) {
 }
 void					neb::gfx::core::shape::base::draw(
 		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::threed> p,
+		std::shared_ptr<neb::gfx::glsl::program::base> p,
 		neb::core::pose const & pose) {
 
 	auto npose = pose * pose_;
@@ -65,16 +65,16 @@ void					neb::gfx::core::shape::base::draw(
 
 }
 void			neb::gfx::core::shape::base::model_load(
-		std::shared_ptr<neb::gfx::glsl::program::threed> p,
+		std::shared_ptr<neb::gfx::glsl::program::base> p,
 		neb::core::pose const & pose) {
 
 	mat4 space = pose.mat4_cast() * glm::scale(scale_);
 
-	p->get_uniform_scalar("model")->load(space);
+	glUniformMatrix4fv(p->uniform_table_[neb::gfx::glsl::uniforms::MODEL], 1, GL_FALSE, &space[0][0]);
 }
 void			neb::gfx::core::shape::base::draw_elements(
 		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::threed> p,
+		std::shared_ptr<neb::gfx::glsl::program::base> p,
 		neb::core::pose const & pose)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;

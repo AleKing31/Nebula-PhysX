@@ -47,7 +47,7 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 	};
 	class light_locations: public light_array::loc_type {
 		public:
-			void		init(std::shared_ptr<neb::gfx::glsl::program::threed> program);
+			void		init(std::shared_ptr<neb::gfx::glsl::program::base> program);
 	};
 }}}}
 

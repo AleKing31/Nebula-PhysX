@@ -32,14 +32,14 @@ void		neb::gfx::camera::proj::base::load(std::shared_ptr<neb::gfx::glsl::program
 	
 	//glViewport(0, 0, parent_->viewport_.w_, parent_->viewport_.h_);
 	
-	p->get_uniform_scalar("proj")->load(proj());
+	glUniformMatrix4fv(p->uniform_table_[neb::gfx::glsl::uniforms::PROJ], 1, GL_FALSE, &_M_matrix[0][0]);
 }
 void		neb::gfx::camera::proj::base::step(gal::etc::timestep const & ts) {
 
 }
 void		neb::gfx::camera::proj::base::calculate_geometry()
 {
-	_M_px_geometry = neb::frustrum_geometry(proj());
+	_M_px_geometry = neb::frustrum_geometry(_M_matrix);
 }
 
 neb::gfx::camera::proj::perspective::perspective(std::shared_ptr<neb::gfx::environ::base> parent):

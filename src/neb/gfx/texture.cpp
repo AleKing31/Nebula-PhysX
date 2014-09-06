@@ -9,7 +9,7 @@
 #include <neb/gfx/texture.hpp>
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/free.hpp>
-#include <neb/gfx/glsl/program/tex.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/glsl/attrib.hh>
 #include <png.h>
@@ -295,7 +295,7 @@ void		neb::gfx::texture::draw(
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(texture_target, o_);
-	p->get_uniform_scalar("tex")->load(0);
+	glUniform1i(p->uniform_table_[neb::gfx::glsl::uniforms::TEX], 0);
 
 	glTexParameteri(texture_target, GL_TEXTURE_COMPARE_MODE, GL_NONE );
 	glTexParameteri(texture_target, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE );
