@@ -327,33 +327,49 @@ void			neb::phx::core::scene::base::draw(
 		std::shared_ptr<neb::gfx::glsl::program::base> program) {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto app(neb::gfx::app::__gfx_glsl::global().lock());
+	// If program parameter is not NULL, use it and do not load lights.
+	//
+	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
+
 
 	assert(program);
 
-	if(1)
-	{
 
-		auto program_3d = std::dynamic_pointer_cast<neb::gfx::glsl::program::threed>(program);
-		if(program_3d) {
-			// lights
-			light_array_[0].load_uniform(program_3d->light_locations_.location);
-		}
-
-		if(tex_shadow_map_) {
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
-
-			GLint loc = program->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
-			neb::gfx::ogl::glUniform(loc, 0);
-		}
-
-		// meshes
-		assert(meshes_.cuboid_);
-		meshes_.cuboid_->draw(program);
-
-
+	auto program_3d = std::dynamic_pointer_cast<neb::gfx::glsl::program::threed>(program);
+	if(program_3d) {
+		// lights
+		light_array_[0].load_uniform(program_3d->light_locations_.location);
 	}
+
+	if(tex_shadow_map_) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
+
+		GLint loc = program->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
+		neb::gfx::ogl::glUniform(loc, 0);
+	}
+
+	// meshes
+	assert(meshes_.cuboid_);
+	meshes_.cuboid_->draw(program);
+
+	/*
+	// meshes
+	auto la = [&] (A::map_type::iterator<0> it) {
+	auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(it->ptr_);
+	assert(actor);
+	actor->draw(context, program_3d, neb::core::pose());
+	};
+
+
+	A::map_.for_each<0>(la);
+	*/
+
+}
+void			neb::phx::core::scene::base::drawPhysxVisualization()
+{
+
+	auto app(neb::gfx::app::__gfx_glsl::global().lock());
 
 	// visual debugging
 	if(px_scene_)
@@ -365,27 +381,11 @@ void			neb::phx::core::scene::base::draw(
 
 		physx::PxU32 nbtriangles = rb.getNbTriangles();
 		const physx::PxDebugTriangle* triangles = rb.getTriangles();
-		/*
-		   physx::PxU32 nblines = 6;
-		   physx::PxDebugLine* lines = new physx::PxDebugLine[6] {
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3( 90,  0,  0), 0xffffffff),
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(-90,  0,  0), 0xffffffff),
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0, 90,  0), 0xffffffff),
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,-90,  0), 0xffffffff),
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,  0, 90), 0xffffffff),
-		   physx::PxDebugLine(physx::PxVec3(0,0,0), physx::PxVec3(  0,  0,-90), 0xffffffff)
-		   };
-		   */
-		/*
-		   physx::PxU32 nbtriangles = 1;
-		   physx::PxDebugTriangle* triangles = new physx::PxDebugTriangle[1] {
-		   physx::PxDebugTriangle(physx::PxVec3(0,0,0), physx::PxVec3( 100,  0,  0), physx::PxVec3(0,100,0), 0xffffffff),
-		   };
-		   */
 
 
 		auto p = app->program_simple3_;
 		p->use();
+
 
 		auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
 		if(e)
@@ -405,25 +405,6 @@ void			neb::phx::core::scene::base::draw(
 			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxVec3)      " << sizeof(physx::PxVec3);
 			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxU32)       " << sizeof(physx::PxU32);
 
-			//glLineWidth(2.0f);
-			/*
-			   for(unsigned int c = 0; c < nblines; c++)
-			   {
-			   LOG(lg, neb::phx::core::scene::sl, info) << "line";
-
-			   LOG(lg, neb::phx::core::scene::sl, info)
-			   << std::setw(16) << lines[c].pos0[0]
-			   << std::setw(16) << lines[c].pos0[1]
-			   << std::setw(16) << lines[c].pos0[2]
-			   << std::setw(16) << std::hex << lines[c].color0;
-			   LOG(lg, neb::phx::core::scene::sl, info)
-			   << std::setw(16) << lines[c].pos1[0]
-			   << std::setw(16) << lines[c].pos1[1]
-			   << std::setw(16) << lines[c].pos1[2]
-			   << std::setw(16) << std::hex << lines[c].color1;
-
-			   }
-			   */
 
 			GLint i_color = p->attrib_table_[neb::gfx::glsl::attribs::COLOR];
 
@@ -502,17 +483,6 @@ void			neb::phx::core::scene::base::draw(
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 	}
-	/*
-	// meshes
-	auto la = [&] (A::map_type::iterator<0> it) {
-	auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(it->ptr_);
-	assert(actor);
-	actor->draw(context, program_3d, neb::core::pose());
-	};
-
-
-	A::map_.for_each<0>(la);
-	*/
 }
 void			neb::phx::core::scene::base::resize(int w, int h) {
 }
