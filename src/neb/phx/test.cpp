@@ -11,7 +11,7 @@
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/test.hpp>
 
-physx::PxConvexMeshGeometry	neb::frustrum_geometry(glm::mat4 proj) {
+physx::PxConvexMeshGeometry*	neb::frustrum_geometry(glm::mat4 proj) {
 	
 	auto app = neb::phx::app::base::global();
 
@@ -76,9 +76,9 @@ physx::PxConvexMeshGeometry	neb::frustrum_geometry(glm::mat4 proj) {
 
 	physx::PxConvexMesh* convexMesh = app->px_physics_->createConvexMesh(input);
 
-	physx::PxConvexMeshGeometry g(convexMesh);
+	physx::PxConvexMeshGeometry* g = new physx::PxConvexMeshGeometry(convexMesh);
 
-	assert(g.isValid());
+	assert(g->isValid());
 
 	auto b = convexMesh->getLocalBounds();
 

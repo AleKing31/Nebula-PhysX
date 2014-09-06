@@ -75,9 +75,9 @@ bool		neb::gfx::environ::shadow::point::shouldRender(unsigned int c) {
 	if(!e) return false;
 	
 	return query(
-			proj_->_M_px_geometry,
+			*proj_->_M_px_geometry,
 			view_[c]->view(),
-			e->proj_->_M_px_geometry,
+			*e->proj_->_M_px_geometry,
 			e->view_->view()
 			);
 

@@ -35,7 +35,7 @@ namespace neb {namespace gfx {namespace camera {namespace proj {
 			// persistence
 			glm::mat4					_M_matrix;
 		public:
-			physx::PxConvexMeshGeometry			_M_px_geometry;
+			physx::PxConvexMeshGeometry*			_M_px_geometry;
 	};
 }}}}
 
