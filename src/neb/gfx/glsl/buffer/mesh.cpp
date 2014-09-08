@@ -18,31 +18,22 @@ constexpr GLboolean		neb::gfx::glsl::buffer::tri1::normalized_[ATTRIB_COUNT];// 
 constexpr GLvoid*		neb::gfx::glsl::buffer::tri1::pointer_[ATTRIB_COUNT];// = {
 constexpr GLsizei		neb::gfx::glsl::buffer::tri1::stride_[ATTRIB_COUNT];// = {
 constexpr unsigned int		neb::gfx::glsl::buffer::tri1::buffer_index_[ATTRIB_COUNT];// = {
-constexpr GLuint		neb::gfx::glsl::buffer::tri1::divisor_[ATTRIB_COUNT];// = {
+constexpr GLuint			neb::gfx::glsl::buffer::tri1::divisor_[ATTRIB_COUNT];// = {
+constexpr neb::gfx::glsl::attribs::e	neb::gfx::glsl::buffer::tri1::attribute_[ATTRIB_COUNT];
 
 
 
 
-
-void			neb::gfx::glsl::buffer::tri1::init(
+/*void			neb::gfx::glsl::buffer::tri1::init(
 		neb::gfx::glsl::buffer::tri1::program_shared program)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 	base_type::init();
-	
-	
-	
-	index_ = new GLint[ATTRIB_COUNT];
-	index_[0] = program->attrib_table_[neb::gfx::glsl::attribs::POSITION];
-	index_[1] = program->attrib_table_[neb::gfx::glsl::attribs::NORMAL];
-	index_[2] = program->attrib_table_[neb::gfx::glsl::attribs::TEXCOOR];
-	index_[3] = program->attrib_table_[neb::gfx::glsl::attribs::TANGENT];
-	index_[4] = program->attrib_table_[neb::gfx::glsl::attribs::BINORMAL];
 
 	vertexAttribPointer();
 
 }
-
+*/
 
 

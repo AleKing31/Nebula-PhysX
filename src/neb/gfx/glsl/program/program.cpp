@@ -26,7 +26,7 @@ neb::gfx::glsl::program::base::base(std::string name):
 	shader_[1] = 0;
 
 	
-	flag_shader_def_.set(neb::gfx::glsl::program::util::flag_shader::SHADOW);
+	//flag_shader_def_.set(neb::gfx::glsl::program::util::flag_shader::SHADOW);
 
 }
 void	neb::gfx::glsl::program::base::init()

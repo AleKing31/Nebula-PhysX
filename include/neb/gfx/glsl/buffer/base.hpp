@@ -5,6 +5,7 @@
 #include <neb/gfx/opengl/vertex.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/glsl/buffer/traits.hpp>
+#include <neb/gfx/glsl/program/base.hpp>
 
 namespace neb { namespace gfx { namespace glsl { namespace buffer {
 
@@ -16,10 +17,15 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			//	BUFFER_COUNT = traits<BUFFER>::BUFFER_COUNT
 			//};
 
-			base(): index_(NULL) {}
-			virtual void		init() {
+			base() {}
+			virtual void		init(std::shared_ptr<neb::gfx::glsl::program::base> program) {
 				glGenBuffers(BUFFER::BUFFER_COUNT, buffer_);
 				checkerror("glGenBuffers");
+
+				for(int i = 0; i < traits<BUFFER>::ATTRIB_COUNT; i++)
+				{
+					index_[i] = program->attrib_table_[BUFFER::attribute_[i]];
+				}
 			}
 			void			vertexAttribPointer()
 			{
@@ -55,7 +61,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 
 			GLuint		buffer_[traits<BUFFER>::BUFFER_COUNT];
 			/** attribute index */
-			GLint*		index_;
+			GLint		index_[traits<BUFFER>::ATTRIB_COUNT];
 	};
 
 }}}}

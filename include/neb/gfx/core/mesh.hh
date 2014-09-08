@@ -50,8 +50,8 @@ namespace neb { namespace gfx { namespace mesh {
 				return begin_;
 			}
 			virtual GLsizeiptr*		end() {
-				begin_[0] = vertices_.size();
-				begin_[1] = indices_.size();
+				begin_[0] = nbVerts_;
+				begin_[1] = nbIndices_;
 				return begin_;
 			}
 			virtual GLvoid** const		data() {
@@ -63,11 +63,11 @@ namespace neb { namespace gfx { namespace mesh {
 				return size();
 			}
 			GLsizeiptr*			size() {
-				assert(!vertices_.empty());
-				assert(!indices_.empty());
+				assert(!nbVerts_ == 0);
+				assert(!nbIndices_ == 0);
 				
-				size_[0] = vertices_.size();
-				size_[1] = indices_.size();
+				size_[0] = nbVerts_;
+				size_[1] = nbIndices_;
 				return size_;
 			}
 
@@ -94,9 +94,17 @@ namespace neb { namespace gfx { namespace mesh {
 			neb::material::material			material_front_;
 
 			/** @todo boost wont let me use shared ptr here! */
-			std::vector<math::geo::vertex>			vertices_;
-			std::vector<GLushort>				indices_;
 
+			void					setVerts(math::geo::vertex*, GLuint);
+			void					setIndices(GLushort*, GLuint);
+			GLuint					getNbVerts();
+			GLuint					getNbIndices();
+		private:
+			math::geo::vertex*			vertices_;
+			GLushort*				indices_;
+			GLuint					nbVerts_;
+			GLuint					nbIndices_;
+		public:
 			buffer_map					buffers_;
 
 

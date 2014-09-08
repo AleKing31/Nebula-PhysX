@@ -1,10 +1,13 @@
 
-#include <neb/phx/util/convert.hpp>
 #include <neb/phx/core/shape/box.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 
 neb::phx::core::shape::box::box()
 {
+}
+void				neb::phx::core::shape::box::__init() {
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	create_physics();
 }
 physx::PxGeometry*		neb::phx::core::shape::box::to_geo() {
 	return new physx::PxBoxGeometry(

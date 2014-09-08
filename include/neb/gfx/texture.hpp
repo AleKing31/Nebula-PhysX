@@ -40,7 +40,9 @@ namespace neb { namespace gfx {
 			// for visualizing the contents
 			virtual void			draw(
 					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p);
+					std::shared_ptr<neb::gfx::glsl::program::base> p,
+					std::shared_ptr<neb::gfx::glsl::program::base>
+					);
 
 			png_uint_32		w_;
 			png_uint_32		h_;

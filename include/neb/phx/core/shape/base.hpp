@@ -22,7 +22,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			virtual void		step(gal::etc::timestep const & ts);
 
 
-			void				create_physics();
+			virtual void		create_physics();
 			virtual physx::PxGeometry*	to_geo();
 		public:
 			//std::shared_ptr<phx::core::shape::util::parent>		getPxParent();

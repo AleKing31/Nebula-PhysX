@@ -30,7 +30,7 @@ void		neb::gfx::environ::two::render(std::shared_ptr<neb::gfx::context::base> co
 	
 	app->program_text_->use();
 	
-	drawable->draw(context, app->program_text_);
+	drawable->draw(context, app->program_text_, 0);
 }		
 
 

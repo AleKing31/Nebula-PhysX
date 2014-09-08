@@ -79,7 +79,7 @@ void		neb::gfx::environ::shadow_directional::render(std::shared_ptr<neb::gfx::co
 
 	//glViewPort(0, 0, );
 
-	drawable->draw(context, program_);
+	drawable->draw(context, program_, 0);
 	
 }		
 

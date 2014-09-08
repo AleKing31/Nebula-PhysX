@@ -16,6 +16,7 @@
 #include <neb/gfx/camera/view/shadow/point.hpp>
 #include <neb/gfx/Context/fbo_multi.hpp>
 #include <neb/gfx/texture.hpp>
+#include <neb/gfx/util/log.hpp>
 
 #include <neb/phx/core/scene/base.hpp>
 
@@ -43,6 +44,15 @@ void			neb::gfx::core::light::point::init()
 	neb::gfx::core::light::base::init();
 
 }	
+void		neb::gfx::core::light::point::callbackPose(neb::core::pose const & gpose)
+{
+	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::gfx::core::light::sl, debug) << gpose.mat4_cast();
+	
+	auto scene = getScene();
+	
+	scene->light_array_[light_array_].set_pos(light_array_slot_, gpose.pos_);
+}
 void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::environ::three> e3)
 {
 

@@ -123,6 +123,7 @@ namespace neb { namespace gfx {
 
 		namespace program {
 			class base;
+			class threed;
 		}
 
 		class shader;

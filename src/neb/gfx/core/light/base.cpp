@@ -28,6 +28,10 @@ neb::gfx::core::light::base::base(std::shared_ptr<neb::core::core::light::util::
 	atten_const_(1.0),
 	atten_linear_(0.0),
 	atten_quad_(0.0),
+	spot_direction_(vec3(0.0, 0.0, -1.0)),
+	spot_cutoff_(1.0),
+	spot_exponent_(1.0),
+	spot_light_cos_cutoff_(1.0),
 	type_(type)
 {
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;

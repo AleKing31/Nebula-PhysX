@@ -102,22 +102,33 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				(void*)0,
 				(void*)0
 			};
-/*			static constexpr void* pointer[ATTRIB_COUNT] = {
-				(void*)((long)&m[0] - (long)&m),
-				(void*)((long)&m[1] - (long)&m),
-				(void*)((long)&m[2] - (long)&m),
-				(void*)((long)&m[3] - (long)&m),
-				0,
-				(void*)0,
-				(void*)0,
-				(void*)0,
-				(void*)0,
-				(void*)0
-			};*/
+			static constexpr neb::gfx::glsl::attribs::e	attribute_[ATTRIB_COUNT] = {
+				neb::gfx::glsl::attribs::INSTANCE_MODEL0,
+				neb::gfx::glsl::attribs::INSTANCE_MODEL1,
+				neb::gfx::glsl::attribs::INSTANCE_MODEL2,
+				neb::gfx::glsl::attribs::INSTANCE_MODEL3,
+				neb::gfx::glsl::attribs::INSTANCE_SAMPLER,
+				neb::gfx::glsl::attribs::INSTANCE_DIFFUSE,
+				neb::gfx::glsl::attribs::INSTANCE_AMBIENT,
+				neb::gfx::glsl::attribs::INSTANCE_SPECULAR,
+				neb::gfx::glsl::attribs::INSTANCE_EMISSION,
+				neb::gfx::glsl::attribs::INSTANCE_SHININESS
+			};
+
+			/*			static constexpr void* pointer[ATTRIB_COUNT] = {
+						(void*)((long)&m[0] - (long)&m),
+						(void*)((long)&m[1] - (long)&m),
+						(void*)((long)&m[2] - (long)&m),
+						(void*)((long)&m[3] - (long)&m),
+						0,
+						(void*)0,
+						(void*)0,
+						(void*)0,
+						(void*)0,
+						(void*)0
+						};*/
 
 		public:
-			void				init(
-					program_shared p);
 
 	};
 }}}}

@@ -25,8 +25,10 @@ namespace neb {
 					 * draw into prepared rendering context
 					 */
 					virtual void			draw(
-							std::shared_ptr<neb::gfx::context::base> context,
-							std::shared_ptr<neb::gfx::glsl::program::base> p) = 0;
+							std::shared_ptr<neb::gfx::context::base>,
+							std::shared_ptr<neb::gfx::glsl::program::base>,
+							std::shared_ptr<neb::gfx::glsl::program::base>
+							) = 0;
 			};
 			class two: virtual public neb::gfx::drawable::base {
 				public:

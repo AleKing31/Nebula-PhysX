@@ -7,7 +7,7 @@
 
 #include "v130/inc/color.glsl"
 
-void	lf_lights(in vec4 amb, in vec4 dif, in vec4 spc) {
+void	lf_lights(in vec4 amb, in vec4 dif, in vec4 spc, in float shininess) {
 
 	vec4 diffuse;
 	vec4 specular;
@@ -179,7 +179,7 @@ void	lf_lights(in vec4 amb, in vec4 dif, in vec4 spc) {
 		{
 
 			specular = atten * light_specular[i] * spc *
-				vec4(vec3(pow(max(0.0, dot(reflect(-L,N), -P.xyz)), vs_instance_shininess)),1.0);
+				vec4(vec3(pow(max(0.0, dot(reflect(-L,N), -P.xyz)), shininess)),1.0);
 		}
 
 		diffuse *= (1.0 - shadow);

@@ -37,7 +37,11 @@ void neb::gfx::core::shape::box::box::createMesh() {
 		auto spc = neb::core::color::color::white();
 		auto emi = neb::core::color::color::black();
 		
-		LOG(lg, neb::gfx::sl, debug) << "diffuse";
+		LOG(lg, neb::gfx::sl, debug) << "diffuse   " << std::hex << dif;
+		LOG(lg, neb::gfx::sl, debug) << "diffuse r " << std::hex << (unsigned int)dif.r;
+		LOG(lg, neb::gfx::sl, debug) << "diffuse g " << std::hex << (unsigned int)dif.g;
+		LOG(lg, neb::gfx::sl, debug) << "diffuse b " << std::hex << (unsigned int)dif.b;
+		LOG(lg, neb::gfx::sl, debug) << "diffuse a " << std::hex << (unsigned int)dif.a;
 		//dif.print();
 		LOG(lg, neb::gfx::sl, debug) << "ambient";
 		//amb.print();

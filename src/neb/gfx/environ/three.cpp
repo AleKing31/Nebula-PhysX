@@ -2,6 +2,7 @@
 
 
 #include <neb/core/util/debug.hpp>
+#include <neb/core/util/cast.hpp>
 
 #include <neb/gfx/app/__gfx_glsl.hpp>
 
@@ -13,6 +14,8 @@
 #include <neb/gfx/drawable/base.hpp>
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
+
+#include <neb/phx/core/scene/base.hpp>
 
 void		neb::gfx::environ::three::init() {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
@@ -78,7 +81,12 @@ void		neb::gfx::environ::three::render(std::shared_ptr<neb::gfx::context::base> 
 	proj_->load(program_);
 	view_->load(program_);
 	
-	drawable->draw(context, program_);
+	drawable->draw(context,
+			0,
+			0);
+
+	auto scene = neb::could_be<neb::gfx::drawable::base, neb::phx::core::scene::base>(drawable);
+	if(scene) scene->drawPhysxVisualization(context);
 	
 }		
 weak_ptr<neb::gfx::camera::view::ridealong>		neb::gfx::environ::three::createViewridealong(

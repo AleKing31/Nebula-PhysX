@@ -20,6 +20,7 @@
 #include <neb/gfx/drawable/base.hpp>
 #include <neb/gfx/glsl/uniform/light_array.hpp>
 #include <neb/gfx/util/decl.hpp>
+#include <neb/gfx/glsl/util/decl.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
@@ -49,7 +50,10 @@ namespace neb { namespace phx { namespace core { namespace scene {
 			void					resize(int w, int h);
 			void					draw(
 					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p);
+					std::shared_ptr<neb::gfx::glsl::program::base> p,
+					std::shared_ptr<neb::gfx::glsl::program::base> p_inst
+					);
+			void					drawPhysxVisualization(std::shared_ptr<neb::gfx::context::base> context);
 
 
 
@@ -90,6 +94,13 @@ namespace neb { namespace phx { namespace core { namespace scene {
 
 
 			// rendering data
+			
+			struct
+			{
+				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3;
+				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3_inst;
+			} _M_programs;
+			
 			// one for static, one for dynamic
 			neb::gfx::glsl::uniform::light_array				light_array_[2];
 

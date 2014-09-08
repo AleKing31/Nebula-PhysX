@@ -40,11 +40,16 @@
 
 typedef neb::core::core::actor::util::parent A;
 
+typedef neb::gfx::glsl::program::base	P;
+typedef neb::gfx::glsl::program::threed	P3;
+
 neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
 	neb::core::core::scene::base(parent),
 	px_scene_(NULL)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+
+	flag_.set(neb::core::core::scene::util::flag::PHYSX_VISUALIZATION);
 }
 neb::phx::core::scene::base::~base() {
 
@@ -61,6 +66,13 @@ void			neb::phx::core::scene::base::init() {
 	create_physics();
 
 	// graphics
+
+	// programs
+	_M_programs._M_d3.reset(new P3("3d"));
+	_M_programs._M_d3->init();
+	_M_programs._M_d3_inst.reset(new P3("3d_inst"));
+	_M_programs._M_d3_inst->init();
+
 	// light arrays
 	light_array_[0].alloc(32);
 	light_array_[1].alloc(32);
@@ -85,8 +97,12 @@ void			neb::phx::core::scene::base::init() {
 }
 void			neb::phx::core::scene::base::release() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-
-	// release scene?!?!
+	
+	if(px_scene_)
+	{
+		px_scene_->release();
+		px_scene_ = NULL;
+	}
 }
 void			neb::phx::core::scene::base::create_physics() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
@@ -322,54 +338,85 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 	//send_actor_update();
 }
 
+
 void			neb::phx::core::scene::base::draw(
 		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base> program) {
+		std::shared_ptr<P> program,
+		std::shared_ptr<P> program_inst
+		)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 	// If program parameter is not NULL, use it and do not load lights.
 	//
 	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
+	
+	std::shared_ptr<P3> d3;
+	std::shared_ptr<P3> d3_inst;
+	
+	auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
+	if(!e) return;
+
+	if(program) {
+		d3 = neb::could_be<P,P3>(program);
+		d3_inst = neb::could_be<P,P3>(program_inst);
+	} else {
+		d3 = _M_programs._M_d3;
+		d3_inst = _M_programs._M_d3_inst;
+	}
+
+	assert(d3);
+	assert(d3_inst);
 
 
-	assert(program);
+	{
+		d3->use();
 
+		e->proj_->load(d3);
+		e->view_->load(d3);
 
-	auto program_3d = std::dynamic_pointer_cast<neb::gfx::glsl::program::threed>(program);
-	if(program_3d) {
 		// lights
-		light_array_[0].load_uniform(program_3d->light_locations_.location);
+		light_array_[0].load_uniform(d3.get());
+
+		// individual meshes
+		auto la = [&] (A::map_type::pointer p) {
+			auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
+			assert(actor);
+			actor->draw(context, d3, neb::core::pose());
+		};
+
+		A::map_.for_each(la);
 	}
 
-	if(tex_shadow_map_) {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
+	{
+		d3_inst->use();
+	
+		e->proj_->load(d3_inst);
+		e->view_->load(d3_inst);
+	
+		// lights
+		light_array_[0].load_uniform(d3_inst.get());
 
-		GLint loc = program->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
-		neb::gfx::ogl::glUniform(loc, 0);
+		if(tex_shadow_map_) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
+
+			GLint loc = d3_inst->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
+			neb::gfx::ogl::glUniform(loc, 0);
+		}
+
+		// meshes
+		assert(meshes_.cuboid_);
+		meshes_.cuboid_->draw(d3_inst);
 	}
-
-	// meshes
-	assert(meshes_.cuboid_);
-	meshes_.cuboid_->draw(program);
-
-	/*
-	// meshes
-	auto la = [&] (A::map_type::iterator<0> it) {
-	auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(it->ptr_);
-	assert(actor);
-	actor->draw(context, program_3d, neb::core::pose());
-	};
-
-
-	A::map_.for_each<0>(la);
-	*/
 
 }
-void			neb::phx::core::scene::base::drawPhysxVisualization()
+void			neb::phx::core::scene::base::drawPhysxVisualization(std::shared_ptr<neb::gfx::context::base> context)
 {
 
 	auto app(neb::gfx::app::__gfx_glsl::global().lock());
+
+	if(!flag_.all(neb::core::core::scene::util::flag::PHYSX_VISUALIZATION)) return;
 
 	// visual debugging
 	if(px_scene_)
@@ -396,14 +443,10 @@ void			neb::phx::core::scene::base::drawPhysxVisualization()
 			glClear(GL_DEPTH_BUFFER_BIT);
 
 
-			LOG(lg, neb::phx::core::scene::sl, info) << "Debug visualization";
-			LOG(lg, neb::phx::core::scene::sl, info) << "number of points    " << rb.getNbPoints();
-			LOG(lg, neb::phx::core::scene::sl, info) << "number of lines     " << nblines;
-			LOG(lg, neb::phx::core::scene::sl, info) << "number of triangles " << nbtriangles;
-
-			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxDebugLine) " << sizeof(physx::PxDebugLine);
-			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxVec3)      " << sizeof(physx::PxVec3);
-			LOG(lg, neb::phx::core::scene::sl, info) << "sizeof(PxU32)       " << sizeof(physx::PxU32);
+			LOG(lg, neb::phx::core::scene::sl, debug) << "Debug visualization";
+			LOG(lg, neb::phx::core::scene::sl, debug) << "number of points    " << rb.getNbPoints();
+			LOG(lg, neb::phx::core::scene::sl, debug) << "number of lines     " << nblines;
+			LOG(lg, neb::phx::core::scene::sl, debug) << "number of triangles " << nbtriangles;
 
 
 			GLint i_color = p->attrib_table_[neb::gfx::glsl::attribs::COLOR];

@@ -27,6 +27,7 @@ namespace neb { namespace gfx { namespace core { namespace light {
 		public:
 			point(std::shared_ptr<neb::core::core::light::util::parent> parent);
 			virtual void	init();
+			virtual void	callbackPose(neb::core::pose const &);
 			virtual void	initShadow(std::shared_ptr<neb::gfx::environ::three>);
 			virtual void	load(neb::core::core::light::util::count & light_count, neb::core::pose const & pose);
 

@@ -30,7 +30,9 @@ namespace neb {namespace gfx {namespace gui {namespace layout {
 			virtual void					step(gal::etc::timestep const & ts);
 			virtual void					draw(
 					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p);
+					std::shared_ptr<neb::gfx::glsl::program::base> p,
+					std::shared_ptr<neb::gfx::glsl::program::base>
+					);
 			/** @} */
 
 			void						connect(

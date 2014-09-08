@@ -40,6 +40,7 @@ namespace neb {
 					virtual void		callbackPose(neb::core::pose const & pose_global);
 
 					virtual weak_ptr<neb::core::core::light::base>		createLightPoint();
+					virtual weak_ptr<neb::core::core::light::base>		createLightSpot(glm::vec3);
 					virtual weak_ptr<neb::core::core::light::base>		createLightDirectional(glm::vec3);
 
 

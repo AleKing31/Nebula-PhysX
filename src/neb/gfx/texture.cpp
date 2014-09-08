@@ -276,9 +276,11 @@ GLuint			neb::gfx::texture::init_buffer(std::shared_ptr<neb::gfx::context::base>
 
 
 
-void		neb::gfx::texture::draw(
+void			neb::gfx::texture::draw(
 		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base>)
+		std::shared_ptr<neb::gfx::glsl::program::base>,
+		std::shared_ptr<neb::gfx::glsl::program::base>
+		)
 {
 	checkerror("unknown");
 

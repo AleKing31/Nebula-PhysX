@@ -26,10 +26,7 @@ void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
 }
 void			neb::phx::core::shape::base::init() {
 	//NEBULA_DEBUG_0_FUNCTION;
-
-	//neb::core::core::shape::base::init();
-
-	create_physics();
+	
 }
 void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;

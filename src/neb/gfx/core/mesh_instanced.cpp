@@ -10,9 +10,11 @@ void			neb::gfx::mesh::instanced::init(
 		neb::gfx::mesh::instanced::program_shared program)
 {
 	mesh_.init_buffer(program);
+	
+	typedef neb::gfx::glsl::buffer::instanced T;
 
+	std::shared_ptr<T> buf(new T());
 
-	auto buf(std::make_shared<neb::gfx::glsl::buffer::instanced>());
 	buffers_[program.get()] = buf;
 	
 	buf->init(program);
@@ -192,11 +194,16 @@ void			neb::gfx::mesh::instanced::draw(
 	buf_mesh->vertexAttribPointer();
 
 	LOG(lg, neb::gfx::sl, debug) << "instances size = " << instances_->size();
-	LOG(lg, neb::gfx::sl, debug) << "mesh size      = " << mesh_.indices_.size();
+	LOG(lg, neb::gfx::sl, debug) << "mesh size      = " << mesh_.getNbIndices();
 
 	buf_mesh->bind();
 
-	glDrawElementsInstanced(GL_TRIANGLES, mesh_.indices_.size(), GL_UNSIGNED_SHORT, 0, instances_->size());
+	glDrawElementsInstanced(
+			GL_TRIANGLES,
+			mesh_.getNbIndices(),
+			GL_UNSIGNED_SHORT,
+			0,
+			instances_->size());
 
 	checkerror("glDrawElementsInstanced");
 

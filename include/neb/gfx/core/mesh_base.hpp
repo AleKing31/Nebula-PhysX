@@ -74,8 +74,7 @@ namespace neb { namespace gfx { namespace mesh {
 						);
 
 			}
-
-
+			
 	};
 
 }}}

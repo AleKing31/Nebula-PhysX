@@ -36,11 +36,11 @@ set(include_extensions obj)
 SET(GRU_VERSION 0.1.1)
 
 INCLUDE(cmh_boost)
-FIND_PACKAGE(Boost 1.55 COMPONENTS program_options serialization log system thread)
+#FIND_PACKAGE(Boost 1.55 COMPONENTS program_options serialization log system thread)
 
 SET(libs
-	${galaxy_LIBRARIES}
-	${nebula_LIBRARIES}
+	#${galaxy_LIBRARIES}
+	#${nebula_LIBRARIES}
 	${Boost_LIBRARIES}
 	${PhysX_LIBRARIES}
 	)

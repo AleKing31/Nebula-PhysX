@@ -32,7 +32,11 @@ void		neb::gfx::gui::layout::base::step(gal::etc::timestep const & ts) {
 		LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 }
-void		neb::gfx::gui::layout::base::draw(std::shared_ptr<neb::gfx::context::base> context, std::shared_ptr<neb::gfx::glsl::program::base> program) {
+void			neb::gfx::gui::layout::base::draw(
+		std::shared_ptr<neb::gfx::context::base> context,
+		std::shared_ptr<neb::gfx::glsl::program::base> program,
+		std::shared_ptr<neb::gfx::glsl::program::base>
+		) {
 	
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 	

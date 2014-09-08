@@ -10,6 +10,7 @@
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/core/shape/base.hpp>
 #include <neb/gfx/core/light/point.hpp>
+#include <neb/gfx/core/light/spot.hpp>
 #include <neb/gfx/core/light/directional.hpp>
 #include <neb/gfx/glsl/attrib.hh>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
@@ -38,7 +39,9 @@ void					neb::gfx::core::shape::base::step(gal::etc::timestep const & ts) {
 void					neb::gfx::core::shape::base::callbackPose(neb::core::pose const & gpose) {
 	LOG(lg, neb::gfx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	LOG(lg, neb::gfx::core::shape::sl, debug) << gpose.mat4_cast();
-	
+
+	neb::core::core::shape::base::__callbackPose(gpose);
+
 	if(mesh_slot_) {
 		auto model = gpose.mat4_cast() * glm::scale(scale_);
 		
@@ -105,24 +108,43 @@ std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::create
 
 	auto self(std::dynamic_pointer_cast<neb::core::core::shape::base>(shared_from_this()));
 
-	auto light = sp::make_shared<neb::gfx::core::light::point>(self);
+	typedef neb::gfx::core::light::point L;
+
+	auto light = std::shared_ptr<L>(new L(self));
+
 
 	neb::core::core::light::util::parent::insert(light);
-	
+
 	light->init();
-	
+
+	return light;
+}
+std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::createLightSpot(glm::vec3 d) {
+
+	auto self(std::dynamic_pointer_cast<neb::core::core::shape::base>(shared_from_this()));
+
+	typedef neb::gfx::core::light::spot L;
+
+	auto light = std::shared_ptr<L>(new L(self));
+
+	light->spot_direction_ = d;
+
+	neb::core::core::light::util::parent::insert(light);
+
+	light->init();
+
 	return light;
 }
 std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::createLightDirectional(glm::vec3 d) {
 
 	auto self(std::dynamic_pointer_cast<neb::core::core::shape::base>(shared_from_this()));
-	
+
 	auto light = std::make_shared<neb::gfx::core::light::directional>(self);
-	
+
 	light->pose_.pos_ = d;
 
 	neb::core::core::light::util::parent::insert(light);
-	
+
 	light->init();
 
 	return light;

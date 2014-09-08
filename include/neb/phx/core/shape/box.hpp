@@ -16,6 +16,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			virtual void				init() = 0;
 			virtual void				release() = 0;
 			virtual void				step(gal::etc::timestep  const & ts) = 0;
+			void					__init();
 
 
 			virtual physx::PxGeometry*		to_geo();

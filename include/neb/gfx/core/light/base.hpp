@@ -25,15 +25,17 @@ namespace neb { namespace gfx { namespace core { namespace light {
 
 		class base: virtual public neb::core::core::light::base {
 			public:
-				enum {
-					POINT = 0,
-					SPOT = 1,
-					DIRECTIONAL = 2
+				struct type {
+					enum e {
+						POINT = 0,
+						SPOT = 1,
+						DIRECTIONAL = 2
+					};
 				};
 				base(std::shared_ptr<neb::core::core::light::util::parent> parent, int type);
 				~base() = 0;
 				void				init();
-				
+
 				virtual void			release();
 				virtual void			cleanup();
 				virtual void			step(gal::etc::timestep const & ts);
@@ -58,9 +60,9 @@ namespace neb { namespace gfx { namespace core { namespace light {
 					ar & boost::serialization::make_nvp("ambient",ambient_);
 					ar & boost::serialization::make_nvp("diffuse",diffuse_);
 					ar & boost::serialization::make_nvp("specular",specular_);
-/*					ar & boost::serialization::make_nvp("atten_const",atten_const_);
-					ar & boost::serialization::make_nvp("atten_linear",atten_linear_);
-					ar & boost::serialization::make_nvp("atten_quad",atten_quad_);*/
+					/*					ar & boost::serialization::make_nvp("atten_const",atten_const_);
+										ar & boost::serialization::make_nvp("atten_linear",atten_linear_);
+										ar & boost::serialization::make_nvp("atten_quad",atten_quad_);*/
 				}
 			public:
 				virtual void				serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
@@ -70,7 +72,7 @@ namespace neb { namespace gfx { namespace core { namespace light {
 					serializeTemplate(ar, version);
 				}
 			public:
-			
+
 				std::string					light_type_string_;
 
 				// data
@@ -84,7 +86,7 @@ namespace neb { namespace gfx { namespace core { namespace light {
 				float						spot_cutoff_;
 				float						spot_exponent_;
 				float						spot_light_cos_cutoff_;
-				
+
 				glm::mat4					shadow_vpb_[6];
 				glm::vec3					shadow_sampler_[2];
 
@@ -93,12 +95,12 @@ namespace neb { namespace gfx { namespace core { namespace light {
 				// shadows
 				//std::shared_ptr<neb::gfx::window::base>		shadow_environ_;				
 				std::shared_ptr<neb::gfx::environ::base>	shadow_environ_;				
-				
+
 				// other properties
 
 				int						light_array_;
 				int						light_array_slot_;
-		
+
 				std::shared_ptr<gal::etc::slots::ticket>	texture_layers_;
 
 				std::shared_ptr<neb::gfx::texture>		texture_shadow_map_;

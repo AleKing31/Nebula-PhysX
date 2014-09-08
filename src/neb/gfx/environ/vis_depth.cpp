@@ -79,7 +79,7 @@ void		neb::gfx::environ::vis_depth::render(std::shared_ptr<neb::gfx::context::ba
 	proj_->load(program_);
 	view_->load(program_);
 	
-	drawable->draw(context, program_);
+	drawable->draw(context, program_, 0);
 	
 }		
 

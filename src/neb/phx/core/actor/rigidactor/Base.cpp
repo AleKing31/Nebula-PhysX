@@ -17,10 +17,12 @@
 {
 }*/
 void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
+	std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+
 	assert(px_actor_);
-
-	physx::PxRigidActor* actor = (physx::PxRigidActor*)px_actor_;
-
+	physx::PxRigidActor* actor = (physx::PxRigidActor*)px_actor_->isRigidActor();
+	assert(actor);
+	
 	physx::PxFilterData coll_data;
 	coll_data.word0 = simulation_.word0;
 	coll_data.word1 = simulation_.word1;
@@ -35,8 +37,10 @@ void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 
 
 	const physx::PxU32 numShapes = actor->getNbShapes();
-
+	
 	physx::PxShape** shapes = new physx::PxShape*[numShapes];
+	
+	std::cout << numShapes << std::endl;
 
 	actor->getShapes(shapes, numShapes);
 
