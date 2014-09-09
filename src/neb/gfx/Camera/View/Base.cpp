@@ -8,8 +8,10 @@ neb::gfx::camera::view::base::base(std::shared_ptr<neb::gfx::environ::base> pare
 	parent_(parent)
 {
 }
-void		neb::gfx::camera::view::base::load(std::shared_ptr<neb::gfx::glsl::program::base> p) {
+void		neb::gfx::camera::view::base::load(neb::gfx::glsl::program::base const * const p) {
 	
+	assert(p);
+
 	auto v = view();
 
 	glUniformMatrix4fv(

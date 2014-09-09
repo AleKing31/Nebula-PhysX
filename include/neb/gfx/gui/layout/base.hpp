@@ -16,11 +16,13 @@ namespace neb {namespace gfx {namespace gui {namespace layout {
 	class base:
 		virtual public neb::itf::shared,
 		virtual public neb::gfx::drawable::base,
-		virtual public neb::gfx::gui::object::util::parent
+		virtual public neb::gfx::gui::object::util::parent,
+		virtual public gal::stl::child< neb::util::parent< neb::gfx::gui::layout::base> >
 	{
 		public:
+			typedef neb::util::parent< neb::gfx::gui::layout::base> parent;
 			//base();
-			base(std::shared_ptr<neb::gfx::gui::layout::util::parent> parent);
+			base(std::shared_ptr<parent> const & p);
 
 			virtual void				init();
 			virtual void				release() {}
@@ -28,11 +30,7 @@ namespace neb {namespace gfx {namespace gui {namespace layout {
 
 			/** @brief Main Loop @{ */
 			virtual void					step(gal::etc::timestep const & ts);
-			virtual void					draw(
-					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p,
-					std::shared_ptr<neb::gfx::glsl::program::base>
-					);
+			virtual void					draw(RenderDesc const &);
 			/** @} */
 
 			void						connect(
@@ -50,8 +48,6 @@ namespace neb {namespace gfx {namespace gui {namespace layout {
 		public:
 			glm::mat4x4					ortho_;
 
-
-			std::shared_ptr<neb::gfx::gui::layout::util::parent>	parent_;
 			// connections
 			struct
 			{

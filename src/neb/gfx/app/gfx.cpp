@@ -2,7 +2,7 @@
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/app/__gfx.hpp>
 #include <neb/gfx/window/Base.hh>
-
+#include <neb/gfx/gui/layout/base.hpp>
 
 void					neb::gfx::app::__gfx::__init() {
 
@@ -141,15 +141,19 @@ void							neb::gfx::app::__gfx::staticCharFun(GLFWwindow* window, unsigned int 
 }
 std::weak_ptr<neb::gfx::gui::layout::base>		neb::gfx::app::__gfx::createLayout()
 {
-	auto self(dynamic_pointer_cast<neb::gfx::app::__gfx>(shared_from_this()));
+/*	auto self(dynamic_pointer_cast<neb::gfx::app::__gfx>(shared_from_this()));
 
-	auto layout = std::make_shared<neb::gfx::gui::layout::base>(self);
+	typedef neb::gfx::gui::layout::base T;
+
+	std::shared_ptr<T> layout(new T(self), gal::stl::deleter<T>());
 
 	neb::gfx::gui::layout::util::parent::insert(layout);
 
 	layout->init();
 
 	return layout;
+*/
+	return neb::util::parent<neb::gfx::gui::layout::base>::create<neb::gfx::gui::layout::base>();
 }
 std::weak_ptr<neb::gfx::window::base>			neb::gfx::app::__gfx::createWindow()
 {

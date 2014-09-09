@@ -18,10 +18,10 @@
 #include <neb/gfx/gui/layout/base.hpp>
 #include <neb/gfx/util/log.hpp>
 
-neb::gfx::gui::layout::base::base(std::shared_ptr<neb::gfx::gui::layout::util::parent> parent): parent_(parent) {
-
+neb::gfx::gui::layout::base::base(std::shared_ptr<parent> const & p):
+	gal::stl::child<parent>(p.get())
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-
 }
 void neb::gfx::gui::layout::base::init() {
 
@@ -32,12 +32,8 @@ void		neb::gfx::gui::layout::base::step(gal::etc::timestep const & ts) {
 		LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 }
-void			neb::gfx::gui::layout::base::draw(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base> program,
-		std::shared_ptr<neb::gfx::glsl::program::base>
-		) {
-	
+void			neb::gfx::gui::layout::base::draw(neb::gfx::RenderDesc const & desc)
+{	
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 	
 	typedef neb::gfx::gui::object::util::parent O;
@@ -45,7 +41,7 @@ void			neb::gfx::gui::layout::base::draw(
 	auto lamb = [&] (O::map_type::pointer p) {
 		auto object = std::dynamic_pointer_cast<neb::gfx::gui::object::base>(p);
 		assert(object);
-		object->draw(program);
+		object->draw(desc);
 	};
 
 	O::map_.for_each(lamb);
@@ -186,10 +182,13 @@ int			neb::gfx::gui::layout::base::search(std::shared_ptr<neb::gfx::window::base
 	return 0;
 }
 weak_ptr<neb::gfx::gui::object::terminal>		neb::gfx::gui::layout::base::createObjectTerminal() {
-	auto term = sp::make_shared<neb::gfx::gui::object::terminal>();
-	insert(term);
-	term->init();
-	return term;
+
+	return neb::gfx::gui::object::util::parent::create<neb::gfx::gui::object::terminal>();
+
+	//auto term = sp::make_shared<neb::gfx::gui::object::terminal>();
+	//insert(term);
+	//term->init();
+	//return term;
 }
 
 

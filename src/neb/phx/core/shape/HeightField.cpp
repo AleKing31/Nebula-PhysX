@@ -11,6 +11,123 @@
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/app/base.hpp>
 
+struct HF
+{
+	HF(
+			physx::PxHeightFieldSample* samples,
+			physx::PxU32 nbRows,
+			physx::PxU32 nbColumns
+	      )
+	{
+		_M_samples = samples;
+		_M_nbRows = nbRows;
+		_M_nbColumns = nbColumns;
+	}
+	short	min()
+	{
+		short m = SHRT_MAX;
+		
+		for(unsigned int i = 0; i < _M_nbRows; i++)
+		{
+			for(unsigned int j = 0; j < _M_nbColumns; j++)
+			{
+				short s = _M_samples[at(i,j)].height;
+				if(s < m) m = s;
+			}
+		}
+		return m;
+	}
+	short	max()
+	{
+		short m = SHRT_MIN;
+		
+		for(unsigned int i = 0; i < _M_nbRows; i++)
+		{
+			for(unsigned int j = 0; j < _M_nbColumns; j++)
+			{
+				short s = _M_samples[at(i,j)].height;
+				if(s > m) m = s;
+			}
+		}
+		return m;
+	}
+	int	at(
+			int i,
+			int j
+		  )
+	{
+		i = (i + _M_nbRows) % _M_nbRows;
+		j = (j + _M_nbColumns) % _M_nbColumns;
+		return i * _M_nbColumns + j;
+	}
+	void	filter(physx::PxU32 width)
+	{
+		int n = (width * 2 + 1) * (width * 2 + 1);
+		
+		int a = -width;
+		int b = width + 1;
+
+		long sum;
+		
+		for(unsigned int i = 0; i < _M_nbRows; i++)
+		{
+			for(unsigned int j = 0; j < _M_nbColumns; j++)
+			{
+				sum = 0;
+				for(int k = a; k < b; k++)
+				{
+					for(int l = a; l < b; l++)
+					{
+						sum += _M_samples[at(i + k, j + l)].height;
+					}
+					short oldS = _M_samples[at(i,j)].height;
+					short newS = sum / n;
+					std::cout
+						<< " oldS = " << oldS
+						<< " newS = " << newS
+						<< " sum = " << sum
+						<< " n = " << n
+						<< std::endl;
+					_M_samples[at(i,j)].height = newS;
+				}
+			}
+		}
+	}
+	void	normalize()
+	{
+		short minH = min();
+		short maxH = max();
+
+		double slope = float(SHRT_MAX - SHRT_MIN) / float(maxH - minH);
+
+		for(unsigned int i = 0; i < _M_nbRows; i++)
+		{
+			for(unsigned int j = 0; j < _M_nbColumns; j++)
+			{
+				short& s = _M_samples[at(i,j)].height;
+				double l = slope * (s - maxH) + SHRT_MAX;
+				std::cout
+					<< " s = " << s
+					<< " l = " << l
+					<< " new = " << (short)l
+					<< " slope = " << slope
+					<< std::endl;
+				s = (short)l;
+			}
+		}
+	}
+
+
+	physx::PxHeightFieldSample*	_M_samples;
+	unsigned int			_M_nbRows;
+	unsigned int			_M_nbColumns;
+
+	short				_M_min;
+	short				_M_max;
+};
+
+
+
 neb::phx::core::shape::HeightField::HeightField(std::shared_ptr<neb::core::core::shape::util::parent> parent):
 	gal::stl::child<neb::core::core::shape::util::parent>(parent.get())
 {
@@ -73,8 +190,12 @@ void				neb::phx::core::shape::HeightField::create_physics()
 }
 physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 
-	unsigned int nbRows = 30;
-	unsigned int nbCols = 30;
+	unsigned int nbRows = 300;
+	unsigned int nbCols = 300;
+	float heightScale = 5.0 / float(SHRT_MAX);
+	float rowScale = 1.0;
+	float colScale = 1.0;
+
 	unsigned int nbVerts = nbRows * nbCols;
 
 	auto thePhysics = phx::app::base::global()->px_physics_;
@@ -86,11 +207,19 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 	{
 		for(unsigned int j = 0; j < nbCols; j++)
 		{
-			samples[i * nbCols + j].height = ::rand() % SHRT_MAX;
+			samples[i * nbCols + j].height = (::rand() % USHRT_MAX) + SHRT_MIN;
 			samples[i * nbCols + j].materialIndex0 = physx::PxBitAndByte(0,0);
 			samples[i * nbCols + j].materialIndex1 = physx::PxBitAndByte(1,0);
 		}
 	}
+
+	HF hf(samples, nbRows, nbCols);
+
+	hf.filter(10);
+	hf.normalize();
+	hf.filter(2);
+
+	//assert(0);
 
 	physx::PxHeightFieldDesc hfDesc;
 	hfDesc.format             = physx::PxHeightFieldFormat::eS16_TM;
@@ -101,10 +230,7 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 	hfDesc.samples.stride     = sizeof(physx::PxHeightFieldSample);
 
 	physx::PxHeightField* aHeightField = thePhysics->createHeightField(hfDesc);
-	
-	float heightScale = 1.0 / float(SHRT_MAX);
-	float rowScale = 1.0;
-	float colScale = 1.0;
+
 
 	physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry(
 			aHeightField,

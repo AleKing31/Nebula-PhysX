@@ -53,7 +53,7 @@ void		neb::gfx::core::light::point::callbackPose(neb::core::pose const & gpose)
 	
 	scene->light_array_[light_array_].set_pos(light_array_slot_, gpose.pos_);
 }
-void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::environ::three> e3)
+void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::environ::SceneDefault> e3)
 {
 
 	// scene
@@ -80,7 +80,7 @@ void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::enviro
 	setShadowEnviron(environ);
 
 	// where shadows are rendered
-	environ->environ3_ = e3;
+	environ->environ_scene_ = e3;
 
 }
 void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::environ::base> environ) {

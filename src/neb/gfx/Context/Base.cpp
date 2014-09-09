@@ -1,5 +1,6 @@
 
 #include <gal/log/log.hpp>
+#include <gal/stl/deleter.hpp>
 
 #include <neb/core/util/debug.hpp>
 #include <neb/core/core/scene/base.hpp>
@@ -9,7 +10,7 @@
 #include <neb/gfx/Context/Window.hpp>
 #include <neb/gfx/Context/Util/Parent.hh>
 #include <neb/gfx/environ/two.hpp>
-#include <neb/gfx/environ/three.hpp>
+#include <neb/gfx/environ/SceneDefault.hpp>
 #include <neb/gfx/environ/shadow/point.hpp>
 #include <neb/gfx/environ/shadow/directional.hpp>
 #include <neb/gfx/environ/vis_depth.hpp>
@@ -71,8 +72,11 @@ std::weak_ptr<neb::gfx::environ::two>			neb::gfx::context::base::createEnvironTw
 	
 	return environ;
 }
-std::weak_ptr<neb::gfx::environ::three>			neb::gfx::context::base::createEnvironThree() {
-	auto environ = sp::make_shared<neb::gfx::environ::three>();
+std::weak_ptr<neb::gfx::environ::SceneDefault>		neb::gfx::context::base::createEnvironSceneDefault() {
+
+	typedef neb::gfx::environ::SceneDefault E;
+	
+	std::shared_ptr<E> environ(new E(), gal::stl::deleter<E>());
 
 	auto w = parent_.lock()->isWindowBase();
 	if(w)

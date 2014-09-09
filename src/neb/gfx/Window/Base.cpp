@@ -23,6 +23,7 @@
 #include <neb/gfx/camera/view/Base.hh>
 #include <neb/gfx/Context/Window.hpp>
 #include <neb/gfx/environ/two.hpp>
+#include <neb/gfx/environ/SceneDefault.hpp>
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/window/util/Parent.hh>
 #include <neb/gfx/util/log.hpp>
@@ -283,7 +284,7 @@ std::weak_ptr<neb::gfx::context::window>		neb::gfx::window::base::createContextT
 		assert(context);
 		insert(context);
 
-		auto environ = context->createEnvironThree().lock();
+		auto environ = context->createEnvironSceneDefault().lock();
 
 		context->init();
 

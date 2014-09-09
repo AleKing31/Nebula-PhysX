@@ -5,6 +5,8 @@
 
 #include <boost/signals2.hpp>
 
+#include <gal/stl/child.hpp>
+
 #include <neb/core/itf/shared.hpp>
 #include <neb/core/color/Color.hh>
 
@@ -13,68 +15,75 @@
 #include <neb/gfx/gui/object/util/parent.hpp>
 #include <neb/gfx/gui/object/util/flag.hpp>
 
-namespace neb {
-	namespace gfx {
-		namespace gui {
-			namespace object {
-				class base: virtual public neb::itf::shared {
-					public:
-						base();
-						virtual ~base() {}
+namespace neb { namespace gfx {
 
-						virtual void			init();
-						//std::shared_ptr<window::window>		get_window();
-						virtual void			draw(std::shared_ptr<neb::gfx::glsl::program::base> p) = 0;
+	class RenderDesc;
 
-						virtual int			key_fun(
-								std::shared_ptr<neb::gfx::window::base> const & window, int, int, int, int) = 0;
-						virtual int			mouse_button_fun(
-								std::shared_ptr<neb::gfx::window::base> const & window, int, int, int);
-						virtual int			charFun(
-								std::shared_ptr<neb::gfx::window::base> const & window,
-								unsigned int codepoint) {return 0;}
+	namespace gui { namespace object {
 
-						//virtual void			connect();
-						bool				active_;
+		class base:
+			virtual public gal::stl::child< neb::util::parent<neb::gfx::gui::object::base> >,
+			virtual public neb::itf::shared
+		{
+			public:
+				typedef neb::util::parent<neb::gfx::gui::object::base> parent;
 
+				base();
+				virtual ~base() {}
 
-						template<class Archive> void	serialize(Archive & ar, unsigned int const & version) {
-							ar & boost::serialization::make_nvp("x",x_);
-							ar & boost::serialization::make_nvp("y",y_);
-							ar & boost::serialization::make_nvp("w",w_);
-							ar & boost::serialization::make_nvp("h",h_);
-							ar & boost::serialization::make_nvp("font_color",font_color_);
-							ar & boost::serialization::make_nvp("bg_color",bg_color_);
-							ar & boost::serialization::make_nvp("label",label_);
+				virtual void			init();
+				//std::shared_ptr<window::window>		get_window();
+				virtual void			draw(neb::gfx::RenderDesc const &) = 0;
 
-						}
-					public:
-						std::shared_ptr<neb::gfx::gui::object::util::parent>	parent_;
-						
-						neb::gfx::gui::object::util::flag			flag_;
+				virtual int			key_fun(
+						std::shared_ptr<neb::gfx::window::base> const & window, int, int, int, int) = 0;
+				virtual int			mouse_button_fun(
+						std::shared_ptr<neb::gfx::window::base> const & window, int, int, int);
+				virtual int			charFun(
+						std::shared_ptr<neb::gfx::window::base> const & window,
+						unsigned int codepoint) {return 0;}
 
-						float							x_;
-						float							y_;
-						float							w_;
-						float							h_;
-
-						neb::core::color::color				font_color_;
-						neb::core::color::color				bg_color_;
-
-						::std::string						label_;
-						// connections
-						struct
-						{
-							boost::signals2::connection		mouse_button_fun_;
-							boost::signals2::connection		key_fun_;
-						} conns_;
+				//virtual void			connect();
+				bool				active_;
 
 
+				template<class Archive> void	serialize(Archive & ar, unsigned int const & version) {
+					ar & boost::serialization::make_nvp("x",x_);
+					ar & boost::serialization::make_nvp("y",y_);
+					ar & boost::serialization::make_nvp("w",w_);
+					ar & boost::serialization::make_nvp("h",h_);
+					ar & boost::serialization::make_nvp("font_color",font_color_);
+					ar & boost::serialization::make_nvp("bg_color",bg_color_);
+					ar & boost::serialization::make_nvp("label",label_);
 
-				};
-			}
-		}
+				}
+			public:
+				std::shared_ptr<neb::gfx::gui::object::util::parent>	parent_;
+
+				neb::gfx::gui::object::util::flag			flag_;
+
+				float							x_;
+				float							y_;
+				float							w_;
+				float							h_;
+
+				neb::core::color::color				font_color_;
+				neb::core::color::color				bg_color_;
+
+				::std::string						label_;
+				// connections
+				struct
+				{
+					boost::signals2::connection		mouse_button_fun_;
+					boost::signals2::connection		key_fun_;
+				} conns_;
+
+
+
+		};
 	}
+	}
+}
 }
 #endif
 

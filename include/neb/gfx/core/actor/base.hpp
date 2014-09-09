@@ -42,8 +42,7 @@ namespace neb {
 						virtual void					step(gal::etc::timestep const & ts);
 					public:
 						void						draw(
-								std::shared_ptr<neb::gfx::context::base> context,
-								std::shared_ptr<neb::gfx::glsl::program::base> p,
+								neb::gfx::glsl::program::base const * const & p,
 								neb::core::pose const & pose);
 
 						void						load_lights(

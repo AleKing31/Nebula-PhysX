@@ -1,9 +1,11 @@
 #version 130
 
+#include "v130/inc/color.glsl"
 #include "v130/inc/material.glsl"
 
 in vec4		vs_P;
 in vec4		vs_m_P;
+in vec4		vs_mv_P;
 in vec3		vs_N;
 in vec2		vs_texcoor;
 in vec3 	vs_T;
@@ -32,16 +34,20 @@ void main(void)
 {
 	float tau = 6.28318530718;
 
-	P = normalize(vs_P);
+	P = normalize(vs_mv_P);
 	N = vs_N;
 	
 	color = vec4(0.0);
 	
 	//vec4 amb, dif, spc;
 	
-	vec4 dif = vec4(0,1,1,1);
+	vec4 brown = vec4(0.5, 0.3, 0, 1);
+	vec4 green = vec4(0.2, 0.5, 0, 1);
+	
+	vec4 dif = cm_linear(scale(vs_P.y, -2.5, 2.5), green, brown);
+
 	vec4 amb = vec4(0.3,0.3,0.3,1);
-	vec4 spc = vec4(1);
+	vec4 spc = vec4(0);
 
 	//if(vs_instance_sampler.x >= 0.0) {
 	//	vec4 image_color = texture(image, vec3(vs_texcoor, vs_instance_sampler.x));

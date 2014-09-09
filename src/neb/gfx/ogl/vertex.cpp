@@ -2,53 +2,6 @@
 #include <neb/gfx/free.hpp>
 #include <neb/gfx/opengl/vertex.hpp>
 
-void			neb::gfx::ogl::vertexAttribPointer(
-		const GLenum*		target,
-		GLint*			index,
-		const GLint*		size,
-		const GLenum*		type,
-		const GLboolean*	normalized,
-		const GLsizei*		stride,
-		GLvoid * const *	pointer,
-		GLuint*			buffer,
-		const unsigned int*	buffer_index,
-		const GLuint*		divisor,
-		unsigned int		attrib_count)
-{
-	for(unsigned int c = 0; c < attrib_count; c++)
-	{
-
-		if(index[c] != -1)
-		{
-			glBindBuffer(
-					target[buffer_index[c]],
-					buffer[buffer_index[c]]);
-
-			checkerror("glBindBuffer");
-
-			glEnableVertexAttribArray(
-					index[c]);
-
-			checkerror("glEnableVertexAttribArray %s\n", index[c]);
-
-			glVertexAttribPointer(
-					index[c],
-					size[c],
-					type[c],
-					normalized[c],
-					stride[c],
-					pointer[c]);
-
-			checkerror("glVertexAttribPointer");
-
-			glVertexAttribDivisor(
-					index[c],
-					divisor[c]);
-
-			checkerror("glVertexAttribDivisor");
-		}
-	}
-}
 void			neb::gfx::ogl::bufferData(
 		const GLenum*		target,
 		const GLuint*		buffer,

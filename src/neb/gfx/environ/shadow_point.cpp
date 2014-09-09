@@ -11,11 +11,13 @@
 
 #include <neb/gfx/environ/shadow/point.hpp>
 #include <neb/gfx/environ/three.hpp>
+#include <neb/gfx/environ/SceneDefault.hpp>
 #include <neb/gfx/drawable/base.hpp>
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/core/light/directional.hpp>
 #include <neb/gfx/camera/proj/base.hpp>
+#include <neb/gfx/RenderDesc.hpp>
 
 #include <neb/phx/test.hpp>
 
@@ -30,8 +32,11 @@ void		neb::gfx::environ::shadow::point::init() {
 //	auto light = light_.lock();
 //	assert(light);
 
-	program_.reset(new neb::gfx::glsl::program::base("shadow"));
-	program_->init();
+	programs_.d3_.reset(new neb::gfx::glsl::program::base("shadow"));
+	programs_.d3_->init();
+
+	programs_.d3_inst_.reset(new neb::gfx::glsl::program::base("shadow_inst"));
+	programs_.d3_inst_->init();
 	
 	static const glm::vec3 look[6] = {
 		glm::vec3( 1, 0, 0),
@@ -51,27 +56,36 @@ void		neb::gfx::environ::shadow::point::init() {
 	};
 
 	// camera
+	
 	for(int c = 0; c < 6; c++) {
 		view_[c].reset(new neb::gfx::camera::view::shadow::point(self));
 		view_[c]->look_ = look[c];
 		view_[c]->up_ = up[c];
 	}
+	
+	typedef neb::gfx::camera::proj::perspective pers;
+	
+	pers* p = new pers(self);
 
-	proj_.reset(new neb::gfx::camera::proj::perspective(self));
-	proj_->set(90.0, 1.0, 100.0);
+	proj_.reset(p);
+	p->set(90.0, 1.0, 100.0);
 
 
 }
 bool		neb::gfx::environ::shadow::point::shouldRender() {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 	
-	assert(program_);
-	if(!program_->flag_shader_.all(neb::gfx::glsl::program::util::flag_shader::SHADOW)) return false;
+	assert(programs_.d3_);
+	assert(programs_.d3_inst_);
+
+	if(!programs_.d3_->flag_shader_.all(neb::gfx::glsl::program::util::flag_shader::SHADOW)) return false;
+
+	if(!programs_.d3_inst_->flag_shader_.all(neb::gfx::glsl::program::util::flag_shader::SHADOW)) return false;
 	
 	return true;
 }
 bool		neb::gfx::environ::shadow::point::shouldRender(unsigned int c) {
-	auto e = environ3_.lock();
+	auto e = environ_scene_.lock();
 	if(!e) return false;
 	
 	return query(
@@ -120,16 +134,23 @@ void			neb::gfx::environ::shadow::point::render(
 
 	assert(proj_);
 	assert(view_[layer]);
-	
-	program_->use();
 
-	proj_->load(program_);
-	view_[layer]->load(program_);
+	//program_->use();
+
+//	proj_->load(program_);
+//	view_[layer]->load(program_);
 
 	//glViewPort(0, 0, );
 
-	drawable->draw(context, program_, 0);
-	
+	drawable->draw(
+			RenderDesc(
+				view_[layer].get(),
+				proj_.get(),
+				programs_.d3_.get(),
+				programs_.d3_inst_.get()
+				)
+		      );
+
 }		
 
 

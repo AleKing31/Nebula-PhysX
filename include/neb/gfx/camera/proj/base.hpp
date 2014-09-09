@@ -24,7 +24,7 @@ namespace neb {namespace gfx {namespace camera {namespace proj {
 			virtual void					calculate() = 0;
 			void						calculate_geometry();
 			
-			void						load(std::shared_ptr<neb::gfx::glsl::program::base> p);
+			void						load(neb::gfx::glsl::program::base const * const p);
 			/** @brief step
 			 * @todo explain when in timeline this occurs and in which thread and why
 			 */

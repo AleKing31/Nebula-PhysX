@@ -121,6 +121,7 @@ void		neb::gfx::mesh::tri1::print(int sl) {
 		v.print(sl);
 	}	*/
 }
+/*
 void			neb::gfx::mesh::tri1::init_buffer(
 		program_shared p)
 {
@@ -145,14 +146,17 @@ void			neb::gfx::mesh::tri1::init_buffer(
 
 	bufferData(buf);
 }
-
-void			neb::gfx::mesh::tri1::draw_elements(
-		program_shared p,
+*/
+void			neb::gfx::mesh::tri1::drawElements(
+		neb::gfx::glsl::program::base const * const & p,
 		neb::core::pose const & pose,
 		glm::vec3 scale)
 {
 
-	// initialize buffers if not already
+	base_t::drawElements(p, pose, scale);
+
+
+/*	// initialize buffers if not already
 	if(!buffers_[p.get()])
 	{	
 		init_buffer(p);
@@ -160,26 +164,17 @@ void			neb::gfx::mesh::tri1::draw_elements(
 	auto buf = buffers_[p.get()];
 
 	if(!buf) return;
+	
+	mesh_base::drawElements(p, buf, pose, scale);
+*/
 
-	draw_elements(p, buf, pose, scale);
-
-}
-void			neb::gfx::mesh::tri1::draw_elements(
-		program_shared						p,
-		std::shared_ptr<neb::gfx::glsl::buffer::tri1>		buf,
-		neb::core::pose const & pose,
-		glm::vec3 scale)
-{
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-
-	buf->vertexAttribPointer();
-
+	/*
 	// Uniforms
 	// ========
 	// material
-	//material_front_.load(p);
+	material_front_.load(p);
 
-	/*	// texture
+		// texture
 		if(normal_map_) {
 		LOG(lg, neb::gfx::sl, debug) << "activate normal map";
 		glActiveTexture(GL_TEXTURE0);//checkerror("glActiveTexture");
@@ -201,8 +196,20 @@ void			neb::gfx::mesh::tri1::draw_elements(
 		} else {
 		p->get_uniform_scalar("has_texture")->load_b(false);
 		}
-		*/
+		*
+*/
 
+}
+/*
+void			neb::gfx::mesh::tri1::draw_elements(
+		program_shared						p,
+		std::shared_ptr<neb::gfx::glsl::buffer::tri1>		buf,
+		neb::core::pose const & pose,
+		glm::vec3 scale)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+
+	buf->vertexAttribPointer();
 	// load modelview matrix
 	LOG(lg, neb::gfx::sl, debug) << "load modelview matrix";
 	mat4 model = pose.mat4_cast() * glm::scale(scale);
@@ -232,4 +239,4 @@ void			neb::gfx::mesh::tri1::draw_elements(
 	LOG(lg, neb::gfx::sl, debug) << "unbind vbo";
 	buf->unbind();
 }
-
+*/

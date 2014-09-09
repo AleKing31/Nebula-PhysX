@@ -76,8 +76,7 @@ void				neb::gfx::core::actor::base::load_lights(neb::core::core::light::util::c
 	S::map_.for_each(lambda_shape);
 }
 void				neb::gfx::core::actor::base::draw(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base> program,
+		neb::gfx::glsl::program::base const * const & program,
 		neb::core::pose const & pose)
 {
 	LOG(lg, neb::core::core::actor::sl, debug) << __PRETTY_FUNCTION__;
@@ -90,13 +89,13 @@ void				neb::gfx::core::actor::base::draw(
 	A::map_.for_each([&] (A::map_type::pointer p) {
 			auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
 			assert(actor);
-			actor->draw(context, program, npose);
+			actor->draw(program, npose);
 			});
 
 	S::map_.for_each([&] (S::map_type::pointer p) {
 			auto shape = std::dynamic_pointer_cast<neb::gfx::core::shape::base>(p);
 			assert(shape);
-			shape->draw(context, program, npose);
+			shape->draw(program, npose);
 			});
 
 

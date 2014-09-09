@@ -28,7 +28,12 @@
 
 typedef weak_ptr<neb::core::core::actor::base> wbase;
 
-namespace neb { namespace phx { namespace core { namespace scene {
+namespace neb {
+	namespace gfx {
+		class RenderDesc;
+	}
+
+	namespace phx { namespace core { namespace scene {
 
 	/** 
 	 * @ingroup group_core
@@ -48,11 +53,7 @@ namespace neb { namespace phx { namespace core { namespace scene {
 
 
 			void					resize(int w, int h);
-			void					draw(
-					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p,
-					std::shared_ptr<neb::gfx::glsl::program::base> p_inst
-					);
+			void					draw(gfx::RenderDesc const &);
 			void					drawPhysxVisualization(std::shared_ptr<neb::gfx::context::base> context);
 
 

@@ -14,10 +14,12 @@ namespace neb { namespace gfx { namespace gui { namespace object {
 		virtual public neb::gfx::gui::object::base
 	{
 		public:
-			terminal();
+			typedef typename neb::gfx::gui::object::base::parent parent;
+
+			terminal(std::shared_ptr<parent>);
 			virtual void			init();
 			virtual void			step(gal::etc::timestep const &) {}
-			virtual void			draw(std::shared_ptr<neb::gfx::glsl::program::base> p);
+			virtual void			draw(RenderDesc const &);
 			virtual int			key_fun(
 					std::shared_ptr<neb::gfx::window::base> const & window, int,int,int,int);
 			virtual int			charFun(

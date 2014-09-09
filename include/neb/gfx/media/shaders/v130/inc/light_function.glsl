@@ -68,7 +68,7 @@ void	lf_lights(in vec4 amb, in vec4 dif, in vec4 spc, in float shininess) {
 		{
 			light_pos = vec3(view * vec4(light_position[i], 1.0));
 
-			L = light_pos - vs_P.xyz;
+			L = light_pos - vs_mv_P.xyz;
 
 			float l = length(L);
 

@@ -22,17 +22,19 @@
 #include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/util/io.hpp>
+#include <neb/gfx/opengl/uniform.hpp>
 
 neb::gfx::camera::proj::base::base(std::shared_ptr<neb::gfx::environ::base> parent):
 	parent_(parent)
 {
 }
-void		neb::gfx::camera::proj::base::load(std::shared_ptr<neb::gfx::glsl::program::base> p) {
-	
+void		neb::gfx::camera::proj::base::load(neb::gfx::glsl::program::base const * const p) {
 	
 	//glViewport(0, 0, parent_->viewport_.w_, parent_->viewport_.h_);
 	
-	glUniformMatrix4fv(p->uniform_table_[neb::gfx::glsl::uniforms::PROJ], 1, GL_FALSE, &_M_matrix[0][0]);
+	neb::gfx::ogl::glUniform(
+			p->uniform_table_[neb::gfx::glsl::uniforms::PROJ],
+			_M_matrix);
 }
 void		neb::gfx::camera::proj::base::step(gal::etc::timestep const & ts) {
 

@@ -62,8 +62,8 @@ void		neb::gfx::context::fbo::render() {
 	
 	if(!environ_->shouldRender()) return;
 
-	assert(environ_->program_);
-	environ_->program_->use();
+	//assert(environ_->program_);
+	//environ_->program_->use();
 	
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::context::base>(shared_from_this());

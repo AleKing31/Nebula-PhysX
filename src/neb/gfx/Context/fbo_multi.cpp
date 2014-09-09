@@ -69,8 +69,8 @@ void		neb::gfx::context::fbo_multi::render() {
 	auto e = std::dynamic_pointer_cast<neb::gfx::environ::shadow::point>(environ_);
 	assert(e);
 
-	assert(environ_->program_);
-	environ_->program_->use();
+	//assert(environ_->program_);
+	//environ_->program_->use();
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::context::base>(shared_from_this());
 	assert(self);

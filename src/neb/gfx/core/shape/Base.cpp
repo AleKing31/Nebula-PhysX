@@ -16,7 +16,9 @@
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
 #include <neb/gfx/util/log.hpp>
+#include <neb/gfx/core/mesh.hh>
 #include <neb/gfx/core/mesh_instanced.hpp>
+#include <neb/gfx/opengl/uniform.hpp>
 
 #include <neb/core/math/geo/polygon.hpp>
 
@@ -57,51 +59,33 @@ void					neb::gfx::core::shape::base::setPose(neb::core::pose const & pose) {
 	neb::gfx::core::light::util::parent::setPose(npose);
 }
 void					neb::gfx::core::shape::base::draw(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base> p,
-		neb::core::pose const & pose) {
-
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose)
+{
 	auto npose = pose * pose_;
 	
-	draw_elements(context, p, npose);
-	
-
+	draw_elements(p, npose);
 }
 void			neb::gfx::core::shape::base::model_load(
-		std::shared_ptr<neb::gfx::glsl::program::base> p,
-		neb::core::pose const & pose) {
-
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose)
+{
 	mat4 space = pose.mat4_cast() * glm::scale(scale_);
 
-	glUniformMatrix4fv(p->uniform_table_[neb::gfx::glsl::uniforms::MODEL], 1, GL_FALSE, &space[0][0]);
+	neb::gfx::ogl::glUniform(
+			p->uniform_table_[neb::gfx::glsl::uniforms::MODEL],
+			space
+			);
 }
 void			neb::gfx::core::shape::base::draw_elements(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base> p,
+		neb::gfx::glsl::program::base const * const & p,
 		neb::core::pose const & pose)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	
-	if(mesh_) {
-		
-		mesh_->draw_elements(p, pose, scale_);
-		/*
-		switch(p->name_) {
-			case neb::program_name::e::IMAGE:
-				if(mesh_->texture_ && !(mesh_->normal_map_))
-					mesh_->draw_elements(context, p, pose, s_);
-				break;
-			case neb::program_name::e::NORM:
-				if(!(mesh_->texture_) && mesh_->normal_map_)
-					mesh_->draw_elements(context, p, pose, s_);
-				break;
-			case neb::program_name::e::LIGHT:
-				if(!(mesh_->texture_) && !(mesh_->normal_map_))
-					mesh_->draw_elements(context, p, pose, s_);
-				break;
-			default:
-				abort();
-		}*/
+
+	if(mesh_)
+	{
+		mesh_->drawElements(p, pose, scale_);
 	}
 }
 std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::createLightPoint() {

@@ -4,6 +4,7 @@
 
 in vec4		vs_P;
 in vec4		vs_m_P;
+in vec4		vs_mv_P;
 in vec3		vs_N;
 in vec2		vs_texcoor;
 in vec3 	vs_T;
@@ -38,7 +39,7 @@ void main(void)
 {
 	float tau = 6.28318530718;
 
-	P = normalize(vs_P);
+	P = normalize(vs_mv_P);
 	N = vs_N;
 	
 	color = vec4(0.0);

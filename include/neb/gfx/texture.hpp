@@ -38,11 +38,7 @@ namespace neb { namespace gfx {
 			void			bind(std::shared_ptr<neb::gfx::context::base> context);
 			
 			// for visualizing the contents
-			virtual void			draw(
-					std::shared_ptr<neb::gfx::context::base> context,
-					std::shared_ptr<neb::gfx::glsl::program::base> p,
-					std::shared_ptr<neb::gfx::glsl::program::base>
-					);
+			virtual void			draw(RenderDesc const &);
 
 			png_uint_32		w_;
 			png_uint_32		h_;

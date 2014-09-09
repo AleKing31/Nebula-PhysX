@@ -9,7 +9,7 @@
 void			neb::gfx::mesh::instanced::init(
 		neb::gfx::mesh::instanced::program_shared program)
 {
-	mesh_.init_buffer(program);
+	//mesh_.init_buffer(program);
 	
 	typedef neb::gfx::glsl::buffer::instanced T;
 
@@ -17,9 +17,9 @@ void			neb::gfx::mesh::instanced::init(
 
 	buffers_[program.get()] = buf;
 	
-	buf->init(program);
+	buf->init(program.get());
 	
-	bufferDataNull(buf);
+	bufferDataNull(buf.get());
 }
 /*void			neb::gfx::mesh::instanced::bufferSubData(
 		std::shared_ptr<neb::gfx::glsl::buffer::mesh_instanced>	buf)

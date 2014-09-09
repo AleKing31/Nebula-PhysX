@@ -34,13 +34,15 @@
 namespace ba = boost::archive;
 
 namespace neb { namespace gfx { namespace mesh {
-	class tri1: public base<neb::gfx::glsl::buffer::tri1> {
-		public:
-			typedef std::shared_ptr<neb::gfx::glsl::buffer::tri1>			buffer_shared;
-			typedef neb::gfx::glsl::program::base			program_type;
-			typedef std::shared_ptr<program_type>			program_shared;
-			typedef std::map<program_type*, buffer_shared>		buffer_map;
 
+	class tri1: public base<neb::gfx::glsl::buffer::tri1>
+	{
+		public:
+			//typedef std::map<neb::gfx::glsl::program::base*, buffer*>	program_buffer_map;
+			typedef neb::gfx::glsl::buffer::tri1				buffer;
+			typedef neb::gfx::glsl::program::base				program;
+			typedef base<neb::gfx::glsl::buffer::tri1>			base_t;
+			
 			tri1();
 			~tri1();
 
@@ -79,21 +81,26 @@ namespace neb { namespace gfx { namespace mesh {
 			void				construct(math::geo::polyhedron*);
 			void				print(int sl);
 
-			void				init_buffer(
-					program_shared p);
-			void				draw_elements(
-					program_shared,
-					neb::core::pose const & pose,
-					glm::vec3 scale);
-			void				draw_elements(
-					program_shared,
+			/*		
+					void				init_buffer(
+					program* p);
+					void				draw_elements(
+					program* p,
 					buffer_shared,
 					neb::core::pose const & pose,
 					glm::vec3 scale);
+					*/
+			/**
+			 * do specific things like custom uniforms, then call mesh::base::drawElements
+			 */
+			void				drawElements(
+					program const * const & p,
+					neb::core::pose const & pose,
+					glm::vec3 scale);
+
 
 			neb::material::material			material_front_;
 
-			/** @todo boost wont let me use shared ptr here! */
 
 			void					setVerts(math::geo::vertex*, GLuint);
 			void					setIndices(GLushort*, GLuint);
@@ -105,7 +112,6 @@ namespace neb { namespace gfx { namespace mesh {
 			GLuint					nbVerts_;
 			GLuint					nbIndices_;
 		public:
-			buffer_map					buffers_;
 
 
 			std::shared_ptr<neb::gfx::texture>		texture_;

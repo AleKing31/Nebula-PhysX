@@ -18,6 +18,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			typedef std::shared_ptr<neb::gfx::glsl::program::base> program_shared;
 			//const math::geo::vertex v;
 
+
 			static constexpr GLenum			target_[BUFFER_COUNT] = {
 				GL_ARRAY_BUFFER,
 				GL_ELEMENT_ARRAY_BUFFER
@@ -30,10 +31,18 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				sizeof(math::geo::vertex),
 				sizeof(GLushort)
 			};
+			static constexpr array_type::e		array_type_[ATTRIB_COUNT] = {
+				array_type::VEC3,
+				array_type::VEC3,
+				array_type::VEC2,
+				array_type::VEC3,
+				array_type::VEC3,
+			};
 			static constexpr GLint			size_array_[ATTRIB_COUNT] = {
 				3,3,2,3,3
 			};
-			static constexpr GLenum			type_[ATTRIB_COUNT] = {
+
+/*			static constexpr GLenum			type_[ATTRIB_COUNT] = {
 				GL_FLOAT,
 				GL_FLOAT,
 				GL_FLOAT,
@@ -47,20 +56,20 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				GL_FALSE,
 				GL_FALSE
 			};
-			/*			static constexpr GLvoid* pointer[ATTRIB_COUNT] = {
+						static constexpr GLvoid* pointer[ATTRIB_COUNT] = {
 						(GLvoid*)((long)&v.p[0]		- (long)&v),
 						(GLvoid*)((long)&v.n[0]		- (long)&v),
 						(GLvoid*)((long)&v.tc[0]	- (long)&v),
 						(GLvoid*)((long)&v.tangent[0]	- (long)&v),
 						(GLvoid*)((long)&v.binormal[0]	- (long)&v)
-						};*/
+						};
 			static constexpr GLvoid*		pointer_[ATTRIB_COUNT] = {
 				(GLvoid*)0,
 				(GLvoid*)12,
 				(GLvoid*)24,
 				(GLvoid*)32,
 				(GLvoid*)44
-			};
+			};*/
 
 			static constexpr GLsizei		stride_[ATTRIB_COUNT] = {
 				sizeof(math::geo::vertex),
@@ -84,8 +93,8 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			};
 
 
-/*			virtual void				init(
-					program_shared p);*/
+			/*			virtual void				init(
+						program_shared p);*/
 
 	};
 }}}}

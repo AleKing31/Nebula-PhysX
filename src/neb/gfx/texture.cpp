@@ -14,10 +14,12 @@
 #include <neb/gfx/glsl/attrib.hh>
 #include <png.h>
 
-std::shared_ptr<neb::gfx::texture>	neb::gfx::texture::makePNG(std::string filename) {
-	auto tex(make_shared<neb::gfx::texture>());
-	tex->load_png(filename);
-	return tex;
+typedef neb::gfx::texture tex;
+
+std::shared_ptr<tex>		neb::gfx::texture::makePNG(std::string filename) {
+	std::shared_ptr<tex> t(new tex());
+	t->load_png(filename);
+	return t;
 }
 neb::gfx::texture::texture():
 	w_(0), h_(0), png_image_data_(0)
@@ -276,11 +278,7 @@ GLuint			neb::gfx::texture::init_buffer(std::shared_ptr<neb::gfx::context::base>
 
 
 
-void			neb::gfx::texture::draw(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<neb::gfx::glsl::program::base>,
-		std::shared_ptr<neb::gfx::glsl::program::base>
-		)
+void			neb::gfx::texture::draw(neb::gfx::RenderDesc const & desc)
 {
 	checkerror("unknown");
 

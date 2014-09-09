@@ -37,6 +37,7 @@
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/Context/Base.hh>
 #include <neb/gfx/environ/three.hpp>
+#include <neb/gfx/RenderDesc.hpp>
 
 typedef neb::core::core::actor::util::parent A;
 
@@ -339,11 +340,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 }
 
 
-void			neb::phx::core::scene::base::draw(
-		std::shared_ptr<neb::gfx::context::base> context,
-		std::shared_ptr<P> program,
-		std::shared_ptr<P> program_inst
-		)
+void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -351,18 +348,20 @@ void			neb::phx::core::scene::base::draw(
 	//
 	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
 	
-	std::shared_ptr<P3> d3;
-	std::shared_ptr<P3> d3_inst;
-	
-	auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
-	if(!e) return;
+	P* d3;
+	P* d3_inst;
 
-	if(program) {
-		d3 = neb::could_be<P,P3>(program);
-		d3_inst = neb::could_be<P,P3>(program_inst);
+
+	if(desc.d3) {
+		d3 = desc.d3;
 	} else {
-		d3 = _M_programs._M_d3;
-		d3_inst = _M_programs._M_d3_inst;
+		d3 = _M_programs._M_d3.get();
+	}
+
+	if(desc.d3_inst) {
+		d3_inst = desc.d3_inst;
+	} else {
+		d3_inst = _M_programs._M_d3_inst.get();
 	}
 
 	assert(d3);
@@ -372,11 +371,11 @@ void			neb::phx::core::scene::base::draw(
 	{
 		d3->use();
 
-		e->proj_->load(d3);
-		e->view_->load(d3);
+		desc.p->load(d3);
+		desc.v->load(d3);
 
 		// lights
-		light_array_[0].load_uniform(d3.get());
+		light_array_[0].load_uniform(d3);
 
 		// individual meshes
 		auto la = [&] (A::map_type::pointer p) {
@@ -391,8 +390,8 @@ void			neb::phx::core::scene::base::draw(
 	{
 		d3_inst->use();
 	
-		e->proj_->load(d3_inst);
-		e->view_->load(d3_inst);
+		desc.p->load(d3_inst);
+		desc.v->load(d3_inst);
 	
 		// lights
 		light_array_[0].load_uniform(d3_inst.get());

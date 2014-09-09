@@ -77,6 +77,7 @@ namespace neb {
 			class base;
 			class two;
 			class three;
+			class SceneDefault;
 		}
 
 		/**@brief %environ */
