@@ -22,11 +22,11 @@ namespace neb { namespace gfx { namespace environ { namespace shadow {
 			virtual ~base() {}
 
 
-			virtual void		init();
-			virtual void		step(gal::etc::timestep const & ts);
-			virtual void		resize(int w, int h);
+			virtual void		init() = 0;
+			virtual void		step(gal::etc::timestep const & ts) = 0;
+			//virtual void		resize(int w, int h) = 0;
 			virtual void		render(std::shared_ptr<neb::gfx::context::base> context) = 0;
-			virtual bool		shouldRender();
+			virtual bool		shouldRender() = 0;
 			virtual bool		shouldRender(unsigned int) { return true; }
 		public:	
 

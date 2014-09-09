@@ -13,6 +13,8 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 		public:
 			typedef base<BUFFER> base_type;
 
+			static_assert(traits<BUFFER>::ATTRIB_COUNT == sizeof...(A), "wrong number of template parameters");
+
 			//enum {
 			//	BUFFER_COUNT = traits<BUFFER>::BUFFER_COUNT
 			//};
@@ -31,6 +33,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			void			vertexAttribPointer()
 			{
 				assert(index_ != NULL);
+
 
 				neb::gfx::ogl::vertexAttribPointer<traits<BUFFER>::ATTRIB_COUNT, A...>
 					(

@@ -17,12 +17,13 @@ namespace neb { namespace gfx { namespace environ {
 	 */
 	class three: virtual public neb::gfx::environ::base {
 		public:
-			typedef std::shared_ptr<neb::gfx::glsl::program::base>	program_shared;
+			typedef std::shared_ptr<neb::gfx::glsl::program::base>		program_shared;
 			typedef std::shared_ptr<neb::gfx::camera::view::base>		view_shared;
 			typedef std::shared_ptr<neb::gfx::camera::proj::base>		proj_shared;
 		public:
-			virtual void		init();
-			virtual void		step(gal::etc::timestep const & ts);
+			virtual void		init() = 0;
+
+			//virtual void		step(gal::etc::timestep const & ts) = 0;
 
 			virtual void		render(
 					std::shared_ptr<neb::gfx::context::base> context) = 0;

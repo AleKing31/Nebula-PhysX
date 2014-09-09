@@ -86,8 +86,11 @@ namespace neb { namespace gfx { namespace mesh {
 			void			drawElements(
 					neb::gfx::glsl::program::base const * const & p,
 					neb::core::pose const & pose,
-					glm::vec3 scale)
+					glm::vec3 scale,
+					GLsizei count)
 			{
+
+				assert(p);
 
 				// initialize buffers if not already
 				auto it = buffers_.find(p);
@@ -101,13 +104,16 @@ namespace neb { namespace gfx { namespace mesh {
 					b = new BUFFER();
 					b->init(p);
 					bufferData(b);
+
+					buffers_[p] = b;
 				}
 				else
 				{
 					b = it->second;
+					assert(b);
 				}
 
-				drawElements(p, b, pose, scale);
+				drawElements(p, b, pose, scale, count);
 
 			}
 			void			drawElements(

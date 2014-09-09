@@ -46,6 +46,10 @@ void		neb::gfx::environ::shadow_directional::step(gal::etc::timestep const & ts)
 	if(view_) view_->step(ts);	
 
 }
+bool		neb::gfx::environ::shadow_directional::shouldRender()
+{
+	return true;
+}
 void		neb::gfx::environ::shadow_directional::render(std::shared_ptr<neb::gfx::context::base> context) {
 
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;

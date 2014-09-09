@@ -46,7 +46,8 @@ typedef neb::gfx::glsl::program::threed	P3;
 
 neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
 	neb::core::core::scene::base(parent),
-	px_scene_(NULL)
+	px_scene_(NULL),
+	px_filter_shader_(NULL)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -355,12 +356,14 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 	if(desc.d3) {
 		d3 = desc.d3;
 	} else {
+		assert(_M_programs._M_d3);
 		d3 = _M_programs._M_d3.get();
 	}
 
 	if(desc.d3_inst) {
 		d3_inst = desc.d3_inst;
 	} else {
+		assert(_M_programs._M_d3);
 		d3_inst = _M_programs._M_d3_inst.get();
 	}
 
@@ -381,7 +384,7 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 		auto la = [&] (A::map_type::pointer p) {
 			auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
 			assert(actor);
-			actor->draw(context, d3, neb::core::pose());
+			actor->draw(d3, neb::core::pose());
 		};
 
 		A::map_.for_each(la);
@@ -394,7 +397,7 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 		desc.v->load(d3_inst);
 	
 		// lights
-		light_array_[0].load_uniform(d3_inst.get());
+		light_array_[0].load_uniform(d3_inst);
 
 		if(tex_shadow_map_) {
 			glActiveTexture(GL_TEXTURE0);
@@ -410,7 +413,8 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 	}
 
 }
-void			neb::phx::core::scene::base::drawPhysxVisualization(std::shared_ptr<neb::gfx::context::base> context)
+void			neb::phx::core::scene::base::drawPhysxVisualization(
+		neb::gfx::RenderDesc const & desc)
 {
 
 	auto app(neb::gfx::app::__gfx_glsl::global().lock());
@@ -433,11 +437,11 @@ void			neb::phx::core::scene::base::drawPhysxVisualization(std::shared_ptr<neb::
 		p->use();
 
 
-		auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
-		if(e)
+		//auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
+		//if(e)
 		{
-			e->proj_->load(p);
-			e->view_->load(p);
+			desc.p->load(p.get());
+			desc.v->load(p.get());
 
 			glClear(GL_DEPTH_BUFFER_BIT);
 

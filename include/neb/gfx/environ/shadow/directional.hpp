@@ -32,8 +32,11 @@ namespace neb { namespace gfx { namespace environ {
 			shadow_directional();
 			virtual void		init();
 			virtual void		step(gal::etc::timestep const & ts);
+
 			virtual void		render(
 					std::shared_ptr<neb::gfx::context::base> context);
+
+			virtual bool		shouldRender();
 		public:
 			/** @brief View Space Camera
 			 * 

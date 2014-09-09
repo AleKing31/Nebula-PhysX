@@ -9,11 +9,19 @@ struct array_type {
 	enum e {
 		VEC2,
 		VEC3,
-		VEC4
+		VEC4,
+		FLOAT
 	};
 };
 
 template<array_type::e T> struct array_traits {};
+template<> struct array_traits<array_type::FLOAT>
+{
+	static const GLint		size = 1;
+	static const GLenum		type = GL_FLOAT;
+	static const GLboolean		normalized = GL_FALSE;
+	static const long		bytes = 4;
+};
 template<> struct array_traits<array_type::VEC2>
 {
 	static const GLint		size = 2;
@@ -27,6 +35,13 @@ template<> struct array_traits<array_type::VEC3>
 	static const GLenum		type = GL_FLOAT;
 	static const GLboolean		normalized = GL_FALSE;
 	static const long		bytes = 12;
+};
+template<> struct array_traits<array_type::VEC4>
+{
+	static const GLint		size = 4;
+	static const GLenum		type = GL_FLOAT;
+	static const GLboolean		normalized = GL_FALSE;
+	static const long		bytes = 16;
 };
 
 
@@ -45,6 +60,15 @@ namespace neb { namespace gfx { namespace ogl {
 			const GLuint*		divisor)
 	{
 		typedef typename gens<sizeof...(A)>::type seq_t;
+
+		assert(target);
+		assert(index);
+		assert(stride);
+		assert(buffer);
+		assert(buffer_index);
+		assert(divisor);
+
+		static_assert(COUNT == sizeof...(A), "wrong number of template parameters");
 
 		static const GLint size[] = { array_traits<A>::size... };
 		GLenum type[] = { array_traits<A>::type... };
@@ -76,7 +100,11 @@ namespace neb { namespace gfx { namespace ogl {
 						stride[c],
 						(GLvoid*)pointer);
 
-				checkerror("glVertexAttribPointer");
+				checkerror("glVertexAttribPointer\nindex %i\nsize %i\nstride %i\npointer %i\n",
+						index[c],
+						size[c],
+						stride[c],
+						pointer);
 
 				glVertexAttribDivisor(
 						index[c],
@@ -89,7 +117,7 @@ namespace neb { namespace gfx { namespace ogl {
 			// advance pointer
 			if(c < (COUNT - 1)) // not the last attribute
 			{
-				if(buffer[c] == buffer[c+1]) // next buffer is the same
+				if(buffer_index[c] == buffer_index[c+1]) // next buffer is the same
 				{
 					pointer += bytes[c];
 				}

@@ -152,8 +152,9 @@ void			neb::gfx::mesh::tri1::drawElements(
 		neb::core::pose const & pose,
 		glm::vec3 scale)
 {
+	assert(p);
 
-	base_t::drawElements(p, pose, scale);
+	base_t::drawElements(p, pose, scale, nbIndices_);
 
 
 /*	// initialize buffers if not already

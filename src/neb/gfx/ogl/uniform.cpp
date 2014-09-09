@@ -34,4 +34,11 @@ void		neb::gfx::ogl::glUniform(GLint location, int const & value) {
 	glUniform1i(location, value);
 	checkerror("glUniform1i %i\n", location);
 }
+void		neb::gfx::ogl::glUniform(GLint location, glm::mat4 const & value) {
+	checkerror("unknown");
+	glUniformMatrix4fv(location, 1, GL_FALSE, (float*)&value);
+	checkerror("glUniformMatrix4fv %i\n", location);
+}
+
+
 

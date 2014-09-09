@@ -7,17 +7,17 @@
 #include <neb/gfx/free.hpp>
 
 void			neb::gfx::mesh::instanced::init(
-		neb::gfx::mesh::instanced::program_shared program)
+		neb::gfx::mesh::instanced::program_type* program)
 {
 	//mesh_.init_buffer(program);
 	
 	typedef neb::gfx::glsl::buffer::instanced T;
-
-	std::shared_ptr<T> buf(new T());
-
-	buffers_[program.get()] = buf;
 	
-	buf->init(program.get());
+	std::shared_ptr<T> buf(new T());
+	
+	buffers_[program] = buf;
+	
+	buf->init(program);
 	
 	bufferDataNull(buf.get());
 }
@@ -162,14 +162,14 @@ GLvoid** const		neb::gfx::mesh::instanced::data() {
 
   }*/	
 void			neb::gfx::mesh::instanced::draw(
-		neb::gfx::mesh::instanced::program_shared program)
+		neb::gfx::mesh::instanced::program_type* program)
 {
 
-	if(!buffers_[program.get()])
+	if(!buffers_[program])
 	{	
 		init(program);
 	}
-	auto buf = buffers_[program.get()];
+	auto buf = buffers_[program];
 
 	if(!buf) return;
 
@@ -177,17 +177,17 @@ void			neb::gfx::mesh::instanced::draw(
 	instances_->update_slots();
 
 	//bufferData(buf);
-	bufferSubData(buf);
+	bufferSubData(buf.get());
 
 	draw(program, buf);
 }
 void			neb::gfx::mesh::instanced::draw(
-		neb::gfx::mesh::instanced::program_shared		program,
+		neb::gfx::mesh::instanced::program_type*		program,
 		std::shared_ptr<neb::gfx::glsl::buffer::instanced>	buf)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto buf_mesh = mesh_.buffers_[program.get()];
+	auto buf_mesh = mesh_.buffers_[program];
 	assert(buf_mesh);
 
 	buf->vertexAttribPointer();

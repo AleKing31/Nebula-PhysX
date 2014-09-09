@@ -53,8 +53,10 @@ namespace neb {
 
 
 			void					resize(int w, int h);
-			void					draw(gfx::RenderDesc const &);
-			void					drawPhysxVisualization(std::shared_ptr<neb::gfx::context::base> context);
+			void					draw(
+					gfx::RenderDesc const &);
+			void					drawPhysxVisualization(
+					gfx::RenderDesc const &);
 
 
 

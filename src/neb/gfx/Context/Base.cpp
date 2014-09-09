@@ -110,7 +110,9 @@ std::weak_ptr<neb::gfx::environ::vis_depth>		neb::gfx::context::base::createEnvi
 }
 std::weak_ptr<neb::gfx::environ::shadow_directional>	neb::gfx::context::base::createEnvironShadowDirectional() {
 
-	auto environ = sp::make_shared<neb::gfx::environ::shadow_directional>();
+	typedef neb::gfx::environ::shadow_directional E;
+
+	std::shared_ptr<E> environ (new E());
 
 	auto p = parent_.lock();
 	assert(p);

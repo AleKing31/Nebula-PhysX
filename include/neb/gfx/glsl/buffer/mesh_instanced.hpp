@@ -10,7 +10,18 @@
 
 namespace neb { namespace gfx { namespace glsl { namespace buffer {
 	class instanced:
-		public neb::gfx::glsl::buffer::base<instanced>
+		public neb::gfx::glsl::buffer::base<
+		instanced,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::VEC4,
+		array_type::FLOAT >
 	{
 		public:
 			typedef std::shared_ptr<neb::gfx::glsl::program::base>		program_shared;
@@ -44,7 +55,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				GL_ARRAY_BUFFER,
 				GL_ARRAY_BUFFER
 			};
-			static constexpr GLint		size_array_[ATTRIB_COUNT] = {
+	/*		static constexpr GLint		size_array_[ATTRIB_COUNT] = {
 				4,
 				4,
 				4,
@@ -55,7 +66,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				4,
 				4,
 				1
-			};
+			};*/
 			static constexpr GLsizei	stride_[ATTRIB_COUNT] = {
 				sizeof(glm::mat4),
 				sizeof(glm::mat4),
@@ -74,12 +85,12 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				GL_FLOAT, GL_FLOAT, GL_FLOAT, 
 				GL_FLOAT
 			};
-			static constexpr GLboolean	normalized_[ATTRIB_COUNT] = {
+/*			static constexpr GLboolean	normalized_[ATTRIB_COUNT] = {
 				GL_FALSE, GL_FALSE, GL_FALSE, 
 				GL_FALSE, GL_FALSE, GL_FALSE, 
 				GL_FALSE, GL_FALSE, GL_FALSE, 
 				GL_FALSE
-			};
+			};*/
 			static constexpr unsigned int	buffer_index_[ATTRIB_COUNT] = {
 				0,0,0,0,
 				1,2,3,4,5,6
@@ -90,7 +101,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				1,1,1,
 				1
 			};
-			static constexpr void*		pointer_[ATTRIB_COUNT] = {
+/*			static constexpr void*		pointer_[ATTRIB_COUNT] = {
 				(void*)0,
 				(void*)16,
 				(void*)32,
@@ -101,7 +112,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				(void*)0,
 				(void*)0,
 				(void*)0
-			};
+			};*/
 			static constexpr neb::gfx::glsl::attribs::e	attribute_[ATTRIB_COUNT] = {
 				neb::gfx::glsl::attribs::INSTANCE_MODEL0,
 				neb::gfx::glsl::attribs::INSTANCE_MODEL1,

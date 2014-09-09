@@ -288,8 +288,8 @@ std::weak_ptr<neb::gfx::context::window>		neb::gfx::window::base::createContextT
 
 		context->init();
 
-		assert(environ->view_);
-		environ->view_->connect(self);
+		//assert(environ->view_);
+		//environ->view_->connect(self);
 
 		w = context;
 	}

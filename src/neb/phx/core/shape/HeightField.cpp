@@ -80,14 +80,14 @@ struct HF
 					{
 						sum += _M_samples[at(i + k, j + l)].height;
 					}
-					short oldS = _M_samples[at(i,j)].height;
+					//short oldS = _M_samples[at(i,j)].height;
 					short newS = sum / n;
-					std::cout
+					/*std::cout
 						<< " oldS = " << oldS
 						<< " newS = " << newS
 						<< " sum = " << sum
 						<< " n = " << n
-						<< std::endl;
+						<< std::endl;*/
 					_M_samples[at(i,j)].height = newS;
 				}
 			}
@@ -106,12 +106,12 @@ struct HF
 			{
 				short& s = _M_samples[at(i,j)].height;
 				double l = slope * (s - maxH) + SHRT_MAX;
-				std::cout
+			/*	std::cout
 					<< " s = " << s
 					<< " l = " << l
 					<< " new = " << (short)l
 					<< " slope = " << slope
-					<< std::endl;
+					<< std::endl;*/
 				s = (short)l;
 			}
 		}
@@ -190,8 +190,8 @@ void				neb::phx::core::shape::HeightField::create_physics()
 }
 physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 
-	unsigned int nbRows = 300;
-	unsigned int nbCols = 300;
+	unsigned int nbRows = 30;
+	unsigned int nbCols = 30;
 	float heightScale = 5.0 / float(SHRT_MAX);
 	float rowScale = 1.0;
 	float colScale = 1.0;

@@ -83,6 +83,8 @@ void			neb::gfx::core::shape::base::draw_elements(
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
+	assert(p);
+
 	if(mesh_)
 	{
 		mesh_->drawElements(p, pose, scale_);

@@ -31,15 +31,15 @@ namespace neb { namespace gfx { namespace mesh {
 
 
 		public:
-			void							init(program_shared);
+			void							init(program_type*);
 			virtual GLsizeiptr*					begin();
 			virtual GLsizeiptr*					end();
 			virtual GLsizeiptr*					size_array();
 			virtual GLsizeiptr*					size();
 			virtual GLvoid** const					data();
 
-			void							draw(program_shared);
-			void							draw(program_shared, buffer_shared);
+			void							draw(program_type*);
+			void							draw(program_type*, buffer_shared);
 		public:
 			neb::gfx::mesh::tri1					mesh_;
 			

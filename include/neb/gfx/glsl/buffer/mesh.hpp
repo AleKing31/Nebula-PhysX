@@ -12,7 +12,13 @@
 
 namespace neb { namespace gfx { namespace glsl { namespace buffer {
 	class tri1: 
-		public neb::gfx::glsl::buffer::base<tri1>
+		public neb::gfx::glsl::buffer::base<
+		tri1,
+		array_type::VEC3,
+		array_type::VEC3,
+		array_type::VEC2,
+		array_type::VEC3,
+		array_type::VEC3 >
 	{
 		public:
 			typedef std::shared_ptr<neb::gfx::glsl::program::base> program_shared;
@@ -31,17 +37,10 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 				sizeof(math::geo::vertex),
 				sizeof(GLushort)
 			};
-			static constexpr array_type::e		array_type_[ATTRIB_COUNT] = {
-				array_type::VEC3,
-				array_type::VEC3,
-				array_type::VEC2,
-				array_type::VEC3,
-				array_type::VEC3,
-			};
-			static constexpr GLint			size_array_[ATTRIB_COUNT] = {
+/*			static constexpr GLint			size_array_[ATTRIB_COUNT] = {
 				3,3,2,3,3
 			};
-
+*/
 /*			static constexpr GLenum			type_[ATTRIB_COUNT] = {
 				GL_FLOAT,
 				GL_FLOAT,

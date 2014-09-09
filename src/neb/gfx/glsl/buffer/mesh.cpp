@@ -12,7 +12,7 @@
 constexpr GLenum		neb::gfx::glsl::buffer::tri1::target_[BUFFER_COUNT];// = {
 constexpr GLenum		neb::gfx::glsl::buffer::tri1::usage_[BUFFER_COUNT];// = {
 constexpr GLsizeiptr		neb::gfx::glsl::buffer::tri1::datasize_[BUFFER_COUNT];// = {
-constexpr GLint			neb::gfx::glsl::buffer::tri1::size_array_[ATTRIB_COUNT];// = {
+//constexpr GLint			neb::gfx::glsl::buffer::tri1::size_array_[ATTRIB_COUNT];// = {
 //constexpr GLenum		neb::gfx::glsl::buffer::tri1::type_[ATTRIB_COUNT];// = {
 //constexpr GLboolean		neb::gfx::glsl::buffer::tri1::normalized_[ATTRIB_COUNT];// = {
 //constexpr GLvoid*		neb::gfx::glsl::buffer::tri1::pointer_[ATTRIB_COUNT];// = {

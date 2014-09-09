@@ -25,9 +25,12 @@ namespace neb { namespace gfx { namespace environ {
 			typedef std::shared_ptr<neb::gfx::camera::proj::base>		proj_shared;
 		public:
 			virtual void		init();
-			virtual void		step(gal::etc::timestep const & ts);
+
+			//virtual void		step(gal::etc::timestep const & ts);
+
 			virtual void		render(
 					std::shared_ptr<neb::gfx::context::base> context);
+
 			std::weak_ptr<neb::gfx::camera::view::ridealong>		createViewridealong(
 					std::weak_ptr<neb::core::core::actor::base> actor);
 		public:

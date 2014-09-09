@@ -4,11 +4,20 @@ out vec4	vs_P;
 
 uniform mat4 view;
 uniform mat4 proj;
-uniform mat4 model;
 
 in vec3		position;
+in vec4		instance_model_0;
+in vec4		instance_model_1;
+in vec4		instance_model_2;
+in vec4		instance_model_3;
 
 void main(void) {
+
+	mat4 model = mat4(
+			instance_model_0,
+			instance_model_1,
+			instance_model_2,
+			instance_model_3);
 
 	mat4 modelview = view * model;
 	
