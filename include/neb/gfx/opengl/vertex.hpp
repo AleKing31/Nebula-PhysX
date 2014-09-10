@@ -79,7 +79,7 @@ namespace neb { namespace gfx { namespace ogl {
 
 		for(unsigned int c = 0; c < COUNT; c++)
 		{
-			if(index[COUNT] != -1)
+			if(index[c] != -1)
 			{
 				glBindBuffer(
 						target[buffer_index[c]],
@@ -90,7 +90,7 @@ namespace neb { namespace gfx { namespace ogl {
 				glEnableVertexAttribArray(
 						index[c]);
 
-				checkerror("glEnableVertexAttribArray %s\n", index[c]);
+				checkerror("glEnableVertexAttribArray %i\n", index[c]);
 
 				glVertexAttribPointer(
 						index[c],

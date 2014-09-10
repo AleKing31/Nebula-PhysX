@@ -23,12 +23,12 @@ namespace neb { namespace gfx { namespace gui { namespace object {
 			virtual int			key_fun(
 					std::shared_ptr<neb::gfx::window::base> const & window, int,int,int,int);
 			virtual int			charFun(
-					shared_ptr<neb::gfx::window::base> const & window,
+					std::shared_ptr<neb::gfx::window::base> const & window,
 					unsigned int codepoint);
 
 
 
-			weak_ptr<neb::core::app::__base::console_type>		console_;
+			std::weak_ptr<neb::core::app::__base::console_type>		console_;
 
 			// display
 			std::vector<std::string>		history_;

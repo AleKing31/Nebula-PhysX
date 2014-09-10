@@ -37,13 +37,13 @@ namespace neb { namespace gfx {namespace app {
 				typedef ::std::map< GLFWwindow*, std::shared_ptr<neb::gfx::window::base> >			glfwwindow_map_type;
 			
 				void						__init();
-				void						release();
+				void						__release();
 				void						step(gal::etc::timestep const & ts);
 				void						render();
 
 				void						init_glew();
 
-				static weak_ptr<neb::gfx::app::__gfx>		global();
+				static std::weak_ptr<neb::gfx::app::__gfx>		global();
 
 				static void					static_error_fun(int,char const *);
 				static void					static_window_pos_fun(GLFWwindow*,int,int);
@@ -57,7 +57,7 @@ namespace neb { namespace gfx {namespace app {
 				static void					static_key_fun(GLFWwindow*,int,int,int,int);
 				static void					staticCharFun(GLFWwindow*,unsigned int);
 
-				weak_ptr<neb::gfx::window::base>		get_window(GLFWwindow*);
+				std::weak_ptr<neb::gfx::window::base>		get_window(GLFWwindow*);
 
 				std::weak_ptr<neb::gfx::gui::layout::base>	createLayout();
 				std::weak_ptr<neb::gfx::window::base>		createWindow();

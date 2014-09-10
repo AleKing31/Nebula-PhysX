@@ -55,12 +55,7 @@ namespace neb { namespace gfx { namespace window {
 			std::weak_ptr<neb::gfx::context::window>	createContextThree();
 			void						makeCurrent();
 		public:
-			std::shared_ptr<neb::gfx::window::util::parent>			parent_;
-			/** @brief self
-			 *
-			 * avoid casting shared_from_this
-			 */
-			std::shared_ptr<neb::gfx::window::base>		self_;
+			std::weak_ptr<neb::gfx::window::util::parent>			parent_;
 
 			// input signals
 			struct

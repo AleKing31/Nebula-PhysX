@@ -61,7 +61,7 @@ void			neb::gfx::window::base::__init() {
 
 	assert(app->flag_.any(neb::core::app::util::flag::INIT_GLFW));
 
-	self_ = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
+	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
 
 
 
@@ -117,7 +117,7 @@ void			neb::gfx::window::base::__init() {
 			neb::gfx::app::__gfx::staticCharFun);
 
 	// add window to app's window map
-	app->windows_glfw_[window_] = self_;
+	app->windows_glfw_[window_] = self;
 
 
 	//if(all(neb::app::base::option::SHADERS)) create_programs();
@@ -197,7 +197,7 @@ void			neb::gfx::window::base::step(gal::etc::timestep const & ts) {
 
 
 	if(glfwWindowShouldClose(window_)) {
-		parent_->erase(_M_index);
+		parent_.lock()->erase(_M_index);
 		return;
 	}
 
@@ -227,16 +227,25 @@ void neb::gfx::window::base::callback_window_close_fun(GLFWwindow* window){
 void neb::gfx::window::base::callback_mouse_button_fun(GLFWwindow* window, int button, int action, int mods) {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	sig_.mouse_button_fun_(self_, button, action, mods);
+	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
+
+	sig_.mouse_button_fun_(self, button, action, mods);
 }
 void			neb::gfx::window::base::callback_key_fun(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	sig_.key_fun_(self_, key, scancode, action, mods);
+
+	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
+
+	sig_.key_fun_(self, key, scancode, action, mods);
 
 }
-void			neb::gfx::window::base::callbackCharFun(GLFWwindow* window, unsigned int codepoint) {
+void			neb::gfx::window::base::callbackCharFun(GLFWwindow* window, unsigned int codepoint)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	sig_.charFun_(self_, codepoint);
+
+	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
+
+	sig_.charFun_(self, codepoint);
 }
 void			neb::gfx::window::base::resize() {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;

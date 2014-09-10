@@ -6,7 +6,7 @@
 
 void					neb::gfx::app::__gfx::__init() {
 
-	vector<std::string> fontfiles({
+	std::vector<std::string> fontfiles({
 		"/usr/share/fonts/msttcorefonts/cour.ttf",
 		"/usr/share/fonts/truetype/msttcorefonts/cour.ttf"});
 
@@ -43,7 +43,7 @@ void					neb::gfx::app::__gfx::__init() {
 	flag_.set(neb::core::app::util::flag::INIT_GLFW);
 	
 }
-void				neb::gfx::app::__gfx::release() {
+void				neb::gfx::app::__gfx::__release() {
 }
 void				neb::gfx::app::__gfx::step(gal::etc::timestep const & ts) {
 	
@@ -62,10 +62,10 @@ void				neb::gfx::app::__gfx::render()
 	//neb::gfx::context::util::parent::render();
 
 }
-void				neb::gfx::app::__gfx::init_glew() {
-
-	if(!flag_.any(neb::core::app::util::flag::INIT_GLEW)) {
-
+void				neb::gfx::app::__gfx::init_glew()
+{
+	if(!flag_.any(neb::core::app::util::flag::INIT_GLEW))
+	{
 		GLenum err = glewInit();
 		if (err != GLEW_OK)
 		{
@@ -78,12 +78,12 @@ void				neb::gfx::app::__gfx::init_glew() {
 }
 //void							neb::gfx::app::__gfx::release() {
 //}
-weak_ptr<neb::gfx::app::__gfx>				neb::gfx::app::__gfx::global() {
-	auto app(dynamic_pointer_cast<neb::gfx::app::__gfx>(g_app_));
+std::weak_ptr<neb::gfx::app::__gfx>				neb::gfx::app::__gfx::global() {
+	auto app(std::dynamic_pointer_cast<neb::gfx::app::__gfx>(g_app_));
 	assert(app);
 	return app;
 }
-weak_ptr<neb::gfx::window::base>			neb::gfx::app::__gfx::get_window(GLFWwindow* window) {
+std::weak_ptr<neb::gfx::window::base>			neb::gfx::app::__gfx::get_window(GLFWwindow* window) {
 	auto it = windows_glfw_.find(window);
 	assert(it != windows_glfw_.cend());
 	assert(it->second);

@@ -187,8 +187,7 @@ void			neb::gfx::mesh::instanced::draw(
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto buf_mesh = mesh_.buffers_[program];
-	assert(buf_mesh);
+	auto buf_mesh = mesh_.getBuffer(program);
 
 	buf->vertexAttribPointer();
 	buf_mesh->vertexAttribPointer();

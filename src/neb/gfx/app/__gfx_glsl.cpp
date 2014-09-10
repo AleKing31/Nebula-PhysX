@@ -6,8 +6,9 @@
 #include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/core/mesh_instanced.hpp>
 
-weak_ptr<neb::gfx::app::__gfx_glsl>		neb::gfx::app::__gfx_glsl::global() {
-	auto app(dynamic_pointer_cast<neb::gfx::app::__gfx_glsl>(g_app_));
+std::weak_ptr<neb::gfx::app::__gfx_glsl>		neb::gfx::app::__gfx_glsl::global()
+{
+	auto app(std::dynamic_pointer_cast<neb::gfx::app::__gfx_glsl>(g_app_));
 	assert(app);
 	return app;
 }

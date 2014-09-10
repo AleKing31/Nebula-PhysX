@@ -5,7 +5,7 @@
 
 #include <neb/gfx/glsl/attrib.hh>
 
-
+#include <neb/phx/util/log.hpp>
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/shape/base.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
@@ -17,19 +17,20 @@ neb::phx::core::shape::base::base():
 }
 neb::phx::core::shape::base::~base()
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	assert(px_shape_ == NULL);
 }
-//void			neb::phx::core::shape::base::release() {
-//}
 void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 }
-void			neb::phx::core::shape::base::init() {
-	//NEBULA_DEBUG_0_FUNCTION;
+void			neb::phx::core::shape::base::init()
+{
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	
 }
 void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 
 	neb::core::core::shape::base::release();
 	
@@ -39,6 +40,7 @@ void			neb::phx::core::shape::base::release() {
 		auto ra = dynamic_cast<neb::phx::core::actor::rigidactor::base*>(p);
 		assert(ra);		
 
+		assert(ra->px_actor_);
 		auto pxra = ra->px_actor_->isRigidActor();
 		assert(pxra);
 		
@@ -50,6 +52,7 @@ void			neb::phx::core::shape::base::release() {
 }
 void			neb::phx::core::shape::base::create_physics() {
 
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	//NEBULA_DEBUG_0_FUNCTION;
 	
 	auto actor = neb::could_be<parent_t, neb::phx::core::actor::base>(getParent());
@@ -83,6 +86,7 @@ void			neb::phx::core::shape::base::create_physics() {
 	return pxparent;
 }*/
 physx::PxGeometry*	neb::phx::core::shape::base::to_geo() {
+	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	return 0;
 }
 

@@ -50,7 +50,6 @@ namespace neb { namespace gfx { namespace core { namespace light {
 				void				RenderLightPOV();
 
 
-				neb::phx::core::scene::base*			getScene();
 				neb::core::pose					getPose();
 				vec4						getPos();
 				void						setPose(neb::core::pose const & pose);

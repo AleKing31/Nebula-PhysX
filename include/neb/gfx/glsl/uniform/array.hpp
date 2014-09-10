@@ -83,7 +83,7 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 			void					load_uniform(P* p)
 			{
 				loc_type& loc = _M_locations[p];
-				loc.check(p);
+				loc.init(p);
 				load_uniform(loc);
 			}
 		private:
@@ -144,10 +144,8 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 				N = I + 2
 			};
 
-			locations()
-			{
-				markLoadAll();
-			}
+			locations(): _M_initialized(false), load_any(1), load_closed(1) {}
+			
 			void					markLoadAll()
 			{
 				for(int j = 0; j < N; j++) {
@@ -155,16 +153,24 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 				}
 				load_closed = 1;
 				load_any = 1;
-
 			}
-			void					check(P* p)
+			void					init(P* p)
 			{
+				if(_M_initialized) return;
+
+				for(unsigned int i = 0; i < N; i++) location[i] = -1;
+
+				for(int j = 0; j < N; j++) load[j] = 1;
+
 				for(unsigned int i = 0; i < N; i++)
 				{
 					location[i] = p->uniform_table_[D::names_[i]];
 					std::cout << "location[" << i << "] = " << location[i] << std::endl;
 				}
+
+				_M_initialized = true;
 			}
+			bool					_M_initialized;
 			GLint					location[I+2];
 			int					load[I+2];
 			int					load_any;

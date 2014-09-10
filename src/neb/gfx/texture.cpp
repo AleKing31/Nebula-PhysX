@@ -253,7 +253,7 @@ GLuint			neb::gfx::texture::init_buffer(std::shared_ptr<neb::gfx::context::base>
 
 	//buffers_[context.get()] = o;
 	
-	cout << "w " << w_ << " h " << h_ << " data " << (long int)png_image_data_ << endl;
+	std::cout << "w " << w_ << " h " << h_ << " data " << (long int)png_image_data_ << std::endl;
 
 	glTexImage2D(
 			GL_TEXTURE_2D,

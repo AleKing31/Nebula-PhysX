@@ -14,6 +14,7 @@
 #include <neb/core/util/debug.hpp>
 
 #include <neb/gfx/app/__gfx.hpp>
+#include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
@@ -80,7 +81,7 @@ void			neb::draw_quad(
 
 }
 void		neb::draw_text(
-		std::shared_ptr<neb::gfx::glsl::program::base> p,
+		std::shared_ptr<neb::gfx::glsl::program::base>,
 		float x, float y, float sx, float sy,
 		neb::core::color::color color,
 		std::string text,
@@ -94,7 +95,8 @@ void		neb::draw_text(
 	sx = 1.0 / (float)window_width;
 	sy = 1.0 / (float)window_height;
 	
-	//auto p = neb::app::base::global()->use_program(neb::program_name::e::TEXT);
+	auto p = neb::gfx::app::__gfx_glsl::global().lock()->program_text_;
+	assert(p);
 
 	LOG(lg, neb::gfx::sl, debug)
 		<< ::std::setw(8) << x

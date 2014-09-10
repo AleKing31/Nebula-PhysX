@@ -44,6 +44,15 @@ neb::gfx::core::light::base::~base() {}
 void			neb::gfx::core::light::base::init() {
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 	
+	// check if detached
+	if(!getScene())
+	{
+		std::cout << "skip initialization" << std::endl;
+		return;
+	}
+	
+	
+	
 	auto pose = getPoseGlobal();
 	
 	// register in light_array
@@ -229,15 +238,7 @@ void	neb::gfx::core::light::base::RenderShadowPost()
 	glDisable(GL_ALPHA_TEST);
 	checkerror(__PRETTY_FUNCTION__);
 }
-neb::phx::core::scene::base*		neb::gfx::core::light::base::getScene() {
-	auto parent = parent_.lock();
-	assert(parent);
-	
-	auto p2 = std::dynamic_pointer_cast<neb::phx::core::scene::base>(
-			parent->getScene().lock());
-	assert(p2);
-	return p2.get();
-}
+
 
 
 

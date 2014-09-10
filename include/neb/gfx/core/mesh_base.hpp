@@ -83,24 +83,15 @@ namespace neb { namespace gfx { namespace mesh {
 						);
 
 			}
-			void			drawElements(
-					neb::gfx::glsl::program::base const * const & p,
-					neb::core::pose const & pose,
-					glm::vec3 scale,
-					GLsizei count)
+		public:
+			BUFFER*			getBuffer(neb::gfx::glsl::program::base const * const & p)
 			{
-
-				assert(p);
-
-				// initialize buffers if not already
-				auto it = buffers_.find(p);
-
 				BUFFER* b;
+
+				auto it = buffers_.find(p);
 
 				if(it == buffers_.end())
 				{	
-					//init_buffer(p);
-
 					b = new BUFFER();
 					b->init(p);
 					bufferData(b);
@@ -112,6 +103,20 @@ namespace neb { namespace gfx { namespace mesh {
 					b = it->second;
 					assert(b);
 				}
+
+				return b;
+			}
+		protected:
+			void			drawElements(
+					neb::gfx::glsl::program::base const * const & p,
+					neb::core::pose const & pose,
+					glm::vec3 scale,
+					GLsizei count)
+			{
+
+				assert(p);
+
+				BUFFER* b = getBuffer(p);
 
 				drawElements(p, b, pose, scale, count);
 
@@ -159,7 +164,7 @@ namespace neb { namespace gfx { namespace mesh {
 
 
 
-		public:
+		private:
 			program_buffer_map			buffers_;
 
 
