@@ -27,7 +27,7 @@ void neb::gfx::core::shape::box::box::createMesh() {
 	mesh_->construct(&cube);
 	*/
 	
-	auto scene = std::dynamic_pointer_cast<neb::phx::core::scene::base>(getScene().lock());
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 	
 	if(!mesh_slot_) {
 		auto model = getPoseGlobal().mat4_cast() * glm::scale(scale_);

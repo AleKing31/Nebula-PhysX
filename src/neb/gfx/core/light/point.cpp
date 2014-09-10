@@ -49,7 +49,7 @@ void		neb::gfx::core::light::point::callbackPose(neb::core::pose const & gpose)
 	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
 	LOG(lg, neb::gfx::core::light::sl, debug) << gpose.mat4_cast();
 	
-	auto scene = getScene();
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 	
 	scene->light_array_[light_array_].set_pos(light_array_slot_, gpose.pos_);
 }
@@ -109,7 +109,7 @@ void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::e
 
 	}
 
-	auto scene = getScene();
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());//getScene();
 
 	// request texture layers
 	texture_layers_ = scene->tex_shadow_map_->layer_slots_->reg(6);
@@ -121,18 +121,17 @@ void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::e
 	shadow_sampler_[1].y = texture_layers_->operator[](4);
 	shadow_sampler_[1].z = texture_layers_->operator[](5);
 
-	auto parent = getScene();
 
-	parent->light_array_[light_array_].set_shadow_vpb_0(light_array_slot_, shadow_vpb_[0]);
-	parent->light_array_[light_array_].set_shadow_vpb_1(light_array_slot_, shadow_vpb_[1]);
-	parent->light_array_[light_array_].set_shadow_vpb_2(light_array_slot_, shadow_vpb_[2]);
-	parent->light_array_[light_array_].set_shadow_vpb_3(light_array_slot_, shadow_vpb_[3]);
-	parent->light_array_[light_array_].set_shadow_vpb_4(light_array_slot_, shadow_vpb_[4]);
-	parent->light_array_[light_array_].set_shadow_vpb_5(light_array_slot_, shadow_vpb_[5]);
+	scene->light_array_[light_array_].set_shadow_vpb_0(light_array_slot_, shadow_vpb_[0]);
+	scene->light_array_[light_array_].set_shadow_vpb_1(light_array_slot_, shadow_vpb_[1]);
+	scene->light_array_[light_array_].set_shadow_vpb_2(light_array_slot_, shadow_vpb_[2]);
+	scene->light_array_[light_array_].set_shadow_vpb_3(light_array_slot_, shadow_vpb_[3]);
+	scene->light_array_[light_array_].set_shadow_vpb_4(light_array_slot_, shadow_vpb_[4]);
+	scene->light_array_[light_array_].set_shadow_vpb_5(light_array_slot_, shadow_vpb_[5]);
 
 
-	parent->light_array_[light_array_].set_shadow_sampler_0(light_array_slot_, shadow_sampler_[0]);
-	parent->light_array_[light_array_].set_shadow_sampler_1(light_array_slot_, shadow_sampler_[1]);
+	scene->light_array_[light_array_].set_shadow_sampler_0(light_array_slot_, shadow_sampler_[0]);
+	scene->light_array_[light_array_].set_shadow_sampler_1(light_array_slot_, shadow_sampler_[1]);
 
 
 

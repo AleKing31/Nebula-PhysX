@@ -70,7 +70,7 @@ void		neb::gfx::core::light::directional::setShadowEnviron(std::shared_ptr<neb::
 	glm::mat4 vpb = bias * proj * view;
 	
 	// request texture layers
-	auto scene = getScene();
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 
 	texture_layers_ = scene->tex_shadow_map_->layer_slots_->reg(1);
 
