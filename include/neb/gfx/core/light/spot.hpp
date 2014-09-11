@@ -36,7 +36,9 @@ namespace neb { namespace gfx { namespace core { namespace light {
 					ar & boost::serialization::make_nvp("spot_light_cos_cutoff",spot_light_cos_cutoff_);
 				}
 			public:
-				spot(std::shared_ptr<neb::core::core::light::util::parent> parent);
+				spot();
+				virtual void			init(neb::core::core::light::util::parent * const & p);
+				virtual type::e		getType();
 
 				virtual void			callbackPose(neb::core::pose const & gpose);
 

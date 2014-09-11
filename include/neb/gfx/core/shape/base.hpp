@@ -18,6 +18,8 @@
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/core/mesh_instanced.hpp>
 
+#include <neb/phx/util/log.hpp>
+
 namespace neb {
 	namespace gfx {
 		namespace context {
@@ -34,7 +36,7 @@ namespace neb {
 					base();
 					virtual ~base();
 
-					void			init();
+					void			init(neb::core::core::shape::util::parent * const & p);
 					void			release();
 					void			step(gal::etc::timestep const & ts);
 					virtual void		callbackPose(neb::core::pose const & pose_global);
@@ -69,6 +71,8 @@ namespace neb {
 					/** @} */
 				public:
 					template<class Archive>	void	serialize(Archive & ar, unsigned int const & version) {
+						LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+		
 						ar & boost::serialization::make_nvp("flag",flag_);
 						ar & boost::serialization::make_nvp("pose",pose_);
 						ar & boost::serialization::make_nvp("scale",scale_);

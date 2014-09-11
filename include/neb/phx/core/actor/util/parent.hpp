@@ -18,7 +18,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace uti
 
 			virtual void						init();
 		public:
-			shared_ptr<neb::phx::core::scene::base>			getScene();
+			//shared_ptr<neb::phx::core::scene::base>			getScene();
 	};
 }}}}}
 

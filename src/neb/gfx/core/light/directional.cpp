@@ -12,16 +12,16 @@
 #include <neb/gfx/util/log.hpp>
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::directional::directional(std::shared_ptr<neb::core::core::light::util::parent> parent):
-	neb::core::core::light::base(parent),
-	neb::gfx::core::light::base(parent, type::DIRECTIONAL)
+neb::gfx::core::light::directional::directional()
 {
 
 }
-void			neb::gfx::core::light::directional::init()
+void			neb::gfx::core::light::directional::init(neb::core::core::light::util::parent * const & p)
 {
-	neb::gfx::core::light::base::init();
-
+	setParent(p);
+	
+	neb::gfx::core::light::base::init(p);
+	
 	auto scene = std::dynamic_pointer_cast<neb::phx::core::scene::base>(
 		getScene()->shared_from_this()
 		);

@@ -20,13 +20,12 @@
 
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::point::point(std::shared_ptr<neb::core::core::light::util::parent> parent):
-	neb::core::core::light::base(parent),
-	neb::gfx::core::light::base(parent, 0)
+neb::gfx::core::light::point::point()
 {}
 void	neb::gfx::core::light::point::load(neb::core::core::light::util::count & light_count, neb::core::pose const & pose) {
 
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
+	assert(0);
 	/*        
 		  neb::gfx::core::light::base::load(light_count.point, pose);
 
@@ -39,10 +38,14 @@ void	neb::gfx::core::light::point::load(neb::core::core::light::util::count & li
 		  light_count.point++;
 		  */
 }
-void			neb::gfx::core::light::point::init()
+void			neb::gfx::core::light::point::init(neb::core::core::light::util::parent * const & p)
 {
-	neb::gfx::core::light::base::init();
+	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 
+	setParent(p);
+
+	neb::gfx::core::light::base::init(p);
+	
 }	
 void		neb::gfx::core::light::point::callbackPose(neb::core::pose const & gpose)
 {

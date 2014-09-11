@@ -17,7 +17,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			base();
 			virtual ~base();
 
-			virtual void		init();
+			virtual void		init(neb::core::core::shape::util::parent * const & p);
 			virtual void		release();
 			virtual void		step(gal::etc::timestep const & ts);
 

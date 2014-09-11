@@ -66,7 +66,7 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	auto actor(actor_.lock());
 	assert(actor);
 
-	auto scene = std::dynamic_pointer_cast<neb::phx::core::scene::base>(actor->getScene());
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(actor->getScene());
 
 	auto proj_base = scene->createActorRigidDynamicUninitialized().lock();
 

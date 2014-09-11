@@ -11,6 +11,8 @@
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/app/base.hpp>
 
+typedef neb::phx::core::shape::HeightField THIS;
+
 struct HF
 {
 	HF(
@@ -127,23 +129,21 @@ struct HF
 };
 
 
+typedef neb::phx::core::shape::HeightField THIS;
 
-neb::phx::core::shape::HeightField::HeightField(std::shared_ptr<neb::core::core::shape::util::parent> parent):
-	gal::stl::child<neb::core::core::shape::util::parent>(parent.get())
+neb::phx::core::shape::HeightField::HeightField()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
-void				neb::phx::core::shape::HeightField::__init()
+void				neb::phx::core::shape::HeightField::init(THIS::parent_t * const & p)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-
-}
-void				neb::phx::core::shape::HeightField::init()
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	neb::core::core::shape::base::init();
-	neb::gfx::core::shape::base::init();
-	neb::phx::core::shape::base::init();
+	
+	setParent(p);
+	
+	neb::core::core::shape::base::init(p);
+	neb::gfx::core::shape::base::init(p);
+	neb::phx::core::shape::base::init(p);
 
 	create_physics();
 }
@@ -350,6 +350,12 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 	mesh_->setIndices(indices, nbIndices);
 
 	return hfGeom;
+}
+void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
+{
+}
+void	THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
+{
 }
 
 

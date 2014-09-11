@@ -8,10 +8,11 @@ namespace neb { namespace gfx { namespace core { namespace light {
 
 	class directional: virtual public neb::gfx::core::light::base {
 		public:
-			directional(std::shared_ptr<neb::core::core::light::util::parent> parent);
-			virtual void	init();
-			virtual void	callbackPose(neb::core::pose const &);
-			virtual void	setShadowEnviron(std::shared_ptr<neb::gfx::environ::base> environ);
+			directional();
+			virtual void		init(neb::core::core::light::util::parent * const & p);
+			virtual type::e		getType();
+			virtual void		callbackPose(neb::core::pose const &);
+			virtual void		setShadowEnviron(std::shared_ptr<neb::gfx::environ::base> environ);
 
 	};
 

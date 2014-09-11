@@ -20,8 +20,9 @@
 
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::base::base(std::shared_ptr<neb::core::core::light::util::parent> parent, int type):
-	neb::core::core::light::base(parent),
+typedef neb::gfx::core::light::base THIS;
+
+neb::gfx::core::light::base::base():
 	ambient_(0.2,0.2,0.2,1.0),
 	diffuse_(neb::core::color::color::white()),
 	specular_(neb::core::color::color::white()),
@@ -31,8 +32,7 @@ neb::gfx::core::light::base::base(std::shared_ptr<neb::core::core::light::util::
 	spot_direction_(vec3(0.0, 0.0, -1.0)),
 	spot_cutoff_(1.0),
 	spot_exponent_(1.0),
-	spot_light_cos_cutoff_(1.0),
-	type_(type)
+	spot_light_cos_cutoff_(1.0)
 {
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -41,9 +41,12 @@ neb::gfx::core::light::base::base(std::shared_ptr<neb::core::core::light::util::
 
 }
 neb::gfx::core::light::base::~base() {}
-void			neb::gfx::core::light::base::init() {
+void			neb::gfx::core::light::base::init(neb::core::core::light::util::parent * const & p)
+{
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 	
+	setParent(p);
+
 	// check if detached
 	if(!hasScene())
 	{
@@ -76,7 +79,7 @@ void			neb::gfx::core::light::base::init() {
 			glm::mat4(),
 			glm::vec3(-1.0),
 			glm::vec3(-1.0),
-			type_
+			(int)getType()
 			);
 }
 void			neb::gfx::core::light::base::setPose(neb::core::pose const & npose) {
@@ -122,13 +125,11 @@ void		neb::gfx::core::light::base::step(gal::etc::timestep const & ts) {
 void	neb::gfx::core::light::base::draw() {	
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 }
-neb::core::pose		neb::gfx::core::light::base::getPose() {
+neb::core::pose		neb::gfx::core::light::base::getPose()
+{
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto parent(parent_.lock());
-	assert(parent);
-
-	auto p = parent->getPoseGlobal();
+	auto p = getParent()->getPoseGlobal();
 
 	return p;
 }
@@ -237,6 +238,14 @@ void	neb::gfx::core::light::base::RenderShadowPost()
 
 	glDisable(GL_ALPHA_TEST);
 	checkerror(__PRETTY_FUNCTION__);
+}
+void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const & v)
+{
+	__serialize(ar,v);
+}
+void	THIS::save(ba::polymorphic_oarchive & ar, unsigned int const & v) const
+{
+	const_cast<THIS*>(this)->__serialize(ar,v);
 }
 
 

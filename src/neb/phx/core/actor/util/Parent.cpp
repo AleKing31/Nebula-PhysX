@@ -14,7 +14,7 @@ neb::phx::core::actor::util::parent::~parent() {
 void							neb::phx::core::actor::util::parent::init() {
 	neb::core::core::actor::util::parent::init();
 }
-std::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
+/*std::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::parent::getScene() {
 	
 	auto scene(std::dynamic_pointer_cast<neb::phx::core::scene::base>(shared_from_this()));
 	
@@ -24,14 +24,14 @@ std::shared_ptr<neb::phx::core::scene::base>			neb::phx::core::actor::util::pare
 	
 	if(!actor) throw 0;
 	
-	auto s = actor->getParent()->getScene();
+	auto s = actor->getScene();
 
 	//return actor->getPxParent()->neb::phx::core::actor::util::parent::getScene();
 	
 	
 	
 	return std::dynamic_pointer_cast<neb::phx::core::scene::base>(s);
-}
+}*/
 
 
 

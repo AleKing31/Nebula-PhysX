@@ -27,9 +27,12 @@ neb::gfx::core::shape::base::base()
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 }
 neb::gfx::core::shape::base::~base() {}
-void					neb::gfx::core::shape::base::init() {
+void					neb::gfx::core::shape::base::init(neb::core::core::shape::util::parent * const & p)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
+	setParent(p);
+		
 	createMesh();
 }
 void					neb::gfx::core::shape::base::release() {
@@ -96,12 +99,11 @@ std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::create
 
 	typedef neb::gfx::core::light::point L;
 
-	auto light = std::shared_ptr<L>(new L(self));
-
+	auto light = std::shared_ptr<L>(new L());
 
 	neb::core::core::light::util::parent::insert(light);
 
-	light->init();
+	light->init(this);
 
 	return light;
 }
@@ -111,13 +113,13 @@ std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::create
 
 	typedef neb::gfx::core::light::spot L;
 
-	auto light = std::shared_ptr<L>(new L(self));
+	auto light = std::shared_ptr<L>(new L(), gal::stl::deleter<L>());
 
 	light->spot_direction_ = d;
 
 	neb::core::core::light::util::parent::insert(light);
 
-	light->init();
+	light->init(this);
 
 	return light;
 }
@@ -125,13 +127,15 @@ std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::create
 
 	auto self(std::dynamic_pointer_cast<neb::core::core::shape::base>(shared_from_this()));
 
-	auto light = std::make_shared<neb::gfx::core::light::directional>(self);
+	typedef neb::gfx::core::light::directional L;
+	
+	auto light = std::shared_ptr<L>(new L(), gal::stl::deleter<L>());
 
 	light->pose_.pos_ = d;
 
 	neb::core::core::light::util::parent::insert(light);
 
-	light->init();
+	light->init(this);
 
 	return light;
 }

@@ -12,9 +12,9 @@
 
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::spot::spot(std::shared_ptr<neb::core::core::light::util::parent> parent):
-	neb::core::core::light::base(parent),
-	neb::gfx::core::light::base(parent, neb::gfx::core::light::base::type::SPOT)
+typedef neb::gfx::core::light::spot THIS;
+
+THIS::spot()
 {
 }
 void			neb::gfx::core::light::spot::load(

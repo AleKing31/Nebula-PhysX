@@ -23,10 +23,11 @@ neb::phx::core::shape::base::~base()
 void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 }
-void			neb::phx::core::shape::base::init()
+void			neb::phx::core::shape::base::init(neb::core::core::shape::util::parent * const & p)
 {
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	
+
 }
 void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;

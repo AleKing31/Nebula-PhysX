@@ -13,13 +13,18 @@ namespace neb { namespace phx { namespace core { namespace shape {
 		virtual public neb::gfx::core::shape::base
 	{
 		public:
-			HeightField(std::shared_ptr<neb::core::core::shape::util::parent>);
+			typedef neb::core::core::shape::util::parent parent_t;
 
-			virtual void				init();
+			HeightField();
+			
+			virtual void				init(parent_t * const & p);
+
 			virtual void				release();
 			virtual void				step(gal::etc::timestep  const & ts);
 			virtual void				create_physics();
-			void					__init();
+
+			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &);
+			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const;
 
 
 			virtual physx::PxGeometry*		to_geo();

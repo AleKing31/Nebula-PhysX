@@ -26,8 +26,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 		return;
 	}
 	
-	auto scene = std::dynamic_pointer_cast<phx::core::scene::base>(getScene());//scene_.lock();
-	assert(scene);
+	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());//scene_.lock();
 	
 	auto p = getPose();
 
