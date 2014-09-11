@@ -20,8 +20,14 @@
 
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::point::point()
+typedef neb::gfx::core::light::point THIS;
+
+THIS::point()
 {}
+neb::gfx::core::light::type::e		THIS::getType()
+{
+	return neb::gfx::core::light::type::SPOT;
+}
 void	neb::gfx::core::light::point::load(neb::core::core::light::util::count & light_count, neb::core::pose const & pose) {
 
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;

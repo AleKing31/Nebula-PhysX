@@ -2,6 +2,7 @@
 #define __NEBULA_APP_GFX_H__
 
 #include <fstream>
+#include <exception>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -22,7 +23,17 @@
 #include <neb/gfx/window/util/Parent.hh>
 #include <neb/gfx/Context/Util/Parent.hh>
 
-namespace neb { namespace gfx {namespace app {
+namespace neb { namespace gfx {
+	
+	struct exception: std::exception
+	{
+		virtual const char *		what()
+		{
+			return "graphics exception";
+		}
+	};
+	
+	namespace app {
 		/** @brief gfx
 		 * 
 		 * graphics and window handling

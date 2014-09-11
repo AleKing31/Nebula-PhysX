@@ -12,9 +12,15 @@
 #include <neb/gfx/util/log.hpp>
 #include <neb/phx/core/scene/base.hpp>
 
-neb::gfx::core::light::directional::directional()
+typedef neb::gfx::core::light::directional THIS;
+
+THIS::directional()
 {
 
+}
+neb::gfx::core::light::type::e		THIS::getType()
+{
+	return neb::gfx::core::light::type::DIRECTIONAL;
 }
 void			neb::gfx::core::light::directional::init(neb::core::core::light::util::parent * const & p)
 {

@@ -37,16 +37,19 @@ void					neb::gfx::app::__gfx::__init() {
 	// glfw
 
 	glfwSetErrorCallback(static_error_fun);
-	glfwInit();
-	
-
-	flag_.set(neb::core::app::util::flag::INIT_GLFW);
-	
+	try
+	{
+		glfwInit();
+		flag_.set(neb::core::app::util::flag::INIT_GLFW);
+	}
+	catch(neb::gfx::exception& e)
+	{
+	}
 }
 void				neb::gfx::app::__gfx::__release() {
 }
 void				neb::gfx::app::__gfx::step(gal::etc::timestep const & ts) {
-	
+
 	neb::gfx::window::util::parent::step(ts);
 
 	//neb::gfx::context::util::parent::step(ts);
@@ -91,7 +94,7 @@ std::weak_ptr<neb::gfx::window::base>			neb::gfx::app::__gfx::get_window(GLFWwin
 }
 void							neb::gfx::app::__gfx::static_error_fun(int error, char const * description) {
 	printf("%s\n", description);
-	abort();
+	throw neb::gfx::exception();
 }
 void							neb::gfx::app::__gfx::static_window_pos_fun(GLFWwindow* window, int x, int y){
 	//GLUTPP_DEBUG_0_FUNCTION;
@@ -141,30 +144,30 @@ void							neb::gfx::app::__gfx::staticCharFun(GLFWwindow* window, unsigned int 
 }
 std::weak_ptr<neb::gfx::gui::layout::base>		neb::gfx::app::__gfx::createLayout()
 {
-/*	auto self(dynamic_pointer_cast<neb::gfx::app::__gfx>(shared_from_this()));
+	/*	auto self(dynamic_pointer_cast<neb::gfx::app::__gfx>(shared_from_this()));
 
-	typedef neb::gfx::gui::layout::base T;
+		typedef neb::gfx::gui::layout::base T;
 
-	std::shared_ptr<T> layout(new T(self), gal::stl::deleter<T>());
+		std::shared_ptr<T> layout(new T(self), gal::stl::deleter<T>());
 
-	neb::gfx::gui::layout::util::parent::insert(layout);
+		neb::gfx::gui::layout::util::parent::insert(layout);
 
-	layout->init();
+		layout->init();
 
-	return layout;
-*/
+		return layout;
+		*/
 	return neb::util::parent<neb::gfx::gui::layout::base>::create<neb::gfx::gui::layout::base>();
 }
 std::weak_ptr<neb::gfx::window::base>			neb::gfx::app::__gfx::createWindow()
 {
 	auto self(std::dynamic_pointer_cast<neb::gfx::app::__gfx>(shared_from_this()));
-	
+
 	auto window = std::make_shared<neb::gfx::window::base>(self);
-	
+
 	neb::gfx::window::util::parent::insert(window);
 
 	window->__init();
-	
+
 	return window;
 }
 

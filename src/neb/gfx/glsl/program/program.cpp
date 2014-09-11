@@ -33,8 +33,8 @@ void	neb::gfx::glsl::program::base::init()
 {
 	//NEBULA_GLSL_PROGRAM_FUNC;
 
-	assert(glfwGetCurrentContext() != NULL);
-	
+	if(glfwGetCurrentContext() == NULL) return;
+
 	o_ = glCreateProgram();
 	
 	checkerror("glCreateProgram %i\n");

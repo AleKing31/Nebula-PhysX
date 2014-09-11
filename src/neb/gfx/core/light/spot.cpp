@@ -17,6 +17,16 @@ typedef neb::gfx::core::light::spot THIS;
 THIS::spot()
 {
 }
+neb::gfx::core::light::type::e		THIS::getType()
+{
+	return neb::gfx::core::light::type::SPOT;
+}
+void			THIS::init(neb::core::core::light::util::parent * const & p)
+{
+	setParent(p);
+
+	neb::gfx::core::light::base::init(p);
+}
 void			neb::gfx::core::light::spot::load(
 		neb::core::core::light::util::count & light_count,
 		neb::core::pose const & pose) {

@@ -38,7 +38,7 @@ namespace neb { namespace gfx { namespace core { namespace light {
 			public:
 				spot();
 				virtual void			init(neb::core::core::light::util::parent * const & p);
-				virtual type::e		getType();
+				virtual type::e			getType();
 
 				virtual void			callbackPose(neb::core::pose const & gpose);
 

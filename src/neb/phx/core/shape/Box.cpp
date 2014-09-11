@@ -5,8 +5,10 @@
 neb::phx::core::shape::box::box()
 {
 }
-void				neb::phx::core::shape::box::__init() {
+void				neb::phx::core::shape::box::init(neb::core::core::shape::util::parent * const & p)
+{
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 	create_physics();
 }
 physx::PxGeometry*		neb::phx::core::shape::box::to_geo() {

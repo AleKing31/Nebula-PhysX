@@ -46,7 +46,8 @@ neb::gfx::window::base::base(std::shared_ptr<neb::gfx::window::util::parent> par
 	x_(1200),
 	y_(0),
 	w_(600),
-	h_(600)
+	h_(600),
+	window_(NULL)
 {
 }
 neb::gfx::window::base::~base() {
@@ -59,11 +60,18 @@ void			neb::gfx::window::base::__init() {
 	auto app = neb::gfx::app::__gfx::global().lock();
 	assert(app);
 
-	assert(app->flag_.any(neb::core::app::util::flag::INIT_GLFW));
+	if(!app->flag_.any(neb::core::app::util::flag::INIT_GLFW))
+	{
+		return;
+	}
+	
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
-
-
+	
+	if(window_)
+	{
+		return;
+	}
 
 
 	// create window
