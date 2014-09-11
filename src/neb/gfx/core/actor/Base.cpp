@@ -27,54 +27,6 @@
 neb::gfx::core::actor::base::~base() {
 	LOG(lg, neb::core::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
-void				neb::gfx::core::actor::base::init() {
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-
-}
-void				neb::gfx::core::actor::base::__init() {
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-
-}
-void				neb::gfx::core::actor::base::release() {
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	
-}
-void				neb::gfx::core::actor::base::load_lights(neb::core::core::light::util::count & light_count, neb::core::pose const & pose) {
-	LOG(lg, neb::core::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-
-	//auto parent(parent_.lock());
-	//assert(parent);
-
-	auto npose = pose * pose_;
-	
-	typedef neb::core::core::actor::util::parent A;
-	typedef neb::core::core::shape::util::parent S;
-
-	auto lambda_actor = [&] (A::map_type::pointer p) {
-		
-		auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
-
-		if(!actor) {
-			std::cout << "ptr   = " << p << " type= " << typeid(*p).name() << ::std::endl;
-			std::cout << "actor = " << actor << ::std::endl;
-			abort();
-		}
-		
-		actor->load_lights(light_count, npose);
-	};
-	
-	auto lambda_shape = [&]  (S::map_type::pointer p) {
-		auto shape = std::dynamic_pointer_cast<neb::gfx::core::shape::base>(p);
-		assert(shape);
-		
-		shape->load_lights(light_count, npose);
-		
-	};
-	
-	A::map_.for_each(lambda_actor);
-	
-	S::map_.for_each(lambda_shape);
-}
 void				neb::gfx::core::actor::base::draw(
 		neb::gfx::glsl::program::base const * const & program,
 		neb::core::pose const & pose)
@@ -98,11 +50,6 @@ void				neb::gfx::core::actor::base::draw(
 			shape->draw(program, npose);
 			});
 
-
-}
-
-void		neb::gfx::core::actor::base::step(gal::etc::timestep const & ts) {
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 }
 

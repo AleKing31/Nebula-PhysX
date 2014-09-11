@@ -63,7 +63,7 @@ namespace neb { namespace gfx {
 			}
 			void					mark_update_all() {
 				update_begin_ = 0;
-				update_end_ = size();
+				update_end_ = size() - 1;
 			}
 			void					reset_update() {
 				update_begin_ = size_array();
@@ -85,6 +85,8 @@ namespace neb { namespace gfx {
 
 				// if instances were removed, copy remaining data to back buffer
 				if(update) swap();
+
+				mark_update_all();
 			}
 			void					swap() {
 

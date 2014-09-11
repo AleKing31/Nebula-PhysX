@@ -47,7 +47,8 @@ typedef neb::gfx::glsl::program::threed	P3;
 neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
 	neb::core::core::scene::base(parent),
 	px_scene_(NULL),
-	px_filter_shader_(NULL)
+	px_filter_shader_(NULL),
+	simulation_callback_(NULL)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 

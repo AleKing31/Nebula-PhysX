@@ -4,6 +4,8 @@
 
 #include <neb/core/util/debug.hpp>
 
+#include <neb/core/core/light/util/parent.hpp>
+
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/core/light/spot.hpp>

@@ -30,12 +30,13 @@ neb::gfx::texture::~texture()
 void			neb::gfx::texture::init_shadow(int w,int h, std::shared_ptr<neb::gfx::context::base>)
 {
 	printf("%s\n",__PRETTY_FUNCTION__);
-
+	
+	
 	w_ = w;
 	h_ = h;
-
+	
 	target_ = GL_TEXTURE_2D_ARRAY;
-
+	
 	glGenTextures(1, &o_);
 	checkerror("glGenTextures");
 

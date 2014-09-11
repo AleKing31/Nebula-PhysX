@@ -19,7 +19,8 @@
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }*/
-void			neb::phx::core::actor::rigiddynamic::base::init() {
+void			neb::phx::core::actor::rigiddynamic::base::init(parent_t * const & p)
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	assert(px_actor_);

@@ -15,10 +15,10 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace act
 
 		public:
 			base();
-			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
+			//base(std::shared_ptr<>);
 			virtual ~base();
-			virtual void					init() = 0;
-			virtual void					release() = 0;
+			//virtual void					init(neb::phx::core::actor::util::parent * const &) = 0;
+			virtual void					release();
 		protected:
 			//void							releaseUp();
 		public:	

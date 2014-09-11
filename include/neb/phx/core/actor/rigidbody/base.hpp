@@ -20,8 +20,8 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 		public:
 			base();
 
-			virtual void					init() = 0;
-			virtual void					release() = 0;
+			//virtual void					init() = 0;
+			//virtual void					release() = 0;
 			virtual void					step(gal::etc::timestep const & ts);
 
 			/** @brief create physics

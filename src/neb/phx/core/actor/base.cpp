@@ -16,10 +16,9 @@ neb::phx::core::actor::base::base():
 neb::phx::core::actor::base::~base() {
 	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
 }
-void			neb::phx::core::actor::base::init() {
+void			neb::phx::core::actor::base::init(parent_t * const & p)
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-	
-	neb::core::core::actor::base::init();
 	
 	create_physics();
 	init_physics();

@@ -70,7 +70,7 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 
 	auto proj_base = scene->createActorRigidDynamicUninitialized().lock();
 
-	auto proj = dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(proj_base);
+	auto proj = std::dynamic_pointer_cast<neb::phx::core::actor::rigiddynamic::base>(proj_base);
 	assert(proj);
 
 	proj->simulation_.word0 = neb::phx::filter::filter::type::DYNAMIC | neb::phx::filter::filter::type::PROJECTILE;
@@ -113,7 +113,7 @@ void			neb::phx::game::weapon::SimpleProjectile::fire() {
 	}
 
 
-	proj->init();
+	proj->init(scene);
 
 	// shape
 	auto shape = proj->createShapeCuboid(

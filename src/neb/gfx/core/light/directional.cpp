@@ -1,3 +1,5 @@
+#include <neb/core/core/light/util/parent.hpp>
+
 #include <neb/gfx/core/light/directional.hpp>
 #include <neb/gfx/environ/shadow/directional.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>

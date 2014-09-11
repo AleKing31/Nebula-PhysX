@@ -55,37 +55,41 @@ void			neb::phx::core::shape::base::create_physics() {
 
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	//NEBULA_DEBUG_0_FUNCTION;
-	
+
+	if(!hasParent()) return;
+
 	auto actor = neb::could_be<parent_t, neb::phx::core::actor::base>(getParent());
-	
-	if(actor) {
-		auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::core::actor::Rigid_Actor>(parent_.lock());
 
-		if(rigidactor) {
-			assert(rigidactor->px_actor_);
-			
-			auto px_rigidactor = rigidactor->px_actor_->isRigidActor();
-			assert(px_rigidactor);
+	if(!actor) return;
 
-			physx::PxMaterial* px_mat = phx::app::base::global()->px_physics_->createMaterial(1,1,1);
+	auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::core::actor::Rigid_Actor>(parent_.lock());
 
-			px_shape_ = px_rigidactor->createShape( *(to_geo()), *px_mat );
-		}
-	}
+	if(!rigidactor) return;
+
+	physx::PxActor* const & px_actor = rigidactor->px_actor_;
+
+	if(!px_actor) return;
+
+	auto px_rigidactor = rigidactor->px_actor_->isRigidActor();
+	assert(px_rigidactor);
+
+	physx::PxMaterial* px_mat = phx::app::base::global()->px_physics_->createMaterial(1,1,1);
+
+	px_shape_ = px_rigidactor->createShape( *(to_geo()), *px_mat );
 }
 /*shared_ptr<neb::phx::core::shape::util::parent>		neb::phx::core::shape::base::getPxParent() {
-	
-	auto parent = getParent();
-	
-	auto pxparent(dynamic_cast<neb::phx::core::shape::util::parent*>(parent));
-	
-	if(!pxparent) {
-		::std::cout << typeid(*parent).name() << ::std::endl;
-		abort();
-	}
 
-	return pxparent;
-}*/
+  auto parent = getParent();
+
+  auto pxparent(dynamic_cast<neb::phx::core::shape::util::parent*>(parent));
+
+  if(!pxparent) {
+  ::std::cout << typeid(*parent).name() << ::std::endl;
+  abort();
+  }
+
+  return pxparent;
+  }*/
 physx::PxGeometry*	neb::phx::core::shape::base::to_geo() {
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	return 0;

@@ -41,13 +41,12 @@ namespace neb {
 	 */
 	class base:
 		virtual public neb::core::core::scene::base,
-		virtual public phx::core::actor::util::parent,
 		virtual public neb::gfx::drawable::base
 	{
 		public:
-			base(std::shared_ptr<neb::core::core::scene::util::parent> parent);
+			base();
 			virtual ~base();
-			virtual void				init();
+			virtual void				init(parent_t * const & p);
 			virtual void				release();
 			void					step(::gal::etc::timestep const & ts);
 

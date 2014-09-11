@@ -20,6 +20,8 @@ void neb::gfx::core::shape::box::box::createMesh() {
 	
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
+	if(!hasScene()) return;
+
 	/*
 	math::geo::cuboid cube(1.0,1.0,1.0);
 	

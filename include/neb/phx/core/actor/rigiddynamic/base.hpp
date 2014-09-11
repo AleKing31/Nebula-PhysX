@@ -3,6 +3,7 @@
 
 #include <PxPhysicsAPI.h>
 
+#include <neb/core/util/macro.hpp>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -17,8 +18,9 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 
 		public:
 			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
+			
+			NEB_INIT_FUNC;
 
-			virtual void					init();
 			virtual void					release() = 0;
 		public:
 			virtual void					step(gal::etc::timestep const & ts) = 0;

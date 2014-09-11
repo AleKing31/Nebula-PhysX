@@ -91,14 +91,24 @@ void			neb::gfx::ogl::bufferSubData(
 		glBindBuffer(
 				target[c],
 				buffer[c]);
+		checkerror("glBufferSubData");
+
+		GLvoid* d = (GLvoid*)((GLintptr)data[c] + offset);
 
 		glBufferSubData(
 				target[c],
 				offset,
 				size[c] * datasize[c],
-				(GLvoid*)((GLintptr)data[c] + offset));
+				d);
 
-		checkerror("glBufferSubData");
+		checkerror(
+				"glBufferSubData\n"
+				"target   %i\n"
+				"offset   %i\n"
+				"size     %i\n"
+				"datasize %i\n"
+				"data     %x\n",
+				target[c], offset, size[c], datasize[c], d);
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	checkerror("glBindBuffer");

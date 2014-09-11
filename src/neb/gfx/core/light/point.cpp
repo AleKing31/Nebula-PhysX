@@ -5,6 +5,8 @@
 #include <neb/core/util/debug.hpp>
 #include <neb/core/util/log.hpp>
 
+#include <neb/core/core/light/util/parent.hpp>
+
 #include <neb/gfx/app/__gfx.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/window/Base.hh>
