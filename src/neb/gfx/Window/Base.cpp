@@ -17,7 +17,7 @@
 
 #include <neb/gfx/free.hpp>
 
-#include <neb/gfx/app/__gfx.hpp>
+#include <neb/gfx/app/glfw.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 
 #include <neb/gfx/camera/view/Base.hh>
@@ -41,7 +41,7 @@ neb::gfx::window::base::base():
 	h_(600)
 {
 }
-neb::gfx::window::base::base(std::shared_ptr<neb::gfx::window::util::parent> parent):
+neb::gfx::window::base::base(std::shared_ptr<neb::util::parent<neb::gfx::window::__base> > parent):
 	parent_(parent),
 	x_(1200),
 	y_(0),
@@ -57,7 +57,7 @@ void			neb::gfx::window::base::__init() {
 
 	neb::itf::shared::__init();
 
-	auto app = neb::gfx::app::__gfx::global().lock();
+	auto app = neb::gfx::app::glfw::global();
 	assert(app);
 
 	if(!app->flag_.any(neb::core::app::util::flag::INIT_GLFW))
@@ -104,25 +104,25 @@ void			neb::gfx::window::base::__init() {
 
 	glfwSetWindowPosCallback(
 			window_,
-			neb::gfx::app::__gfx::static_window_pos_fun);
+			neb::gfx::app::glfw::static_window_pos_fun);
 	glfwSetWindowSizeCallback(
 			window_,
-			neb::gfx::app::__gfx::static_window_size_fun);
+			neb::gfx::app::glfw::static_window_size_fun);
 	glfwSetWindowCloseCallback(
 			window_,
-			neb::gfx::app::__gfx::static_window_close_fun);
+			neb::gfx::app::glfw::static_window_close_fun);
 	glfwSetWindowRefreshCallback(
 			window_,
-			neb::gfx::app::__gfx::static_window_refresh_fun);
+			neb::gfx::app::glfw::static_window_refresh_fun);
 	glfwSetKeyCallback(
 			window_,
-			neb::gfx::app::__gfx::static_key_fun);
+			neb::gfx::app::glfw::static_key_fun);
 	glfwSetMouseButtonCallback(
 			window_,
-			neb::gfx::app::__gfx::static_mouse_button_fun);
+			neb::gfx::app::glfw::static_mouse_button_fun);
 	glfwSetCharCallback(
 			window_,
-			neb::gfx::app::__gfx::staticCharFun);
+			neb::gfx::app::glfw::staticCharFun);
 
 	// add window to app's window map
 	app->windows_glfw_[window_] = self;

@@ -22,7 +22,7 @@ namespace neb {
 			 */
 			class base: virtual public neb::itf::shared {
 				public:
-					virtual void			init() = 0;
+					//virtual void			init() = 0;
 					/** @brief draw
 					 *
 					 * @param context context in which we are drawing. used by shape to keep track of vertex buffers for various contexts.
@@ -33,7 +33,7 @@ namespace neb {
 			};
 			class two: virtual public neb::gfx::drawable::base {
 				public:
-					virtual void			init() {}
+					//virtual void			init() {}
 			};
 		}
 	}

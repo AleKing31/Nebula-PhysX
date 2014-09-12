@@ -44,8 +44,7 @@ typedef neb::core::core::actor::util::parent A;
 typedef neb::gfx::glsl::program::base	P;
 typedef neb::gfx::glsl::program::threed	P3;
 
-neb::phx::core::scene::base::base(std::shared_ptr<neb::core::core::scene::util::parent > parent):
-	neb::core::core::scene::base(parent),
+neb::phx::core::scene::base::base():
 	px_scene_(NULL),
 	px_filter_shader_(NULL),
 	simulation_callback_(NULL)
@@ -60,12 +59,12 @@ neb::phx::core::scene::base::~base() {
 
 	assert(px_scene_ == NULL);
 }
-void			neb::phx::core::scene::base::init() {
-
+void			neb::phx::core::scene::base::init(parent_t * const & p)
+{
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-
-	neb::core::core::scene::base::init();
-
+	
+	neb::core::core::scene::base::init(p);
+	
 	create_physics();
 
 	// graphics

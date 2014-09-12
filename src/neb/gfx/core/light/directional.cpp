@@ -3,7 +3,8 @@
 #include <neb/gfx/core/light/directional.hpp>
 #include <neb/gfx/environ/shadow/directional.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
-#include <neb/gfx/app/__gfx.hpp>
+//#include <neb/gfx/app/__gfx.hpp>
+#include <neb/gfx/app/glfw.hpp>
 #include <neb/gfx/core/light/base.hpp>
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/free.hpp>
@@ -36,10 +37,13 @@ void			neb::gfx::core::light::directional::init(neb::core::core::light::util::pa
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::core::light::directional>(shared_from_this());
 	
-	auto app = neb::gfx::app::__gfx::global().lock();
+	auto app = neb::gfx::app::glfw::global();
 
-	auto window = app->createWindow().lock();
+	
+	auto window = app->neb::util::parent<neb::gfx::window::__base>::create<neb::gfx::window::base>().lock();
+
 	auto context = window->createContextFBO().lock();
+	
 	auto environ = context->createEnvironShadowDirectional().lock();
 	
 	context->setDrawable(scene);

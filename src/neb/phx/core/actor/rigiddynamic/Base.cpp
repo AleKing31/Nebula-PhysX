@@ -35,9 +35,11 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
 		return;
 	}
+	
+	if(!neb::core::app::__base::is_valid()) return;
 
 	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
-
+	
 	auto p(getPose());	
 	physx::PxTransform pose(
 			phx::util::convert(vec3(p.pos_)),
@@ -84,8 +86,10 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 void			neb::phx::core::actor::rigiddynamic::base::init_physics() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
-	assert(px_actor_);	
+	if(!px_actor_) return;
+
 	physx::PxRigidDynamic* px_rigid_dynamic = px_actor_->isRigidDynamic();
+
 	assert(px_rigid_dynamic);
 
 	physx::PxRigidBodyExt::updateMassAndInertia(*px_rigid_dynamic, density_);

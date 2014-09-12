@@ -9,6 +9,7 @@
 
 #include <neb/gfx/app/__gfx.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
+#include <neb/gfx/app/glfw.hpp>
 #include <neb/gfx/window/Base.hh>
 #include <neb/gfx/core/light/point.hpp>
 #include <neb/gfx/glsl/uniform/vector.hpp>
@@ -74,9 +75,11 @@ void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::enviro
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::core::light::point>(shared_from_this());
 
-	auto app = neb::gfx::app::__gfx::global().lock();
+	auto app = neb::gfx::app::glfw::global();
 
-	auto window = app->createWindow().lock();
+	typedef neb::gfx::window::base Window;
+	auto window = app->neb::gfx::window::util::parent::create<Window>().lock();
+	
 
 	auto context = window->createContextFBOMulti().lock();
 

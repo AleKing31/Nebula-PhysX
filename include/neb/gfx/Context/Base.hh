@@ -41,7 +41,7 @@ namespace neb {
 					//base();
 					base(std::shared_ptr<neb::gfx::context::util::parent> parent);
 					//base&						operator=(base const & r);
-					//void						init();
+					virtual void					init() = 0;
 					//void						release();
 					virtual void					step(gal::etc::timestep const & ts);
 					virtual void					render();

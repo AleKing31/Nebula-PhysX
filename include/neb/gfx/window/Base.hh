@@ -31,7 +31,7 @@ namespace neb { namespace gfx { namespace window {
 	{
 		public:
 			base();
-			base(std::shared_ptr<neb::gfx::window::util::parent> parent);
+			base(std::shared_ptr<neb::util::parent<neb::gfx::window::__base> > parent);
 			virtual ~base();
 
 		public:
@@ -55,7 +55,7 @@ namespace neb { namespace gfx { namespace window {
 			std::weak_ptr<neb::gfx::context::window>	createContextThree();
 			void						makeCurrent();
 		public:
-			std::weak_ptr<neb::gfx::window::util::parent>			parent_;
+			std::weak_ptr<neb::util::parent<neb::gfx::window::__base> >		parent_;
 
 			// input signals
 			struct

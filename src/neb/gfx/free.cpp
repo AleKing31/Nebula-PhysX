@@ -15,8 +15,8 @@
 
 #include <neb/gfx/app/__gfx.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
-#include <neb/gfx/window/Base.hh>
-#include <neb/gfx/glsl/uniform/scalar.hpp>
+//#include <neb/gfx/window/Base.hh>
+#include <neb/gfx/glsl/program/base.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/free.hpp>
 #include <neb/gfx/util/log.hpp>

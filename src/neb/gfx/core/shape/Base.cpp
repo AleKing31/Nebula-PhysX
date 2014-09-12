@@ -32,7 +32,9 @@ void					neb::gfx::core::shape::base::init(neb::core::core::shape::util::parent 
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 	setParent(p);
-		
+
+	if(!neb::core::app::__base::is_valid()) return;
+
 	createMesh();
 }
 void					neb::gfx::core::shape::base::release() {
