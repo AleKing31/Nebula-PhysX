@@ -38,30 +38,25 @@ neb::gfx::window::base::base():
 	x_(1200),
 	y_(0),
 	w_(600),
-	h_(600)
-{
-}
-neb::gfx::window::base::base(std::shared_ptr<neb::util::parent<neb::gfx::window::__base> > parent):
-	parent_(parent),
-	x_(1200),
-	y_(0),
-	w_(600),
 	h_(600),
 	window_(NULL)
 {
 }
 neb::gfx::window::base::~base() {
 }
-void			neb::gfx::window::base::__init() {
+void			neb::gfx::window::base::init(parent_t * const & p)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+	
+	if(p == NULL) return;
 
-	neb::itf::shared::__init();
+	setParent(p);
 
 	auto app = neb::gfx::app::glfw::global();
-	assert(app);
 
 	if(!app->flag_.any(neb::core::app::util::flag::INIT_GLFW))
 	{
+		std::cout << "glfw not initializaed" << std::endl;
 		return;
 	}
 	
@@ -201,11 +196,11 @@ void neb::gfx::window::base::callback_window_refresh_fun(GLFWwindow*) {
 void			neb::gfx::window::base::step(gal::etc::timestep const & ts) {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	neb::gfx::context::util::parent::step(ts);
+	contexts::step(ts);
 
-
-	if(glfwWindowShouldClose(window_)) {
-		parent_.lock()->erase(_M_index);
+	if(glfwWindowShouldClose(window_))
+	{
+		getParent()->erase(_M_index);
 		return;
 	}
 
@@ -277,13 +272,14 @@ std::weak_ptr<neb::gfx::context::window>		neb::gfx::window::base::createContextT
 
 	std::weak_ptr<neb::gfx::context::window> w;
 	{
-		auto context(make_shared<neb::gfx::context::window>(self));
-		assert(context);
-		insert(context);
+		auto context = createContextWindow().lock();
+		//auto context(make_shared<>(self));
+		//assert(context);
+		//insert(context);
 
 		auto environ = context->createEnvironTwo().lock();
 
-		context->init();
+		//context->init(this);
 
 		w = context;
 	}
@@ -297,13 +293,14 @@ std::weak_ptr<neb::gfx::context::window>		neb::gfx::window::base::createContextT
 
 	std::weak_ptr<neb::gfx::context::window> w;
 	{
-		auto context = std::make_shared<neb::gfx::context::window>(self);
-		assert(context);
-		insert(context);
+		auto context = createContextWindow().lock();
+	//	auto context = std::make_shared<neb::gfx::context::window>(self);
+	//	assert(context);
+	//	insert(context);
 
 		auto environ = context->createEnvironSceneDefault().lock();
 
-		context->init();
+	//	context->init(this);
 
 		//assert(environ->view_);
 		//environ->view_->connect(self);

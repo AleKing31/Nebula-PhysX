@@ -40,7 +40,7 @@ void			neb::gfx::core::light::directional::init(neb::core::core::light::util::pa
 	auto app = neb::gfx::app::glfw::global();
 
 	
-	auto window = app->neb::util::parent<neb::gfx::window::__base>::create<neb::gfx::window::base>().lock();
+	auto window = app->neb::gfx::window::util::parent::create<neb::gfx::window::base>().lock();
 
 	auto context = window->createContextFBO().lock();
 	

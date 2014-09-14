@@ -10,6 +10,8 @@
 #include <neb/core/itf/shared.hpp>
 #include <neb/core/color/Color.hh>
 
+#include <neb/core/type_traits.hpp>
+
 #include <neb/gfx/util/decl.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/gui/object/util/parent.hpp>
@@ -22,17 +24,16 @@ namespace neb { namespace gfx {
 	namespace gui { namespace object {
 
 		class base:
-			virtual public gal::stl::child< neb::util::parent<neb::gfx::gui::object::base> >,
+			virtual public neb::gfx::gui::object::util::parent,
 			virtual public neb::itf::shared
 		{
 			public:
-				typedef neb::util::parent<neb::gfx::gui::object::base> parent;
+				typedef neb::util::parent<neb::gfx::gui::object::base, neb::gfx::gui::object::util::parent> parent_t;
 
 				base();
 				virtual ~base() {}
 
-				virtual void			init();
-				//std::shared_ptr<window::window>		get_window();
+				virtual void			init(parent_t * const & p);
 				virtual void			draw(neb::gfx::RenderDesc const &) = 0;
 
 				virtual int			key_fun(

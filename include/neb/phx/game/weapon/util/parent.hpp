@@ -13,7 +13,7 @@ namespace neb { namespace phx { namespace game { namespace weapon { namespace ut
 	 * abstract class for parent of a shape
 	 */
 	class parent:
-		virtual public neb::util::parent<neb::phx::game::weapon::base>
+		virtual public neb::util::parent<neb::phx::game::weapon::base, parent>
 	{
 		public:
 			virtual ~parent() {}

@@ -30,12 +30,12 @@ namespace neb { namespace gfx { namespace window {
 		virtual public neb::gfx::window::util::cast
 	{
 		public:
-			base();
-			base(std::shared_ptr<neb::util::parent<neb::gfx::window::__base> > parent);
-			virtual ~base();
+			typedef neb::gfx::window::util::parent parent_t;
+			typedef neb::util::parent<neb::gfx::context::base, neb::gfx::context::util::parent> contexts;
 
-		public:
-			virtual void				__init();
+			base();
+			virtual ~base();
+			virtual void				init(parent_t * const & p);
 			virtual void				release();
 
 			/** @name Main Loop @{ */
@@ -55,8 +55,6 @@ namespace neb { namespace gfx { namespace window {
 			std::weak_ptr<neb::gfx::context::window>	createContextThree();
 			void						makeCurrent();
 		public:
-			std::weak_ptr<neb::util::parent<neb::gfx::window::__base> >		parent_;
-
 			// input signals
 			struct
 			{

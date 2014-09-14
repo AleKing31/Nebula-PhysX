@@ -13,16 +13,15 @@
 
 typedef gal::console::temp<gal::console::backend::python, gal::console::frontend::store> console_type;
 
-neb::gfx::gui::object::terminal::terminal(std::shared_ptr<parent> p):
-	gal::stl::child<parent>(p.get()),
+neb::gfx::gui::object::terminal::terminal():
 	history_current_(0),
 	page_offset_(0),
 	max_line_count_(10)
 {}
-void		neb::gfx::gui::object::terminal::init() {
+void		neb::gfx::gui::object::terminal::init(parent_t * const & p) {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	neb::gfx::gui::object::base::init();
+	neb::gfx::gui::object::base::init(p);
 
 	auto app = neb::core::app::__base::global();
 

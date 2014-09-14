@@ -21,9 +21,9 @@
 
 /*neb::gfx::context::base::base() {
 }*/
-neb::gfx::context::base::base(std::shared_ptr<neb::gfx::context::util::parent> parent): parent_(parent) {
+neb::gfx::context::base::base()
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	assert(parent);
 }
 /*neb::gfx::context::base&		neb::gfx::context::base::operator=(neb::gfx::context::base const & r){
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
@@ -47,7 +47,8 @@ void		neb::gfx::context::base::render() {
 	/**
 	 * prepare rendering environment and then call the drawable
 	 */
-	if(!environ_) {
+	if(!environ_)
+	{
 		LOG(lg, neb::gfx::sl, warning) << "context has no environ";
 		return;
 	}
@@ -57,7 +58,8 @@ void		neb::gfx::context::base::render() {
 	
 	environ_->render(self);
 }		
-std::weak_ptr<neb::gfx::environ::two>			neb::gfx::context::base::createEnvironTwo() {
+std::weak_ptr<neb::gfx::environ::two>			neb::gfx::context::base::createEnvironTwo()
+{
 	auto environ = sp::make_shared<neb::gfx::environ::two>();
 	
 	auto w = parent_.lock()->isWindowBase();

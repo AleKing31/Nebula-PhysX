@@ -17,14 +17,13 @@ namespace neb {namespace gfx {namespace gui {namespace layout {
 		virtual public neb::itf::shared,
 		virtual public neb::gfx::drawable::base,
 		virtual public neb::gfx::gui::object::util::parent,
-		virtual public gal::stl::child< neb::util::parent< neb::gfx::gui::layout::base> >
+		virtual public gal::stl::child< neb::gfx::gui::layout::util::parent >
 	{
 		public:
-			typedef neb::util::parent< neb::gfx::gui::layout::base> parent;
-			//base();
-			base(std::shared_ptr<parent> const & p);
+			typedef neb::gfx::gui::layout::util::parent parent_t;
 
-			virtual void				init();
+			base();
+			virtual void				init(parent_t * const & p);
 			virtual void				release() {}
 
 

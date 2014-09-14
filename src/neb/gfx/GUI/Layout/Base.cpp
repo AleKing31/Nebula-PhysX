@@ -16,26 +16,28 @@
 #include <neb/gfx/gui/object/edittext.hh>
 #include <neb/gfx/gui/object/terminal.hh>
 #include <neb/gfx/gui/layout/base.hpp>
+#include <neb/gfx/gui/layout/util/parent.hpp>
 #include <neb/gfx/util/log.hpp>
 
-neb::gfx::gui::layout::base::base(std::shared_ptr<parent> const & p):
-	gal::stl::child<parent>(p.get())
+neb::gfx::gui::layout::base::base()
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 }
-void neb::gfx::gui::layout::base::init() {
-
+void neb::gfx::gui::layout::base::init(parent_t * const & p)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	//jess::clog << NEB_FUNCSIG << std::endl;
+
+	setParent(p);
 }
-void		neb::gfx::gui::layout::base::step(gal::etc::timestep const & ts) {
-		LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+void		neb::gfx::gui::layout::base::step(gal::etc::timestep const & ts)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 }
 void			neb::gfx::gui::layout::base::draw(neb::gfx::RenderDesc const & desc)
 {	
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	typedef neb::gfx::gui::object::util::parent O;
 
 	auto lamb = [&] (O::map_type::pointer p) {
