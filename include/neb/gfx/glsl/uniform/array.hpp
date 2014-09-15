@@ -119,12 +119,15 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 				if(loc.load[I] == 1)
 				{
 					LOG(lg, neb::gfx::sl, debug) << "load_uniform__ I=" << I << " loc=" << loc.location[I];
-					for(int i = 0; i < neb::gfx::array<T...>::size; i++) {
 
+					for(int i = 0; i < neb::gfx::array<T...>::size; i++)
+					{
 						//std::get<I>(neb::gfx::array_basic<T...>::data_)[i]
 						//neb::gfx::array_basic<T...>::get<I,U>(i)
 
-						LOG(lg, neb::gfx::sl, debug) << std::setw(32) << neb::gfx::array_basic<T...>::template get<I,U>(i);
+						LOG(lg, neb::gfx::sl, debug)
+							<< std::setw(32) << neb::gfx::array_basic<T...>::template get<I,U>(i)
+							<< " closed=" << neb::gfx::array<T...>::closed[i];
 					}
 
 					neb::gfx::ogl::glUniformv(

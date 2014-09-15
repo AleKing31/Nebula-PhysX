@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <gal/stl/child.hpp>
 
 #include <neb/core/util/decl.hpp> // gru/config.hpp.in
 
@@ -35,7 +36,8 @@ namespace neb {
 			 */
 			class base:
 				virtual public neb::itf::shared,
-				virtual public neb::gfx::context::util::cast
+				virtual public neb::gfx::context::util::cast,
+				virtual public gal::stl::child<neb::gfx::context::util::parent>
 			{
 				public:
 					typedef neb::gfx::context::util::parent parent_t;
@@ -55,12 +57,6 @@ namespace neb {
 					std::weak_ptr<neb::gfx::environ::vis_depth>		createEnvironVisDepth();
 
 					void							setDrawable(std::shared_ptr<neb::gfx::drawable::base>);
-				public:
-					/** @brief %Parent
-					 * 
-					 * @note WEAK
-					 */
-					std::weak_ptr<neb::gfx::context::util::parent>			parent_;
 				public:
 					std::shared_ptr<neb::gfx::environ::base>			environ_;
 			};

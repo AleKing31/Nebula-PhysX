@@ -182,11 +182,13 @@ void		neb::gfx::window::base::render() {
 
 	typedef neb::gfx::context::util::parent C;
 
-	C::map_.for_each([] (C::map_type::pointer p) {
-			auto context = std::dynamic_pointer_cast<neb::gfx::context::base>(p);
-			assert(context);
-			context->render();
-			});
+	auto lamb = [] (C::map_type::pointer p) {
+		auto context = std::dynamic_pointer_cast<neb::gfx::context::base>(p);
+		assert(context);
+		context->render();
+	};
+
+	C::map_.for_each(lamb);
 
 	glFinish();
 	glfwSwapBuffers(window_);
@@ -294,13 +296,13 @@ std::weak_ptr<neb::gfx::context::window>		neb::gfx::window::base::createContextT
 	std::weak_ptr<neb::gfx::context::window> w;
 	{
 		auto context = createContextWindow().lock();
-	//	auto context = std::make_shared<neb::gfx::context::window>(self);
-	//	assert(context);
-	//	insert(context);
+		//	auto context = std::make_shared<neb::gfx::context::window>(self);
+		//	assert(context);
+		//	insert(context);
 
 		auto environ = context->createEnvironSceneDefault().lock();
 
-	//	context->init(this);
+		context->init(this);
 
 		//assert(environ->view_);
 		//environ->view_->connect(self);

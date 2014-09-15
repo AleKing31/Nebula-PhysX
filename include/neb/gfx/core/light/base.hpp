@@ -70,6 +70,7 @@ namespace neb { namespace gfx { namespace core { namespace light {
 		public:
 			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &);
 			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const;
+			BOOST_SERIALIZATION_SPLIT_MEMBER();
 		public:
 
 			std::string					light_type_string_;

@@ -150,5 +150,20 @@ void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::e
 
 
 }
+void		THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
+{
+	LOG(lg, neb::core::core::shape::sl, debug) << __FUNCSIG__;
+
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+}
+void		THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
+{
+	LOG(lg, neb::core::core::shape::sl, debug) << __FUNCSIG__;
+
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+}
+
 
 

@@ -3,12 +3,14 @@
 
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/camera/view/ridealong.hh>
+#include <neb/gfx/camera/view/Free.hh>
 #include <neb/gfx/environ/SceneDefault.hpp>
 #include <neb/gfx/RenderDesc.hpp>
 
 #include <neb/phx/core/scene/base.hpp>
 
-void		neb::gfx::environ::SceneDefault::init() {
+void		neb::gfx::environ::SceneDefault::init()
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::environ::three>(shared_from_this());
@@ -21,11 +23,9 @@ void		neb::gfx::environ::SceneDefault::init() {
 
 
 	// camera
-//	if(!view_) {
-//		view_.reset(new neb::gfx::camera::view::Free(self));
-//	}
-
-
+	if(!view_) {
+		view_.reset(new neb::gfx::camera::view::Free(self));
+	}
 
 
 }

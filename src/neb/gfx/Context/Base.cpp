@@ -62,7 +62,7 @@ std::weak_ptr<neb::gfx::environ::two>			neb::gfx::context::base::createEnvironTw
 {
 	auto environ = sp::make_shared<neb::gfx::environ::two>();
 	
-	auto w = parent_.lock()->isWindowBase();
+	auto w = getParent()->isWindowBase();
 	if(w)
 	{
 		w->makeCurrent();
@@ -80,7 +80,7 @@ std::weak_ptr<neb::gfx::environ::SceneDefault>		neb::gfx::context::base::createE
 	
 	std::shared_ptr<E> environ(new E(), gal::stl::deleter<E>());
 
-	auto w = parent_.lock()->isWindowBase();
+	auto w = getParent()->isWindowBase();
 	if(w)
 	{
 		w->makeCurrent();
@@ -96,8 +96,7 @@ std::weak_ptr<neb::gfx::environ::vis_depth>		neb::gfx::context::base::createEnvi
 
 	auto environ = std::make_shared<neb::gfx::environ::vis_depth>();
 
-	auto p = parent_.lock();
-	assert(p);
+	auto p = getParent();
 	auto w = p->isWindowBase();
 	if(w)
 	{
@@ -116,8 +115,7 @@ std::weak_ptr<neb::gfx::environ::shadow_directional>	neb::gfx::context::base::cr
 
 	std::shared_ptr<E> environ (new E());
 
-	auto p = parent_.lock();
-	assert(p);
+	auto p = getParent();
 	auto w = p->isWindowBase();
 	if(w)
 	{
@@ -134,8 +132,7 @@ std::weak_ptr<neb::gfx::environ::shadow::point>		neb::gfx::context::base::create
 
 	auto environ = sp::make_shared<neb::gfx::environ::shadow::point>();
 
-	auto p = parent_.lock();
-	assert(p);
+	auto p = getParent();
 	auto w = p->isWindowBase();
 	if(w)
 	{

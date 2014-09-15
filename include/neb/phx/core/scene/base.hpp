@@ -47,6 +47,7 @@ namespace neb {
 			base();
 			virtual ~base();
 			virtual void				init(parent_t * const & p);
+			void					init_light();
 			virtual void				release();
 			void					step(::gal::etc::timestep const & ts);
 
@@ -61,14 +62,9 @@ namespace neb {
 
 		public:
 			void					create_physics();
-			virtual  void				serialize(
-					boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
-				ar & boost::serialization::make_nvp("gravity",gravity_);
-			}
-			virtual void				serialize(
-					boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
-				ar & boost::serialization::make_nvp("gravity",gravity_);
-			}
+			virtual void				load(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
+			virtual void				save(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) const;
+			BOOST_SERIALIZATION_SPLIT_MEMBER();
 			/** @name convenience functions
 			 * @{
 			 */

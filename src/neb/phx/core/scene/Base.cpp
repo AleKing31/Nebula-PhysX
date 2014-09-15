@@ -39,6 +39,8 @@
 #include <neb/gfx/environ/three.hpp>
 #include <neb/gfx/RenderDesc.hpp>
 
+typedef neb::phx::core::scene::base THIS;
+
 typedef neb::core::core::actor::util::parent A;
 
 typedef neb::gfx::glsl::program::base	P;
@@ -63,7 +65,7 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 	
-	neb::core::core::scene::base::init(p);
+	//neb::core::core::scene::base::init(p);
 	
 	create_physics();
 
@@ -75,9 +77,7 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 	_M_programs._M_d3_inst.reset(new P3("3d_inst"));
 	_M_programs._M_d3_inst->init();
 
-	// light arrays
-	light_array_[0].alloc(32);
-	light_array_[1].alloc(32);
+	init_light();
 
 	// meshes
 	math::geo::cuboid cube(1.0,1.0,1.0);
@@ -96,6 +96,13 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 			shadow_tex_size,
 			std::shared_ptr<neb::gfx::context::base>());
 
+}
+void			THIS::init_light()
+{
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	// light arrays
+	light_array_[0].alloc(32);
+	light_array_[1].alloc(32);
 }
 void			neb::phx::core::scene::base::release() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
@@ -348,7 +355,7 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 	// If program parameter is not NULL, use it and do not load lights.
 	//
 	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
-	
+
 	P* d3;
 	P* d3_inst;
 
@@ -373,6 +380,9 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 
 	{
 		d3->use();
+
+		assert(desc.p);
+		assert(desc.v);
 
 		desc.p->load(d3);
 		desc.v->load(d3);
@@ -531,6 +541,14 @@ void			neb::phx::core::scene::base::drawPhysxVisualization(
 	}
 }
 void			neb::phx::core::scene::base::resize(int w, int h) {
+}
+void			THIS::load(boost::archive::polymorphic_iarchive & ar, unsigned int const & version)
+{
+	ar & boost::serialization::make_nvp("gravity",gravity_);
+}
+void			THIS::save(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) const
+{
+	ar & boost::serialization::make_nvp("gravity",gravity_);
 }
 
 

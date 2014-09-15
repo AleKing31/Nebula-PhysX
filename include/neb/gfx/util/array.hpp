@@ -19,6 +19,9 @@ namespace neb { namespace gfx {
 	template<class... T> class array: public array_basic<T...> {
 		public:
 			typedef typename gens<sizeof...(T)>::type	seq_type;
+
+			array(): closed(0), size(0) {}
+			
 			void				alloc(int n) {
 				array_basic<T...>::alloc(n);
 
@@ -30,7 +33,11 @@ namespace neb { namespace gfx {
 
 				size = 0;
 			}
-			int				reg_array(T... initial) {
+			int				reg_array(T... initial)
+			{
+				if(closed == 0) abort();
+			
+			
 				// search for empty slot
 				int i = 0;
 				while(closed[i]) i++;

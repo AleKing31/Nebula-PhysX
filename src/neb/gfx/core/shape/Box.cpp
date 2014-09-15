@@ -31,7 +31,11 @@ void neb::gfx::core::shape::box::box::createMesh() {
 	
 	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 	
-	if(!mesh_slot_) {
+	if(!mesh_slot_)
+	{
+		LOG(lg, neb::gfx::sl, debug) << "mesh registered";
+
+
 		auto model = getPoseGlobal().mat4_cast() * glm::scale(scale_);
 
 		auto dif = neb::core::color::ucolor8888::rand();
@@ -51,6 +55,8 @@ void neb::gfx::core::shape::box::box::createMesh() {
 		//spc.print();
 		LOG(lg, neb::gfx::sl, debug) << "emission";
 		//emi.print();
+
+		assert(scene->meshes_.cuboid_);
 
 		mesh_slot_ = scene->meshes_.cuboid_->instances_->reg(
 				model,

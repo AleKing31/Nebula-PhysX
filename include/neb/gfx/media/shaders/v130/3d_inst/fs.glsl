@@ -67,6 +67,7 @@ void main(void)
 	lf_lights(amb, dif, spc, vs_instance_shininess);
 
 	color += vs_instance_emission;
+
 }
 
 

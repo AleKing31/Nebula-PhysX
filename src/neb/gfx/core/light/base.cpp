@@ -44,7 +44,7 @@ neb::gfx::core::light::base::~base() {}
 void			neb::gfx::core::light::base::init(neb::core::core::light::util::parent * const & p)
 {
 	LOG(lg, neb::core::core::light::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	setParent(p);
 
 	// check if detached
@@ -53,13 +53,20 @@ void			neb::gfx::core::light::base::init(neb::core::core::light::util::parent * 
 		std::cout << "skip initialization" << std::endl;
 		return;
 	}
-	
+
 	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
-	
+
 	auto pose = getPoseGlobal();
-	
+
 	// register in light_array
 	light_array_ = 0;
+
+	if(scene->light_array_[light_array_].size_array() == 0)
+	{
+		scene->init_light();
+		assert(scene->light_array_[light_array_].size_array() != 0);
+	}
+
 	light_array_slot_ = scene->light_array_[light_array_].reg(
 			pose.pos_,
 			ambient_,
@@ -81,14 +88,15 @@ void			neb::gfx::core::light::base::init(neb::core::core::light::util::parent * 
 			glm::vec3(-1.0),
 			(int)getType()
 			);
+
 }
 void			neb::gfx::core::light::base::setPose(neb::core::pose const & npose) {
 	pose_ = npose;
 
 	auto s = dynamic_cast<neb::phx::core::scene::base*>(getScene());
-	
+
 	auto pose = getPoseGlobal();
-	
+
 	s->light_array_[light_array_].set_pos(			light_array_slot_, pose.pos_);
 	s->light_array_[light_array_].set_spot_direction(	light_array_slot_, pose.rot_ * spot_direction_);
 }

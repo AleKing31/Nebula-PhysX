@@ -99,4 +99,20 @@ void		neb::gfx::core::light::directional::setShadowEnviron(std::shared_ptr<neb::
 			shadow_sampler_[0]);
 
 }
+void		THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
+{
+	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
+
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+}
+void		THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
+{
+	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
+
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
+	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+}
+
+
 

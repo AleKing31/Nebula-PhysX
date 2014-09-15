@@ -6,9 +6,11 @@ neb::gfx::context::window::window()
 }
 void		neb::gfx::context::window::init(parent_t * const & p)
 {
-	neb::gfx::context::base::__init();
+	setParent(p);
+	
+	//neb::gfx::context::base::init(p);
 
-	auto window = parent_.lock()->isWindowBase();
+	auto window = getParent()->isWindowBase();
 
 	resize(window->w_, window->h_);
 }

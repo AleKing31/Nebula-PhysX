@@ -35,6 +35,9 @@ namespace neb { namespace gfx { namespace core { namespace light {
 			virtual void		setShadowEnviron(std::shared_ptr<neb::gfx::environ::base> environ);
 
 
+			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &);
+			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const;
+			BOOST_SERIALIZATION_SPLIT_MEMBER();
 
 	};
 

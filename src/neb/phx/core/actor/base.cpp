@@ -43,7 +43,8 @@ void			neb::phx::core::actor::base::hit() {
 
 	physx::PxU32 w2 = simulation_.word2;
 
-	if(w2 & phx::filter::filter::PROJECTILE) {
+	if(w2 & phx::filter::filter::PROJECTILE)
+	{
 		LOG(lg, neb::phx::core::actor::sl, debug) << shared_from_this().get() << " is projectile, erase";
 		parent->erase(_M_index);
 	}

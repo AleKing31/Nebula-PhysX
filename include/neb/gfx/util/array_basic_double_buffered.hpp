@@ -68,15 +68,20 @@ namespace neb { namespace gfx {
 				std::get<I>(*back_)[newi] = std::get<I>(*front_)[oldi];
 				return 0;
 			}
-			void					set_size(int size) {
-				size_ = size;
+			void					set_size(GLsizei s) {
+				LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this << " size = " << s;
+				size_ = s;
 			}
 			template<int I, typename U> U*		get() {
 				return std::get<I>(*front_);
 			}
-			int					next() {
+			int					next()
+			{
+				LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this << " size = " << size_+1;
 				if(size_ == size_array_) throw 0;
-				return size_++;
+				GLsizei s = size_;
+				size_++;
+				return s;
 			}
 			GLsizei					size() const {
 				return size_;

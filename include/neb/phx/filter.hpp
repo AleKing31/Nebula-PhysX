@@ -60,6 +60,8 @@ namespace neb { namespace phx {
 		};
 		class data {
 			public:
+				data(): word0(0), word1(0), word2(0), word3(0) {}
+
 				template<class Archive> void	serialize(Archive & ar, unsigned int const & version) {
 					ar & boost::serialization::make_nvp("word0",word0);
 					ar & boost::serialization::make_nvp("word1",word1);
