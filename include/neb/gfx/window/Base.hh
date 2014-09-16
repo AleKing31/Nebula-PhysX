@@ -9,6 +9,7 @@
 
 #include <neb/core/util/decl.hpp>
 #include <neb/core/core/scene/util/decl.hpp>
+#include <neb/core/input/source.hpp>
 
 #include <neb/gfx/Context/Base.hh>
 #include <neb/gfx/Context/Util/Parent.hh>
@@ -21,13 +22,13 @@
 #include <neb/gfx/window/__base.hpp>
 #include <neb/gfx/window/util/Flag.hh>
 #include <neb/gfx/window/util/Cast.hh>
-#include <neb/gfx/window/util/signals.hpp>
 
 namespace neb { namespace gfx { namespace window {
 	class base:
 		virtual public neb::gfx::window::__base,
 		virtual public neb::gfx::context::util::parent,
-		virtual public neb::gfx::window::util::cast
+		virtual public neb::gfx::window::util::cast,
+		virtual public neb::core::input::source
 	{
 		public:
 			typedef neb::gfx::window::util::parent parent_t;
@@ -37,6 +38,8 @@ namespace neb { namespace gfx { namespace window {
 			virtual ~base();
 			virtual void				init(parent_t * const & p);
 			virtual void				release();
+			
+			virtual glm::vec2			getCursorPosNDC();
 
 			/** @name Main Loop @{ */
 			virtual void				render();
@@ -55,13 +58,6 @@ namespace neb { namespace gfx { namespace window {
 			std::weak_ptr<neb::gfx::context::window>	createContextThree();
 			void						makeCurrent();
 		public:
-			// input signals
-			struct
-			{
-				neb::gfx::window::signals::KeyFun		key_fun_;
-				neb::gfx::window::signals::MouseButtonFun	mouse_button_fun_;
-				neb::gfx::window::signals::CharFun		charFun_;
-			} sig_;
 
 
 			static GLFWwindow*					first_window_;

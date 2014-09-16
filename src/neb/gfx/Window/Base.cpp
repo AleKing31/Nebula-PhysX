@@ -234,15 +234,20 @@ void neb::gfx::window::base::callback_mouse_button_fun(GLFWwindow* window, int b
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
 
-	sig_.mouse_button_fun_(self, button, action, mods);
+	sig_.mouseButtonFun_(self, button, action, mods);
 }
-void			neb::gfx::window::base::callback_key_fun(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void			neb::gfx::window::base::callback_key_fun(
+		GLFWwindow* window,
+		int key,
+		int scancode,
+		int action,
+		int mods)
+{
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto self = std::dynamic_pointer_cast<neb::gfx::window::base>(shared_from_this());
 
-	sig_.key_fun_(self, key, scancode, action, mods);
-
+	sig_.keyFun_(self, key, scancode, action, mods);
 }
 void			neb::gfx::window::base::callbackCharFun(GLFWwindow* window, unsigned int codepoint)
 {
@@ -316,5 +321,8 @@ void						neb::gfx::window::base::makeCurrent() {
 	assert(window_ != NULL);
 	glfwMakeContextCurrent(window_);
 }
-
+glm::vec2					neb::gfx::window::base::getCursorPosNDC()
+{
+	return glm::vec2();
+}
 

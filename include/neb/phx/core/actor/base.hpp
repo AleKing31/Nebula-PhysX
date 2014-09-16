@@ -7,15 +7,13 @@
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/shape/util/parent.hpp>
-#include <neb/phx/game/weapon/util/parent.hpp>
-#include <neb/phx/game/weapon/util/decl.hpp>
-#include <neb/phx/filter.hpp>
+//#include <neb/core/game/weapon/util/parent.hpp>
+#include <neb/core/game/weapon/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor {
 
 	class base:
 		virtual public neb::core::core::actor::base,
-		virtual public neb::phx::game::weapon::util::parent,
 		virtual public neb::phx::core::actor::util::cast
 	{
 		public:
@@ -38,8 +36,8 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			virtual void		init_physics() {}
 
 			template<typename Archive> void		serializeTemplate(Archive & ar, unsigned int const & version) {
-				ar & boost::serialization::make_nvp("filter_data_simulation",simulation_);
-				ar & boost::serialization::make_nvp("filter_data_scene_query",scene_query_);
+				//ar & boost::serialization::make_nvp("filter_data_simulation",simulation_);
+				//ar & boost::serialization::make_nvp("filter_data_scene_query",scene_query_);
 
 			}
 	
@@ -50,18 +48,12 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			 */
 			/** @brief create simple projectile weapon
 			 */
-			std::weak_ptr<neb::phx::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
-					std::shared_ptr<neb::gfx::window::base> window,
+			std::weak_ptr<neb::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
+					std::shared_ptr<neb::core::input::source> src,
 					double size,
 					double damage,
 					double velocity);
 			/** @} */
-		public:
-
-			phx::filter::data							simulation_;
-			phx::filter::data							scene_query_;
-
-			double									health_;
 
 	};
 

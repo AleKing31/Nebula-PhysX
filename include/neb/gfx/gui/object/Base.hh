@@ -10,12 +10,14 @@
 #include <neb/core/itf/shared.hpp>
 #include <neb/core/color/Color.hh>
 
+#include <neb/core/input/sink.hpp>
 #include <neb/core/type_traits.hpp>
 
 #include <neb/gfx/util/decl.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/gui/object/util/parent.hpp>
 #include <neb/gfx/gui/object/util/flag.hpp>
+
 
 namespace neb { namespace gfx {
 
@@ -24,6 +26,7 @@ namespace neb { namespace gfx {
 	namespace gui { namespace object {
 
 		class base:
+			virtual public neb::core::input::sink,
 			virtual public neb::gfx::gui::object::util::parent,
 			virtual public neb::itf::shared
 		{
@@ -36,12 +39,12 @@ namespace neb { namespace gfx {
 				virtual void			init(parent_t * const & p);
 				virtual void			draw(neb::gfx::RenderDesc const &) = 0;
 
-				virtual int			key_fun(
-						std::shared_ptr<neb::gfx::window::base> const & window, int, int, int, int) = 0;
-				virtual int			mouse_button_fun(
-						std::shared_ptr<neb::gfx::window::base> const & window, int, int, int);
+				virtual int			keyFun(
+						std::shared_ptr<neb::core::input::source> const &, int, int, int, int) = 0;
+				virtual int			mouseButtonFun(
+						std::shared_ptr<neb::core::input::source> const &, int, int, int);
 				virtual int			charFun(
-						std::shared_ptr<neb::gfx::window::base> const & window,
+						std::shared_ptr<neb::core::input::source> const &,
 						unsigned int codepoint) {return 0;}
 
 				//virtual void			connect();

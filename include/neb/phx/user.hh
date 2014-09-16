@@ -14,7 +14,7 @@ namespace neb { namespace phx {
 		public:
 			user();
 			void	init();
-			void	connect(std::shared_ptr<neb::gfx::window::base>);
+			void	connect(std::shared_ptr<neb::core::input::source>);
 			void	set_control(std::shared_ptr<phx::core::actor::control::rigidbody::base>);
 			
 			

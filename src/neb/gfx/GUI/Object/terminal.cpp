@@ -73,7 +73,7 @@ void		neb::gfx::gui::object::terminal::draw(neb::gfx::RenderDesc const & desc) {
 	draw_text(0, x, y, sx, sy, font_color_, line.c_str(), console->line_.pos + console->prompt_end_.size());
 }
 int			neb::gfx::gui::object::terminal::charFun(
-		shared_ptr<neb::gfx::window::base> const & window,
+		shared_ptr<neb::core::input::source> const & window,
 		unsigned int codepoint)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
@@ -86,8 +86,8 @@ int			neb::gfx::gui::object::terminal::charFun(
 	}
 	return 1;
 }
-int			neb::gfx::gui::object::terminal::key_fun(
-		std::shared_ptr<neb::gfx::window::base> const & window,
+int			neb::gfx::gui::object::terminal::keyFun(
+		std::shared_ptr<neb::core::input::source> const & window,
 		int key,
 		int scancode,
 		int action,

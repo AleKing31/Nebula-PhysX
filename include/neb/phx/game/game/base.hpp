@@ -1,6 +1,0 @@
-#ifndef PHYSX_GAME_GAME_BASE_HPP
-#define PHYSX_GAME_GAME_BASE_HPP
-
-
-
-#endif

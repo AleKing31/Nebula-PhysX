@@ -37,7 +37,9 @@ void					neb::gfx::core::shape::base::init(neb::core::core::shape::util::parent 
 
 	createMesh();
 }
-void					neb::gfx::core::shape::base::release() {
+void					neb::gfx::core::shape::base::release()
+{
+	neb::core::core::shape::base::release();
 }
 void					neb::gfx::core::shape::base::step(gal::etc::timestep const & ts) {
 

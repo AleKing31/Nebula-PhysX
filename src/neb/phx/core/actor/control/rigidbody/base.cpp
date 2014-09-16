@@ -16,8 +16,13 @@
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
-neb::phx::core::actor::control::rigidbody::base::base() {
+typedef neb::phx::core::actor::control::rigidbody::base THIS;
 
+THIS::base() {
+
+}
+void		THIS::release()
+{
 }
 void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
 	abort();
@@ -25,7 +30,13 @@ void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive
 void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
 	abort();
 }
-int			neb::phx::core::actor::control::rigidbody::base::key_fun(std::shared_ptr<neb::gfx::window::base> window, int key, int scancode, int action, int mods) {
+int			neb::phx::core::actor::control::rigidbody::base::keyFun(
+		std::shared_ptr<neb::core::input::source> src,
+		int key,
+		int scancode,
+		int action,
+		int mods)
+{
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;

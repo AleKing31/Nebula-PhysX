@@ -25,7 +25,8 @@
 #include <neb/core/util/debug.hpp>
 
 #include <neb/gfx/window/Base.hh>
-#include <neb/gfx/window/util/signals.hpp>
+
+#include <neb/core/input/signals.hpp>
 
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
@@ -84,17 +85,21 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
-void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::gfx::window::base> window)
+void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::core::input::source> src)
 {
 	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
 
-	auto control(sp::make_shared<neb::phx::core::actor::control::rigidbody::manual>());
+	typedef neb::phx::core::actor::control::rigidbody::manual Control;
+
+	std::shared_ptr<Control> control(new Control());
 
 	control_ = control;
 
 	control->actor_ = isPxActorRigidBodyBase();
 
-	control->conn_.key_fun_ = window->sig_.key_fun_.connect(
+	control->connectKeyFun(src, 20);
+
+/*	control->conn_.key_fun_ = window->sig_.key_fun_.connect(
 			20,
 			neb::gfx::window::signals::KeyFun::slot_type(
 				&neb::phx::core::actor::control::rigidbody::base::key_fun,
@@ -106,7 +111,7 @@ void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_p
 				_5
 				).track_foreign(control)
 			);
-
+*/
 
 }
 void			neb::phx::core::actor::rigidbody::base::createControlPD()

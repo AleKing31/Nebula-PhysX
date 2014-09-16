@@ -8,8 +8,13 @@
 #include <gal/etc/timestep.hpp>
 
 #include <neb/core/util/typedef.hpp>
+#include <neb/core/input/sink.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
+
+namespace neb { namespace core { namespace input {
+	class source;
+}}}
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
 
@@ -23,13 +28,17 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 		 * This creates requirements for how control works. All infomation needed to determine 
 		 * force and torque at a given point in time must be stored in raw.
 		 **/
-		class base {
+		class base:
+			virtual public neb::core::input::sink
+		{
 			public:
 				base();
 				virtual ~base() {}
 				base&				operator=(base const & base);
 
-				virtual int			key_fun(std::shared_ptr<neb::gfx::window::base>, int, int, int, int);
+				virtual void			release();
+
+				virtual int			keyFun(std::shared_ptr<neb::core::input::source>, int, int, int, int);
 
 				virtual void			step(gal::etc::timestep const & ts) = 0;
 				virtual vec3			f_body() = 0;
