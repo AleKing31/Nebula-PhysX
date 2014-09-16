@@ -147,6 +147,7 @@ void			neb::gfx::environ::shadow::point::render(
 				view_[layer].get(),
 				proj_.get(),
 				programs_.d3_.get(),
+				programs_.d3_HF_.get(),
 				programs_.d3_inst_.get()
 				)
 		      );

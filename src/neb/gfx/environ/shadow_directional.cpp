@@ -92,6 +92,7 @@ void		neb::gfx::environ::shadow_directional::render(std::shared_ptr<neb::gfx::co
 				view_.get(),
 				proj_.get(),
 				programs_.d3_.get(),
+				programs_.d3_HF_.get(),
 				programs_.d3_inst_.get())
 		      );
 

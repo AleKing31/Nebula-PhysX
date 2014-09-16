@@ -3,7 +3,7 @@
 
 float	scale(float x, float a, float b)
 {
-	return (x - b) / (b - a);
+	return (x - a) / (b - a);
 }
 vec4	cm_linear(float x, vec4 a, vec4 b)
 {
@@ -34,6 +34,8 @@ vec4	uintARGB8888_to_vec4(in uint uc)
 	
 	return vec4(r,g,b,a);
 }
+
+vec4 red = vec4(1,0,0,1);
 
 #endif
 

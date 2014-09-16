@@ -23,13 +23,19 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			virtual void				step(gal::etc::timestep  const & ts);
 			virtual void				create_physics();
 
+			virtual void				drawHF(
+							neb::gfx::glsl::program::base const * const & p,
+							neb::core::pose const & pose);
+
+
 			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &);
 			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const;
 
 
 			virtual physx::PxGeometry*		to_geo();
 
-
+			physx::PxReal				min_y_;
+			physx::PxReal				max_y_;
 	};
 
 

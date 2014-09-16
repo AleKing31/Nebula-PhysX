@@ -18,6 +18,9 @@ uniform sampler2DArray	normal_map;
 uniform sampler2DArray	shadow_map;
 uniform int		flag;
 
+uniform float		hf_min;
+uniform float		hf_max;
+
 #include "v130/inc/light.glsl"
 
 uniform mat4 view;
@@ -41,7 +44,15 @@ void main(void)
 	
 	//vec4 amb, dif, spc;
 	
-	vec4 dif = vec4(0,1,1,1);
+	vec4 brown = vec4(0.5, 0.3, 0, 1);
+	vec4 green = vec4(0.2, 0.5, 0, 1);
+	vec4 white = vec4(1,1,1,1);
+	vec4 black = vec4(0,0,0,1);	
+	vec4 blue = vec4(0,0,1,1);
+
+	vec4 dif = cm_linear(scale(vs_P.y, hf_min, hf_max), green, brown);
+	//vec4 dif = cm_linear(scale(vs_P.y, hf_min, hf_max), white, black);
+	//vec4 dif = cm_linear(scale(vs_P.y, -100.0, 10000.0), red, blue);
 
 	vec4 amb = vec4(0.3,0.3,0.3,1);
 	vec4 spc = vec4(0);
@@ -68,6 +79,7 @@ void main(void)
 	//color += vs_instance_emission;
 	
 	//color = vec4(1,1,1,1);
+	//color = dif;
 }
 
 

@@ -34,13 +34,6 @@ namespace neb { namespace gfx { namespace environ {
 			std::weak_ptr<neb::gfx::camera::view::ridealong>		createViewridealong(
 					std::weak_ptr<neb::core::core::actor::base> actor);
 		public:
-
-			struct {
-				program_shared			d3_;
-				program_shared			d3_inst_;
-			} programs_;
-
-
 	};
 
 

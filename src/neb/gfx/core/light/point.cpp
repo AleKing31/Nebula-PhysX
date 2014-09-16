@@ -61,9 +61,7 @@ void		neb::gfx::core::light::point::callbackPose(neb::core::pose const & gpose)
 	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
 	LOG(lg, neb::gfx::core::light::sl, debug) << gpose.mat4_cast();
 	
-	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
-	
-	scene->light_array_[light_array_].set_pos(light_array_slot_, gpose.pos_);
+	light_array_slot_->set<0>(gpose.pos_);
 }
 void			neb::gfx::core::light::point::initShadow(std::shared_ptr<neb::gfx::environ::SceneDefault> e3)
 {
@@ -136,16 +134,16 @@ void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::e
 	shadow_sampler_[1].z = texture_layers_->operator[](5);
 
 
-	scene->light_array_[light_array_].set_shadow_vpb_0(light_array_slot_, shadow_vpb_[0]);
-	scene->light_array_[light_array_].set_shadow_vpb_1(light_array_slot_, shadow_vpb_[1]);
-	scene->light_array_[light_array_].set_shadow_vpb_2(light_array_slot_, shadow_vpb_[2]);
-	scene->light_array_[light_array_].set_shadow_vpb_3(light_array_slot_, shadow_vpb_[3]);
-	scene->light_array_[light_array_].set_shadow_vpb_4(light_array_slot_, shadow_vpb_[4]);
-	scene->light_array_[light_array_].set_shadow_vpb_5(light_array_slot_, shadow_vpb_[5]);
+	light_array_slot_->set<10>(shadow_vpb_[0]);
+	light_array_slot_->set<11>(shadow_vpb_[1]);
+	light_array_slot_->set<12>(shadow_vpb_[2]);
+	light_array_slot_->set<13>(shadow_vpb_[3]);
+	light_array_slot_->set<14>(shadow_vpb_[4]);
+	light_array_slot_->set<15>(shadow_vpb_[5]);
 
 
-	scene->light_array_[light_array_].set_shadow_sampler_0(light_array_slot_, shadow_sampler_[0]);
-	scene->light_array_[light_array_].set_shadow_sampler_1(light_array_slot_, shadow_sampler_[1]);
+	light_array_slot_->set<16>(shadow_sampler_[0]);
+	light_array_slot_->set<17>(shadow_sampler_[1]);
 
 
 

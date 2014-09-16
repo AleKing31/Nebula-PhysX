@@ -80,6 +80,7 @@ void		neb::gfx::environ::vis_depth::render(std::shared_ptr<neb::gfx::context::ba
 				view_.get(),
 				proj_.get(),
 				programs_.d3_.get(),
+				programs_.d3_HF_.get(),
 				programs_.d3_inst_.get())
 		      );
 	

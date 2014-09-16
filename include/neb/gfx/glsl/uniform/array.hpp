@@ -13,8 +13,11 @@
 #include <neb/gfx/util/io.hpp>
 #include <neb/gfx/opengl/uniform.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
-#include <neb/gfx/util/array.hpp>
 #include <neb/gfx/util/log.hpp>
+
+#include <neb/gfx/util/array.hpp>
+#include <neb/gfx/util/slot.hpp>
+
 
 #include <neb/gfx/glsl/program/base.hpp>
 
@@ -34,18 +37,40 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 	 */
 	typedef neb::gfx::glsl::program::base		P;
 
-	template<typename LOC_DER, class... T> class array: public neb::gfx::array<T...> {
+	template<typename LOC_DER, class... T> class array:
+		public std::enable_shared_from_this< array< LOC_DER, T... > >,
+		public neb::gfx::array<T...>
+	{
 		public:
-			typedef locations<sizeof...(T), LOC_DER>		loc_type;
-			typedef typename gens<sizeof...(T)>::type		seq_type;
-			typedef std::map<P*, loc_type>				loc_map;
+			typedef locations<sizeof...(T), LOC_DER>				loc_type;
+			typedef typename gens<sizeof...(T)>::type				seq_type;
+			typedef std::map<P*, loc_type>						loc_map;
+			typedef std::enable_shared_from_this< array< LOC_DER, T... > >		esft;
+			typedef slot< array< LOC_DER, T... > >					slot_type;
+			typedef std::shared_ptr<slot_type>					slot_shared;
 		public:
-			virtual int				reg(T... initial) {
+
+			using neb::gfx::array<T...>::size;
+			using neb::gfx::array<T...>::getClosed;
+			using neb::gfx::array<T...>::isClosed;
+			using neb::gfx::array<T...>::isOpen;
+
+			virtual slot_shared			reg(T... initial)
+			{
+				LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
+
 				int i = neb::gfx::array<T...>::reg_array(initial...);
+
+				slot_shared s(
+						new slot_type(
+							esft::shared_from_this(),
+							i
+							)
+					     );
 
 				markLoadAll();				
 
-				return i;
+				return s;
 			}
 			void					markLoadAll()
 			{
@@ -70,7 +95,10 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 					p.second.load_any = 1;
 				}
 			}
-			void					unreg(int i) {
+			void					unreg(int i)
+			{
+				LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
+
 				neb::gfx::array<T...>::unreg_array(i);
 
 				markLoadClosed();
@@ -95,17 +123,17 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 
 						neb::gfx::ogl::glUniformv(
 								loc.location[sizeof...(T)],
-								neb::gfx::array<T...>::size,
-								neb::gfx::array<T...>::closed);
+								size(),
+								getClosed());
 
 						loc.load_closed = 0;
 					}
 
 					neb::gfx::ogl::glUniform(
 							loc.location[sizeof...(T)+1],
-							(int)neb::gfx::array<T...>::size);
+							(int)size());
 
-					LOG(lg, neb::gfx::sl, debug) << "load_uniform size=" << neb::gfx::array<T...>::size;
+					LOG(lg, neb::gfx::sl, debug) << "load_uniform size=" << size();
 
 					loc.load_any = 0;
 				}
@@ -120,19 +148,19 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 				{
 					LOG(lg, neb::gfx::sl, debug) << "load_uniform__ I=" << I << " loc=" << loc.location[I];
 
-					for(int i = 0; i < neb::gfx::array<T...>::size; i++)
+					for(int i = 0; i < size(); i++)
 					{
 						//std::get<I>(neb::gfx::array_basic<T...>::data_)[i]
 						//neb::gfx::array_basic<T...>::get<I,U>(i)
 
 						LOG(lg, neb::gfx::sl, debug)
 							<< std::setw(32) << neb::gfx::array_basic<T...>::template get<I,U>(i)
-							<< " closed=" << neb::gfx::array<T...>::closed[i];
+							<< " closed=" << isClosed(i);
 					}
 
 					neb::gfx::ogl::glUniformv(
 							loc.location[I],
-							neb::gfx::array<T...>::size,
+							size(),
 							neb::gfx::array_basic<T...>::template get<I,U>());
 
 					loc.load[I] = 0;
@@ -148,7 +176,7 @@ namespace neb { namespace gfx { namespace glsl { namespace uniform {
 			};
 
 			locations(): _M_initialized(false), load_any(1), load_closed(1) {}
-			
+
 			void					markLoadAll()
 			{
 				for(int j = 0; j < N; j++) {

@@ -22,6 +22,8 @@
 
 #include <neb/core/math/geo/polygon.hpp>
 
+typedef neb::gfx::core::shape::base THIS;
+
 neb::gfx::core::shape::base::base()
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
@@ -73,6 +75,11 @@ void					neb::gfx::core::shape::base::draw(
 	
 	draw_elements(p, npose);
 }
+void			THIS::drawHF(
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose)
+{
+}
 void			neb::gfx::core::shape::base::model_load(
 		neb::gfx::glsl::program::base const * const & p,
 		neb::core::pose const & pose)
@@ -88,7 +95,7 @@ void			neb::gfx::core::shape::base::draw_elements(
 		neb::gfx::glsl::program::base const * const & p,
 		neb::core::pose const & pose)
 {
-	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
 
 	assert(p);
 

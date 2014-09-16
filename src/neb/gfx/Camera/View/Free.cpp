@@ -108,7 +108,8 @@ void			neb::gfx::camera::view::Free::connect(std::shared_ptr<neb::core::input::s
 {
 	LOG(lg, neb::gfx::sl, info) << __PRETTY_FUNCTION__;
 	
-	connectKeyFun(src, 20);
+	/** @todo might have something to do with signal segfault */
+	//connectKeyFun(src, 20);
 	
 	/*window->sig_.keyFun_.connect(
 			20,

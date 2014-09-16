@@ -57,36 +57,6 @@ void			neb::gfx::gui::layout::base::connect(std::shared_ptr<neb::core::input::so
 	connectKeyFun(src, 10);
 	connectCharFun(src, 10);
 	connectMouseButtonFun(src, 10);
-
-/*
-	conns_.key_fun_ = window->sig_.key_fun_.connect(
-			10,
-			::std::bind(&neb::gfx::gui::layout::base::key_fun,
-				this,
-				::std::placeholders::_1,
-				::std::placeholders::_2,
-				::std::placeholders::_3,
-				::std::placeholders::_4,
-				::std::placeholders::_5
-				));
-	conns_.charFun_ = window->sig_.charFun_.connect(
-			10,
-			::std::bind(&neb::gfx::gui::layout::base::charFun,
-				this,
-				::std::placeholders::_1,
-				::std::placeholders::_2
-				));
-
-	conns_.mouse_button_fun_ = window->sig_.mouse_button_fun_.connect(
-			10,
-			::std::bind(&neb::gfx::gui::layout::base::mouse_button_fun,
-				this,
-				::std::placeholders::_1,
-				::std::placeholders::_2,
-				::std::placeholders::_3,
-				::std::placeholders::_4
-				));
-*/
 }
 int			neb::gfx::gui::layout::base::keyFun(
 		std::shared_ptr<neb::core::input::source> const & src,

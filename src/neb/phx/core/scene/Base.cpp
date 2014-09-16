@@ -74,6 +74,10 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 	// programs
 	_M_programs._M_d3.reset(new P3("3d"));
 	_M_programs._M_d3->init();
+
+	_M_programs._M_d3_HF.reset(new P3("3d_HF"));
+	_M_programs._M_d3_HF->init();
+
 	_M_programs._M_d3_inst.reset(new P3("3d_inst"));
 	_M_programs._M_d3_inst->init();
 
@@ -100,13 +104,20 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 void			THIS::init_light()
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-	// light arrays
-	light_array_[0].alloc(32);
-	light_array_[1].alloc(32);
+
+	if(!light_array_[0])
+	{
+		// light arrays
+		light_array_[0].reset(new neb::gfx::glsl::uniform::light_array);
+		light_array_[0]->alloc(32);
+
+		light_array_[1].reset(new neb::gfx::glsl::uniform::light_array);
+		light_array_[1]->alloc(32);
+	}
 }
 void			neb::phx::core::scene::base::release() {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	if(px_scene_)
 	{
 		px_scene_->release();
@@ -218,7 +229,7 @@ void			neb::phx::core::scene::base::create_physics() {
 		physx::PxVisualizationParameter::eCLOTH_VIRTUAL_PARTICLES,
 		physx::PxVisualizationParameter::eMBP_REGIONS
 	};
-	
+
 	for(unsigned int i = 0; i < (sizeof(flags) / sizeof(unsigned int)); i++)
 	{
 		px_scene_->setVisualizationParameter(flags[i], 1.0f);
@@ -352,13 +363,22 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
+		assert(desc.p);
+		assert(desc.v);
+
+	drawMesh(desc);
+	drawMeshHF(desc);
+	drawMeshInst(desc);
+}
+void			THIS::drawMesh(neb::gfx::RenderDesc const & desc)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+
 	// If program parameter is not NULL, use it and do not load lights.
 	//
 	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
 
 	P* d3;
-	P* d3_inst;
-
 
 	if(desc.d3) {
 		d3 = desc.d3;
@@ -367,6 +387,71 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 		d3 = _M_programs._M_d3.get();
 	}
 
+	assert(d3);
+
+	d3->use();
+
+	desc.p->load(d3);
+	desc.v->load(d3);
+
+	// lights
+	assert(light_array_[0]);
+	light_array_[0]->load_uniform(d3);
+
+	// individual meshes
+	auto la = [&] (A::map_type::pointer p) {
+		auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
+		assert(actor);
+		actor->draw(d3, neb::core::pose());
+	};
+
+	A::map_.for_each(la);
+
+}
+void			THIS::drawMeshHF(neb::gfx::RenderDesc const & desc)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+
+	// If program parameter is not NULL, use it and do not load lights.
+	//
+	// For rendering lights, use one of the programs owned by this, which contain persistent data for the lights.
+
+	P* p;
+
+	if(desc.d3_HF) {
+		p = desc.d3_HF;
+	} else {
+		assert(_M_programs._M_d3_HF);
+		p = _M_programs._M_d3_HF.get();
+	}
+
+	assert(p);
+
+	p->use();
+
+	desc.p->load(p);
+	desc.v->load(p);
+
+	// lights
+	assert(light_array_[0]);
+	light_array_[0]->load_uniform(p);
+
+	// individual meshes
+	auto la = [&] (A::map_type::pointer ptr) {
+		auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(ptr);
+		assert(actor);
+		actor->drawHF(p, neb::core::pose());
+	};
+
+	A::map_.for_each(la);
+
+}
+void			THIS::drawMeshInst(neb::gfx::RenderDesc const & desc)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+
+	P* d3_inst;
+
 	if(desc.d3_inst) {
 		d3_inst = desc.d3_inst;
 	} else {
@@ -374,53 +459,28 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 		d3_inst = _M_programs._M_d3_inst.get();
 	}
 
-	assert(d3);
 	assert(d3_inst);
 
+	d3_inst->use();
 
-	{
-		d3->use();
+	desc.p->load(d3_inst);
+	desc.v->load(d3_inst);
 
-		assert(desc.p);
-		assert(desc.v);
+	// lights
+	assert(light_array_[0]);
+	light_array_[0]->load_uniform(d3_inst);
 
-		desc.p->load(d3);
-		desc.v->load(d3);
+	if(tex_shadow_map_) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
 
-		// lights
-		light_array_[0].load_uniform(d3);
-
-		// individual meshes
-		auto la = [&] (A::map_type::pointer p) {
-			auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
-			assert(actor);
-			actor->draw(d3, neb::core::pose());
-		};
-
-		A::map_.for_each(la);
+		GLint loc = d3_inst->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
+		neb::gfx::ogl::glUniform(loc, 0);
 	}
 
-	{
-		d3_inst->use();
-	
-		desc.p->load(d3_inst);
-		desc.v->load(d3_inst);
-	
-		// lights
-		light_array_[0].load_uniform(d3_inst);
-
-		if(tex_shadow_map_) {
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(tex_shadow_map_->target_, tex_shadow_map_->o_);
-
-			GLint loc = d3_inst->uniform_table_[neb::gfx::glsl::uniforms::TEX_SHADOW_MAP];
-			neb::gfx::ogl::glUniform(loc, 0);
-		}
-
-		// meshes
-		assert(meshes_.cuboid_);
-		meshes_.cuboid_->draw(d3_inst);
-	}
+	// meshes
+	assert(meshes_.cuboid_);
+	meshes_.cuboid_->draw(d3_inst);
 
 }
 void			neb::phx::core::scene::base::drawPhysxVisualization(

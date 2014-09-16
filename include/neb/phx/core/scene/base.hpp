@@ -53,11 +53,12 @@ namespace neb {
 
 
 			void					resize(int w, int h);
-			void					draw(
-					gfx::RenderDesc const &);
-			void					drawPhysxVisualization(
-					gfx::RenderDesc const &);
 
+			void					draw(gfx::RenderDesc const &);
+			void					drawMesh(gfx::RenderDesc const &);
+			void					drawMeshHF(gfx::RenderDesc const &);
+			void					drawMeshInst(gfx::RenderDesc const &);
+			void					drawPhysxVisualization(gfx::RenderDesc const &);
 
 
 		public:
@@ -87,20 +88,17 @@ namespace neb {
 
 
 
-
-
-
-
 			// rendering data
 			
 			struct
 			{
 				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3;
+				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3_HF;
 				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3_inst;
 			} _M_programs;
 			
 			// one for static, one for dynamic
-			neb::gfx::glsl::uniform::light_array				light_array_[2];
+			std::shared_ptr<neb::gfx::glsl::uniform::light_array>		light_array_[2];
 
 			std::shared_ptr<neb::gfx::texture>				tex_shadow_map_;
 

@@ -90,13 +90,11 @@ void		neb::gfx::core::light::directional::setShadowEnviron(std::shared_ptr<neb::
 
 	shadow_vpb_[0] = vpb;
 	
-
-	scene->light_array_[light_array_].set_shadow_vpb_0(
-			light_array_slot_,
-			shadow_vpb_[0]);
-	scene->light_array_[light_array_].set_shadow_sampler_0(
-			light_array_slot_,
-			shadow_sampler_[0]);
+	// light array
+	
+	light_array_slot_->set<10>(shadow_vpb_[0]);
+			
+	light_array_slot_->set<16>(shadow_sampler_[0]);
 
 }
 void		THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)

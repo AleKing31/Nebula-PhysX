@@ -17,12 +17,15 @@ namespace neb {
 						camera::view::base* nv,
 						camera::proj::base* np,
 						glsl::program::base* nd3,
-						glsl::program::base* nd3_inst): v(nv), p(np), d3(nd3), d3_inst(nd3_inst) {}
+						glsl::program::base* nd3_HF,
+						glsl::program::base* nd3_inst):
+					v(nv), p(np), d3(nd3), d3_HF(nd3_HF), d3_inst(nd3_inst) {}
 
 				camera::view::base*		v;
 				camera::proj::base*		p;
 				
 				glsl::program::base*		d3;
+				glsl::program::base*		d3_HF;
 				glsl::program::base*		d3_inst;
 				
 		};

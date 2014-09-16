@@ -32,6 +32,7 @@ namespace neb { namespace gfx { namespace environ {
 
 			struct {
 				program_shared			d3_;
+				program_shared			d3_HF_;
 				program_shared			d3_inst_;
 			} programs_;
 

@@ -15,7 +15,7 @@
 #include <neb/core/core/light/base.hpp>
 #include <neb/core/color/Color.hh>
 
-
+#include <neb/gfx/glsl/uniform/light_array.hpp>
 #include <neb/gfx/core/scene/util/decl.hpp>
 #include <neb/gfx/util/decl.hpp>
 
@@ -97,8 +97,8 @@ namespace neb { namespace gfx { namespace core { namespace light {
 
 			// other properties
 
-			int						light_array_;
-			int						light_array_slot_;
+			int							light_array_;
+			neb::gfx::glsl::uniform::light_array::slot_shared	light_array_slot_;
 
 			std::shared_ptr<gal::etc::slots::ticket>	texture_layers_;
 

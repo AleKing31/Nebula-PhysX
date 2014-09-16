@@ -83,6 +83,8 @@ namespace neb { namespace gfx {
 				LIGHT_CLOSED,
 				LIGHT_COUNT,
 				FONT_COLOR,
+				HF_MIN,
+				HF_MAX,
 				COUNT
 			};
 
@@ -117,7 +119,9 @@ namespace neb { namespace gfx {
 				"light_type",
 				"light_closed",
 				"light_count",
-				"font_color"
+				"font_color",
+				"hf_min",
+				"hf_max"
 			};
 		};
 

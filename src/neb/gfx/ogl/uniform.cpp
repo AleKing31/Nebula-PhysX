@@ -29,6 +29,11 @@ void		neb::gfx::ogl::glUniformv(GLint location, GLsizei count, int const * const
 	glUniform1iv(location, count, value);
 	checkerror("glUniform1iv %i %i\n", location, count);
 }
+void		neb::gfx::ogl::glUniform(GLint location, float const & value) {
+	checkerror("unknown");
+	glUniform1f(location, value);
+	checkerror("glUniform1f %i\n", location);
+}
 void		neb::gfx::ogl::glUniform(GLint location, int const & value) {
 	checkerror("unknown");
 	glUniform1i(location, value);

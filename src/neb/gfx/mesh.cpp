@@ -152,6 +152,7 @@ void			neb::gfx::mesh::tri1::drawElements(
 		neb::core::pose const & pose,
 		glm::vec3 scale)
 {
+	LOG(lg, neb::gfx::sl, (severity_level)sl) << "mesh";
 	assert(p);
 
 	base_t::drawElements(p, pose, scale, nbIndices_);

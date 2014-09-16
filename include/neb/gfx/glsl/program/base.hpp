@@ -31,7 +31,7 @@ namespace neb { namespace gfx { namespace glsl { namespace program {
 			void			add_shader(std::string, GLenum);
 			void			add_shaders(std::vector<neb::gfx::glsl::shader>);
 			void			compile();
-			void			use();
+			void			use() const;
 			void			locate();
 			void			scanUniforms();
 

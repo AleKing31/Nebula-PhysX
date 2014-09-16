@@ -25,6 +25,8 @@ neb::gfx::core::light::type::e		THIS::getType()
 }
 void			THIS::init(neb::core::core::light::util::parent * const & p)
 {
+	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
+
 	setParent(p);
 
 	neb::gfx::core::light::base::init(p);
@@ -59,10 +61,8 @@ void		neb::gfx::core::light::spot::callbackPose(neb::core::pose const & gpose)
 	LOG(lg, neb::gfx::core::light::sl, debug) << __PRETTY_FUNCTION__;
 	LOG(lg, neb::gfx::core::light::sl, debug) << gpose.mat4_cast();
 	
-	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
-	
-	scene->light_array_[light_array_].set_pos(light_array_slot_, gpose.pos_);
-	scene->light_array_[light_array_].set_spot_direction(light_array_slot_, gpose.rot_ * spot_direction_);
+	light_array_slot_->set<0>(gpose.pos_);
+	light_array_slot_->set<7>(gpose.rot_ * spot_direction_);
 }
 void		neb::gfx::core::light::spot::setShadowEnviron(std::shared_ptr<neb::gfx::environ::base> environ) {
 /*

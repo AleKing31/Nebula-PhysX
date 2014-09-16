@@ -109,7 +109,7 @@ void	neb::gfx::glsl::program::base::compile() {
 	printf("program=%i\n",o_);
 
 }
-void	neb::gfx::glsl::program::base::use() {
+void	neb::gfx::glsl::program::base::use() const {
 	
 	checkerror("unknown");
 	

@@ -52,6 +52,31 @@ void				neb::gfx::core::actor::base::draw(
 
 
 }
+void				neb::gfx::core::actor::base::drawHF(
+		neb::gfx::glsl::program::base const * const & program,
+		neb::core::pose const & pose)
+{
+	LOG(lg, neb::core::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+
+	auto npose = pose * pose_;
+
+	typedef neb::core::core::actor::util::parent A;
+	typedef neb::core::core::shape::util::parent S;
+
+	A::map_.for_each([&] (A::map_type::pointer p) {
+			auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(p);
+			assert(actor);
+			actor->drawHF(program, npose);
+			});
+
+	S::map_.for_each([&] (S::map_type::pointer p) {
+			auto shape = std::dynamic_pointer_cast<neb::gfx::core::shape::base>(p);
+			assert(shape);
+			shape->drawHF(program, npose);
+			});
+
+
+}
 
 
 

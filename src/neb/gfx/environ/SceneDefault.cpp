@@ -83,6 +83,7 @@ void		neb::gfx::environ::SceneDefault::render(std::shared_ptr<neb::gfx::context:
 				view_.get(),
 				proj_.get(),
 				programs_.d3_.get(),
+				programs_.d3_HF_.get(),
 				programs_.d3_inst_.get()
 				)
 		      );
@@ -94,6 +95,7 @@ void		neb::gfx::environ::SceneDefault::render(std::shared_ptr<neb::gfx::context:
 				view_.get(),
 				proj_.get(),
 				programs_.d3_.get(),
+				programs_.d3_HF_.get(),
 				programs_.d3_inst_.get()
 				)
 			);

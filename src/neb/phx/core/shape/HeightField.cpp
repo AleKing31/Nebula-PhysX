@@ -124,8 +124,8 @@ struct HF
 	unsigned int			_M_nbRows;
 	unsigned int			_M_nbColumns;
 
-	short				_M_min;
-	short				_M_max;
+	//short				_M_min;
+	//short				_M_max;
 };
 
 
@@ -248,6 +248,8 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 	math::geo::vertex* vertices = new math::geo::vertex[nbVerts];
 	GLushort* indices = new GLushort[nbIndices];
 
+	min_y_ = physx::PxReal(hf.min()) * heightScale;
+	max_y_ = physx::PxReal(hf.max()) * heightScale;
 
 
 	for(physx::PxU32 i = 0; i < nbRows; i++)
@@ -356,6 +358,19 @@ void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
 }
 void	THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
 {
+}
+void			THIS::drawHF(
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose)
+{
+	auto npose = pose * pose_;
+	
+	p->use();
+	
+	neb::gfx::ogl::glUniform(p->uniform_table_[neb::gfx::glsl::uniforms::HF_MIN], min_y_);
+	neb::gfx::ogl::glUniform(p->uniform_table_[neb::gfx::glsl::uniforms::HF_MAX], max_y_);
+	
+	draw_elements(p, npose);
 }
 
 

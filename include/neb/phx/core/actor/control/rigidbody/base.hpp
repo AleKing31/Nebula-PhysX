@@ -12,24 +12,21 @@
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
-namespace neb { namespace core { namespace input {
-	class source;
-}}}
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
 
 
 
-		/** @brief Rigid Body
-		 * An object (what did I mean by 'object' here, an actor?) makes no distinction between local and remote.
-		 * In a remote scene, the actor will send a control update message.
-		 * In a local scene, the actor will call upon stored values; it makes no difference to the
-		 * actor whether these value were set by calls to key_fun or by a control update message.
-		 * This creates requirements for how control works. All infomation needed to determine 
-		 * force and torque at a given point in time must be stored in raw.
-		 **/
-		class base:
-			virtual public neb::core::input::sink
+	/** @brief Rigid Body
+	 * An object (what did I mean by 'object' here, an actor?) makes no distinction between local and remote.
+	 * In a remote scene, the actor will send a control update message.
+	 * In a local scene, the actor will call upon stored values; it makes no difference to the
+	 * actor whether these value were set by calls to key_fun or by a control update message.
+	 * This creates requirements for how control works. All infomation needed to determine 
+	 * force and torque at a given point in time must be stored in raw.
+	 **/
+	class base:
+		virtual public neb::core::input::sink
 		{
 			public:
 				base();
@@ -38,7 +35,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 
 				virtual void			release();
 
-				virtual int			keyFun(std::shared_ptr<neb::core::input::source>, int, int, int, int);
+				virtual int			keyFun(std::shared_ptr<neb::core::input::source> const &, int, int, int, int);
 
 				virtual void			step(gal::etc::timestep const & ts) = 0;
 				virtual vec3			f_body() = 0;
@@ -62,37 +59,35 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 				vec3				force_;
 				vec3				torque_;
 
-
-				struct
-				{
-					boost::signals2::connection	key_fun_;
-				} conn_;
-
 				//gal::control::control		pid_;
 
 		};
-		class manual: public neb::phx::core::actor::control::rigidbody::base {
-			public:
-				virtual ~manual() {}
-				void				step(gal::etc::timestep const & ts);
-				virtual vec3			f_body();
-				virtual vec3			t_body();
-				virtual vec3			f_global();
-				virtual vec3			t_global();
+	class manual:
+		virtual public neb::phx::core::actor::control::rigidbody::base
+	{
+		public:
+			virtual ~manual() {}
+			void				step(gal::etc::timestep const & ts);
+			virtual vec3			f_body();
+			virtual vec3			t_body();
+			virtual vec3			f_global();
+			virtual vec3			t_global();
 
-		};
-		class pd: public neb::phx::core::actor::control::rigidbody::base {
-			public:
-				virtual ~pd() {}
-				void				step(gal::etc::timestep const & ts);
+	};
+	class pd:
+		virtual public neb::phx::core::actor::control::rigidbody::base
+	{
+		public:
+			virtual ~pd() {}
+			void				step(gal::etc::timestep const & ts);
 
-				vec3				getOrientationError();
+			vec3				getOrientationError();
 
-				virtual vec3			f_body();
-				virtual vec3			t_body();
-				virtual vec3			f_global();
-				virtual vec3			t_global();
-		};
+			virtual vec3			f_body();
+			virtual vec3			t_body();
+			virtual vec3			f_global();
+			virtual vec3			t_global();
+	};
 
 
 }}}}}}

@@ -26,7 +26,7 @@ namespace neb { namespace gfx { namespace mesh {
 				glm::vec4,
 				float
 				>		instances_type;
-			typedef instances_type::slot				slot_type;
+			typedef instances_type::slot_type			slot_type;
 
 
 
