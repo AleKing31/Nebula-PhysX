@@ -11,6 +11,7 @@
 #include <neb/gfx/Context/Util/Parent.hh>
 #include <neb/gfx/environ/two.hpp>
 #include <neb/gfx/environ/SceneDefault.hpp>
+#include <neb/gfx/environ/NormalMap.hpp>
 #include <neb/gfx/environ/shadow/point.hpp>
 #include <neb/gfx/environ/shadow/directional.hpp>
 #include <neb/gfx/environ/vis_depth.hpp>
@@ -77,6 +78,24 @@ std::weak_ptr<neb::gfx::environ::two>			neb::gfx::context::base::createEnvironTw
 std::weak_ptr<neb::gfx::environ::SceneDefault>		neb::gfx::context::base::createEnvironSceneDefault() {
 
 	typedef neb::gfx::environ::SceneDefault E;
+	
+	std::shared_ptr<E> environ(new E(), gal::stl::deleter<E>());
+
+	auto w = getParent()->isWindowBase();
+	if(w)
+	{
+		w->makeCurrent();
+	}
+
+	environ->init();
+
+	environ_ = environ;
+
+	return environ;
+}
+std::weak_ptr<neb::gfx::environ::NormalMap>		neb::gfx::context::base::createEnvironNormalMap() {
+
+	typedef neb::gfx::environ::NormalMap E;
 	
 	std::shared_ptr<E> environ(new E(), gal::stl::deleter<E>());
 

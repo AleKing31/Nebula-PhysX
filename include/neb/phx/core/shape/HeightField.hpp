@@ -1,7 +1,7 @@
 #ifndef PHYSX_SHAPE_HEIGHT_FIELD_HH
 #define PHYSX_SHAPE_HEIGHT_FIELD_HH
 
-
+#include <neb/core/core/shape/HeightField/desc.hpp>
 #include <neb/gfx/core/shape/base.hpp>
 #include <neb/phx/core/shape/base.hpp>
 
@@ -36,6 +36,8 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 			physx::PxReal				min_y_;
 			physx::PxReal				max_y_;
+
+			neb::core::core::shape::HeightField::desc	desc_;
 	};
 
 

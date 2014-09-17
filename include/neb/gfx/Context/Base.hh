@@ -52,6 +52,7 @@ namespace neb {
 
 					std::weak_ptr<neb::gfx::environ::two>			createEnvironTwo();
 					std::weak_ptr<neb::gfx::environ::SceneDefault>		createEnvironSceneDefault();
+					std::weak_ptr<neb::gfx::environ::NormalMap>		createEnvironNormalMap();
 					std::weak_ptr<neb::gfx::environ::shadow::point>		createEnvironShadowPoint();
 					std::weak_ptr<neb::gfx::environ::shadow_directional>	createEnvironShadowDirectional();
 					std::weak_ptr<neb::gfx::environ::vis_depth>		createEnvironVisDepth();

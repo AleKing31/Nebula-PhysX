@@ -54,8 +54,11 @@ namespace neb { namespace gfx { namespace window {
 			void					callback_mouse_button_fun(GLFWwindow*,int,int,int);
 			void					callback_key_fun(GLFWwindow*,int,int,int,int);
 			void					callbackCharFun(GLFWwindow*,unsigned int);
+
 			std::weak_ptr<neb::gfx::context::window>	createContextTwo();
 			std::weak_ptr<neb::gfx::context::window>	createContextThree();
+			std::weak_ptr<neb::gfx::context::window>	createContextNormalMap();
+
 			void						makeCurrent();
 		public:
 
