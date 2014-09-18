@@ -19,10 +19,13 @@
 #include <neb/gfx/util/config.hpp>
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/glsl/shader.hh>
+#include <neb/gfx/app/__gfx_glsl.hpp>
 
 std::vector<std::string>		readLines(std::string filename) {
 
-	filename = NEB_GFX_SHADER_DIR + filename;
+	auto app(neb::gfx::app::__gfx_glsl::global().lock());
+	
+	filename = app->share_dir_ + "media/shaders/" + filename;
 
 	std::ifstream ifs(filename);
 

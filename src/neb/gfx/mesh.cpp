@@ -12,6 +12,8 @@
 #include <neb/core/math/geo/polygon.hpp>
 #include <neb/core/util/debug.hpp>
 
+#include <PxPhysicsAPI.h>
+
 #include <neb/gfx/free.hpp>
 #include <neb/gfx/core/mesh.hh>
 #include <neb/gfx/texture.hpp>
@@ -20,6 +22,7 @@
 #include <neb/gfx/glsl/attrib.hh>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/glsl/buffer/mesh.hpp>
+#include <neb/gfx/app/__gfx_glsl.hpp>
 
 neb::gfx::mesh::tri1::tri1() {
 	//printf("%s\n",__PRETTY_FUNCTION__);
@@ -231,6 +234,158 @@ void			neb::gfx::mesh::tri1::drawElements(
 	 */
 
 }
+void			neb::gfx::mesh::tri1::drawDebug(
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose,
+		glm::vec3 scale)
+{
+	LOG(lg, neb::gfx::sl, info) << __PRETTY_FUNCTION__;
+	assert(p);
+
+	// model matrix
+	LOG(lg, neb::gfx::sl, debug) << "load modelview matrix";
+	glm::mat4 model = pose.mat4_cast() * glm::scale(scale);
+
+
+	// debug vis
+	//auto app(neb::gfx::app::__gfx_glsl::global().lock());
+
+	//if(!flag_.all(neb::core::core::scene::util::flag::PHYSX_VISUALIZATION)) return;
+
+	// visual debugging
+	//if(px_scene_)
+	{
+		//const physx::PxRenderBuffer& rb = px_scene_->getRenderBuffer();
+
+		//physx::PxU32 nblines = rb.getNbLines();
+		//const physx::PxDebugLine* lines = rb.getLines();
+
+		//physx::PxU32 nbtriangles = rb.getNbTriangles();
+		//const physx::PxDebugTriangle* triangles = rb.getTriangles();
+
+
+		physx::PxU32 nblines = nbVerts_;
+		physx::PxU32 nbtriangles = 0;
+
+		LOG(lg, neb::gfx::sl, debug) << "Debug visualization";
+		//LOG(lg, neb::gfx::sl, debug) << "number of points    " << rb.getNbPoints();
+		LOG(lg, neb::gfx::sl, debug) << "number of lines     " << nblines;
+		LOG(lg, neb::gfx::sl, debug) << "number of triangles " << nbtriangles;
+
+		// argb 32 bit
+		physx::PxU32 red = 0xffff0000;
+
+		std::vector<physx::PxDebugLine> lines;
+		for(unsigned int i = 0; i < nbVerts_; i++)
+		{
+			if((i % 100) == 0) LOG(lg, neb::gfx::sl, debug) << std::dec << i;
+
+
+			// calculate model space position and normal
+			glm::vec3 p = vec3(model * vec4(vertices_[i].p,1));
+			glm::vec3 n = mat3(model) * vertices_[i].n;
+			glm::vec3 e = p + n;
+
+			lines.emplace_back(
+					physx::PxVec3(p.x, p.y, p.z),
+					physx::PxVec3(e.x, e.y, e.z),
+					red);
+		}
+
+
+		physx::PxDebugTriangle* triangles = NULL;
+
+
+		//auto e = neb::could_be<neb::gfx::environ::base, neb::gfx::environ::three>(context->environ_);
+		//if(e)
+		{
+
+			//glClear(GL_DEPTH_BUFFER_BIT);
+
+
+
+
+			GLint i_color = p->attrib_table_[neb::gfx::glsl::attribs::COLOR];
+
+			glEnableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::POSITION]);
+			if(i_color > -1)
+				glEnableVertexAttribArray(i_color);
+
+			GLuint buf;
+			glGenBuffers(1, &buf);
+			glBindBuffer(GL_ARRAY_BUFFER, buf);
+
+
+			// lines
+			glBufferData(
+					GL_ARRAY_BUFFER,
+					sizeof(physx::PxDebugLine) * nblines,
+					&lines[0],
+					GL_STREAM_DRAW
+				    );
+
+			glVertexAttribPointer(
+					p->attrib_table_[neb::gfx::glsl::attribs::POSITION],
+					3,
+					GL_FLOAT,
+					GL_FALSE,
+					16,
+					0);
+
+
+			if(i_color > -1)
+				glVertexAttribIPointer(
+						p->attrib_table_[neb::gfx::glsl::attribs::COLOR],
+						1,
+						GL_UNSIGNED_INT,
+						16,
+						(GLvoid*)12);
+
+			glDrawArrays(GL_LINES, 0, nblines * 2);
+
+			checkerror("");
+
+			// triangles
+			glBufferData(
+					GL_ARRAY_BUFFER,
+					sizeof(physx::PxDebugTriangle) * nbtriangles,
+					triangles,
+					GL_STREAM_DRAW
+				    );
+
+			glVertexAttribPointer(
+					p->attrib_table_[neb::gfx::glsl::attribs::POSITION],
+					3,
+					GL_FLOAT,
+					GL_FALSE,
+					16,
+					0);
+
+
+			if(i_color > -1)
+				glVertexAttribIPointer(
+						p->attrib_table_[neb::gfx::glsl::attribs::COLOR],
+						1,
+						GL_UNSIGNED_INT,
+						16,
+						(GLvoid*)12);
+
+			glDrawArrays(GL_TRIANGLES, 0, nbtriangles * 3);
+
+			checkerror("");
+
+			// cleanup
+			glDisableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::POSITION]);
+			if(i_color > -1)
+				glDisableVertexAttribArray(p->attrib_table_[neb::gfx::glsl::attribs::COLOR]);
+
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+	}
+
+}
+
+
 /*
    void			neb::gfx::mesh::tri1::draw_elements(
    program_shared						p,

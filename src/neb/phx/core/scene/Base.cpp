@@ -64,42 +64,45 @@ neb::phx::core::scene::base::~base() {
 void			neb::phx::core::scene::base::init(parent_t * const & p)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
-	
+
 	//neb::core::core::scene::base::init(p);
-	
+
 	create_physics();
 
 	// graphics
 
-	// programs
-	_M_programs._M_d3.reset(new P3("3d"));
-	_M_programs._M_d3->init();
+	// use _M_programs._M_d3 as completion flag
+	if(!_M_programs._M_d3)
+	{
+		// programs
+		_M_programs._M_d3.reset(new P3("3d"));
+		_M_programs._M_d3->init();
 
-	_M_programs._M_d3_HF.reset(new P3("3d_HF"));
-	_M_programs._M_d3_HF->init();
+		_M_programs._M_d3_HF.reset(new P3("3d_HF"));
+		_M_programs._M_d3_HF->init();
 
-	_M_programs._M_d3_inst.reset(new P3("3d_inst"));
-	_M_programs._M_d3_inst->init();
+		_M_programs._M_d3_inst.reset(new P3("3d_inst"));
+		_M_programs._M_d3_inst->init();
 
-	init_light();
+		init_light();
 
-	// meshes
-	math::geo::cuboid cube(1.0,1.0,1.0);
+		// meshes
+		math::geo::cuboid cube(1.0,1.0,1.0);
 
-	meshes_.cuboid_.reset(new neb::gfx::mesh::instanced);
-	meshes_.cuboid_->mesh_.construct(&cube);
+		meshes_.cuboid_.reset(new neb::gfx::mesh::instanced);
+		meshes_.cuboid_->mesh_.construct(&cube);
 
-	meshes_.cuboid_->instances_.reset(new neb::gfx::mesh::instanced::instances_type);
-	meshes_.cuboid_->instances_->alloc(2048);
+		meshes_.cuboid_->instances_.reset(new neb::gfx::mesh::instanced::instances_type);
+		meshes_.cuboid_->instances_->alloc(2048);
 
-	unsigned int shadow_tex_size = 512;
+		unsigned int shadow_tex_size = 512;
 
-	tex_shadow_map_ = std::make_shared<neb::gfx::texture>();
-	tex_shadow_map_->init_shadow(
-			shadow_tex_size,
-			shadow_tex_size,
-			std::shared_ptr<neb::gfx::context::base>());
-
+		tex_shadow_map_ = std::make_shared<neb::gfx::texture>();
+		tex_shadow_map_->init_shadow(
+				shadow_tex_size,
+				shadow_tex_size,
+				std::shared_ptr<neb::gfx::context::base>());
+	}
 }
 void			THIS::init_light()
 {
@@ -363,8 +366,8 @@ void			neb::phx::core::scene::base::draw(neb::gfx::RenderDesc const & desc)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-		assert(desc.p);
-		assert(desc.v);
+	assert(desc.p);
+	assert(desc.v);
 
 	drawMesh(desc);
 	drawMeshHF(desc);
@@ -483,6 +486,27 @@ void			THIS::drawMeshInst(neb::gfx::RenderDesc const & desc)
 	meshes_.cuboid_->draw(d3_inst);
 
 }
+void			neb::phx::core::scene::base::drawDebug(
+		neb::gfx::RenderDesc const & desc)
+{
+	auto app(neb::gfx::app::__gfx_glsl::global().lock());
+
+	auto p = app->program_simple3_;
+	p->use();
+
+	desc.p->load(p.get());
+	desc.v->load(p.get());
+
+	// individual meshes
+	auto la = [&] (A::map_type::pointer ptr) {
+		auto actor = std::dynamic_pointer_cast<neb::gfx::core::actor::base>(ptr);
+		assert(actor);
+		actor->drawDebug(p.get(), neb::core::pose());
+	};
+
+	A::map_.for_each(la);
+
+}	
 void			neb::phx::core::scene::base::drawPhysxVisualization(
 		neb::gfx::RenderDesc const & desc)
 {

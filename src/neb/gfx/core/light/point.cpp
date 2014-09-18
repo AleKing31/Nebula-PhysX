@@ -148,19 +148,21 @@ void		neb::gfx::core::light::point::setShadowEnviron(std::shared_ptr<neb::gfx::e
 
 
 }
-void		THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
+void		THIS::load(ba::polymorphic_iarchive & ar, unsigned int const & v)
 {
 	LOG(lg, neb::core::core::shape::sl, debug) << __FUNCSIG__;
 
-	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
-	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+	gal::itf::shared::serialize(ar, v);
+	neb::core::core::light::base::load(ar, v);
+	neb::gfx::core::light::base::load(ar, v);
 }
-void		THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
+void		THIS::save(ba::polymorphic_oarchive & ar, unsigned int const & v) const
 {
 	LOG(lg, neb::core::core::shape::sl, debug) << __FUNCSIG__;
 
-	BOOST_SERIALIZATION_BASE_OBJECT_NVP(gal::itf::shared);
-	BOOST_SERIALIZATION_BASE_OBJECT_NVP(neb::core::core::light::base);
+	const_cast<THIS*>(this)->gal::itf::shared::serialize(ar, v);
+	neb::core::core::light::base::save(ar, v);
+	neb::gfx::core::light::base::save(ar, v);
 }
 
 

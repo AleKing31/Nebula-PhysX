@@ -59,6 +59,7 @@ namespace neb {
 			void					drawMeshHF(gfx::RenderDesc const &);
 			void					drawMeshInst(gfx::RenderDesc const &);
 			void					drawPhysxVisualization(gfx::RenderDesc const &);
+			void					drawDebug(gfx::RenderDesc const &);
 
 
 		public:

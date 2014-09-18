@@ -95,6 +95,10 @@ namespace neb { namespace gfx { namespace mesh {
 			/**
 			 * do specific things like custom uniforms, then call mesh::base::drawElements
 			 */
+			void				drawDebug(
+					program const * const & p,
+					neb::core::pose const & pose,
+					glm::vec3 scale);
 			void				drawElements(
 					program const * const & p,
 					neb::core::pose const & pose,

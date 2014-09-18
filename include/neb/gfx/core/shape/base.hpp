@@ -68,6 +68,9 @@ namespace neb {
 							neb::gfx::glsl::program::base const * const & p,
 							neb::core::pose const & pose);
 					
+					virtual void					drawDebug(
+							neb::gfx::glsl::program::base const * const & p,
+							neb::core::pose const & pose);
 					virtual void					draw_elements(
 							neb::gfx::glsl::program::base const * const & p,
 							neb::core::pose const & pose);

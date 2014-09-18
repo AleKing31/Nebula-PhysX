@@ -104,6 +104,19 @@ void			neb::gfx::core::shape::base::draw_elements(
 		mesh_->drawElements(p, pose, scale_);
 	}
 }
+void			neb::gfx::core::shape::base::drawDebug(
+		neb::gfx::glsl::program::base const * const & p,
+		neb::core::pose const & pose)
+{
+	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
+	
+	assert(p);
+	
+	if(mesh_)
+	{
+		mesh_->drawDebug(p, pose, scale_);
+	}
+}
 std::weak_ptr<neb::core::core::light::base>		neb::gfx::core::shape::base::createLightPoint() {
 
 	auto self(std::dynamic_pointer_cast<neb::core::core::shape::base>(shared_from_this()));

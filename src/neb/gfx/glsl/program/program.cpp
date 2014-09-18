@@ -116,6 +116,9 @@ void	neb::gfx::glsl::program::base::use() const {
 	glUseProgram(o_);
 	checkerror("glUseProgram %i\n", o_);
 
+	// load flags
+	//glUniform1i(uniform_table_[neb::gfx::glsl::uniforms::FLAG], flag_shader_.val_);
+	//checkerror("");
 }
 void			neb::gfx::glsl::program::base::restoreDefaultShaderFlags()
 {

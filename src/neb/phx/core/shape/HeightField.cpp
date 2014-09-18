@@ -151,11 +151,11 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 
 	//PxShape* aHeightFieldShape = aHeightFieldActor->createShape(hfGeom, aMaterialArray, nbMaterials);
 
+	// testing heightfield mipmap
+	//neb::math::HeightField* hf2 = hf.mipmap(2);
+	//mesh_from_heightfield(hf2, rowScale * 4, colScale * 4);
 
-	neb::math::HeightField* hf2 = hf.mipmap(2);
-
-
-	mesh_from_heightfield(hf2, rowScale * 4, colScale * 4);
+	mesh_from_heightfield(&hf, rowScale, colScale);
 
 	return hfGeom;
 
@@ -185,23 +185,41 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 		{
 			int ind = hf->at(i,j);
 
-			vertices[hf->at(i,j)].p = glm::vec3(
-					(float)i * rowScale,
-					hf->get(i,j),
-					(float)j * colScale
-					);
-		
-			vertices[ind].tc = glm::vec2(
-					(float)i / (float)(r-1),
-					(float)j / (float)(c-1)
-					);
+			if(1) {
+				vertices[hf->at(i,j)].p = glm::vec3(
+						(float)i * rowScale,
+						(float)j * colScale,
+						hf->get(i,j)
+						);
 
-			vertices[hf->at(i,j)].n = glm::vec3(
-					-hf->_M_dzdx[hf->at(i,j)],
-					2.0 * rowScale,
-					hf->_M_dzdy[hf->at(i,j)]
-					);
+				vertices[ind].tc = glm::vec2(
+						(float)i / (float)(r-1),
+						(float)j / (float)(c-1)
+						);
 
+				vertices[hf->at(i,j)].n = glm::vec3(
+						-hf->_M_dzdx[hf->at(i,j)],
+						-hf->_M_dzdy[hf->at(i,j)],
+						2.0 * rowScale
+						);
+			} else {
+				vertices[hf->at(i,j)].p = glm::vec3(
+						(float)i * rowScale,
+						hf->get(i,j),
+						(float)j * colScale
+						);
+
+				vertices[ind].tc = glm::vec2(
+						(float)i / (float)(r-1),
+						(float)j / (float)(c-1)
+						);
+
+				vertices[hf->at(i,j)].n = glm::vec3(
+						hf->_M_dzdx[hf->at(i,j)],
+						2.0 * rowScale,
+						hf->_M_dzdy[hf->at(i,j)]
+						);
+			}
 		}
 	}
 
@@ -214,13 +232,24 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 
 			assert((d+5) < nbIndices);
 
-			indices[d+0] = hf->at(i    , j    );
-			indices[d+1] = hf->at(i + 1, j    );
-			indices[d+2] = hf->at(i    , j + 1);
+			if(1) {
+				indices[d+0] = hf->at(i    , j    );
+				indices[d+1] = hf->at(i + 1, j    );
+				indices[d+2] = hf->at(i    , j + 1);
 
-			indices[d+3] = hf->at(i + 1, j    );
-			indices[d+4] = hf->at(i + 1, j + 1);
-			indices[d+5] = hf->at(i    , j + 1);
+				indices[d+3] = hf->at(i + 1, j    );
+				indices[d+4] = hf->at(i + 1, j + 1);
+				indices[d+5] = hf->at(i    , j + 1);
+			} else {
+				// reversed
+				indices[d+0] = hf->at(i    , j    );
+				indices[d+1] = hf->at(i    , j + 1);
+				indices[d+2] = hf->at(i + 1, j    );
+
+				indices[d+3] = hf->at(i + 1, j    );
+				indices[d+4] = hf->at(i    , j + 1);
+				indices[d+5] = hf->at(i + 1, j + 1);
+			}
 		}
 	}
 
@@ -229,7 +258,8 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 	mesh_->setVerts(vertices, nbVerts);
 	mesh_->setIndices(indices, nbIndices);
 
-	mesh_->normal_map_ = neb::gfx::texture::makePNG("test.png");
+	// testing generated normal map
+	//mesh_->normal_map_ = neb::gfx::texture::makePNG("test.png");
 
 }
 void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
@@ -256,6 +286,8 @@ void			THIS::drawHF(
 
 
 	draw_elements(p, npose);
+
+	
 }
 
 

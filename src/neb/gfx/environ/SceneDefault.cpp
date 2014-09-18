@@ -90,15 +90,26 @@ void		neb::gfx::environ::SceneDefault::render(std::shared_ptr<neb::gfx::context:
 
 	auto scene = neb::could_be<neb::gfx::drawable::base, neb::phx::core::scene::base>(drawable);
 
-	if(scene) scene->drawPhysxVisualization(
-			RenderDesc(
-				view_.get(),
-				proj_.get(),
-				programs_.d3_.get(),
-				programs_.d3_HF_.get(),
-				programs_.d3_inst_.get()
-				)
-			);
+	if(scene) scene->drawDebug(
+				RenderDesc(
+					view_.get(),
+					proj_.get(),
+					programs_.d3_.get(),
+					programs_.d3_HF_.get(),
+					programs_.d3_inst_.get()
+					)
+				);
 
+	if(0) { /** @todo make this a dynamic flag! */
+		if(scene) scene->drawPhysxVisualization(
+				RenderDesc(
+					view_.get(),
+					proj_.get(),
+					programs_.d3_.get(),
+					programs_.d3_HF_.get(),
+					programs_.d3_inst_.get()
+					)
+				);
+	}
 }	
 
