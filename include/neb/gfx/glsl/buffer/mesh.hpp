@@ -24,6 +24,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			typedef std::shared_ptr<neb::gfx::glsl::program::base> program_shared;
 			//const math::geo::vertex v;
 
+			typedef GLushort index_type;
 
 			static constexpr GLenum			target_[BUFFER_COUNT] = {
 				GL_ARRAY_BUFFER,
@@ -35,7 +36,7 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 			};
 			static constexpr GLsizeiptr		datasize_[BUFFER_COUNT] = {
 				sizeof(math::geo::vertex),
-				sizeof(GLushort)
+				sizeof(index_type)
 			};
 /*			static constexpr GLint			size_array_[ATTRIB_COUNT] = {
 				3,3,2,3,3

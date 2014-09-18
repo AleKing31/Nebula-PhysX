@@ -16,9 +16,14 @@
 
 typedef neb::gfx::texture tex;
 
-std::shared_ptr<tex>		neb::gfx::texture::makePNG(std::string filename) {
+std::shared_ptr<tex>		neb::gfx::texture::makePNG(std::string filename)
+{
 	std::shared_ptr<tex> t(new tex());
+	
 	t->load_png(filename);
+	
+	t->init_buffer(0);
+
 	return t;
 }
 neb::gfx::texture::texture():
@@ -90,12 +95,13 @@ GLuint		neb::gfx::texture::genAndBind(std::shared_ptr<neb::gfx::context::base> c
 	
 	glGenTextures(1, &o);
 	checkerror("glGenTextures");
-	glBindTexture(GL_TEXTURE_2D, o);
+
+	glBindTexture(target_, o);
 	checkerror("glBindTexture");
 
 	return o;
 }
-void	neb::gfx::texture::bind(std::shared_ptr<neb::gfx::context::base> context)
+void		neb::gfx::texture::bind(neb::gfx::glsl::program::base const * const & p)
 {
 	/*GLuint o;
 	
@@ -108,9 +114,7 @@ void	neb::gfx::texture::bind(std::shared_ptr<neb::gfx::context::base> context)
 		o = it->second;
 	}*/
 	
-	
-
-	glBindTexture(GL_TEXTURE_2D, o_);
+	glBindTexture(target_, o_);
 	checkerror("glBindTexture");
 }
 int		neb::gfx::texture::load_png(std::string filename)
@@ -190,11 +194,20 @@ int		neb::gfx::texture::load_png(std::string filename)
 
 	// get info about png
 	png_get_IHDR(
-			png_ptr, info_ptr,
-			&w_, &h_,
-			&bit_depth, &color_type,
-			NULL, NULL, NULL);
+			png_ptr,
+			info_ptr,
+			&w_,
+			&h_,
+			&bit_depth,
+			&color_type,
+			NULL,
+			NULL,
+			NULL);
 	
+	std::cout << "png info" << std::endl;
+	std::cout << "bit depth  " << bit_depth << std::endl;
+	std::cout << "color type " << color_type << std::endl;
+	std::cout << "w h        " << w_ << " " << h_<< std::endl;
 	
 	
 	// Update the png info struct.
@@ -249,15 +262,20 @@ int		neb::gfx::texture::load_png(std::string filename)
 	return 0;
 }
 GLuint			neb::gfx::texture::init_buffer(std::shared_ptr<neb::gfx::context::base> context) {
-	
+
+	// initialize 2D with png data
+
+	target_ = GL_TEXTURE_2D;
+
 	o_ = genAndBind(context);
 
 	//buffers_[context.get()] = o;
 	
 	std::cout << "w " << w_ << " h " << h_ << " data " << (long int)png_image_data_ << std::endl;
 
+
 	glTexImage2D(
-			GL_TEXTURE_2D,
+			target_,
 			0,
 			GL_RGB,
 			w_, h_,
@@ -265,13 +283,14 @@ GLuint			neb::gfx::texture::init_buffer(std::shared_ptr<neb::gfx::context::base>
 			GL_RGB,
 			GL_UNSIGNED_BYTE,
 			png_image_data_);
+
 	checkerror("glTexImage2D");
 
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(target_, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(target_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	checkerror("glTexParameterf");
 	
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(target_, 0);
 
 	return o_;
 }

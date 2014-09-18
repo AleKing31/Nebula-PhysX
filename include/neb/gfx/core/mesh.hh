@@ -42,7 +42,9 @@ namespace neb { namespace gfx { namespace mesh {
 			typedef neb::gfx::glsl::buffer::tri1				buffer;
 			typedef neb::gfx::glsl::program::base				program;
 			typedef base<neb::gfx::glsl::buffer::tri1>			base_t;
-			
+		
+			typedef typename buffer::index_type index_type;
+
 			tri1();
 			~tri1();
 
@@ -103,14 +105,14 @@ namespace neb { namespace gfx { namespace mesh {
 
 
 			void					setVerts(math::geo::vertex*, GLuint);
-			void					setIndices(GLushort*, GLuint);
+			void					setIndices(index_type*, GLuint);
 			GLuint					getNbVerts();
 			GLuint					getNbIndices();
 		private:
-			math::geo::vertex*			vertices_;
-			GLushort*				indices_;
-			GLuint					nbVerts_;
-			GLuint					nbIndices_;
+			math::geo::vertex*				vertices_;
+			index_type*					indices_;
+			GLuint						nbVerts_;
+			GLuint						nbIndices_;
 		public:
 
 

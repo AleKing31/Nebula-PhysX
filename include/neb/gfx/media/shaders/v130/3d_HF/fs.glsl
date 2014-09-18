@@ -12,7 +12,7 @@ in vec3 	vs_T;
 in vec3		vs_B;
 
 uniform sampler2DArray	image;
-uniform sampler2DArray	normal_map;
+uniform sampler2D	normal_map;
 
 //uniform sampler2DArrayShadow	shadow_map;
 uniform sampler2DArray	shadow_map;
@@ -24,6 +24,9 @@ uniform float		hf_max;
 #include "v130/inc/light.glsl"
 
 uniform mat4 view;
+
+
+uniform bool has_normal_map;
 
 out vec4 color;
 
@@ -68,10 +71,17 @@ void main(void)
 	//	spc = vs_instance_specular;
 	//}
 	
-	//if(vs_instance_sampler.y >= 0.0) {	
-	//	vec3 norm_vector = texture(normal_map, vec3(vs_texcoor, vs_instance_sampler.y)).xyz;
-	//	N = normalize(N + (mat3(vs_T, vs_B, vs_N) * norm_vector));
-	//}
+	if(has_normal_map)
+	{	
+		vec3 norm_vector = texture(normal_map, vs_texcoor).rgb * 2.0 - 1.0;
+
+		norm_vector = normalize(norm_vector);
+		
+		//N = normalize(N + (mat3(vs_T, vs_B, vs_N) * norm_vector));
+		
+		// need proper transformation
+		N = norm_vector;
+	}
 	
 	
 	lf_lights(amb, dif, spc, 100.0);

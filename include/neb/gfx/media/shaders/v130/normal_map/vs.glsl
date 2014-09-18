@@ -5,6 +5,7 @@
 
 out vec3	vs_mv_N;
 out vec3	vs_N;
+out vec3	vs_P;
 
 uniform mat4 view;
 uniform mat4 proj;
@@ -22,6 +23,8 @@ void main(void)
 
 	vs_N = normalize(normal);
 	vs_mv_N = normalize(mat3(mv) * normal);
+
+	vs_P = position;
 
 	// Calculate the clip-space position of each vertex
 	gl_Position = mvp * vec4(position,1.0);

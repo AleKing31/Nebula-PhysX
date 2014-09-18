@@ -85,6 +85,7 @@ namespace neb { namespace gfx {
 				FONT_COLOR,
 				HF_MIN,
 				HF_MAX,
+				HAS_NORMAL_MAP,
 				COUNT
 			};
 
@@ -121,7 +122,8 @@ namespace neb { namespace gfx {
 				"light_count",
 				"font_color",
 				"hf_min",
-				"hf_max"
+				"hf_max",
+				"has_normal_map"
 			};
 		};
 

@@ -61,7 +61,7 @@ namespace neb {
 					void						init_buffer(
 							neb::gfx::glsl::program::base const * const & p);
 
-					void						draw(
+					virtual void					draw(
 							neb::gfx::glsl::program::base const * const & p,
 							neb::core::pose const & pose);
 					virtual void					drawHF(

@@ -17,6 +17,21 @@
 #include <neb/gfx/glsl/buffer/traits.hpp>
 #include <neb/gfx/glsl/program/base.hpp>
 
+template<typename T> struct index_traits {};
+
+template<> struct index_traits<GLubyte>
+{
+	static const GLenum	type = GL_UNSIGNED_BYTE;
+};
+template<> struct index_traits<GLushort>
+{
+	static const GLenum	type = GL_UNSIGNED_SHORT;
+};
+template<> struct index_traits<GLuint>
+{
+	static const GLenum	type = GL_UNSIGNED_INT;
+};
+
 namespace neb { namespace gfx { namespace mesh {
 	template<typename BUFFER> class base {
 		protected:
@@ -146,16 +161,18 @@ namespace neb { namespace gfx { namespace mesh {
 				// bind
 				LOG(lg, neb::gfx::sl, debug) << "bind vbo";
 				b->bind();
+				
+				checkerror("unknown");
 
 				// draw
 				LOG(lg, neb::gfx::sl, debug) << "draw";
 				glDrawElements(
 						GL_TRIANGLES,
 						count,
-						GL_UNSIGNED_SHORT,
+						index_traits<typename BUFFER::index_type>::type,
 						0);
 
-				checkerror("glDrawElements");
+				checkerror("glDrawElements\ncount %i\n", count);
 
 				// unbind
 				LOG(lg, neb::gfx::sl, debug) << "unbind vbo";

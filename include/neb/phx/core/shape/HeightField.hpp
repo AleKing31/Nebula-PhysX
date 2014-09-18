@@ -5,6 +5,10 @@
 #include <neb/gfx/core/shape/base.hpp>
 #include <neb/phx/core/shape/base.hpp>
 
+namespace neb { namespace math {
+	struct HeightField;
+}}
+
 namespace neb { namespace phx { namespace core { namespace shape {
 
 
@@ -23,6 +27,10 @@ namespace neb { namespace phx { namespace core { namespace shape {
 			virtual void				step(gal::etc::timestep  const & ts);
 			virtual void				create_physics();
 
+			// dont render normally. function is empty
+			virtual void				draw(
+							neb::gfx::glsl::program::base const * const & p,
+							neb::core::pose const & pose);
 			virtual void				drawHF(
 							neb::gfx::glsl::program::base const * const & p,
 							neb::core::pose const & pose);
@@ -33,6 +41,8 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 
 			virtual physx::PxGeometry*		to_geo();
+
+			void					mesh_from_heightfield(neb::math::HeightField*, float, float);
 
 			physx::PxReal				min_y_;
 			physx::PxReal				max_y_;

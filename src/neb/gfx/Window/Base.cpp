@@ -17,6 +17,8 @@
 
 #include <neb/gfx/free.hpp>
 
+#include <neb/gfx/opengl/png.hpp>
+
 #include <neb/gfx/app/glfw.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 
@@ -192,6 +194,9 @@ void		neb::gfx::window::base::render() {
 
 	glFinish();
 	glfwSwapBuffers(window_);
+
+	
+	save_png("test.png",w_,h_);
 }
 void neb::gfx::window::base::callback_window_refresh_fun(GLFWwindow*) {
 }
