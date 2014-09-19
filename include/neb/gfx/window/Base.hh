@@ -10,6 +10,7 @@
 #include <neb/core/util/decl.hpp>
 #include <neb/core/core/scene/util/decl.hpp>
 #include <neb/core/input/source.hpp>
+#include <neb/core/input/callback.hpp>
 
 #include <neb/gfx/Context/Base.hh>
 #include <neb/gfx/Context/Util/Parent.hh>
@@ -28,7 +29,8 @@ namespace neb { namespace gfx { namespace window {
 		virtual public neb::gfx::window::__base,
 		virtual public neb::gfx::context::util::parent,
 		virtual public neb::gfx::window::util::cast,
-		virtual public neb::core::input::source
+		virtual public neb::core::input::source,
+		virtual public neb::core::input::callback
 	{
 		public:
 			typedef neb::gfx::window::util::parent parent_t;
@@ -60,10 +62,12 @@ namespace neb { namespace gfx { namespace window {
 			std::weak_ptr<neb::gfx::context::window>	createContextNormalMap();
 
 			void						makeCurrent();
+
+			void						printScreen();
 		public:
 
 
-			static GLFWwindow*					first_window_;
+			static GLFWwindow*				first_window_;
 
 
 			neb::gfx::window::util::Flag	flag_;
@@ -77,6 +81,9 @@ namespace neb { namespace gfx { namespace window {
 			GLFWwindow*		window_;
 
 			//int			windowID;
+
+			// persistent buffer for screen print
+			std::vector<unsigned char>		screenBuffer_;
 
 		public:
 
