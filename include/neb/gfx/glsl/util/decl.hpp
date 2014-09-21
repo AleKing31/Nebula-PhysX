@@ -134,10 +134,6 @@ namespace neb { namespace gfx {
 
 		class shader;
 
-		namespace buffer {
-			class tri1;
-			class instanced;
-		}
 	}
 
 }}

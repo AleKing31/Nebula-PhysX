@@ -29,7 +29,7 @@ namespace neb {
 		class texture;
 
 		namespace mesh {
-			template<typename BUFFER> class base;
+			//template<typename BUFFER> class base;
 			class tri1;
 			class instanced;
 		}

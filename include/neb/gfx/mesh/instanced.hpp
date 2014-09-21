@@ -1,15 +1,19 @@
 #ifndef NEB_GFX_MESH_INSTANCED_HPP
 #define NEB_GFX_MESH_INSTANCED_HPP
 
-#include <neb/gfx/core/mesh_base.hpp>
-#include <neb/gfx/core/mesh.hh>
+#include <neb/gfx/mesh/base.hpp>
+#include <neb/gfx/mesh/tri1.hpp>
+
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/util/array_continuous.hpp>
-#include <neb/gfx/glsl/buffer/mesh_instanced.hpp>
+
+#include <neb/gfx/glsl/buffer/instanced.hpp>
 
 
 namespace neb { namespace gfx { namespace mesh {
-	class instanced: public neb::gfx::mesh::base<neb::gfx::glsl::buffer::instanced> {
+
+	class instanced: public neb::gfx::mesh::base<neb::gfx::glsl::buffer::instanced>
+	{
 		public:
 			typedef neb::gfx::glsl::program::base			program_type;
 			typedef std::shared_ptr<program_type>			program_shared;
@@ -27,6 +31,17 @@ namespace neb { namespace gfx { namespace mesh {
 				float
 				>		instances_type;
 			typedef instances_type::slot_type			slot_type;
+			
+			typedef neb::gfx::mesh::base<neb::gfx::glsl::buffer::instanced>		B;
+			
+			typedef neb::gfx::glsl::program::base		P;
+			typedef typename B::buffer_tuple		buffer_tuple;
+			typedef std::map<P const *, buffer_tuple>	program_buffer_map;
+
+			enum {
+				BUFFER_COUNT = B::BUFFER_COUNT
+			};
+			typedef typename gens<BUFFER_COUNT>::type seq_type;
 
 
 

@@ -15,13 +15,13 @@
 #include <PxPhysicsAPI.h>
 
 #include <neb/gfx/free.hpp>
-#include <neb/gfx/core/mesh.hh>
+#include <neb/gfx/mesh/tri1.hpp>
 #include <neb/gfx/texture.hpp>
 #include <neb/gfx/util/log.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
 #include <neb/gfx/glsl/attrib.hh>
 #include <neb/gfx/glsl/uniform/scalar.hpp>
-#include <neb/gfx/glsl/buffer/mesh.hpp>
+#include <neb/gfx/glsl/buffer/tri1.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 
 neb::gfx::mesh::tri1::tri1() {

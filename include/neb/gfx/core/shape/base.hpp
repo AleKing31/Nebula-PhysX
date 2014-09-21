@@ -14,9 +14,9 @@
 #include <neb/gfx/core/light/util/parent.hpp>
 #include <neb/gfx/texture.hpp>
 #include <neb/gfx/material.hpp>
-#include <neb/gfx/core/mesh.hh>
+#include <neb/gfx/mesh/tri1.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
-#include <neb/gfx/core/mesh_instanced.hpp>
+#include <neb/gfx/mesh/instanced.hpp>
 
 #include <neb/phx/util/log.hpp>
 

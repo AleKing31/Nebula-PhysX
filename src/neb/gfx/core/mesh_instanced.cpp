@@ -1,17 +1,18 @@
 
 #include <neb/gfx/util/log.hpp>
-#include <neb/gfx/core/mesh_instanced.hpp>
-#include <neb/gfx/glsl/buffer/mesh_instanced.hpp>
+#include <neb/gfx/mesh/instanced.hpp>
+#include <neb/gfx/glsl/buffer/instanced.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
 #include <neb/gfx/glsl/attrib.hh>
 #include <neb/gfx/free.hpp>
+
 
 void			neb::gfx::mesh::instanced::init(
 		neb::gfx::mesh::instanced::program_type* program)
 {
 	//mesh_.init_buffer(program);
 	
-	typedef neb::gfx::glsl::buffer::instanced T;
+/*	typedef neb::gfx::glsl::buffer::instanced T;
 	
 	std::shared_ptr<T> buf(new T());
 	
@@ -20,74 +21,12 @@ void			neb::gfx::mesh::instanced::init(
 	buf->init(program);
 	
 	bufferDataNull(buf.get());
+*/
+
+	buffer_tuple bt = getBufferTuple(program);
+
+	bufferDataNull(bt);
 }
-/*void			neb::gfx::mesh::instanced::bufferSubData(
-		std::shared_ptr<neb::gfx::glsl::buffer::mesh_instanced>	buf)
-{
-	checkerror("unknown");
-
-	void* data[] = {
-		instances_->get<0, glm::mat4>(),
-		instances_->get<1, glm::vec4>(),
-		instances_->get<2, glm::vec4>(),
-		instances_->get<3, glm::vec4>(),
-		instances_->get<4, glm::vec4>(),
-		instances_->get<5, glm::vec4>(),
-		instances_->get<6, GLfloat>()
-	};
-
-	GLuint* buffer = buf->buffer_;
-
-	auto b = instances_->update_begin_;
-	auto e = instances_->update_end_;
-
-	if(e < b) return;
-
-	auto len = e - b + 1;
-	
-	LOG(lg, neb::gfx::sl, debug) << "update " << b << " to " << e;
-	
-	for(unsigned int c = 0; c < BUFFER_COUNT; c++) {
-
-		GLintptr offset = b * buffer_type::datasize[c];
-
-		LOG(lg, neb::gfx::sl, debug)
-			<< std::setw(16) << offset
-			<< std::setw(16) << len * datasize[c];
-
-		glBindBuffer(GL_ARRAY_BUFFER, buffer[c]);
-		glBufferSubData(
-				GL_ARRAY_BUFFER,
-				offset,
-				len * datasize[c],
-				(GLvoid*)((GLintptr)data[c] + offset));
-		checkerror("glBufferSubData");
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	instances_->reset_update();
-}*/
-/*void			neb::gfx::mesh::instanced::bufferDataNull(
-		std::shared_ptr<neb::gfx::glsl::buffer::mesh_instanced>	buf)
-{
-	checkerror("unknown");
-
-	auto size = instances_->size_array();
-
-	GLuint* buffer = buf->buffer_array_;
-
-	for(unsigned int c = 0; c < BUFFER_COUNT; c++) {
-		glBindBuffer(GL_ARRAY_BUFFER, buffer[c]);
-		glBufferData(
-				GL_ARRAY_BUFFER,
-				size * datasize[c],
-				NULL,
-				GL_STREAM_DRAW);
-		checkerror("glBufferSubData");
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	}*/
 
 GLsizeiptr*		neb::gfx::mesh::instanced::size_array() {
 
@@ -140,27 +79,6 @@ GLvoid** const		neb::gfx::mesh::instanced::data() {
 	data_[6] = instances_->get<6, GLfloat>();
 	return data_;
 }
-/*void			neb::gfx::mesh::instanced::bufferData(
-  std::shared_ptr<neb::gfx::glsl::buffer::mesh_instanced>	buf)
-  {
-  checkerror("unknown");
-
-  auto size = instances_->size();
-
-
-  GLuint* buffer = buf->buffer_array_;
-
-  neb::gfx::ogl::bufferData(
-  buffer_array_,
-  datasize,
-  size,
-  data,
-  GL_STREAM_DRAW,
-  BUFFER_COUNT
-  );
-
-
-  }*/	
 void			neb::gfx::mesh::instanced::draw(
 		neb::gfx::mesh::instanced::program_type* program)
 {
@@ -172,13 +90,17 @@ void			neb::gfx::mesh::instanced::draw(
 	auto buf = buffers_[program];
 
 	if(!buf) return;
-
-
+	
+	auto bt = getBufferTuple(program);
+	
 	instances_->update_slots();
 
 	//bufferData(buf);
-	bufferSubData(buf.get());
-
+	//bufferSubData(buf.get());
+	//buf->bufferSubData(begin(), end(), size(), data());
+	
+	bufferSubData(bt);
+	
 	draw(program, buf);
 }
 void			neb::gfx::mesh::instanced::draw(
@@ -187,15 +109,18 @@ void			neb::gfx::mesh::instanced::draw(
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
 
-	auto buf_mesh = mesh_.getBuffer(program);
+	//auto buf_mesh = mesh_.getBuffer(program);
+	auto bt = mesh_.getBufferTuple(program);
 
 	buf->vertexAttribPointer();
-	buf_mesh->vertexAttribPointer();
+	//buf_mesh->vertexAttribPointer();
+	
+	mesh_.vertexAttribPointer(bt);
 
 	LOG(lg, neb::gfx::sl, debug) << "instances size = " << instances_->size();
 	LOG(lg, neb::gfx::sl, debug) << "mesh size      = " << mesh_.getNbIndices();
 
-	buf_mesh->bind();
+	mesh_.bind(bt);
 
 	glDrawElementsInstanced(
 			GL_TRIANGLES,
@@ -206,6 +131,6 @@ void			neb::gfx::mesh::instanced::draw(
 
 	checkerror("glDrawElementsInstanced");
 
-	buf_mesh->unbind();
+	mesh_.unbind(bt);
 }
 

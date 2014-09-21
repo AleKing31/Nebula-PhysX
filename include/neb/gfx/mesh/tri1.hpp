@@ -27,23 +27,24 @@
 #include <neb/gfx/material.hpp>
 #include <neb/gfx/glsl/util/decl.hpp>
 #include <neb/gfx/util/decl.hpp>
-#include <neb/gfx/glsl/buffer/mesh.hpp>
+#include <neb/gfx/glsl/buffer/tri1.hpp>
 #include <neb/gfx/Context/Util/decl.hpp>
-#include <neb/gfx/core/mesh_base.hpp>
+#include <neb/gfx/mesh/base.hpp>
 
 namespace ba = boost::archive;
 
 namespace neb { namespace gfx { namespace mesh {
 
-	class tri1: public base<neb::gfx::glsl::buffer::tri1>
+	class tri1: public elements<neb::gfx::glsl::buffer::elements<GLushort>, neb::gfx::glsl::buffer::tri1>
 	{
 		public:
 			//typedef std::map<neb::gfx::glsl::program::base*, buffer*>	program_buffer_map;
+
 			typedef neb::gfx::glsl::buffer::tri1				buffer;
 			typedef neb::gfx::glsl::program::base				program;
-			typedef base<neb::gfx::glsl::buffer::tri1>			base_t;
+			typedef elements<neb::gfx::glsl::buffer::elements<GLushort>, neb::gfx::glsl::buffer::tri1>	base_t;
 		
-			typedef typename buffer::index_type index_type;
+			typedef GLushort index_type;
 
 			tri1();
 			~tri1();

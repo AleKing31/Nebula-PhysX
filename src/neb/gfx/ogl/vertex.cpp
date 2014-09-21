@@ -3,114 +3,99 @@
 #include <neb/gfx/opengl/vertex.hpp>
 
 void			neb::gfx::ogl::bufferData(
-		const GLenum*		target,
-		const GLuint*		buffer,
-		const GLsizeiptr*	datasize,
-		const GLsizeiptr*	size,
-		GLvoid** const		data,
-		const GLenum*		usage,
-		const unsigned int	buffer_count)
+		const GLenum		target,
+		const GLuint		buffer,
+		const GLsizeiptr	datasize,
+		const GLsizeiptr	size,
+		GLvoid* const		data,
+		const GLenum		usage)
 {
 
-	for(unsigned int c = 0; c < buffer_count; c++)
-	{
-		glBindBuffer(
-				target[c],
-				buffer[c]);
+	glBindBuffer(
+			target,
+			buffer);
 
-		checkerror("glBindBuffer");
+	checkerror("glBindBuffer");
 
-		glBufferData(
-				target[c],
-				size[c] * datasize[c],
-				data[c],
-				usage[c]);
+	glBufferData(
+			target,
+			size * datasize,
+			data,
+			usage);
 
-		checkerror("glBufferSubData");
+	checkerror("glBufferSubData");
 
-		glBindBuffer(target[c], 0);
+	glBindBuffer(target, 0);
 
-		checkerror("glBindBuffer");
-
-	}
-
+	checkerror("glBindBuffer");
 
 }
 void			neb::gfx::ogl::bufferDataNull(
-		const GLenum*		target,
-		GLuint*			buffer,
-		const GLsizeiptr*	datasize,
-		GLsizeiptr*		size,
-		const GLenum*		usage,
-		unsigned int		buffer_count)
+		const GLenum		target,
+		GLuint			buffer,
+		const GLsizeiptr	datasize,
+		GLsizeiptr		size,
+		const GLenum		usage)
 {
 
-	for(unsigned int c = 0; c < buffer_count; c++)
-	{
-		glBindBuffer(target[c], buffer[c]);
+	glBindBuffer(target, buffer);
 
-		checkerror("glBindBuffer");
+	checkerror("glBindBuffer");
 
-		glBufferData(
-				target[c],
-				size[c] * datasize[c],
-				NULL,
-				usage[c]);
+	glBufferData(
+			target,
+			size * datasize,
+			NULL,
+			usage);
 
-		checkerror("glBufferData");
+	checkerror("glBufferData");
 
-		glBindBuffer(target[c], 0);
+	glBindBuffer(target, 0);
 
-		checkerror("glBindBuffer");
-
-	}
-
-
+	checkerror("glBindBuffer");
 }
 void			neb::gfx::ogl::bufferSubData(
-		const GLenum*		target,
-		GLuint*			buffer,
-		GLintptr*		begin,
-		GLintptr*		end,
-		const GLsizeiptr*	datasize,
-		GLsizeiptr*		size,
-		GLvoid** const		data,
-		unsigned int		count)
+		const GLenum		target,
+		GLuint			buffer,
+		GLintptr		begin,
+		GLintptr		end,
+		const GLsizeiptr	datasize,
+		GLsizeiptr		size,
+		GLvoid* const		data)
 {
 
 	GLsizeiptr offset;
 
-	for(unsigned int c = 0; c < count; c++) {
 
-		offset = begin[c] * datasize[c];
+	offset = begin * datasize;
 
-		//LOG(lg, neb::gfx::sl, debug)
-		//	<< std::setw(16) << offset
-		//	<< std::setw(16) << siz * BUFFER::datasize[c];
+	//LOG(lg, neb::gfx::sl, debug)
+	//	<< std::setw(16) << offset
+	//	<< std::setw(16) << siz * BUFFER::datasize;
 
-		glBindBuffer(
-				target[c],
-				buffer[c]);
-		checkerror("glBufferSubData");
+	glBindBuffer(
+			target,
+			buffer);
+	checkerror("glBufferSubData");
 
-		GLvoid* d = (GLvoid*)((GLintptr)data[c] + offset);
+	GLvoid* d = (GLvoid*)((GLintptr)data + offset);
 
-		glBufferSubData(
-				target[c],
-				offset,
-				size[c] * datasize[c],
-				d);
+	glBufferSubData(
+			target,
+			offset,
+			size * datasize,
+			d);
 
-		checkerror(
-				"glBufferSubData\n"
-				"target   %i\n"
-				"offset   %i\n"
-				"size     %i\n"
-				"datasize %i\n"
-				"data     %x\n",
-				target[c], offset, size[c], datasize[c], d);
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	checkerror(
+			"glBufferSubData\n"
+			"target   %i\n"
+			"offset   %i\n"
+			"size     %i\n"
+			"datasize %i\n"
+			"data     %x\n",
+			target, offset, size, datasize, d);
+
+	glBindBuffer(target, 0);
 	checkerror("glBindBuffer");
 
 

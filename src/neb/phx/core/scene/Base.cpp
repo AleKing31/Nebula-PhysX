@@ -32,7 +32,7 @@
 #include <neb/gfx/glsl/uniform/scalar.hpp>
 #include <neb/gfx/camera/proj/perspective.hpp>
 #include <neb/gfx/camera/view/Base.hh>
-#include <neb/gfx/core/mesh_instanced.hpp>
+#include <neb/gfx/mesh/instanced.hpp>
 #include <neb/gfx/texture.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/Context/Base.hh>

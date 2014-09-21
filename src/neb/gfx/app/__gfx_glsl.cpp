@@ -4,7 +4,7 @@
 #include <neb/gfx/util/config.hpp>
 #include <neb/gfx/app/__gfx_glsl.hpp>
 #include <neb/gfx/glsl/program/base.hpp>
-#include <neb/gfx/core/mesh_instanced.hpp>
+#include <neb/gfx/mesh/instanced.hpp>
 
 std::weak_ptr<neb::gfx::app::__gfx_glsl>		neb::gfx::app::__gfx_glsl::global()
 {

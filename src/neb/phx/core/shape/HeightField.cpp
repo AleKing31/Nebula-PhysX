@@ -7,7 +7,7 @@
 #include <neb/core/util/cast.hpp>
 #include <neb/core/math/geo/vertex.hpp>
 
-#include <neb/gfx/core/mesh.hh>
+#include <neb/gfx/mesh/tri1.hpp>
 
 #include <neb/phx/core/shape/HeightField.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
