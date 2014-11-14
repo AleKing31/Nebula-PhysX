@@ -27,7 +27,7 @@ std::vector<std::string>		readLines(std::string filename) {
 
 	auto app(neb::gfx::app::__gfx_glsl::global().lock());
 	
-	filename = NEB_SHARE_DIR"/media/shaders/" + filename;
+	filename = NEB_SHARE_DIR"media/shaders/" + filename;
 
 	std::ifstream ifs(filename);
 

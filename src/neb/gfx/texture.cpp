@@ -37,6 +37,8 @@ neb::gfx::texture::~texture()
 void			neb::gfx::texture::init_shadow(int w,int h, std::shared_ptr<neb::gfx::context::base>)
 {
 	printf("%s\n",__PRETTY_FUNCTION__);
+
+	if(!neb::core::app::__base::is_valid()) return;
 	
 	
 	w_ = w;

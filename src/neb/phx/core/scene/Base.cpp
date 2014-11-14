@@ -127,14 +127,17 @@ void			neb::phx::core::scene::base::release() {
 		px_scene_ = NULL;
 	}
 }
-void			neb::phx::core::scene::base::create_physics() {
+void			neb::phx::core::scene::base::create_physics()
+{
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+
+	if(!neb::phx::app::base::is_valid()) return;
 
 	if(px_scene_ != NULL) {
 		LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
 		return;
 	}
-
+	
 	auto pxphysics = neb::phx::app::base::global()->px_physics_;
 
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());

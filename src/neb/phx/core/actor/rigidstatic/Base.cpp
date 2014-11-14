@@ -18,8 +18,11 @@
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }*/
-void			neb::phx::core::actor::rigidstatic::base::create_physics() {
+void			neb::phx::core::actor::rigidstatic::base::create_physics()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+
+	if(!neb::core::app::__base::is_valid()) return;
 	
 	if(px_actor_ != NULL) {
 		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
@@ -61,9 +64,11 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics() {
 
 	scene->px_scene_->addActor(*px_rigid_static);
 }
-void			neb::phx::core::actor::rigidstatic::base::init_physics() {
-
+void			neb::phx::core::actor::rigidstatic::base::init_physics()
+{
 	printf("%s\n", __PRETTY_FUNCTION__);
+
+	if(!neb::core::app::__base::is_valid()) return;
 
 	setupFiltering();
 }
