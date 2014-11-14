@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 
+#include <neb/core/util/config.hpp>
+
 #include <neb/core/color/Color.hh>
 
 #include <neb/gfx/app/__gfx_glsl.hpp>
@@ -123,7 +125,7 @@ int		neb::gfx::texture::load_png(std::string filename)
 	
 	auto app(neb::core::app::__base::global());
 	
-	filename = app->share_dir_ + "media/texture/" + filename;
+	filename = NEB_SHARE_DIR"/media/texture/" + filename;
 	
 	png_byte header[8];
 

@@ -15,6 +15,8 @@
 #include <iterator>
 #include <algorithm>
 
+#include <neb/core/util/config.hpp>
+
 #include <neb/gfx/free.hpp>
 #include <neb/gfx/util/config.hpp>
 #include <neb/gfx/util/log.hpp>
@@ -25,7 +27,7 @@ std::vector<std::string>		readLines(std::string filename) {
 
 	auto app(neb::gfx::app::__gfx_glsl::global().lock());
 	
-	filename = app->share_dir_ + "media/shaders/" + filename;
+	filename = NEB_SHARE_DIR"/media/shaders/" + filename;
 
 	std::ifstream ifs(filename);
 
