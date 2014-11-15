@@ -52,15 +52,6 @@ namespace neb {
 			void					step(::gal::etc::timestep const & ts);
 
 
-			void					resize(int w, int h);
-
-			void					draw(gfx::RenderDesc const &);
-			void					drawMesh(gfx::RenderDesc const &);
-			void					drawMeshHF(gfx::RenderDesc const &);
-			void					drawMeshInst(gfx::RenderDesc const &);
-			void					drawPhysxVisualization(gfx::RenderDesc const &);
-			void					drawDebug(gfx::RenderDesc const &);
-
 
 		public:
 			void					create_physics();
@@ -85,32 +76,6 @@ namespace neb {
 			 */
 			virtual weak_ptr<neb::core::core::actor::base>		createActorRigidDynamicUninitialized() = 0;
 			/** @} */
-
-
-
-
-			// rendering data
-			
-			struct
-			{
-				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3;
-				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3_HF;
-				std::shared_ptr<neb::gfx::glsl::program::threed>	_M_d3_inst;
-			} _M_programs;
-			
-			// one for static, one for dynamic
-			std::shared_ptr<neb::gfx::glsl::uniform::light_array>		light_array_[2];
-
-			std::shared_ptr<neb::gfx::texture>				tex_shadow_map_;
-
-			// standard meshes
-			struct {
-				std::shared_ptr<neb::gfx::mesh::instanced>		cuboid_;
-			} meshes_;
-
-
-
-
 
 
 
