@@ -101,9 +101,9 @@ namespace neb { namespace gfx { namespace ogl {
 						stride,
 						pointer[c]);
 
-				glVertexAttribDivisor(
-						index[c],
-						divisor[c]);
+				//glVertexAttribDivisor(
+				//		index[c],
+				//		divisor[c]);
 
 				checkerror("glVertexAttribDivisor");
 

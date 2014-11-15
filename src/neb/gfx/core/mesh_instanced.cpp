@@ -83,25 +83,26 @@ void			neb::gfx::mesh::instanced::draw(
 		neb::gfx::mesh::instanced::program_type* program)
 {
 
-	if(!buffers_[program])
+/*	if(!buffers_inst_[program])
 	{	
 		init(program);
 	}
-	auto buf = buffers_[program];
-
-	if(!buf) return;
+	auto buf = buffers_inst_[program];
+	
+	if(!buf) return;*/
 	
 	auto bt = getBufferTuple(program);
 	
 	instances_->update_slots();
-
+	
 	//bufferData(buf);
 	//bufferSubData(buf.get());
 	//buf->bufferSubData(begin(), end(), size(), data());
 	
 	bufferSubData(bt);
 	
-	draw(program, buf);
+	//draw(program, buf);
+	draw(program, std::get<0>(bt));
 }
 void			neb::gfx::mesh::instanced::draw(
 		neb::gfx::mesh::instanced::program_type*		program,

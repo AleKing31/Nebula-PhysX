@@ -104,19 +104,25 @@ namespace neb { namespace gfx { namespace mesh {
 			buffer_tuple				getBufferTuple(P const * const & p)
 			{
 				auto it = buffers_.find(p);
+				
+				if(it != buffers_.end()) return it->second;
 
-				if(it == buffers_.end())
-				{
-					buffer_tuple bt(getBuffer<BUFFERS>(p)...);
 
-					bufferData(bt);
+				buffer_tuple bt(getBuffer<BUFFERS>(p)...);
 
-					buffers_[p] = bt;
+				bufferData(bt);
+				
+				typename program_buffer_map::value_type val(p,bt);
+				
+				//buffers_[p] = bt;
 
-					return bt;
-				}
+				auto ret = buffers_.insert(val);
 
-				return it->second;
+				assert(ret.second);
+
+				return bt;
+
+
 			}
 			template<typename BUFFER> std::shared_ptr<BUFFER>	getBuffer(neb::gfx::glsl::program::base const * const & p)
 			{
@@ -133,7 +139,7 @@ namespace neb { namespace gfx { namespace mesh {
 			template<int...S> void		unbind(seq<S...>, buffer_tuple const & bt) { pass((std::get<S>(bt)->vertexAttribPointer())...); }
 
 		private:
-			program_buffer_map			buffers_;
+			program_buffer_map		buffers_;
 
 
 	};

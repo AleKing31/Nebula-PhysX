@@ -58,7 +58,7 @@ namespace neb { namespace gfx { namespace mesh {
 		public:
 			neb::gfx::mesh::tri1					mesh_;
 			
-			buffer_map						buffers_;
+			buffer_map						buffers_inst_;
 
 			std::shared_ptr<instances_type>				instances_;
 	};
