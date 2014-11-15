@@ -46,11 +46,11 @@ void	neb::gfx::mesh::tri1::construct(math::geo::polyhedron* poly) {
 
 
 	nbVerts_   = 3 * nbTriangles;
-	nbIndices_ = 3 * nbTriangles;
+	GLuint nbIndices = 3 * nbTriangles;
 	vertices_  = new math::geo::vertex[nbVerts_];
-	indices_   = new index_type[nbIndices_];
-		
-	for(size_t i = 0; i < nbIndices_; ++i) {
+	indices_.reserve(nbIndices);
+	
+	for(size_t i = 0; i < nbIndices; ++i) {
 		indices_[i] = i;
 	}
 	
@@ -64,7 +64,7 @@ void	neb::gfx::mesh::tri1::construct(math::geo::polyhedron* poly) {
 	}
 
 	LOG(lg, neb::gfx::sl, debug) << "vertices: " << nbVerts_;
-	LOG(lg, neb::gfx::sl, debug) << "indices:  " << nbIndices_;
+	LOG(lg, neb::gfx::sl, debug) << "indices:  " << nbIndices;
 
 
 }
@@ -73,14 +73,13 @@ void			neb::gfx::mesh::tri1::setVerts(math::geo::vertex* verts, unsigned int nbV
 	vertices_ = verts;
 	nbVerts_ = nbVerts;
 }
-void			neb::gfx::mesh::tri1::setIndices(index_type* indices, unsigned int nbIndices)
+void			neb::gfx::mesh::tri1::setIndices(std::vector<index_type> const & indices)
 {
 	indices_ = indices;
-	nbIndices_ = nbIndices;
 }
 unsigned int		neb::gfx::mesh::tri1::getNbIndices()
 {
-	return nbIndices_;
+	return indices_.size();
 }
 void		neb::gfx::mesh::tri1::serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version) {
 	
@@ -104,7 +103,7 @@ void		neb::gfx::mesh::tri1::serialize(boost::archive::polymorphic_iarchive & ar,
 	
 	
 	LOG(lg, neb::gfx::sl, info) << "vertices: " << nbVerts_;
-	LOG(lg, neb::gfx::sl, info) << "indices:  " << nbIndices_;
+	LOG(lg, neb::gfx::sl, info) << "indices:  " << indices_.size();
 
 }
 void		neb::gfx::mesh::tri1::serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) {
@@ -115,7 +114,7 @@ void		neb::gfx::mesh::tri1::serialize(boost::archive::polymorphic_oarchive & ar,
 	//ar & indices_;
 	
 	LOG(lg, neb::gfx::sl, info) << "vertices: " << nbVerts_;
-	LOG(lg, neb::gfx::sl, info) << "indices:  " << nbIndices_;
+	LOG(lg, neb::gfx::sl, info) << "indices:  " << indices_.size();
 
 }
 void		neb::gfx::mesh::tri1::print(int sl) {
@@ -163,6 +162,7 @@ void			neb::gfx::mesh::tri1::drawElements(
 
 	int tex_num = 3;
 
+	// normal map
 	if(normal_map_) {
 		LOG(lg, neb::gfx::sl, info) << "activate normal map";
 
@@ -187,7 +187,9 @@ void			neb::gfx::mesh::tri1::drawElements(
 
 	checkerror("unknown");
 
-	base_t::drawElements(p, pose, scale, nbIndices_);
+	assert(glfwGetCurrentContext());
+	
+	base_t::drawElements(p, pose, scale, indices_.size());
 
 
 	/*	// initialize buffers if not already

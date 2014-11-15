@@ -67,6 +67,7 @@ void				neb::phx::core::shape::HeightField::create_physics()
 		assert(rigidactor);
 
 		if(rigidactor) {
+			if(!rigidactor->px_actor_) rigidactor->create_physics();
 			assert(rigidactor->px_actor_);
 
 			auto px_rigidactor = rigidactor->px_actor_->isRigidActor();
@@ -111,8 +112,8 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
 	hf.createRandom();
 
 
-	for(float f : desc_.fc)
-		hf.filterc(f);
+	//for(float f : desc_.fc)
+	//	hf.filterc(f);
 
 	hf.normalize(-desc_.hs, desc_.hs);
 
@@ -172,8 +173,9 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 
 	unsigned int nbTriangles = (r - 1) * (c - 1) * 2;
 	unsigned int nbIndices = nbTriangles * 3;
+
 	::math::geo::vertex* vertices = new ::math::geo::vertex[nbVerts];
-	mesh_type::index_type* indices = new mesh_type::index_type[nbIndices];
+	std::vector<mesh_type::index_type> indices(nbIndices);
 	
 	
 	min_y_ = hf->min();
@@ -258,7 +260,7 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 	mesh_.reset(new neb::gfx::mesh::tri1);
 
 	mesh_->setVerts(vertices, nbVerts);
-	mesh_->setIndices(indices, nbIndices);
+	mesh_->setIndices(indices);
 
 	// testing generated normal map
 	//mesh_->normal_map_ = neb::gfx::texture::makePNG("test.png");

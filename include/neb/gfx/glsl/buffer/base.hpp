@@ -33,6 +33,8 @@ namespace neb { namespace gfx { namespace glsl { namespace buffer {
 					GLsizeiptr size,
 					GLvoid* const data)
 			{
+				std::cout << __PRETTY_FUNCTION__ << std::endl;
+
 				neb::gfx::ogl::bufferData(
 						D::target_,
 						buffer_,

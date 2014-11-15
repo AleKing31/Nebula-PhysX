@@ -49,32 +49,11 @@ namespace neb { namespace gfx { namespace mesh {
 			tri1();
 			~tri1();
 
-			virtual GLsizeiptr*		begin() {
-				begin_[0] = 0;
-				begin_[1] = 0;
-				return begin_;
-			}
-			virtual GLsizeiptr*		end() {
-				begin_[0] = nbVerts_;
-				begin_[1] = nbIndices_;
-				return begin_;
-			}
-			virtual GLvoid** const		data() {
-				data_[0] = &vertices_[0];
-				data_[1] = &indices_[0];
-				return data_;
-			}
-			GLsizeiptr*			size_array() {
-				return size();
-			}
-			GLsizeiptr*			size() {
-				assert(!nbVerts_ == 0);
-				assert(!nbIndices_ == 0);
-				
-				size_[0] = nbVerts_;
-				size_[1] = nbIndices_;
-				return size_;
-			}
+			virtual GLsizeiptr*		begin();
+			virtual GLsizeiptr*		end();
+			virtual GLvoid** const		data();
+			GLsizeiptr*			size_array();
+			GLsizeiptr*			size();
 
 			void				serialize(
 					ba::polymorphic_iarchive & ar, unsigned int const & version);
@@ -92,7 +71,7 @@ namespace neb { namespace gfx { namespace mesh {
 					buffer_shared,
 					neb::core::pose const & pose,
 					glm::vec3 scale);
-					*/
+			 */
 			/**
 			 * do specific things like custom uniforms, then call mesh::base::drawElements
 			 */
@@ -110,14 +89,13 @@ namespace neb { namespace gfx { namespace mesh {
 
 
 			void					setVerts(math::geo::vertex*, GLuint);
-			void					setIndices(index_type*, GLuint);
+			void					setIndices(std::vector<index_type> const &);
 			GLuint					getNbVerts();
 			GLuint					getNbIndices();
 		private:
 			math::geo::vertex*				vertices_;
-			index_type*					indices_;
+			std::vector<index_type>				indices_;
 			GLuint						nbVerts_;
-			GLuint						nbIndices_;
 		public:
 
 

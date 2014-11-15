@@ -37,9 +37,9 @@ namespace neb { namespace gfx { namespace mesh {
 	template<typename... BUFFERS> class base
 	{
 		public:
-			typedef neb::gfx::glsl::program::base		P;
-			typedef std::tuple<BUFFERS*...>			buffer_tuple;
-			typedef std::map<P const *, buffer_tuple>	program_buffer_map;
+			typedef neb::gfx::glsl::program::base			P;
+			typedef std::tuple< std::shared_ptr<BUFFERS>... >	buffer_tuple;
+			typedef std::map<P const *, buffer_tuple>		program_buffer_map;
 
 			enum {
 				BUFFER_COUNT = sizeof...(BUFFERS)
@@ -59,7 +59,11 @@ namespace neb { namespace gfx { namespace mesh {
 			template<int I> GLsizeiptr		end()		{ end(); return end_[I]; }
 			template<int I> GLsizeiptr		size()		{ size(); return size_[I]; }
 			template<int I> GLsizeiptr		size_array()	{ size_array(); return size_array_[I]; }
-			template<int I> GLvoid* const		data()		{ data(); return data_[I]; }
+			template<int I> GLvoid* const		data()
+			{
+				data();
+				return data_[I];
+			}
 
 			/** set by function of same name then sent to bufferData functions */
 			GLvoid*				data_[BUFFER_COUNT];
@@ -68,16 +72,13 @@ namespace neb { namespace gfx { namespace mesh {
 			GLsizeiptr			size_[BUFFER_COUNT];
 			GLsizeiptr			size_array_[BUFFER_COUNT];
 
-			
-
-			void					bufferData(buffer_tuple const & bt) { bufferData(seq_type(), bt); }
-			template<int...S> void			bufferData(seq<S...>, buffer_tuple const & bt) {
-				pass((
-							std::get<S>(bt)->bufferData(
-								size<S>(),
-								data<S>()
-								)
-							)...);
+			void					bufferData(buffer_tuple const & bt)
+			{
+				bufferData(seq_type(), bt);
+			}
+			template<int...S> void			bufferData(seq<S...>, buffer_tuple const & bt)
+			{
+				pass((std::get<S>(bt)->bufferData(size<S>(), data<S>()))...);
 			}
 			void					bufferDataNull(buffer_tuple const & bt) { bufferDataNull(seq_type(), bt); }
 			template<int...S> void			bufferDataNull(seq<S...>, buffer_tuple const & bt) {
@@ -85,7 +86,7 @@ namespace neb { namespace gfx { namespace mesh {
 							std::get<S>(bt)->bufferDataNull(
 								size_array<S>()
 								)
-							)...);
+				     )...);
 			}
 			void					bufferSubData(buffer_tuple const & bt) { bufferSubData(seq_type(), bt); }
 			template<int...S> void			bufferSubData(seq<S...>, buffer_tuple const & bt) {
@@ -117,9 +118,9 @@ namespace neb { namespace gfx { namespace mesh {
 
 				return it->second;
 			}
-			template<typename BUFFER> BUFFER*	getBuffer(neb::gfx::glsl::program::base const * const & p)
+			template<typename BUFFER> std::shared_ptr<BUFFER>	getBuffer(neb::gfx::glsl::program::base const * const & p)
 			{
-				BUFFER* b = new BUFFER();
+				std::shared_ptr<BUFFER> b(new BUFFER());
 				b->init(p);
 				return b;
 			}
@@ -148,9 +149,9 @@ namespace neb { namespace gfx { namespace mesh {
 			using B::unbind;
 			using B::vertexAttribPointer;
 
-			typedef neb::gfx::glsl::program::base		P;
-			typedef std::tuple<BUFFERS*...>			buffer_tuple;
-			typedef std::map<P const *, buffer_tuple>	program_buffer_map;
+			typedef neb::gfx::glsl::program::base			P;
+			typedef std::tuple<std::shared_ptr<BUFFERS>...>		buffer_tuple;
+			typedef std::map<P const *, buffer_tuple>		program_buffer_map;
 
 			enum {
 				BUFFER_COUNT = sizeof...(BUFFERS)

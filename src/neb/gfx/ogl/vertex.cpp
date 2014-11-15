@@ -10,6 +10,10 @@ void			neb::gfx::ogl::bufferData(
 		GLvoid* const		data,
 		const GLenum		usage)
 {
+	
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << "datasize " << datasize << std::endl;
+	std::cout << "size     " << size << std::endl;
 
 	glBindBuffer(
 			target,
