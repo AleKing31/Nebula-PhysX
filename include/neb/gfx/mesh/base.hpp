@@ -116,9 +116,9 @@ namespace neb { namespace gfx { namespace mesh {
 				
 				//buffers_[p] = bt;
 
-				auto ret = buffers_.insert(val);
+				//auto ret = buffers_.insert(val);
 
-				assert(ret.second);
+				//assert(ret.second);
 
 				return bt;
 

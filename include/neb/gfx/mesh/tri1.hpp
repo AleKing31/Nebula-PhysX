@@ -87,20 +87,17 @@ namespace neb { namespace gfx { namespace mesh {
 
 			neb::material::material			material_front_;
 
-
-			void					setVerts(math::geo::vertex*, GLuint);
+			void					setVerts(std::vector<math::geo::vertex> const &);
 			void					setIndices(std::vector<index_type> const &);
+
 			GLuint					getNbVerts();
 			GLuint					getNbIndices();
 		private:
-			math::geo::vertex*				vertices_;
-			std::vector<index_type>				indices_;
-			GLuint						nbVerts_;
+			std::vector<math::geo::vertex>		vertices_;
+			std::vector<index_type>			indices_;
 		public:
-
-
-			std::shared_ptr<neb::gfx::texture>		texture_;
-			std::shared_ptr<neb::gfx::texture>		normal_map_;
+			std::shared_ptr<neb::gfx::texture>	texture_;
+			std::shared_ptr<neb::gfx::texture>	normal_map_;
 	};
 }}}
 

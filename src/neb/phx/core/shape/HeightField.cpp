@@ -174,7 +174,7 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 	unsigned int nbTriangles = (r - 1) * (c - 1) * 2;
 	unsigned int nbIndices = nbTriangles * 3;
 
-	::math::geo::vertex* vertices = new ::math::geo::vertex[nbVerts];
+	std::vector<::math::geo::vertex> vertices(nbVerts);
 	std::vector<mesh_type::index_type> indices(nbIndices);
 	
 	
@@ -259,7 +259,7 @@ void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, flo
 
 	mesh_.reset(new neb::gfx::mesh::tri1);
 
-	mesh_->setVerts(vertices, nbVerts);
+	mesh_->setVerts(vertices);
 	mesh_->setIndices(indices);
 
 	// testing generated normal map

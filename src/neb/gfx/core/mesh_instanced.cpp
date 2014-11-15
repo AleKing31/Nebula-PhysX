@@ -83,6 +83,8 @@ void			neb::gfx::mesh::instanced::draw(
 		neb::gfx::mesh::instanced::program_type* program)
 {
 
+	assert(program);
+
 /*	if(!buffers_inst_[program])
 	{	
 		init(program);
@@ -100,15 +102,20 @@ void			neb::gfx::mesh::instanced::draw(
 	//buf->bufferSubData(begin(), end(), size(), data());
 	
 	bufferSubData(bt);
-	
+
+	auto b = std::get<0>(bt);
+	assert(b);
+
 	//draw(program, buf);
-	draw(program, std::get<0>(bt));
+	draw(program, b);
 }
 void			neb::gfx::mesh::instanced::draw(
 		neb::gfx::mesh::instanced::program_type*		program,
 		std::shared_ptr<neb::gfx::glsl::buffer::instanced>	buf)
 {
 	LOG(lg, neb::gfx::sl, debug) << __PRETTY_FUNCTION__;
+
+	assert(instances_);
 
 	//auto buf_mesh = mesh_.getBuffer(program);
 	auto bt = mesh_.getBufferTuple(program);
@@ -123,12 +130,14 @@ void			neb::gfx::mesh::instanced::draw(
 
 	mesh_.bind(bt);
 
+	auto s = instances_->size();
+
 	glDrawElementsInstanced(
 			GL_TRIANGLES,
 			mesh_.getNbIndices(),
 			GL_UNSIGNED_SHORT,
 			0,
-			instances_->size());
+			s);
 
 	checkerror("glDrawElementsInstanced");
 
