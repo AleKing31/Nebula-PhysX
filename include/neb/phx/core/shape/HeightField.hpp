@@ -1,13 +1,9 @@
 #ifndef PHYSX_SHAPE_HEIGHT_FIELD_HH
 #define PHYSX_SHAPE_HEIGHT_FIELD_HH
 
-#include <neb/core/core/shape/HeightField/desc.hpp>
+#include <neb/core/core/shape/HeightField.hpp>
 
 #include <neb/phx/core/shape/base.hpp>
-
-namespace neb { namespace math {
-	struct HeightField;
-}}
 
 namespace neb { namespace phx { namespace core { namespace shape {
 
@@ -33,10 +29,6 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 			void					mesh_from_heightfield(neb::math::HeightField*, float, float);
 
-			physx::PxReal				min_y_;
-			physx::PxReal				max_y_;
-
-			neb::core::core::shape::HeightField::desc	desc_;
 	};
 
 
