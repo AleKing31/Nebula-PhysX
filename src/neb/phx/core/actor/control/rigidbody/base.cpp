@@ -57,9 +57,9 @@ int			neb::phx::core::actor::control::rigidbody::base::keyFun(
 		<< " mods = " << mods
 		<< " flag = ";
 
-	vec3 x(1.0,0.0,0.0);
-	vec3 y(0.0,1.0,0.0);
-	vec3 z(0.0,0.0,1.0);
+	glm::vec3 x(1.0,0.0,0.0);
+	glm::vec3 y(0.0,1.0,0.0);
+	glm::vec3 z(0.0,0.0,1.0);
 
 	switch(action) {
 		case GLFW_PRESS:

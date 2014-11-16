@@ -7,7 +7,6 @@
 
 #include <gal/etc/timestep.hpp>
 
-#include <neb/core/util/typedef.hpp>
 #include <neb/core/input/sink.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -38,10 +37,10 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 				virtual int			keyFun(std::shared_ptr<neb::core::input::source> const &, int, int, int, int);
 
 				virtual void			step(gal::etc::timestep const & ts) = 0;
-				virtual vec3			f_body() = 0;
-				virtual vec3			t_body() = 0;
-				virtual vec3			f_global() = 0;
-				virtual vec3			t_global() = 0;
+				virtual glm::vec3		f_body() = 0;
+				virtual glm::vec3		t_body() = 0;
+				virtual glm::vec3		f_global() = 0;
+				virtual glm::vec3		t_global() = 0;
 
 				virtual void			serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
 				virtual void			serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version);
@@ -50,14 +49,14 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 			public:
 				std::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
 
-				quat				q_target_;
-				vec3				p_target_;
+				glm::quat				q_target_;
+				glm::vec3				p_target_;
 
-				vec3				f_;
-				vec3				t_;
+				glm::vec3				f_;
+				glm::vec3				t_;
 
-				vec3				force_;
-				vec3				torque_;
+				glm::vec3				force_;
+				glm::vec3				torque_;
 
 				//gal::control::control		pid_;
 
@@ -68,10 +67,10 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 		public:
 			virtual ~manual() {}
 			void				step(gal::etc::timestep const & ts);
-			virtual vec3			f_body();
-			virtual vec3			t_body();
-			virtual vec3			f_global();
-			virtual vec3			t_global();
+			virtual glm::vec3		f_body();
+			virtual glm::vec3		t_body();
+			virtual glm::vec3		f_global();
+			virtual glm::vec3		t_global();
 
 	};
 	class pd:
@@ -81,12 +80,12 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 			virtual ~pd() {}
 			void				step(gal::etc::timestep const & ts);
 
-			vec3				getOrientationError();
+			glm::vec3			getOrientationError();
 
-			virtual vec3			f_body();
-			virtual vec3			t_body();
-			virtual vec3			f_global();
-			virtual vec3			t_global();
+			virtual glm::vec3		f_body();
+			virtual glm::vec3		t_body();
+			virtual glm::vec3		f_global();
+			virtual glm::vec3		t_global();
 	};
 
 

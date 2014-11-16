@@ -3,7 +3,6 @@
 #include <neb/core/core/scene/base.hpp>
 #include <neb/core/core/shape/base.hpp>
 #include <neb/core/util/debug.hpp>
-#include <neb/core/util/typedef.hpp>
 
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/actor/base.hpp>

@@ -11,16 +11,10 @@
 #include <gal/etc/flag.hpp>
 #include <gal/stl/map.hpp>
 
-#include <neb/core/util/decl.hpp>
-#include <neb/core/util/typedef.hpp>
-#include <neb/core/math/Serialization/glm.hpp>
 #include <neb/core/core/actor/util/parent.hpp>
 #include <neb/core/core/scene/base.hpp>
-
-#include <neb/gfx/drawable/base.hpp>
-#include <neb/gfx/glsl/uniform/light_array.hpp>
-#include <neb/gfx/util/decl.hpp>
-#include <neb/gfx/glsl/util/decl.hpp>
+#include <neb/core/math/serialization/glm.hpp>
+#include <neb/core/util/decl.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
@@ -28,20 +22,14 @@
 
 typedef weak_ptr<neb::core::core::actor::base> wbase;
 
-namespace neb {
-	namespace gfx {
-		class RenderDesc;
-	}
-
-	namespace phx { namespace core { namespace scene {
+namespace neb { namespace phx { namespace core { namespace scene {
 
 	/** 
 	 * @ingroup group_core
 	 * @brief base
 	 */
 	class base:
-		virtual public neb::core::core::scene::base,
-		virtual public neb::gfx::drawable::base
+		virtual public neb::core::core::scene::base
 	{
 		public:
 			base();
@@ -84,7 +72,8 @@ namespace neb {
 			physx::PxScene*						px_scene_;
 			physx::PxSimulationFilterShader				px_filter_shader_;
 			neb::phx::simulation_callback*				simulation_callback_;
-			vec3							gravity_;
+			
+			glm::vec3						gravity_;
 			//neb::vehicle_manager					vehicle_manager_;
 	};
 }}}}

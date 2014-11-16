@@ -24,7 +24,7 @@
 
 #include <neb/core/util/debug.hpp>
 
-#include <neb/gfx/window/Base.hh>
+//#include <neb/gfx/window/Base.hh>
 
 #include <neb/core/input/signals.hpp>
 
@@ -39,18 +39,19 @@
 neb::phx::core::actor::rigidbody::base::base():
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)
-{}
+{
+}
 void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
 
 	// body frame
-	vec3 f_body;
-	vec3 t_body;
+	glm::vec3 f_body;
+	glm::vec3 t_body;
 
 	// global frame
-	vec3 f_global;
-	vec3 t_global;
+	glm::vec3 f_global;
+	glm::vec3 t_global;
 	
 	if(control_) {
 		f_body += control_->f_body();
@@ -117,20 +118,20 @@ void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_p
 void			neb::phx::core::actor::rigidbody::base::createControlPD()
 {
 	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;;
-
+	
 	auto self = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(
 			shared_from_this()
 			);
-
+	
 	auto control = std::make_shared<neb::phx::core::actor::control::rigidbody::pd>();
-
+	
 	control_ = control;
-
+	
 	control->actor_ = self;
-
-	control->p_target_ = vec3(0,0,5);
-
-	control->q_target_ = glm::angleAxis(1.5f, vec3(0.0,1.0,0.0));
+	
+	control->p_target_ = glm::vec3(0,0,5);
+	
+	control->q_target_ = glm::angleAxis(1.5f, glm::vec3(0.0,1.0,0.0));
 
 }
 void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts)

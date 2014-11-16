@@ -3,7 +3,7 @@
 #include <neb/core/core/shape/base.hpp>
 #include <neb/core/core/light/base.hpp>
 
-#include <neb/gfx/glsl/attrib.hh>
+//#include <neb/gfx/glsl/attrib.hh>
 
 #include <neb/phx/util/log.hpp>
 #include <neb/phx/app/base.hpp>
