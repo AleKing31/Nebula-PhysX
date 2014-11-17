@@ -1,8 +1,8 @@
-#ifndef PHYSX_SHAPE_HEIGHT_FIELD_HH
-#define PHYSX_SHAPE_HEIGHT_FIELD_HH
+#ifndef NEB_PHX_CORE_SHAPE_HEIGHT_FIELD_HH
+#define NEB_PHX_CORE_SHAPE_HEIGHT_FIELD_HH
 
+#include <neb/core/util/decl.hpp>
 #include <neb/core/math/geo/util/decl.hpp>
-
 #include <neb/core/core/shape/HeightField.hpp>
 
 #include <neb/phx/core/shape/base.hpp>
@@ -17,7 +17,9 @@ namespace neb { namespace phx { namespace core { namespace shape {
 
 			HeightField();
 			
-			virtual void				init(parent_t * const & p);
+		protected:
+			void					__init(parent_t * const & p);
+		public:
 			virtual void				release();
 			virtual void				step(gal::etc::timestep  const & ts);
 

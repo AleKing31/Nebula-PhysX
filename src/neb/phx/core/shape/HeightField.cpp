@@ -24,15 +24,9 @@ neb::phx::core::shape::HeightField::HeightField()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
-void				neb::phx::core::shape::HeightField::init(THIS::parent_t * const & p)
+void				neb::phx::core::shape::HeightField::__init(THIS::parent_t * const & p)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-
-	setParent(p);
-
-	neb::core::core::shape::base::init(p);
-	neb::gfx::core::shape::base::init(p);
-	neb::phx::core::shape::base::init(p);
 
 	create_physics();
 }
