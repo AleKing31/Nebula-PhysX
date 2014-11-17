@@ -25,6 +25,7 @@
 
 #include <neb/phx/core/scene/base.hpp>
 
+/*
 #include <neb/gfx/core/actor/base.hpp>
 #include <neb/gfx/core/shape/base.hpp>
 #include <neb/gfx/glsl/program/threed.hpp>
@@ -38,13 +39,14 @@
 #include <neb/gfx/Context/Base.hh>
 #include <neb/gfx/environ/three.hpp>
 #include <neb/gfx/RenderDesc.hpp>
+*/
 
 typedef neb::phx::core::scene::base THIS;
 
 typedef neb::core::core::actor::util::parent A;
 
-typedef neb::gfx::glsl::program::base	P;
-typedef neb::gfx::glsl::program::threed	P3;
+//typedef neb::gfx::glsl::program::base	P;
+//typedef neb::gfx::glsl::program::threed	P3;
 
 neb::phx::core::scene::base::base():
 	px_scene_(NULL),

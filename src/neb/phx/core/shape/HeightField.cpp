@@ -3,7 +3,7 @@
 #include <climits>
 #include <ctime>
 
-#include <neb/core/rand.hpp>
+#include <neb/core/math/rand.hpp>
 #include <neb/core/util/cast.hpp>
 #include <neb/core/math/geo/vertex.hpp>
 

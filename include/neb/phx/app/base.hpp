@@ -38,7 +38,7 @@ namespace neb {
 
 
 			class base:
-				virtual public neb::app::__core,
+				virtual public nc::app::__core,
 				virtual public neb::phx::core::scene::util::parent
 				//virtual public neb::phx::game::game::util::parent
 			{

@@ -42,7 +42,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	
 	auto p(getPose());	
 	physx::PxTransform pose(
-			phx::util::convert(vec3(p.pos_)),
+			phx::util::convert(glm::vec3(p.pos_)),
 			phx::util::convert(p.rot_)
 			);
 	
