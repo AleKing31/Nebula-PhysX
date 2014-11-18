@@ -3,6 +3,8 @@
 
 #include <PxPhysicsAPI.h>
 
+#include <glm/glm.hpp>
+
 #include <neb/gfx/environ/util/decl.hpp>
 
 namespace neb {

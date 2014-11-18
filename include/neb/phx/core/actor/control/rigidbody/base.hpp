@@ -1,6 +1,9 @@
 #ifndef PHYSX_CORE_ACTOR_CONTROL_RIGID_BODY_CONTROL_H__
 #define PHYSX_CORE_ACTOR_CONTROL_RIGID_BODY_CONTROL_H__
 
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/signals2.hpp>

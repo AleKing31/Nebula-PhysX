@@ -30,15 +30,6 @@ void				neb::phx::core::shape::HeightField::__init(THIS::parent_t * const & p)
 
 	create_physics();
 }
-void				neb::phx::core::shape::HeightField::release()
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	neb::core::core::shape::base::release();
-	neb::gfx::core::shape::base::release();
-	neb::phx::core::shape::base::release();
-
-
-}
 void				neb::phx::core::shape::HeightField::step(gal::etc::timestep  const & ts)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -74,17 +65,13 @@ void				neb::phx::core::shape::HeightField::create_physics()
 			px_shape_ = px_rigidactor->createShape(*(to_geo()), px_mat, 2);
 		}
 	}
-
 }
-
-
 float scale(float x, float oa, float ob, float na, float nb)
 {
 	return (x - oa) / (ob - oa) * (nb - na) + na;
 }
-
-physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo() {
-
+physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo()
+{
 	unsigned int r = desc_.r;
 	unsigned int c = desc_.c;
 

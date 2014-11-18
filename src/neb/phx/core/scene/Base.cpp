@@ -74,7 +74,7 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 	// graphics
 
 	// use _M_programs._M_d3 as completion flag
-	if(!_M_programs._M_d3)
+/*	if(!_M_programs._M_d3)
 	{
 		// programs
 		_M_programs._M_d3.reset(new P3("3d"));
@@ -104,7 +104,7 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 				shadow_tex_size,
 				shadow_tex_size,
 				std::shared_ptr<neb::gfx::context::base>());
-	}
+	}*/
 }
 void			THIS::init_light()
 {

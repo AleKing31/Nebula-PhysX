@@ -10,7 +10,8 @@
 namespace neb { namespace phx { namespace core { namespace shape {
 
 	class HeightField:
-		virtual public neb::phx::core::shape::base
+		virtual public neb::phx::core::shape::base,
+		virtual public nc::core::shape::HeightField::Base
 	{
 		public:
 			typedef neb::core::core::shape::util::parent parent_t;
