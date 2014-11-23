@@ -6,7 +6,9 @@
 #include <neb/core/game/ai/base.hpp>
 #include <neb/core/util/log.hpp>
 
-void						neb::game::ai::base::step(gal::etc::timestep const & ts) {
+
+
+void						neb::core::game::ai::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::core::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -26,17 +28,17 @@ void						neb::game::ai::base::step(gal::etc::timestep const & ts) {
 	
 	
 	
-	vec3 look = vec3(target->pose_.pos_ - actor->pose_.pos_);
-	vec3 up(0,0,-1);
+	glm::vec3 look = glm::vec3(target->pose_.pos_ - actor->pose_.pos_);
+	glm::vec3 up(0,0,-1);
 	
 	look = glm::normalize(look);
 	
 	float w = glm::dot(up,look);
 
-	vec3 v = glm::cross(up,look);
+	glm::vec3 v = glm::cross(up,look);
 	//vec3 v = glm::cross(look,up);
 	
-	quat q(1.0 + w, v.x, v.y, v.z);
+	glm::quat q(1.0 + w, v.x, v.y, v.z);
 	q = glm::normalize(q);
 	
 	//quat q(up,look);
@@ -58,7 +60,7 @@ void						neb::game::ai::base::step(gal::etc::timestep const & ts) {
 
 	pd->q_target_ = q;
 	
-	typedef neb::game::weapon::util::parent W;
+	typedef neb::core::game::weapon::util::parent W;
 
 	// fire
 	if(glm::length(pd->getOrientationError()) < 0.1) {

@@ -5,8 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
 
-#include <neb/gfx/util/io.hpp>
-#include <neb/gfx/environ/base.hpp>
+//#include <neb/gfx/util/io.hpp>
+//#include <neb/gfx/environ/base.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/test.hpp>
@@ -30,8 +30,8 @@ physx::PxConvexMeshGeometry*	neb::frustrum_geometry(glm::mat4 proj) {
 
 	glm::mat4 inv = glm::inverseTranspose(glm::transpose(proj));
 
-	std::cout << "proj" << std::endl << proj << std::endl;
-	std::cout << "inv" << std::endl << inv << std::endl;
+	//std::cout << "proj" << std::endl << proj << std::endl;
+	//std::cout << "inv" << std::endl << inv << std::endl;
 
 	std::cout << "verts" << std::endl;
 	for(int c = 0; c < 8; c++)
@@ -43,7 +43,7 @@ physx::PxConvexMeshGeometry*	neb::frustrum_geometry(glm::mat4 proj) {
 				gverts[c].y,
 				gverts[c].z);
 
-		std::cout << gverts[c] << std::endl;
+		//std::cout << gverts[c] << std::endl;
 	}
 
 /*	physx::PxHullPolygon polys[6];

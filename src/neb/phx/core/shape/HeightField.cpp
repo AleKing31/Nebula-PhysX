@@ -9,33 +9,30 @@
 
 //#include <neb/gfx/mesh/tri1.hpp>
 
-#include <neb/phx/core/shape/HeightField.hpp>
+#include <neb/phx/core/shape/HeightField/Base.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/app/base.hpp>
 
 #include <neb/core/math/HeightField.hpp>
 
-typedef neb::phx::core::shape::HeightField THIS;
+typedef neb::phx::core::shape::HeightField::Base THIS;
 
-
-typedef neb::phx::core::shape::HeightField THIS;
-
-neb::phx::core::shape::HeightField::HeightField()
+THIS::Base()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
-void				neb::phx::core::shape::HeightField::__init(THIS::parent_t * const & p)
+void				THIS::__init(THIS::parent_t * const & p)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 	create_physics();
 }
-void				neb::phx::core::shape::HeightField::step(gal::etc::timestep  const & ts)
+void				THIS::step(gal::etc::timestep  const & ts)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
 }
-void				neb::phx::core::shape::HeightField::create_physics()
+void				THIS::create_physics()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
@@ -70,7 +67,7 @@ float scale(float x, float oa, float ob, float na, float nb)
 {
 	return (x - oa) / (ob - oa) * (nb - na) + na;
 }
-physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo()
+physx::PxGeometry*		THIS::to_geo()
 {
 	unsigned int r = desc_.r;
 	unsigned int c = desc_.c;
@@ -79,17 +76,15 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo()
 	float colScale = desc_.h / float(c-1);
 
 	unsigned int nbVerts = r * c;
-
-	typedef neb::gfx::mesh::tri1 mesh_type;
-
-	assert(nbVerts <= (std::numeric_limits<mesh_type::index_type>::max() + 1));
+	
+	assert(nbVerts <= (std::numeric_limits<unsigned short>::max() + 1));
 
 	auto thePhysics = phx::app::base::global()->px_physics_;
 	assert(thePhysics);
 
 	// create heightfield short data
 
-	neb::math::HeightField hf(r, c);
+	neb::core::math::HeightField::Base hf(r, c);
 	hf.createRandom();
 
 
@@ -139,112 +134,10 @@ physx::PxGeometry*		neb::phx::core::shape::HeightField::to_geo()
 	//neb::math::HeightField* hf2 = hf.mipmap(2);
 	//mesh_from_heightfield(hf2, rowScale * 4, colScale * 4);
 
-	mesh_from_heightfield(&hf, rowScale, colScale);
+
+	//mesh_from_heightfield(&hf, rowScale, colScale);
 
 	return hfGeom;
-
-}
-void	THIS::mesh_from_heightfield(neb::math::HeightField* hf, float rowScale, float colScale)
-{
-	unsigned int r = hf->_M_r;
-	unsigned int c = hf->_M_c;
-	unsigned int nbVerts = r * c;
-
-	typedef neb::gfx::mesh::tri1 mesh_type;
-
-	unsigned int nbTriangles = (r - 1) * (c - 1) * 2;
-	unsigned int nbIndices = nbTriangles * 3;
-
-	std::vector<::math::geo::vertex> vertices(nbVerts);
-	std::vector<mesh_type::index_type> indices(nbIndices);
-	
-	
-	min_y_ = hf->min();
-	max_y_ = hf->max();
-	
-	hf->slope(rowScale, colScale);
-
-	for(unsigned int i = 0; i < r; i++)
-	{
-		for(unsigned int j = 0; j < c; j++)
-		{
-			int ind = hf->at(i,j);
-
-			if(1) {
-				vertices[hf->at(i,j)].p = glm::vec3(
-						(float)i * rowScale,
-						(float)j * colScale,
-						hf->get(i,j)
-						);
-
-				vertices[ind].tc = glm::vec2(
-						(float)i / (float)(r-1),
-						(float)j / (float)(c-1)
-						);
-
-				vertices[hf->at(i,j)].n = glm::vec3(
-						-hf->_M_dzdx[hf->at(i,j)],
-						-hf->_M_dzdy[hf->at(i,j)],
-						2.0 * rowScale
-						);
-			} else {
-				vertices[hf->at(i,j)].p = glm::vec3(
-						(float)i * rowScale,
-						hf->get(i,j),
-						(float)j * colScale
-						);
-
-				vertices[ind].tc = glm::vec2(
-						(float)i / (float)(r-1),
-						(float)j / (float)(c-1)
-						);
-
-				vertices[hf->at(i,j)].n = glm::vec3(
-						hf->_M_dzdx[hf->at(i,j)],
-						2.0 * rowScale,
-						hf->_M_dzdy[hf->at(i,j)]
-						);
-			}
-		}
-	}
-
-
-	for(unsigned int i = 0; i < (r-1); i++)
-	{
-		for(unsigned int j = 0; j < (c-1); j++)
-		{
-			unsigned int d = (i * (c-1) + j) * 6;
-
-			assert((d+5) < nbIndices);
-
-			if(1) {
-				indices[d+0] = hf->at(i    , j    );
-				indices[d+1] = hf->at(i + 1, j    );
-				indices[d+2] = hf->at(i    , j + 1);
-
-				indices[d+3] = hf->at(i + 1, j    );
-				indices[d+4] = hf->at(i + 1, j + 1);
-				indices[d+5] = hf->at(i    , j + 1);
-			} else {
-				// reversed
-				indices[d+0] = hf->at(i    , j    );
-				indices[d+1] = hf->at(i    , j + 1);
-				indices[d+2] = hf->at(i + 1, j    );
-
-				indices[d+3] = hf->at(i + 1, j    );
-				indices[d+4] = hf->at(i    , j + 1);
-				indices[d+5] = hf->at(i + 1, j + 1);
-			}
-		}
-	}
-
-	mesh_.reset(new neb::gfx::mesh::tri1);
-
-	mesh_->setVerts(vertices);
-	mesh_->setIndices(indices);
-
-	// testing generated normal map
-	//mesh_->normal_map_ = neb::gfx::texture::makePNG("test.png");
 
 }
 void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
@@ -252,27 +145,6 @@ void	THIS::load(ba::polymorphic_iarchive & ar, unsigned int const &)
 }
 void	THIS::save(ba::polymorphic_oarchive & ar, unsigned int const &) const
 {
-}
-void			THIS::draw(
-		neb::gfx::glsl::program::base const * const & p,
-		neb::core::pose const & pose)
-{}
-void			THIS::drawHF(
-		neb::gfx::glsl::program::base const * const & p,
-		neb::core::pose const & pose)
-{
-	auto npose = pose * pose_;
-
-	p->use();
-
-	// load texture height range
-	neb::gfx::ogl::glUniform(p->uniform_table_[neb::gfx::glsl::uniforms::HF_MIN], min_y_);
-	neb::gfx::ogl::glUniform(p->uniform_table_[neb::gfx::glsl::uniforms::HF_MAX], max_y_);
-
-
-	draw_elements(p, npose);
-
-	
 }
 
 
