@@ -20,7 +20,7 @@ namespace neb { namespace phx { namespace core { namespace shape { namespace Hei
 			virtual void				init(parent_t * const & p) = 0;
 			void					__init(parent_t * const & p);
 		public:
-			virtual void				release();
+			virtual void				release() = 0;
 			virtual void				step(gal::etc::timestep  const & ts);
 			virtual void				create_physics();
 			virtual void				load(ba::polymorphic_iarchive & ar, unsigned int const &);
