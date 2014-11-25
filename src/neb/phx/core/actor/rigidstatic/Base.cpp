@@ -60,6 +60,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	assert(this == isActorBase().get());
 
 	// add PxActor to PxScene
+	scene->create_physics();
 	assert(scene->px_scene_ != NULL);
 
 	scene->px_scene_->addActor(*px_rigid_static);
