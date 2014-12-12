@@ -22,7 +22,7 @@ physx::PxFilterFlags	DefaultFilterShader(
 		const void* constantBlock,
 		physx::PxU32 constantBlockSize )
 {	
-	printf("%s\n",__PRETTY_FUNCTION__);
+	logprint(neb::phx::sl, debug, "%s\n",__PRETTY_FUNCTION__);
 	
 	//printf("%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
 	

@@ -48,7 +48,7 @@ SET(libs
 	#galaxy_log_0
 	#galaxy_console_0
 	${Boost_LIBRARIES}
-	${PhysX_LIBRARIES}
+	${physX_LIBRARIES}
 	)
 
 INCLUDE(cmh_library)
