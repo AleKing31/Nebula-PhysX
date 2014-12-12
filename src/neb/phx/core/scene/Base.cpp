@@ -5,16 +5,6 @@
 #include <neb/core/util/cast.hpp>
 #include <neb/core/util/debug.hpp>
 #include <neb/core/core/scene/util/decl.hpp>
-
-#include <neb/phx/app/base.hpp>
-#include <neb/phx/core/actor/rigidstatic/base.hpp>
-#include <neb/phx/core/actor/rigiddynamic/base.hpp>
-#include <neb/phx/core/scene/base.hpp>
-#include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
-
-
-
 #include <neb/core/util/log.hpp>
 #include <neb/core/util/config.hpp>
 #include <neb/core/core/light/base.hpp>
@@ -23,7 +13,12 @@
 #include <neb/core/timer/actor/Release.hpp>
 #include <neb/core/math/geo/polyhedron.hh>
 
+#include <neb/phx/app/base.hpp>
+#include <neb/phx/core/actor/rigidstatic/base.hpp>
+#include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
+#include <neb/phx/util/convert.hpp>
+#include <neb/phx/util/log.hpp>
 
 /*
 #include <neb/gfx/core/actor/base.hpp>
@@ -63,7 +58,7 @@ neb::phx::core::scene::base::~base() {
 
 	assert(px_scene_ == NULL);
 }
-void			neb::phx::core::scene::base::init(parent_t * const & p)
+void			neb::phx::core::scene::base::__init(parent_t * const & p)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -106,7 +101,8 @@ void			neb::phx::core::scene::base::init(parent_t * const & p)
 				std::shared_ptr<neb::gfx::context::base>());
 	}*/
 }
-void			neb::phx::core::scene::base::release() {
+void			neb::phx::core::scene::base::release()
+{
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
 	if(px_scene_)
