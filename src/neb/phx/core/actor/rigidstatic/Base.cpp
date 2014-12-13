@@ -22,7 +22,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
-	if(!neb::core::app::__base::is_valid()) return;
+	if(!neb::core::app::base::is_valid()) return;
 	
 	if(px_actor_ != NULL) {
 		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
@@ -69,7 +69,7 @@ void			neb::phx::core::actor::rigidstatic::base::init_physics()
 {
 	printf("%s\n", __PRETTY_FUNCTION__);
 
-	if(!neb::core::app::__base::is_valid()) return;
+	if(!neb::core::app::base::is_valid()) return;
 
 	setupFiltering();
 }
