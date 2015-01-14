@@ -13,7 +13,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 
 	/** @brief base */
 	class base:
-		virtual public phx::core::actor::rigidactor::base
+		virtual public neb::phx::core::actor::rigidactor::base
 	{
 		public:
 			typedef shared_ptr<neb::phx::core::actor::control::rigidbody::base>	control_shared;
