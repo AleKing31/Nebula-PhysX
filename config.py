@@ -59,6 +59,10 @@ add_subdirectory(test)
 
 l = Library("nebula_physx")
 
+l.require("galaxy_std")
+l.require("galaxy_log")
+l.require("galaxy_console")
+l.require("nebula_core")
 l.require("physx")
 
 l.make()
