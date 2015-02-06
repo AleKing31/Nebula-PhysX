@@ -34,7 +34,7 @@ physx::PxFilterFlags DefaultFilterShader(
 
 namespace neb { namespace phx { namespace app {
 	class base:
-		virtual public neb::core::app::base,
+		virtual public neb::core::app::Base,
 		virtual public neb::phx::core::scene::util::parent
 		//virtual public neb::phx::game::game::util::parent
 	{

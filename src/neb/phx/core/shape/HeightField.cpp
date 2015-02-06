@@ -35,7 +35,7 @@ void				THIS::create_physics()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-	if(!neb::core::app::base::is_valid()) return;
+	if(!neb::core::app::Base::is_valid()) return;
 
 	auto actor = neb::could_be<parent_t, neb::phx::core::actor::base>(getParent());
 	assert(actor);
