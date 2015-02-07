@@ -36,7 +36,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 		return;
 	}
 	
-	if(!neb::core::app::base::is_valid()) return;
+	if(!neb::core::app::Base::is_valid()) return;
 
 	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 	
