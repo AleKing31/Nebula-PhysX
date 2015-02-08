@@ -28,7 +28,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 	 * force and torque at a given point in time must be stored in raw.
 	 **/
 	class base:
-		virtual public neb::core::input::sink
+		virtual public neb::fnd::input::sink
 		{
 			public:
 				base();
@@ -37,7 +37,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 
 				virtual void			release();
 
-				virtual int			keyFun(std::shared_ptr<neb::core::input::source> const &, int, int, int, int);
+				virtual int			keyFun(std::shared_ptr<neb::fnd::input::source> const &, int, int, int, int);
 
 				virtual void			step(gal::etc::timestep const & ts) = 0;
 				virtual glm::vec3		f_body() = 0;

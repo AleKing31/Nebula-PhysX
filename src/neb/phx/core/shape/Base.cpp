@@ -23,7 +23,7 @@ neb::phx::core::shape::base::~base()
 void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 }
-void			neb::phx::core::shape::base::init(neb::core::core::shape::util::parent * const & p)
+void			neb::phx::core::shape::base::init(neb::fnd::core::shape::util::parent * const & p)
 {
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	
@@ -33,7 +33,7 @@ void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 
-	neb::core::core::shape::base::release();
+	neb::fnd::core::shape::base::release();
 	
 	if(px_shape_) {
 		auto p = getParent();
@@ -62,7 +62,7 @@ void			neb::phx::core::shape::base::create_physics() {
 
 	if(!actor) return;
 
-	auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::core::actor::Rigid_Actor>(parent_.lock());
+	auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::fnd::actor::Rigid_Actor>(parent_.lock());
 
 	if(!rigidactor) return;
 

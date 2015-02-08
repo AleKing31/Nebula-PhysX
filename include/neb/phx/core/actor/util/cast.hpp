@@ -8,7 +8,7 @@
 namespace neb { namespace phx { namespace core { namespace actor { namespace util {
 
 	class cast:
-		virtual public neb::core::core::actor::util::cast
+		virtual public neb::fnd::core::actor::util::cast
 	{
 		public:
 			std::shared_ptr<neb::phx::core::actor::base>				isPxActorBase();

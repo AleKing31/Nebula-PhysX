@@ -439,10 +439,10 @@ physx::PxRigidDynamic* createVehicleActor4W(
 	
 	return actor;
 }
-std::shared_ptr<neb::core::actor::vehicle>	neb::vehicle_manager::create_vehicle(
+std::shared_ptr<neb::fnd::actor::vehicle>	neb::vehicle_manager::create_vehicle(
 		physx::PxPhysics* physics,
 		physx::PxScene* scene,
-		std::shared_ptr<neb::core::actor::desc> desc) {
+		std::shared_ptr<neb::fnd::actor::desc> desc) {
 
 	// material
 	physx::PxMaterial* material = physics->createMaterial(0.5f, 0.5f, 0.1f);
@@ -525,7 +525,7 @@ std::shared_ptr<neb::core::actor::vehicle>	neb::vehicle_manager::create_vehicle(
 	
 	// my stuff
 	
-	std::shared_ptr<neb::core::actor::vehicle> vehicle;//(new neb::core::actor::vehicle);
+	std::shared_ptr<neb::fnd::actor::vehicle> vehicle;//(new neb::fnd::actor::vehicle);
 	
 	//vehicle->desc_ = desc;
 	

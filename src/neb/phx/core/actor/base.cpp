@@ -26,10 +26,10 @@ void			neb::phx::core::actor::base::init(parent_t * const & p)
 /*void			phx::core::actor::base::release() {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
-	neb::core::core::actor::base::release();
+	neb::fnd::core::actor::base::release();
 }*/
 void			neb::phx::core::actor::base::step(gal::etc::timestep const & ts) {
-	neb::core::core::actor::base::step(ts);
+	neb::fnd::core::actor::base::step(ts);
 }
 /*std::shared_ptr<neb::phx::core::actor::util::parent>		neb::phx::core::actor::base::getPxParent() {
 	auto parent(phx::core::actor::base::parent_.lock());
@@ -49,7 +49,7 @@ void			neb::phx::core::actor::base::hit() {
 		parent->erase(_M_index);
 	}
 
-	if(flag_.any(neb::core::core::actor::util::flag::E::DESTRUCTIBLE)) {
+	if(flag_.any(neb::fnd::core::actor::util::flag::E::DESTRUCTIBLE)) {
 		damage(0.6f);
 	}
 }
@@ -77,7 +77,7 @@ void			neb::phx::core::actor::base::damage(double h) {
 typedef nc::game::weapon::SimpleProjectile Weapon;
 
 std::weak_ptr<Weapon>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
-		std::shared_ptr<neb::core::input::source> src,
+		std::shared_ptr<neb::fnd::input::source> src,
 		double size,
 		double damage,
 		double velocity) {

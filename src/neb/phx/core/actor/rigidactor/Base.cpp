@@ -8,10 +8,10 @@
 
 #include <neb/phx/core/shape/box.hpp>
 
-//neb::core::actor::rigidactor::base::base() {
+//neb::fnd::actor::rigidactor::base::base() {
 //}
 /*neb::phx::core::actor::rigidactor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
+	neb::fnd::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent)
 {

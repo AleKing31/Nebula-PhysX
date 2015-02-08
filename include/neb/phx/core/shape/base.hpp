@@ -12,12 +12,12 @@
 namespace neb { namespace phx { namespace core { namespace shape {
 
 
-	class base: virtual public neb::core::core::shape::base {
+	class base: virtual public neb::fnd::core::shape::base {
 		public:
 			base();
 			virtual ~base();
 
-			virtual void		init(neb::core::core::shape::util::parent * const & p);
+			virtual void		init(neb::fnd::core::shape::util::parent * const & p);
 			virtual void		release();
 			virtual void		step(gal::etc::timestep const & ts);
 

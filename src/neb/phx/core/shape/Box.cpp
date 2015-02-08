@@ -5,7 +5,7 @@
 neb::phx::core::shape::box::box()
 {
 }
-void				neb::phx::core::shape::box::init(neb::core::core::shape::util::parent * const & p)
+void				neb::phx::core::shape::box::init(neb::fnd::core::shape::util::parent * const & p)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 

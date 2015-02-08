@@ -26,7 +26,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace act
 			virtual void					create_physics() = 0;
 			virtual void					init_physics() = 0;
 			//virtual void					add_force(real) = 0;
-			//virtual void					setPose(neb::core::pose const & pose) = 0;
+			//virtual void					setPose(neb::fnd::pose const & pose) = 0;
 		public:
 			physx::PxActor*					px_actor_;
 	};

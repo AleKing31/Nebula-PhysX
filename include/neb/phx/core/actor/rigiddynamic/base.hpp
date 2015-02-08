@@ -11,7 +11,7 @@
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace rigiddynamic {
 	class base:
-		virtual public neb::core::core::actor::rigiddynamic::base,
+		virtual public neb::fnd::core::actor::rigiddynamic::base,
 		virtual public neb::phx::core::actor::rigidbody::base
 	{
 		public:
@@ -23,10 +23,10 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			virtual void					create_physics();
 			virtual void					init_physics();
 			//virtual void					add_force(double) = 0;
-			//virtual void					setPose(neb::core::pose const & pose);
+			//virtual void					setPose(neb::fnd::pose const & pose);
 /*
-			neb::core::math::pose				getPoseGlobal() const;
-			neb::core::math::pose				getPose() const;
+			neb::fnd::math::pose				getPoseGlobal() const;
+			neb::fnd::math::pose				getPose() const;
 			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &) = 0;
 			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const = 0;
 			BOOST_SERIALIZATION_SPLIT_MEMBER();

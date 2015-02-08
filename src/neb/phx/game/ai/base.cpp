@@ -8,12 +8,12 @@
 
 
 
-void						neb::core::game::ai::base::step(gal::etc::timestep const & ts) {
+void						neb::fnd::game::ai::base::step(gal::etc::timestep const & ts) {
 
-	LOG(lg, neb::core::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::fnd::sl, debug) << __PRETTY_FUNCTION__;
 
 	auto actor = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor_.lock());
-	//auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(actor_.lock());
+	//auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(actor_.lock());
 	if(!actor) return;
 
 	auto target = target_.lock();
@@ -43,24 +43,24 @@ void						neb::core::game::ai::base::step(gal::etc::timestep const & ts) {
 	
 	//quat q(up,look);
 	
-	LOG(lg, neb::core::sl, debug)
+	LOG(lg, neb::fnd::sl, debug)
 		<< ::std::setw(16) << "look"
 		<< ::std::setw(16) << look.x
 		<< ::std::setw(16) << look.y
 		<< ::std::setw(16) << look.z;
 
-	LOG(lg, neb::core::sl, debug)
+	LOG(lg, neb::fnd::sl, debug)
 		<< ::std::setw(16) << "q"
 		<< ::std::setw(16) << q.w
 		<< ::std::setw(16) << q.x
 		<< ::std::setw(16) << q.y
 		<< ::std::setw(16) << q.z;
 
-	//LOG(lg, neb::core::sl, debug) << __PRETTY_FUNCTION__;
+	//LOG(lg, neb::fnd::sl, debug) << __PRETTY_FUNCTION__;
 
 	pd->q_target_ = q;
 	
-	typedef neb::core::game::weapon::util::parent W;
+	typedef neb::fnd::game::weapon::util::parent W;
 
 	// fire
 	if(glm::length(pd->getOrientationError()) < 0.1) {

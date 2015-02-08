@@ -38,7 +38,7 @@
 
 typedef neb::phx::core::scene::base THIS;
 
-typedef neb::core::core::actor::util::parent A;
+typedef neb::fnd::core::actor::util::parent A;
 
 //typedef neb::gfx::glsl::program::base	P;
 //typedef neb::gfx::glsl::program::threed	P3;
@@ -50,7 +50,7 @@ neb::phx::core::scene::base::base():
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
-	flag_.set(neb::core::core::scene::util::flag::PHYSX_VISUALIZATION);
+	flag_.set(neb::fnd::core::scene::util::flag::PHYSX_VISUALIZATION);
 }
 neb::phx::core::scene::base::~base() {
 
@@ -62,7 +62,7 @@ void			neb::phx::core::scene::base::__init(parent_t * const & p)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
-	//neb::core::core::scene::base::init(p);
+	//neb::fnd::core::scene::base::init(p);
 
 	create_physics();
 
@@ -242,14 +242,14 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 	// PxScene
 	assert(px_scene_ != NULL);
 
-	typedef neb::core::core::actor::util::parent A;
+	typedef neb::fnd::core::actor::util::parent A;
 
 
 	//========================================================================
 	// lock all actors
 
 	A::map_.for_each([&] (A::map_type::pointer p) {
-			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(p);
+			auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
 			assert(actor);
 			actor->mutex_.lock();
 			LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
@@ -257,7 +257,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 
 	LOG(lg, neb::phx::core::scene::sl, debug) << "actors locked";
 	/*A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
-	  auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(it->ptr_);
+	  auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(it->ptr_);
 	  assert(actor);
 	  LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
 	  });*/
@@ -297,13 +297,13 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 		physx::PxRigidBody* pxrigidbody = pxactor->isRigidBody();
 
 
-		neb::core::core::actor::base* pactor = static_cast<neb::core::core::actor::base*>(ud);
+		neb::fnd::core::actor::base* pactor = static_cast<neb::fnd::core::actor::base*>(ud);
 		auto actor = pactor->isActorBase();
 		assert(actor);
 
 		if(actor) {
 			pose = active_transforms[i].actor2World;
-			actor->setPose(neb::core::math::pose(
+			actor->setPose(neb::fnd::math::pose(
 						phx::util::convert(pose.p),
 						phx::util::convert(pose.q)
 						));
@@ -328,12 +328,12 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 				//v.print();
 			}
 
-			actor->flag_.set(neb::core::core::actor::util::flag::E::SHOULD_UPDATE);
+			actor->flag_.set(neb::fnd::core::actor::util::flag::E::SHOULD_UPDATE);
 		}
 	}
 	// unlock all actors
 	A::map_.for_each([&] (A::map_type::pointer p) {
-			auto actor = std::dynamic_pointer_cast<neb::core::core::actor::base>(p);
+			auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
 			assert(actor);
 			actor->mutex_.unlock();
 			});

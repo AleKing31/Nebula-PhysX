@@ -31,7 +31,7 @@ void			neb::phx::core::actor::control::rigidbody::base::serialize(boost::archive
 	abort();
 }
 int			neb::phx::core::actor::control::rigidbody::base::keyFun(
-		std::shared_ptr<neb::core::input::source> const & src,
+		std::shared_ptr<neb::fnd::input::source> const & src,
 		int key,
 		int scancode,
 		int action,

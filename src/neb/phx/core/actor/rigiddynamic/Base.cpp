@@ -11,7 +11,7 @@
 #include <neb/phx/util/log.hpp>
 
 /*neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
+	neb::fnd::core::actor::base(parent),
 	phx::core::actor::base(parent),
 	phx::core::actor::actor::base(parent),
 	phx::core::actor::rigidactor::base(parent),
@@ -36,7 +36,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 		return;
 	}
 	
-	if(!neb::core::app::Base::is_valid()) return;
+	if(!neb::fnd::app::Base::is_valid()) return;
 
 	auto scene = dynamic_cast<neb::phx::core::scene::base*>(getScene());
 	

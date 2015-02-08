@@ -86,7 +86,7 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
-void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::core::input::source> src)
+void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::fnd::input::source> src)
 {
 	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
 

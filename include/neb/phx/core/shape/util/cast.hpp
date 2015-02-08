@@ -5,7 +5,7 @@
 
 namespace neb { namespace phx { namespace core { namespace shape { namespace util {
 	class cast:
-		virtual public neb::core::core::shape::util::cast
+		virtual public neb::fnd::core::shape::util::cast
 	{
 		public:
 			shared_ptr<neb::phx::core::shape::base>		isPxShapeBase();

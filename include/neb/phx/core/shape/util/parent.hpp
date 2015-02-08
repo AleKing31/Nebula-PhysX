@@ -18,7 +18,7 @@ namespace neb { namespace phx { namespace core { namespace shape { namespace uti
 	 * abstract class for parent of a shape
 	 */
 	class parent:
-		virtual public neb::core::core::shape::util::parent,
+		virtual public neb::fnd::core::shape::util::parent,
 		virtual public neb::phx::core::actor::util::cast,
 		virtual public neb::phx::core::shape::util::cast
 	{

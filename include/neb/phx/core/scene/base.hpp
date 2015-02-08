@@ -20,7 +20,7 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/simulation_callback.hh>
 
-typedef weak_ptr<neb::core::core::actor::base> wbase;
+typedef weak_ptr<neb::fnd::core::actor::base> wbase;
 
 namespace neb { namespace phx { namespace core { namespace scene {
 
@@ -29,7 +29,7 @@ namespace neb { namespace phx { namespace core { namespace scene {
 	 * @brief base
 	 */
 	class base:
-		virtual public neb::core::core::scene::base
+		virtual public neb::fnd::core::scene::base
 	{
 		public:
 			base();
@@ -55,14 +55,14 @@ namespace neb { namespace phx { namespace core { namespace scene {
 			 *
 			 * @warning return actor is not initialized
 			 */
-			virtual weak_ptr<neb::core::core::actor::base>		createActorRigidStaticUninitialized() = 0;
+			virtual weak_ptr<neb::fnd::core::actor::base>		createActorRigidStaticUninitialized() = 0;
 			/** @brief create rigidstatic
 			 *
 			 * @note typeof returned actor will be determined by final implementation of this
 			 *
 			 * @warning return actor is not initialized
 			 */
-			virtual weak_ptr<neb::core::core::actor::base>		createActorRigidDynamicUninitialized() = 0;
+			virtual weak_ptr<neb::fnd::core::actor::base>		createActorRigidDynamicUninitialized() = 0;
 			/** @} */
 
 

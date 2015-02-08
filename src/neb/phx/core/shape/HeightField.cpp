@@ -35,7 +35,7 @@ void				THIS::create_physics()
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 
-	if(!neb::core::app::Base::is_valid()) return;
+	if(!neb::fnd::app::Base::is_valid()) return;
 
 	auto actor = neb::could_be<parent_t, neb::phx::core::actor::base>(getParent());
 	assert(actor);
@@ -43,7 +43,7 @@ void				THIS::create_physics()
 	if(px_shape_) return;
 
 	if(actor) {
-		auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::core::actor::Rigid_Actor>(parent_.lock());
+		auto rigidactor = actor->isPxActorRigidActorBase();//std::dynamic_pointer_cast<neb::fnd::actor::Rigid_Actor>(parent_.lock());
 
 		assert(rigidactor);
 
@@ -83,7 +83,7 @@ physx::PxGeometry*		THIS::to_geo()
 
 	// create heightfield short data
 
-	neb::core::math::HeightField::Base hf(r, c);
+	neb::fnd::math::HeightField::Base hf(r, c);
 	hf.createRandom();
 
 

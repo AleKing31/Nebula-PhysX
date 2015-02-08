@@ -8,7 +8,7 @@
 
 neb::phx::user::user()
 {}
-void			neb::phx::user::connect(std::shared_ptr<neb::core::input::source> src)
+void			neb::phx::user::connect(std::shared_ptr<neb::fnd::input::source> src)
 {
 
 /*

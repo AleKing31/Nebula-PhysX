@@ -13,7 +13,7 @@ namespace neb { namespace phx { namespace core { namespace shape {
 		public:
 			box();
 
-			virtual void				init(neb::core::core::shape::util::parent * const & p) = 0;
+			virtual void				init(neb::fnd::core::shape::util::parent * const & p) = 0;
 			virtual void				release() = 0;
 			virtual void				step(gal::etc::timestep  const & ts) = 0;
 

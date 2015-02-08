@@ -4,19 +4,19 @@
 #include <neb/core/actor/util/raw.hpp>
 #include <neb/Xml/Xml.hpp>
 
-neb::core::actor::raw::raw():
-	type_(neb::core::actor::Type::NONE),
-	mode_create_(neb::core::actor::mode_create::e::NOW),
+neb::fnd::actor::raw::raw():
+	type_(neb::fnd::actor::Type::NONE),
+	mode_create_(neb::fnd::actor::mode_create::e::NOW),
 	flag_(0),
 	density_(200),
 	health_(1.0)
 {
 	memset(name_, 0, max_name_length + 1);
 }
-void		neb::core::actor::raw::load(neb::weak_ptr<neb::core::actor::base> actor) {
+void		neb::fnd::actor::raw::load(neb::weak_ptr<neb::fnd::actor::base> actor) {
 	operator=(*(actor->raw_));
 }
-unsigned int neb::core::actor::raw::parse_filter(tinyxml2::XMLElement* element, unsigned int i) {
+unsigned int neb::fnd::actor::raw::parse_filter(tinyxml2::XMLElement* element, unsigned int i) {
 
 	if(element == NULL) return i;
 
@@ -44,7 +44,7 @@ unsigned int neb::core::actor::raw::parse_filter(tinyxml2::XMLElement* element, 
 	}
 	abort();
 }
-void neb::core::actor::raw::plane(tinyxml2::XMLElement* element) {
+void neb::fnd::actor::raw::plane(tinyxml2::XMLElement* element) {
 
 	printf("%s\n", __PRETTY_FUNCTION__);
 
@@ -65,7 +65,7 @@ void neb::core::actor::raw::plane(tinyxml2::XMLElement* element) {
 
 	pose_ = pose;
 }
-void neb::core::actor::raw::controller(tinyxml2::XMLElement* element) {
+void neb::fnd::actor::raw::controller(tinyxml2::XMLElement* element) {
 
 	printf("%s\n",__FUNCTION__);
 

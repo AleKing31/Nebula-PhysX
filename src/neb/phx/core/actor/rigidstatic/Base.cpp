@@ -11,7 +11,7 @@
 #include <neb/phx/core/scene/base.hpp>
 
 /*neb::phx::core::actor::rigidstatic::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
+	neb::fnd::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	neb::phx::core::actor::actor::base(parent),
 	neb::phx::core::actor::rigidactor::base(parent)
@@ -22,7 +22,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 {
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 
-	if(!neb::core::app::Base::is_valid()) return;
+	if(!neb::fnd::app::Base::is_valid()) return;
 	
 	if(px_actor_ != NULL) {
 		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
@@ -69,7 +69,7 @@ void			neb::phx::core::actor::rigidstatic::base::init_physics()
 {
 	printf("%s\n", __PRETTY_FUNCTION__);
 
-	if(!neb::core::app::Base::is_valid()) return;
+	if(!neb::fnd::app::Base::is_valid()) return;
 
 	setupFiltering();
 }

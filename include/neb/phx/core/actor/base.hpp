@@ -13,14 +13,14 @@
 namespace neb { namespace phx { namespace core { namespace actor {
 
 	class base:
-		virtual public neb::core::core::actor::base,
+		virtual public neb::fnd::core::actor::base,
 		virtual public neb::phx::core::actor::util::cast
 	{
 		public:
 			base();
 			virtual ~base();
 			
-			virtual void		init(neb::core::core::actor::util::parent * const & p);
+			virtual void		init(neb::fnd::core::actor::util::parent * const & p);
 			virtual void		release() = 0;
 			virtual void		step(gal::etc::timestep const & ts);
 
@@ -49,7 +49,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			/** @brief create simple projectile weapon
 			 */
 			std::weak_ptr<nc::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
-					std::shared_ptr<neb::core::input::source> src,
+					std::shared_ptr<neb::fnd::input::source> src,
 					double size,
 					double damage,
 					double velocity);

@@ -14,7 +14,7 @@ namespace neb { namespace phx { namespace core { namespace shape { namespace Hei
 		virtual public nc::core::shape::HeightField::Base
 	{
 		public:
-			typedef neb::core::core::shape::util::parent parent_t;
+			typedef neb::fnd::core::shape::util::parent parent_t;
 			Base();
 		protected:
 			virtual void				init(parent_t * const & p) = 0;

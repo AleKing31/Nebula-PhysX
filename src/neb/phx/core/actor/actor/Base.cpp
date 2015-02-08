@@ -15,7 +15,7 @@ neb::phx::core::actor::actor::base::base():
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 }
 /*neb::phx::core::actor::actor::base::base(std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::core::core::actor::base(parent),
+	neb::fnd::core::actor::base(parent),
 	neb::phx::core::actor::base(parent),
 	px_actor_(NULL)
 {
