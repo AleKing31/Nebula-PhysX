@@ -39,7 +39,7 @@ namespace neb { namespace phx { namespace app {
 		//virtual public neb::phx::game::game::util::parent
 	{
 		public:
-			static std::shared_ptr<phx::app::base>		global();
+			//static std::shared_ptr<phx::app::base>		global();
 			base();
 		protected:
 			void						__init();
