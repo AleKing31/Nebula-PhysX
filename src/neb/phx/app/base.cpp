@@ -132,8 +132,10 @@ void						neb::phx::app::base::release() {
 	px_physics_->release();
 	px_foundation_->release();
 }
-std::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global() {
-	auto app(::std::dynamic_pointer_cast<neb::phx::app::base>(g_app_));
+std::shared_ptr<neb::phx::app::base>		neb::phx::app::base::global()
+{
+	assert(g_app_);
+	auto app(std::dynamic_pointer_cast<neb::phx::app::base>(g_app_));
 	assert(app);
 	return app;
 }
