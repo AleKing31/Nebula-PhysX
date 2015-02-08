@@ -40,7 +40,7 @@ typedef neb::phx::core::scene::base THIS;
 
 typedef neb::fnd::core::actor::util::parent A;
 
-//typedef neb::gfx::glsl::program::base	P;
+//typedef neb::gfx::glsl::program::Base	P;
 //typedef neb::gfx::glsl::program::threed	P3;
 
 neb::phx::core::scene::base::base():
