@@ -48,7 +48,7 @@ namespace neb { namespace phx { namespace core { namespace actor {
 			 */
 			/** @brief create simple projectile weapon
 			 */
-			std::weak_ptr<nc::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
+			std::weak_ptr<neb::fnd::game::weapon::SimpleProjectile>			createWeaponSimpleProjectile(
 					std::shared_ptr<neb::fnd::input::source> src,
 					double size,
 					double damage,

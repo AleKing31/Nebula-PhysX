@@ -11,7 +11,7 @@ namespace neb { namespace phx { namespace core { namespace shape { namespace Hei
 	/***/
 	class Base:
 		virtual public neb::phx::core::shape::base,
-		virtual public nc::core::shape::HeightField::Base
+		virtual public neb::fnd::core::shape::HeightField::Base
 	{
 		public:
 			typedef neb::fnd::core::shape::util::parent parent_t;

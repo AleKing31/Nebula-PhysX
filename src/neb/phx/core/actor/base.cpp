@@ -74,7 +74,7 @@ void			neb::phx::core::actor::base::damage(double h) {
   return 0;
   }*/
 
-typedef nc::game::weapon::SimpleProjectile Weapon;
+typedef neb::fnd::game::weapon::SimpleProjectile Weapon;
 
 std::weak_ptr<Weapon>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
 		std::shared_ptr<neb::fnd::input::source> src,
@@ -95,7 +95,7 @@ std::weak_ptr<Weapon>			neb::phx::core::actor::base::createWeaponSimpleProjectil
 	weap->size_ = size;
 	weap->damage_ = damage;
 
-	nc::game::weapon::util::parent::insert(weap);
+	neb::fnd::game::weapon::util::parent::insert(weap);
 
 	return weap;
 }
