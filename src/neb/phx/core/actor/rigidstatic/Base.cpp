@@ -42,9 +42,11 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	//pose.q.print();
 
 	// PxActor
-	auto app = neb::phx::app::base::global();
+	auto app = get_app();
+
 	auto pxph = app->px_physics_;
 	assert(pxph);
+	
 	physx::PxRigidStatic* px_rigid_static = pxph->createRigidStatic(pose);
 	
 	if(px_rigid_static == NULL) {

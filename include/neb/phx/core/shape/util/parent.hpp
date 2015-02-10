@@ -8,7 +8,7 @@
 
 #include <neb/core/util/config.hpp>
 #include <neb/core/core/shape/util/parent.hpp>
-#include <neb/core/itf/Pose.hh>
+#include <neb/core/itf/Pose.hpp>
 
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/shape/util/cast.hpp>
