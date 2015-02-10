@@ -28,8 +28,8 @@ void	neb::phx::simulation_callback::onContact(
 	 * doing so keeps the actors alive long enough to return from the call to @c hit
 	 * allows the scene to release the actors safely during the call to @c hit
 	 */
-	auto nactor0 = static_cast<neb::fnd::core::actor::base*>(pxactor0->userData)->isActorBase();
-	auto nactor1 = static_cast<neb::fnd::core::actor::base*>(pxactor1->userData)->isActorBase();
+	auto nactor0 = static_cast<neb::fnd::core::actor::base*>(pxactor0->userData)->is_fnd_actor_base();
+	auto nactor1 = static_cast<neb::fnd::core::actor::base*>(pxactor1->userData)->is_fnd_actor_base();
 
 	assert(nactor0);
 	assert(nactor1);

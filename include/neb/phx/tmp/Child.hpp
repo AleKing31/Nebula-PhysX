@@ -3,12 +3,15 @@
 
 #include <neb/core/tmp/Child.hpp>
 
-namespace neb { namespace phx { namespace app { namespace util {
+#include <neb/phx/app/util/decl.hpp>
+
+namespace neb { namespace phx { namespace tmp {
 	template<class T> class Child:
 		virtual public neb::fnd::tmp::Child<T>
 	{
+		public:
 		neb::phx::app::base*	get_phx_app();
-	}
-}}}}
+	};
+}}}
 
 #endif

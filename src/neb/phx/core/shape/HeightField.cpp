@@ -55,8 +55,11 @@ void				THIS::create_physics()
 			assert(px_rigidactor);
 
 			physx::PxMaterial* px_mat[2];
-			px_mat[0] = phx::app::base::global()->px_physics_->createMaterial(1,1,1);
-			px_mat[1] = phx::app::base::global()->px_physics_->createMaterial(1,1,1);
+
+			auto app = get_phx_app();
+
+			px_mat[0] = app->px_physics_->createMaterial(1,1,1);
+			px_mat[1] = app->px_physics_->createMaterial(1,1,1);
 
 			px_shape_ = px_rigidactor->createShape(*(to_geo()), px_mat, 2);
 		}
@@ -78,7 +81,7 @@ physx::PxGeometry*		THIS::to_geo()
 	
 	assert(nbVerts <= (std::numeric_limits<unsigned short>::max() + 1));
 
-	auto thePhysics = phx::app::base::global()->px_physics_;
+	auto thePhysics = get_phx_app()->px_physics_;
 	assert(thePhysics);
 
 	// create heightfield short data

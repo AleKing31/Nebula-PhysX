@@ -46,6 +46,13 @@ namespace neb { namespace phx { namespace app {
 		public:
 			void						release();
 			virtual void					step(gal::etc::timestep const & ts);
+			physx::PxConvexMeshGeometry*			frustrum_geometry(glm::mat4 proj);
+			bool						query(
+					physx::PxConvexMeshGeometry& g0,
+					glm::mat4 v0,
+					physx::PxConvexMeshGeometry& g1,
+					glm::mat4 v1);
+
 			DefaultErrorCallback 				px_default_error_callback_;
 			physx::PxDefaultAllocator 			px_default_allocator_callback_;
 			physx::PxFoundation*				px_foundation_;

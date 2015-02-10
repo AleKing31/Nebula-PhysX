@@ -13,7 +13,7 @@
 namespace neb { namespace phx { namespace core { namespace shape {
 	class base:
 		virtual public neb::fnd::core::shape::base,
-		virtual public neb::phx::tmp::Child<parent_t>
+		virtual public neb::phx::tmp::Child<neb::fnd::core::shape::util::parent>
 	{
 		public:
 			base();
