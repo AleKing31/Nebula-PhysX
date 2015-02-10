@@ -8,20 +8,19 @@
 #include <neb/core/core/shape/base.hpp>
 
 #include <neb/phx/core/shape/util/parent.hpp>
+#include <neb/phx/tmp/Child.hpp>
 
 namespace neb { namespace phx { namespace core { namespace shape {
-
-
-	class base: virtual public neb::fnd::core::shape::base {
+	class base:
+		virtual public neb::fnd::core::shape::base,
+		virtual public neb::phx::tmp::Child<parent_t>
+	{
 		public:
 			base();
 			virtual ~base();
-
 			virtual void		init(neb::fnd::core::shape::util::parent * const & p);
 			virtual void		release();
 			virtual void		step(gal::etc::timestep const & ts);
-
-
 			virtual void		create_physics();
 			virtual physx::PxGeometry*	to_geo();
 		public:

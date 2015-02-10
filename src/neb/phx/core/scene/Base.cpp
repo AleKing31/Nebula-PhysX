@@ -11,7 +11,7 @@
 #include <neb/core/core/light/util/light_count.hpp>
 //#include <neb/core/timer/util/decl.hpp>
 #include <neb/core/timer/actor/Release.hpp>
-#include <neb/core/math/geo/polyhedron.hh>
+#include <neb/core/math/geo/polyhedron.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
@@ -122,7 +122,8 @@ void			neb::phx::core::scene::base::create_physics()
 		return;
 	}
 	
-	auto pxphysics = neb::phx::app::base::global()->px_physics_;
+	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	auto pxphysics = app->px_physics_;
 
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
 
@@ -228,11 +229,11 @@ void			neb::phx::core::scene::base::create_physics()
 
 
 }
-void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
-
+void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
+{
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
-	auto app = phx::app::base::global();
+	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
 
 	// timer
 	//timer_set_.step(time);
@@ -298,7 +299,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts) {
 
 
 		neb::fnd::core::actor::base* pactor = static_cast<neb::fnd::core::actor::base*>(ud);
-		auto actor = pactor->isActorBase();
+		auto actor = pactor->is_fnd_actor_base();
 		assert(actor);
 
 		if(actor) {

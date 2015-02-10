@@ -32,15 +32,13 @@ namespace neb { namespace phx { namespace core { namespace scene {
 		virtual public neb::fnd::core::scene::base
 	{
 		public:
+			using CHILD::get_app;
 			base();
 			virtual ~base();
 			void					__init(parent_t * const & p);
 			void					init_light();
 			virtual void				release();
 			void					step(::gal::etc::timestep const & ts);
-
-
-
 		public:
 			void					create_physics();
 			virtual void				load(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);

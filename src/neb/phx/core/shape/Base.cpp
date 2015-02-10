@@ -51,8 +51,8 @@ void			neb::phx::core::shape::base::release() {
 		px_shape_ = NULL;
 	}
 }
-void			neb::phx::core::shape::base::create_physics() {
-
+void			neb::phx::core::shape::base::create_physics()
+{
 	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
 	//NEBULA_DEBUG_0_FUNCTION;
 
@@ -73,7 +73,7 @@ void			neb::phx::core::shape::base::create_physics() {
 	auto px_rigidactor = rigidactor->px_actor_->isRigidActor();
 	assert(px_rigidactor);
 
-	physx::PxMaterial* px_mat = phx::app::base::global()->px_physics_->createMaterial(1,1,1);
+	physx::PxMaterial* px_mat = get_phx_app()->px_physics_->createMaterial(1,1,1);
 
 	px_shape_ = px_rigidactor->createShape( *(to_geo()), *px_mat );
 }

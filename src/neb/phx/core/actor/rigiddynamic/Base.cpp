@@ -48,7 +48,8 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	
 	
 	// PxActor
-	physx::PxRigidDynamic* px_rigid_dynamic = neb::phx::app::base::global()->px_physics_->createRigidDynamic(pose);
+	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	physx::PxRigidDynamic* px_rigid_dynamic = app->px_physics_->createRigidDynamic(pose);
 
 	if (!px_rigid_dynamic)
 	{
@@ -64,15 +65,15 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	auto sft = shared_from_this();
 	auto uc = sft.use_count();
 
+	// set userData to raw neb::fnd::core::actor::base*
+	px_rigid_dynamic->userData = is_fnd_actor_base().get();
 
-	px_rigid_dynamic->userData = isActorBase().get();
-
-
+	// debuggin
 	assert(uc == sft.use_count());
 
 	// debug
 	assert(this == shared_from_this().get());
-	assert(this == isActorBase().get());
+	assert(this == is_fnd_actor_base().get());
 	assert(this == isPxActorRigidDynamicBase().get());
 	assert(std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(shared_from_this()));
 	

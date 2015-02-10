@@ -3,7 +3,6 @@
 
 #include <PxPhysicsAPI.h>
 
-
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 
@@ -14,6 +13,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 	{
 
 		public:
+			using CHILD::get_app;
 			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
 
 			//virtual void					init() = 0;

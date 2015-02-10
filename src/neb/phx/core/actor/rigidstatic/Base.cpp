@@ -42,7 +42,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	//pose.q.print();
 
 	// PxActor
-	auto app = get_app();
+	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
 
 	auto pxph = app->px_physics_;
 	assert(pxph);
@@ -57,9 +57,9 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	px_actor_ = px_rigid_static;
 
 	// userData
-	px_rigid_static->userData = isActorBase().get();
+	px_rigid_static->userData = is_fnd_actor_base().get();
 	assert(this == shared_from_this().get());
-	assert(this == isActorBase().get());
+	assert(this == is_fnd_actor_base().get());
 
 	// add PxActor to PxScene
 	scene->create_physics();

@@ -15,6 +15,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 		virtual public neb::phx::core::actor::rigidbody::base
 	{
 		public:
+			using CHILD::get_app;
 			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
 			NEB_INIT_FUNC;
 			virtual void					release() = 0;
