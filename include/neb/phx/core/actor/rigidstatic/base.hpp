@@ -13,7 +13,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 	{
 
 		public:
-			using CHILD::get_app;
+			using CHILD::get_fnd_app;
 			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
 
 			//virtual void					init() = 0;

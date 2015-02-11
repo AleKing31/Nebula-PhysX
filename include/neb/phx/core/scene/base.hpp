@@ -32,7 +32,7 @@ namespace neb { namespace phx { namespace core { namespace scene {
 		virtual public neb::fnd::core::scene::base
 	{
 		public:
-			using CHILD::get_app;
+			using CHILD::get_fnd_app;
 			base();
 			virtual ~base();
 			void					__init(parent_t * const & p);
