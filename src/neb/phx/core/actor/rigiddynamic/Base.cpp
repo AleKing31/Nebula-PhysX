@@ -48,7 +48,8 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 	
 	
 	// PxActor
-	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	auto app = get_phx_app();
+
 	physx::PxRigidDynamic* px_rigid_dynamic = app->px_physics_->createRigidDynamic(pose);
 
 	if (!px_rigid_dynamic)

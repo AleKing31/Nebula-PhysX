@@ -10,7 +10,13 @@ namespace neb { namespace phx { namespace tmp {
 		virtual public neb::fnd::tmp::Child<T>
 	{
 		public:
-		neb::phx::app::base*	get_phx_app();
+			neb::phx::app::base * const	get_phx_app()
+			{
+				auto a = neb::fnd::tmp::Child<T>::get_fnd_child();
+				auto p = dynamic_cast<neb::phx::app::base*>(a);
+				assert(p);
+				return p;
+			}
 	};
 }}}
 

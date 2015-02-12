@@ -3,6 +3,7 @@
 
 #include <neb/core/core/actor/base.hpp>
 
+#include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
@@ -14,7 +15,8 @@ namespace neb { namespace phx { namespace core { namespace actor {
 
 	class base:
 		virtual public neb::fnd::core::actor::base,
-		virtual public neb::phx::core::actor::util::cast
+		virtual public neb::phx::core::actor::util::cast,
+		virtual public neb::phx::tmp::Child<neb::fnd::core::actor::util::parent>
 	{
 		public:
 			base();

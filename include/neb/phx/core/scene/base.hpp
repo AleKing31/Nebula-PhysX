@@ -16,6 +16,7 @@
 #include <neb/core/math/serialization/glm.hpp>
 #include <neb/core/util/decl.hpp>
 
+#include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/simulation_callback.hh>
@@ -23,13 +24,13 @@
 typedef weak_ptr<neb::fnd::core::actor::base> wbase;
 
 namespace neb { namespace phx { namespace core { namespace scene {
-
 	/** 
 	 * @ingroup group_core
 	 * @brief base
 	 */
 	class base:
-		virtual public neb::fnd::core::scene::base
+		virtual public neb::fnd::core::scene::base,
+		virtual public neb::phx::tmp::Child<neb::fnd::core::scene::util::parent>
 	{
 		public:
 			using CHILD::get_fnd_app;

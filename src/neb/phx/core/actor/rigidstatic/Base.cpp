@@ -42,7 +42,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	//pose.q.print();
 
 	// PxActor
-	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	auto app = get_phx_app();
 
 	auto pxph = app->px_physics_;
 	assert(pxph);

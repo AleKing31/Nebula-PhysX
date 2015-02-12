@@ -122,7 +122,8 @@ void			neb::phx::core::scene::base::create_physics()
 		return;
 	}
 	
-	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	auto app = get_phx_app();
+
 	auto pxphysics = app->px_physics_;
 
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
@@ -233,7 +234,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
-	auto app = dynamic_cast<neb::phx::app::base*>(get_app());
+	auto app = get_phx_app();
 
 	// timer
 	//timer_set_.step(time);
