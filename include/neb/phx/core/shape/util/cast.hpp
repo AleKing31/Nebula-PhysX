@@ -10,7 +10,7 @@ namespace neb { namespace phx { namespace core { namespace shape { namespace uti
 		virtual public neb::fnd::core::shape::util::cast
 	{
 		public:
-			shared_ptr<neb::phx::core::shape::base>		isPxShapeBase();
+			std::shared_ptr<neb::phx::core::shape::base>		isPxShapeBase();
 	};
 }}}}}
 

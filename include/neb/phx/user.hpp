@@ -7,18 +7,22 @@
 //#include <nebula/config.hpp>
 //#include <nebula/camera/camera.hpp>
 
+#include <neb/core/input/util/decl.hpp>
 #include <neb/core/core/actor/util/decl.hpp>
+
+#include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx {
 	/** @brief
 	 *
 	 */
-	class user {
+	class user
+	{
 		public:
 			user();
 			void		init();
 			void		connect(std::shared_ptr<neb::fnd::input::source>);
-			void		set_control(std::shared_ptr<phx::core::actor::control::rigidbody::base>);
+			void		set_control(std::shared_ptr<neb::phx::core::actor::control::rigidbody::base>);
 			std::shared_ptr<phx::core::actor::control::rigidbody::base>		control_;
 			
 	};

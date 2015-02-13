@@ -1,6 +1,8 @@
 #ifndef NEBULA_MATH_SERIALIZATION_HPP
 #define NEBULA_MATH_SERIALIZATION_HPP
 
+#include <boost/serialization/nvp.hpp>
+
 #include <PxPhysicsAPI.h>
 
 namespace boost {
