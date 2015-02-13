@@ -8,15 +8,11 @@
 
 #include <gal/etc/timestep.hpp>
 
-//#include <PxPhysicsAPI.h>
+#include <PxPhysicsAPI.h>
 
 // neb/phx/camera/proj/base.hpp
 
-#include <neb/gfx/util/decl.hpp>
-#include <neb/gfx/glsl/util/decl.hpp>
-
 namespace neb { namespace phx { namespace camera { namespace proj {
-
 	/** @brief @Base */
 	class base
 	{
@@ -37,14 +33,6 @@ namespace neb { namespace phx { namespace camera { namespace proj {
 		public:
 			physx::PxConvexMeshGeometry*			_M_px_geometry;
 	};
-
 }}}}
 
-
 #endif
-
-
-
-
-
-

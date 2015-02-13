@@ -3,11 +3,10 @@
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
-namespace phx { namespace core { namespace actor {
+namespace neb { namespace phx { namespace core { namespace actor {
 
+	typedef neb::phx::core::actor::rigiddynamic::local		projectile_local;
 
-	typedef phx::core::actor::rigiddynamic::local		projectile_local;
-
-}}}
+}}}}
 
 #endif
