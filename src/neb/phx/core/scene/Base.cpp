@@ -234,7 +234,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
 
-	auto app = get_phx_app();
+	//auto app = get_phx_app();
 
 	// timer
 	//timer_set_.step(time);
