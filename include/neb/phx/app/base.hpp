@@ -52,7 +52,7 @@ namespace neb { namespace phx { namespace app {
 					glm::mat4 v0,
 					physx::PxConvexMeshGeometry& g1,
 					glm::mat4 v1);
-
+			physx::PxDefaultCpuDispatcher*			create_default_cpu_dispatcher();
 			DefaultErrorCallback 				px_default_error_callback_;
 			physx::PxDefaultAllocator 			px_default_allocator_callback_;
 			physx::PxFoundation*				px_foundation_;

@@ -293,5 +293,9 @@ bool		THIS::query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvex
 			e1->proj_->px_geometry_,
 			e1->view_->view());
 }*/
+physx::PxDefaultCpuDispatcher*			THIS::create_default_cpu_dispatcher()
+{
+	return physx::PxDefaultCpuDispatcherCreate(1);
+}
 
 

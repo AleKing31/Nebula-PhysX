@@ -60,7 +60,7 @@ neb::phx::core::scene::base::~base() {
 }
 void			neb::phx::core::scene::base::__init(parent_t * const & p)
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
 
 	//neb::fnd::core::scene::base::init(p);
 
@@ -113,9 +113,9 @@ void			neb::phx::core::scene::base::release()
 }
 void			neb::phx::core::scene::base::create_physics()
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
 
-	if(!neb::phx::app::base::is_valid()) return;
+	//if(!neb::phx::app::base::is_valid()) return;
 
 	if(px_scene_ != NULL) {
 		LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
@@ -125,6 +125,9 @@ void			neb::phx::core::scene::base::create_physics()
 	auto app = get_phx_app();
 
 	auto pxphysics = app->px_physics_;
+	assert(pxphysics);
+
+	LOG(lg, neb::phx::core::scene::sl, debug) << "pxphysics " << pxphysics;
 
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
 
@@ -132,14 +135,14 @@ void			neb::phx::core::scene::base::create_physics()
 
 	scene_desc.flags |= physx::PxSceneFlag::eENABLE_ACTIVETRANSFORMS;
 
-	int m_nbThreads = 1;
+	//int m_nbThreads = 1;
 
 	// cpu dispatcher
 	printf("cpu dispatcher\n");
 	if( !scene_desc.cpuDispatcher )
 	{
-		physx::PxDefaultCpuDispatcher* cpuDispatcher =
-			::physx::PxDefaultCpuDispatcherCreate( m_nbThreads );
+		//physx::PxDefaultCpuDispatcher* cpuDispatcher = physx::PxDefaultCpuDispatcherCreate( m_nbThreads );
+		physx::PxDefaultCpuDispatcher* cpuDispatcher = app->create_default_cpu_dispatcher();
 
 		assert( cpuDispatcher );
 
@@ -232,7 +235,7 @@ void			neb::phx::core::scene::base::create_physics()
 }
 void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " dt = " << ts.dt;
+	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this << " dt = " << ts.dt;
 
 	//auto app = get_phx_app();
 
