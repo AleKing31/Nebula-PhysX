@@ -37,7 +37,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 
 			virtual void					add_force(double);
 			//virtual void					setPose(neb::fnd::pose const & pose) = 0;
-			void						createControlManual(std::shared_ptr<neb::fnd::input::source> window);
+			virtual void					createControlManual(std::shared_ptr<neb::fnd::input::source> window);
 			void						createControlPD();
 		public:
 			control_shared					control_;

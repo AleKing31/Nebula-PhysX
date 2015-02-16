@@ -74,31 +74,6 @@ void			neb::phx::core::actor::base::damage(double h) {
   return 0;
   }*/
 
-typedef neb::fnd::game::weapon::SimpleProjectile Weapon;
-
-std::weak_ptr<Weapon>			neb::phx::core::actor::base::createWeaponSimpleProjectile(
-		std::shared_ptr<neb::fnd::input::source> src,
-		double size,
-		double damage,
-		double velocity) {
-
-	auto self(isPxActorBase());
-	
-	std::shared_ptr<Weapon> weap(new Weapon());
-
-	//weap->actor_ = self;
-	weap->setParent(this);
-
-	weap->connect(src);
-
-	weap->velocity_ = velocity;
-	weap->size_ = size;
-	weap->damage_ = damage;
-
-	neb::fnd::game::weapon::util::parent::insert(weap);
-
-	return weap;
-}
 
 
 
