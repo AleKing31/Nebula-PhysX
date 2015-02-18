@@ -5,31 +5,19 @@
 
 #include <neb/core/actor/base.hpp>
 
-namespace phx { namespace core { namespace actor { namespace controller {
-
-
-
-	class base:
+namespace neb { namespace phx { namespace core { namespace actor { namespace controller {
+	class Base:
 		virtual public phx::core::actor::base,
 		virtual public neb::core::actor::controller::base
 	{
 		public:
-			base(std::shared_ptr<neb::core::actor::util::parent>);
-
+			Base(std::shared_ptr<neb::core::actor::util::parent>);
 			virtual void		init();
 			virtual void		release();
 			virtual void		step(gal::etc::timestep const & ts);
-
 			virtual void		add_force();
-
 			physx::PxController*	px_controller_;
-
 	};
-
-
-
-}}}}
-
+}}}}}
 
 #endif
-
