@@ -3,11 +3,14 @@
 
 #include <PxPhysicsAPI.h>
 
+#include <neb/core/core/actor/rigidactor/base.hpp>
+
 #include <neb/phx/core/actor/actor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace rigidactor {
 	class base:
+		virtual public neb::fnd::core::actor::rigidactor::base,
 		virtual public neb::phx::core::actor::actor::base
 	{
 		public:
@@ -21,7 +24,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			virtual void						init_physics() = 0;
 			//virtual void						add_force(real) = 0;
 			//virtual void						set_pose(physx::PxTransform);
-			virtual void						setGlobalPosition(glm::vec3 p);
+			virtual void						set_pose_global(neb::fnd::math::pose pose);
 			/** @name convenience functions
 			 * @{
 			 *

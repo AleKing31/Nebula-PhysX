@@ -53,15 +53,17 @@ void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 
 	delete[] shapes;
 }
-void								neb::phx::core::actor::rigidactor::base::setGlobalPosition(glm::vec3 p) {
+void		neb::phx::core::actor::rigidactor::base::set_pose_global(neb::fnd::math::pose pose)
+{
 	/** @todo if is nested actor, then this is wrong... */
-	pose_.pos_ = p;
+	pose_ = pose;
 	
 	assert(px_actor_);
 	auto px_rigidactor = px_actor_->isRigidActor();
 	assert(px_rigidactor);
+
 	px_rigidactor->setGlobalPose(physx::PxTransform(
-				neb::phx::util::convert(p),
+				neb::phx::util::convert(pose_.pos_),
 				neb::phx::util::convert(pose_.rot_)
 				));
 }
