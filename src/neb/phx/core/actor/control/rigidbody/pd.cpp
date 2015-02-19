@@ -11,11 +11,16 @@
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
-glm::vec3		neb::phx::core::actor::control::rigidbody::pd::getOrientationError() {
+typedef neb::phx::core::actor::control::rigidbody::pd THIS;
+
+THIS::~pd()
+{
+}
+glm::vec3		neb::phx::core::actor::control::rigidbody::pd::getOrientationError()
+{
 	// get actor
 	auto actor = actor_.lock();
 	assert(actor);
-
 
 	// error
 	glm::quat qe = (q_target_ * glm::conjugate(actor->pose_.rot_));
@@ -23,7 +28,8 @@ glm::vec3		neb::phx::core::actor::control::rigidbody::pd::getOrientationError() 
 
 	return error;
 }
-void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep const & ts) { // 1
+void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep const & ts)
+{
 	//NEBULA_DEBUG_1_FUNCTION;
 
 	// step target
@@ -105,19 +111,23 @@ void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep con
 		force_ = c * error; // - c1 * velocity;
 	}
 }
-glm::vec3			neb::phx::core::actor::control::rigidbody::pd::f_body() {
+glm::vec3			neb::phx::core::actor::control::rigidbody::pd::f_body()
+{
 	//NEBULA_DEBUG_1_FUNCTION;
 	return glm::vec3();
 }
-glm::vec3			neb::phx::core::actor::control::rigidbody::pd::t_body() {
+glm::vec3			neb::phx::core::actor::control::rigidbody::pd::t_body()
+{
 	//NEBULA_DEBUG_1_FUNCTION;
 	return glm::vec3();
 }
-glm::vec3			neb::phx::core::actor::control::rigidbody::pd::f_global() {
+glm::vec3			neb::phx::core::actor::control::rigidbody::pd::f_global()
+{
 	//NEBULA_DEBUG_1_FUNCTION;
 	return force_;
 }
-glm::vec3			neb::phx::core::actor::control::rigidbody::pd::t_global() {
+glm::vec3			neb::phx::core::actor::control::rigidbody::pd::t_global()
+{
 	//NEBULA_DEBUG_1_FUNCTION;
 	return torque_;
 }

@@ -16,22 +16,31 @@
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>
 
-void			neb::phx::core::actor::control::rigidbody::manual::step(gal::etc::timestep const & ts) { // 0
+typedef neb::phx::core::actor::control::rigidbody::manual THIS;
 
+THIS::~manual()
+{
 }
-glm::vec3		neb::phx::core::actor::control::rigidbody::manual::f_body() {
+void			THIS::step(gal::etc::timestep const & ts)
+{
+}
+glm::vec3		THIS::f_body()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return f_ * 10.0f;
 }
-glm::vec3		neb::phx::core::actor::control::rigidbody::manual::t_body() {
+glm::vec3		THIS::t_body()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return t_ * 3.0f;
 }
-glm::vec3		neb::phx::core::actor::control::rigidbody::manual::f_global() {
+glm::vec3		THIS::f_global()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return glm::vec3();
 }
-glm::vec3		neb::phx::core::actor::control::rigidbody::manual::t_global() {
+glm::vec3		THIS::t_global()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	return glm::vec3();
 }

@@ -10,15 +10,12 @@
 
 #include <gal/etc/timestep.hpp>
 
+#include <neb/core/itf/verbosity.hpp>
 #include <neb/core/input/sink.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
-
 namespace neb { namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
-
-
-
 	/** @brief Rigid Body
 	 * An object (what did I mean by 'object' here, an actor?) makes no distinction between local and remote.
 	 * In a remote scene, the actor will send a control update message.
@@ -28,59 +25,49 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 	 * force and torque at a given point in time must be stored in raw.
 	 **/
 	class base:
+		public neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>,
 		virtual public neb::fnd::input::sink
-		{
-			public:
-				base();
-				virtual ~base() {}
-				base&				operator=(base const & base);
-
-				virtual void			release();
-
-				virtual int			keyFun(std::shared_ptr<neb::fnd::input::source> const &, int, int, int, int);
-
-				virtual void			step(gal::etc::timestep const & ts) = 0;
-				virtual glm::vec3		f_body() = 0;
-				virtual glm::vec3		t_body() = 0;
-				virtual glm::vec3		f_global() = 0;
-				virtual glm::vec3		t_global() = 0;
-
-				virtual void			serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
-				virtual void			serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version);
-			private:
-
-			public:
-				std::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
-
-				glm::quat				q_target_;
-				glm::vec3				p_target_;
-
-				glm::vec3				f_;
-				glm::vec3				t_;
-
-				glm::vec3				force_;
-				glm::vec3				torque_;
-
-				//gal::control::control		pid_;
-
-		};
+	{
+		public:
+			using neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>::printv;
+			base();
+			virtual ~base();
+			base&				operator=(base const & base);
+			virtual void			release();
+			virtual int			keyFun(std::shared_ptr<neb::fnd::input::source> const &, int, int, int, int);
+			virtual void			step(gal::etc::timestep const & ts) = 0;
+			virtual glm::vec3		f_body() = 0;
+			virtual glm::vec3		t_body() = 0;
+			virtual glm::vec3		f_global() = 0;
+			virtual glm::vec3		t_global() = 0;
+			virtual void			serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
+			virtual void			serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version);
+		public:
+			std::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
+			glm::quat				q_target_;
+			glm::vec3				p_target_;
+			glm::vec3				f_;
+			glm::vec3				t_;
+			glm::vec3				force_;
+			glm::vec3				torque_;
+			//gal::control::control		pid_;
+	};
 	class manual:
 		virtual public neb::phx::core::actor::control::rigidbody::base
 	{
 		public:
-			virtual ~manual() {}
+			virtual ~manual();
 			void				step(gal::etc::timestep const & ts);
 			virtual glm::vec3		f_body();
 			virtual glm::vec3		t_body();
 			virtual glm::vec3		f_global();
 			virtual glm::vec3		t_global();
-
 	};
 	class pd:
 		virtual public neb::phx::core::actor::control::rigidbody::base
 	{
 		public:
-			virtual ~pd() {}
+			virtual ~pd();
 			void				step(gal::etc::timestep const & ts);
 
 			glm::vec3			getOrientationError();

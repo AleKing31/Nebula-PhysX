@@ -33,6 +33,8 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	
 	auto p = getPose();
 
+	printv(info, "pos = %16f %16f %16f\n", p.pos_.x, p.pos_.y, p.pos_.z);
+
 	physx::PxTransform pose(
 			neb::phx::util::convert(glm::vec3(p.pos_)),
 			neb::phx::util::convert(p.rot_)

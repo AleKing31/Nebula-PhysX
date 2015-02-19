@@ -30,9 +30,9 @@ physx::PxFilterFlags	DefaultFilterShader(
 		const void* constantBlock,
 		physx::PxU32 constantBlockSize )
 {	
-	logprint(neb::phx::sl, debug, "%s\n",__PRETTY_FUNCTION__);
+	printf("%s\n",__PRETTY_FUNCTION__);
 	
-	//printf("%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
+	printf("%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
 	
 	physx::PxFilterFlags filter_flags = physx::PxFilterFlag::eDEFAULT;
 	
@@ -46,13 +46,16 @@ physx::PxFilterFlags	DefaultFilterShader(
 	// collision
 	physx::PxU32 w0 = filterData0.word0 & filterData1.word1;
 	physx::PxU32 w1 = filterData1.word0 & filterData0.word1;
-
+	
 	if(w0 && w1) {
 		pairFlags |= physx::PxPairFlag::eCONTACT_DEFAULT;
 		
-		filter_flags = physx::PxFilterFlag::eDEFAULT;	
+		filter_flags = physx::PxFilterFlag::eDEFAULT;
+
+		printf("collision\n");
 	} else {
 		filter_flags = physx::PxFilterFlag::eSUPPRESS;
+		printf("suppress\n");
 	}
 	
 	// notification

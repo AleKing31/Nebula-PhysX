@@ -35,7 +35,6 @@
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 
-
 neb::phx::core::actor::rigidbody::base::base():
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)

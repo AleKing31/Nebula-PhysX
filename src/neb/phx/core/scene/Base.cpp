@@ -135,14 +135,14 @@ void			neb::phx::core::scene::base::create_physics()
 
 	scene_desc.flags |= physx::PxSceneFlag::eENABLE_ACTIVETRANSFORMS;
 
-	//int m_nbThreads = 1;
+	int m_nbThreads = 1;
 
 	// cpu dispatcher
 	printf("cpu dispatcher\n");
 	if( !scene_desc.cpuDispatcher )
 	{
-		//physx::PxDefaultCpuDispatcher* cpuDispatcher = physx::PxDefaultCpuDispatcherCreate( m_nbThreads );
-		physx::PxDefaultCpuDispatcher* cpuDispatcher = app->create_default_cpu_dispatcher();
+		physx::PxDefaultCpuDispatcher* cpuDispatcher = physx::PxDefaultCpuDispatcherCreate( m_nbThreads );
+		//physx::PxDefaultCpuDispatcher* cpuDispatcher = app->create_default_cpu_dispatcher();
 
 		assert( cpuDispatcher );
 

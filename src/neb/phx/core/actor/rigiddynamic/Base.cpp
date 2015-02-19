@@ -28,7 +28,8 @@ void			neb::phx::core::actor::rigiddynamic::base::init(parent_t * const & p)
 	assert(pxrd);
 	pxrd->setLinearDamping(0.01);
 }
-void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
+void			neb::phx::core::actor::rigiddynamic::base::create_physics()
+{
 	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
 	
 	if(px_actor_ != NULL) {
@@ -45,7 +46,6 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics() {
 			phx::util::convert(glm::vec3(p.pos_)),
 			phx::util::convert(p.rot_)
 			);
-	
 	
 	// PxActor
 	auto app = get_phx_app();
