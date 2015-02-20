@@ -12,6 +12,7 @@
 //#include <neb/core/timer/util/decl.hpp>
 #include <neb/core/timer/actor/Release.hpp>
 #include <neb/core/math/geo/polyhedron.hpp>
+#include <neb/core/net/core/scene/Base.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
@@ -230,10 +231,18 @@ void			neb::phx::core::scene::base::create_physics()
 		px_scene_->setVisualizationParameter(flags[i], 1.0f);
 	}
 
-
-
 }
-void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
+void			THIS::step(gal::etc::timestep const & ts)
+{
+	/// \TODO assert(_M_network_object) then use visitor pattern
+	
+	// if is remote scene, do not simulate physics
+	if(_M_network_object)
+		_M_network_object->visit_step(this, ts);
+	else
+		step_physics(ts);
+}
+void			THIS::step_physics(gal::etc::timestep const & ts)
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this << " dt = " << ts.dt;
 

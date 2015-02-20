@@ -15,6 +15,7 @@
 #include <neb/core/core/scene/base.hpp>
 #include <neb/core/math/serialization/glm.hpp>
 #include <neb/core/util/decl.hpp>
+#include <neb/core/net/util/decl.hpp>
 
 #include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -34,14 +35,17 @@ namespace neb { namespace phx { namespace core { namespace scene {
 	{
 		public:
 			using CHILD::get_fnd_app;
+			friend class neb::fnd::net::core::scene::Base;
 			base();
 			virtual ~base();
 			void					__init(parent_t * const & p);
 			void					init_light();
 			virtual void				release();
-			void					step(::gal::etc::timestep const & ts);
-		public:
+			void					step(gal::etc::timestep const & ts);
+		private:
+			void					step_physics(gal::etc::timestep const & ts);
 			void					create_physics();
+		public:
 			virtual void				load(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
 			virtual void				save(boost::archive::polymorphic_oarchive & ar, unsigned int const & version) const;
 			BOOST_SERIALIZATION_SPLIT_MEMBER();
