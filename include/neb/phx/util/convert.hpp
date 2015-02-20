@@ -5,6 +5,8 @@
 
 #include <PxPhysicsAPI.h>
 
+#include <neb/core/math/pose.hpp>
+
 namespace neb { namespace phx { namespace util {
 
 	physx::PxVec2		convert(glm::vec2 const & v);
@@ -18,6 +20,10 @@ namespace neb { namespace phx { namespace util {
 	glm::quat		convert(physx::PxQuat const & v);
 	glm::mat4		convert(physx::PxMat44 const & v);
 	glm::mat4		convert(physx::PxTransform const & t);
+	// pose
+	physx::PxTransform	convert_pose(neb::fnd::math::pose const & pose);
+	neb::fnd::math::pose	convert_pose(physx::PxTransform const & pose);
+	
 
 }}}
 

@@ -11,7 +11,7 @@
 #include <gal/etc/timestep.hpp>
 
 #include <neb/core/itf/verbosity.hpp>
-#include <neb/core/input/sink.hpp>
+#include <neb/core/core/actor/control/rigidbody/Base.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 
@@ -26,7 +26,7 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 	 **/
 	class base:
 		public neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>,
-		virtual public neb::fnd::input::sink
+		virtual public neb::fnd::core::actor::control::rigidbody::base
 	{
 		public:
 			using neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>::printv;

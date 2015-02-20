@@ -308,10 +308,8 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
 
 		if(actor) {
 			pose = active_transforms[i].actor2World;
-			actor->setPose(neb::fnd::math::pose(
-						phx::util::convert(pose.p),
-						phx::util::convert(pose.q)
-						));
+
+			actor->v_set_pose_data(phx::util::convert_pose(pose));
 
 			LOG(lg, neb::phx::core::scene::sl, debug)
 				<< ::std::setw(8) << "p"
@@ -319,6 +317,7 @@ void			neb::phx::core::scene::base::step(gal::etc::timestep const & ts)
 				<< ::std::setw(8) << pose.p.y
 				<< ::std::setw(8) << pose.p.z;
 
+			// if is rigidbody, also set velocity
 			if(pxrigidbody != NULL) {
 				auto rigidbody = ::std::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(actor);
 				if(!rigidbody) {
