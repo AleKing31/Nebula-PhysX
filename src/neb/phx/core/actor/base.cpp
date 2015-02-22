@@ -1,8 +1,8 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/util/debug.hpp>
+#include <neb/fnd/util/debug.hpp>
 
-#include <neb/core/game/weapon/SimpleProjectile.hpp>
+#include <neb/fnd/game/weapon/SimpleProjectile.hpp>
 
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/base.hpp>

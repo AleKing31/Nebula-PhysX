@@ -11,12 +11,12 @@
 #include <gal/etc/flag.hpp>
 #include <gal/stl/map.hpp>
 
-#include <neb/core/core/actor/util/parent.hpp>
-#include <neb/core/core/scene/base.hpp>
-#include <neb/core/math/serialization/glm.hpp>
-#include <neb/core/util/decl.hpp>
-#include <neb/core/net/util/decl.hpp>
-#include <neb/core/DebugBuffer.hpp>
+#include <neb/fnd/core/actor/util/parent.hpp>
+#include <neb/fnd/core/scene/base.hpp>
+#include <neb/fnd/math/serialization/glm.hpp>
+#include <neb/fnd/util/decl.hpp>
+#include <neb/fnd/net/util/decl.hpp>
+#include <neb/fnd/DebugBuffer.hpp>
 
 #include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>

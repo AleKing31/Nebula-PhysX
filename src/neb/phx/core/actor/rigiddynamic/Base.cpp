@@ -1,7 +1,7 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/util/debug.hpp>
-#include <neb/core/core/shape/base.hpp>
+#include <neb/fnd/util/debug.hpp>
+#include <neb/fnd/core/shape/base.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/scene/base.hpp>

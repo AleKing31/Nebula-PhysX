@@ -1,15 +1,15 @@
 #ifndef PHYSX_CORE_ACTOR_BASE
 #define PHYSX_CORE_ACTOR_BASE
 
-#include <neb/core/core/actor/base.hpp>
+#include <neb/fnd/core/actor/base.hpp>
 
 #include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/shape/util/parent.hpp>
-//#include <neb/core/game/weapon/util/parent.hpp>
-#include <neb/core/game/weapon/util/decl.hpp>
+//#include <neb/fnd/game/weapon/util/parent.hpp>
+#include <neb/fnd/game/weapon/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor {
 

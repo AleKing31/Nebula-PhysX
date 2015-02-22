@@ -10,10 +10,10 @@
 //#include <neb/Physics.hh>
 //#include <neb/simulation_callback.hh>
 
-#include <neb/core/actor/util/Types.hh>
-//#include <neb/core/actor/Control/util/Types.hh>
-#include <neb/core/actor/RigidBody/Base.hh>
-#include <neb/core/actor/RigidDynamic/Local.hh>
+#include <neb/fnd/actor/util/Types.hh>
+//#include <neb/fnd/actor/Control/util/Types.hh>
+#include <neb/fnd/actor/RigidBody/Base.hh>
+#include <neb/fnd/actor/RigidDynamic/Local.hh>
 
 #include <neb/network/Types.hh>
 #include <neb/network/message.hh>
@@ -22,11 +22,11 @@
 */
 #include <gal/log/log.hpp>
 
-#include <neb/core/util/debug.hpp>
+#include <neb/fnd/util/debug.hpp>
 
 //#include <neb/gfx/window/Base.hh>
 
-#include <neb/core/input/signals.hpp>
+#include <neb/fnd/input/signals.hpp>
 
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/util/log.hpp>

@@ -3,8 +3,8 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/core/itf/verbosity.hpp>
-#include <neb/core/math/pose.hpp>
+#include <neb/fnd/itf/verbosity.hpp>
+#include <neb/fnd/math/pose.hpp>
 
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>

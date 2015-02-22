@@ -3,10 +3,10 @@
 //#include <neb/scene/scene.h>
 //#include <neb/simulation_callback.h>
 
-#include <neb/core/core/actor/util/decl.hpp>
-#include <neb/core/core/actor/base.hpp>
+#include <neb/fnd/core/actor/util/decl.hpp>
+#include <neb/fnd/core/actor/base.hpp>
 
-//#include <neb/core/shape/desc.hh>
+//#include <neb/fnd/shape/desc.hh>
 
 
 /*

@@ -6,9 +6,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <neb/core/util/config.hpp>
-#include <neb/core/core/shape/util/parent.hpp>
-#include <neb/core/itf/Pose.hpp>
+#include <neb/fnd/util/config.hpp>
+#include <neb/fnd/core/shape/util/parent.hpp>
+#include <neb/fnd/itf/Pose.hpp>
 
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/shape/util/cast.hpp>

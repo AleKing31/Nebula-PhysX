@@ -1,6 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/util/debug.hpp>
+#include <neb/fnd/util/debug.hpp>
 
 #include <neb/phx/util/convert.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>

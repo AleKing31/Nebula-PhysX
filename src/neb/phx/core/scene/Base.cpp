@@ -2,17 +2,17 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/core/util/cast.hpp>
-#include <neb/core/util/debug.hpp>
-#include <neb/core/core/scene/util/decl.hpp>
-#include <neb/core/util/log.hpp>
-#include <neb/core/util/config.hpp>
-#include <neb/core/core/light/base.hpp>
-#include <neb/core/core/light/util/light_count.hpp>
-//#include <neb/core/timer/util/decl.hpp>
-#include <neb/core/timer/actor/Release.hpp>
-#include <neb/core/math/geo/polyhedron.hpp>
-#include <neb/core/net/core/scene/Base.hpp>
+#include <neb/fnd/util/cast.hpp>
+#include <neb/fnd/util/debug.hpp>
+#include <neb/fnd/core/scene/util/decl.hpp>
+#include <neb/fnd/util/log.hpp>
+#include <neb/fnd/util/config.hpp>
+#include <neb/fnd/core/light/base.hpp>
+#include <neb/fnd/core/light/util/light_count.hpp>
+//#include <neb/fnd/timer/util/decl.hpp>
+#include <neb/fnd/timer/actor/Release.hpp>
+#include <neb/fnd/math/geo/polyhedron.hpp>
+#include <neb/fnd/net/core/scene/Base.hpp>
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>

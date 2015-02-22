@@ -3,8 +3,8 @@
 #include <climits>
 #include <ctime>
 
-#include <neb/core/util/cast.hpp>
-#include <neb/core/math/geo/vertex.hpp>
+#include <neb/fnd/util/cast.hpp>
+#include <neb/fnd/math/geo/vertex.hpp>
 
 //#include <neb/gfx/mesh/tri1.hpp>
 
@@ -12,7 +12,7 @@
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/app/base.hpp>
 
-#include <neb/core/math/HeightField.hpp>
+#include <neb/fnd/math/HeightField.hpp>
 
 typedef neb::phx::core::shape::HeightField::Base THIS;
 

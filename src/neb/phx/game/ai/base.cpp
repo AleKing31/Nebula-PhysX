@@ -1,10 +1,10 @@
 
-#include <neb/core/util/debug.hpp>
+#include <neb/fnd/util/debug.hpp>
 
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
-#include <neb/core/game/ai/base.hpp>
-#include <neb/core/util/log.hpp>
+#include <neb/fnd/game/ai/base.hpp>
+#include <neb/fnd/util/log.hpp>
 
 
 

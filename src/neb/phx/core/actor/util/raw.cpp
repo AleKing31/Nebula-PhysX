@@ -1,7 +1,7 @@
 
 /*
-#include <neb/core/actor/Base.hpp>
-#include <neb/core/actor/util/raw.hpp>
+#include <neb/fnd/actor/Base.hpp>
+#include <neb/fnd/actor/util/raw.hpp>
 #include <neb/Xml/Xml.hpp>
 
 neb::fnd::actor::raw::raw():

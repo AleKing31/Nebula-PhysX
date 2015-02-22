@@ -1,7 +1,7 @@
 #ifndef NEB_PHX_TMP_CHILD_HPP
 #define NEB_PHX_TMP_CHILD_HPP
 
-#include <neb/core/tmp/Child.hpp>
+#include <neb/fnd/tmp/Child.hpp>
 
 #include <neb/phx/app/util/decl.hpp>
 

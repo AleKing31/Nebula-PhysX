@@ -1,7 +1,7 @@
 #ifndef PHYSX_CORE_SHAPE_UTIL_CAST_HPP
 #define PHYSX_CORE_SHAPE_UTIL_CAST_HPP
 
-#include <neb/core/core/shape/util/cast.hpp>
+#include <neb/fnd/core/shape/util/cast.hpp>
 
 #include <neb/phx/core/shape/util/decl.hpp>
 

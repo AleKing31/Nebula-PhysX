@@ -1,7 +1,7 @@
 
 //#include <neb/gfx/Context/Base.hh>
 
-#include <neb/core/util/config.hpp>
+#include <neb/fnd/util/config.hpp>
 
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/user.hpp>

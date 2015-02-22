@@ -1,6 +1,6 @@
 
 /*
-#include <neb/core/actor/Controller/Base.hh>
+#include <neb/fnd/actor/Controller/Base.hh>
 
 neb::fnd::actor::Controller::Controller(std::shared_ptr<neb::fnd::actor::util::parent> parent): neb::fnd::actor::base(parent) {
 

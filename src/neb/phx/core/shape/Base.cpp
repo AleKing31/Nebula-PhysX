@@ -1,7 +1,7 @@
-#include <neb/core/util/cast.hpp>
-#include <neb/core/util/debug.hpp>
-#include <neb/core/core/shape/base.hpp>
-#include <neb/core/core/light/base.hpp>
+#include <neb/fnd/util/cast.hpp>
+#include <neb/fnd/util/debug.hpp>
+#include <neb/fnd/core/shape/base.hpp>
+#include <neb/fnd/core/light/base.hpp>
 
 //#include <neb/gfx/glsl/attrib.hh>
 

@@ -10,8 +10,8 @@
 
 #include <gal/etc/timestep.hpp>
 
-#include <neb/core/itf/verbosity.hpp>
-#include <neb/core/core/actor/control/rigidbody/Base.hpp>
+#include <neb/fnd/itf/verbosity.hpp>
+#include <neb/fnd/core/actor/control/rigidbody/Base.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 

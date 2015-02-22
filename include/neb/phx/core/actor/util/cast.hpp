@@ -1,7 +1,7 @@
 #ifndef PHYSX_CORE_ACTOR_UTIL_CAST_HPP
 #define PHYSX_CORE_ACTOR_UTIL_CAST_HPP
 
-#include <neb/core/core/actor/util/Cast.hpp>
+#include <neb/fnd/core/actor/util/Cast.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
 

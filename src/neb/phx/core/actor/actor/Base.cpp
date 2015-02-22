@@ -1,8 +1,8 @@
 #include <gal/log/log.hpp>
 
-#include <neb/core/core/scene/base.hpp>
-#include <neb/core/core/shape/base.hpp>
-#include <neb/core/util/debug.hpp>
+#include <neb/fnd/core/scene/base.hpp>
+#include <neb/fnd/core/shape/base.hpp>
+#include <neb/fnd/util/debug.hpp>
 
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/actor/base.hpp>

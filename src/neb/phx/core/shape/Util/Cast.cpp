@@ -1,8 +1,8 @@
 
 /*
-#include <neb/core/actor/util/Types.hh>
-#include <neb/core/actor/util/Cast.hh>
-#include <neb/core/actor/RigidDynamic/Base.hh>
+#include <neb/fnd/actor/util/Types.hh>
+#include <neb/fnd/actor/util/Cast.hh>
+#include <neb/fnd/actor/RigidDynamic/Base.hh>
 
 
 std::shared_ptr<neb::fnd::actor::base>				neb::fnd::actor::util::cast::isActorBase() {

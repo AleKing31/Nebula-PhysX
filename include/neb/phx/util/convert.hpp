@@ -5,7 +5,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/core/math/pose.hpp>
+#include <neb/fnd/math/pose.hpp>
 
 namespace neb { namespace phx { namespace util {
 
