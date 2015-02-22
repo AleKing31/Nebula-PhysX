@@ -237,10 +237,10 @@ void			THIS::step(gal::etc::timestep const & ts)
 	/// \TODO assert(_M_network_object) then use visitor pattern
 	
 	// if is remote scene, do not simulate physics
-	if(_M_network_object)
-		_M_network_object->visit_step(this, ts);
-	else
-		step_physics(ts);
+	//if(_M_network_object)
+	//	_M_network_object->visit_step(this, ts);
+	//else
+	step_physics(ts);
 }
 void			THIS::step_physics(gal::etc::timestep const & ts)
 {
