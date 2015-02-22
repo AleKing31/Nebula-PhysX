@@ -16,6 +16,7 @@
 #include <neb/core/math/serialization/glm.hpp>
 #include <neb/core/util/decl.hpp>
 #include <neb/core/net/util/decl.hpp>
+#include <neb/core/DebugBuffer.hpp>
 
 #include <neb/phx/tmp/Child.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -42,6 +43,7 @@ namespace neb { namespace phx { namespace core { namespace scene {
 			void					init_light();
 			virtual void				release();
 			void					step(gal::etc::timestep const & ts);
+			neb::fnd::DebugBuffer			get_debug_buffer();
 		private:
 			void					step_physics(gal::etc::timestep const & ts);
 			void					create_physics();

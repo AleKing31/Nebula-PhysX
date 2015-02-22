@@ -368,6 +368,28 @@ void			THIS::save(boost::archive::polymorphic_oarchive & ar, unsigned int const 
 {
 	ar & boost::serialization::make_nvp("gravity",gravity_);
 }
+neb::fnd::DebugBuffer	THIS::get_debug_buffer()
+{
+		const physx::PxRenderBuffer& rb = px_scene_->getRenderBuffer();
 
+		physx::PxU32 nblines = rb.getNbLines();
+		const physx::PxDebugLine* lines = rb.getLines();
 
+		physx::PxU32 nbtriangles = rb.getNbTriangles();
+		const physx::PxDebugTriangle* triangles = rb.getTriangles();
+		
+		assert(sizeof(physx::PxDebugLine) == sizeof(neb::fnd::DebugLine));
+		
+		neb::fnd::DebugBuffer db;
+		
+		db.lines = new neb::fnd::DebugLine[nblines];
+		memcpy(db.lines, lines, sizeof(neb::fnd::DebugLine) * nblines);
+		db.nblines = nblines;
+
+		db.triangles = new neb::fnd::DebugTriangle[nbtriangles];
+		memcpy(db.triangles, triangles, sizeof(neb::fnd::DebugTriangle) * nbtriangles);
+		db.nbtriangles = nbtriangles;
+		
+		return db;
+}
 
