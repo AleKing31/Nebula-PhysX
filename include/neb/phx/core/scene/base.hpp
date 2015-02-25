@@ -40,8 +40,8 @@ namespace neb { namespace phx { namespace core { namespace scene {
 			base();
 			virtual ~base();
 			void					__init(parent_t * const & p);
+			void					__release();
 			void					init_light();
-			virtual void				release();
 			void					step(gal::etc::timestep const & ts);
 			neb::fnd::DebugBuffer			get_debug_buffer();
 		private:

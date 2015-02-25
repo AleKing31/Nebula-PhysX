@@ -53,7 +53,8 @@ neb::phx::core::scene::base::base():
 
 	flag_.set(neb::fnd::core::scene::util::flag::PHYSX_VISUALIZATION);
 }
-neb::phx::core::scene::base::~base() {
+neb::phx::core::scene::base::~base()
+{
 
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
@@ -102,7 +103,7 @@ void			neb::phx::core::scene::base::__init(parent_t * const & p)
 				std::shared_ptr<neb::gfx::context::base>());
 	}*/
 }
-void			neb::phx::core::scene::base::release()
+void			neb::phx::core::scene::base::__release()
 {
 	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
 
