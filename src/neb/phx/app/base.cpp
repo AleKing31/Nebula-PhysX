@@ -10,7 +10,7 @@
 
 #include <gal/log/log.hpp>
 
-#include <neb/fnd/core/scene/base.hpp>
+#include <neb/fnd/core/scene/Base.hpp>
 #include <neb/fnd/util/debug.hpp>
 
 #include <neb/phx/simulation_callback.hh>

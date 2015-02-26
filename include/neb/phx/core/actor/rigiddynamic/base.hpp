@@ -5,7 +5,7 @@
 
 #include <neb/fnd/util/macro.hpp>
 
-#include <neb/fnd/core/actor/rigiddynamic/base.hpp>
+#include <neb/fnd/core/actor/rigiddynamic/Base.hpp>
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 

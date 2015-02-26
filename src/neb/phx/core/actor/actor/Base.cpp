@@ -1,6 +1,6 @@
 #include <gal/log/log.hpp>
 
-#include <neb/fnd/core/scene/base.hpp>
+#include <neb/fnd/core/scene/Base.hpp>
 #include <neb/fnd/core/shape/base.hpp>
 #include <neb/fnd/util/debug.hpp>
 

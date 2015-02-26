@@ -4,7 +4,7 @@
 //#include <neb/simulation_callback.h>
 
 #include <neb/fnd/core/actor/util/decl.hpp>
-#include <neb/fnd/core/actor/base.hpp>
+#include <neb/fnd/core/actor/Base.hpp>
 
 //#include <neb/fnd/shape/desc.hh>
 
