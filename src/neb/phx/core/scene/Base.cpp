@@ -18,7 +18,6 @@
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
 
 /*
 #include <neb/gfx/core/actor/base.hpp>
@@ -48,20 +47,19 @@ neb::phx::core::scene::base::base():
 	px_filter_shader_(NULL),
 	simulation_callback_(NULL)
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	flag_.set(neb::fnd::core::scene::util::flag::PHYSX_VISUALIZATION);
 }
 neb::phx::core::scene::base::~base()
 {
-
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	assert(px_scene_ == NULL);
 }
 void			neb::phx::core::scene::base::__init(parent_t * const & p)
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
+	printv_func(DEBUG);
 
 	//neb::fnd::core::scene::base::init(p);
 
@@ -104,7 +102,7 @@ void			neb::phx::core::scene::base::__init(parent_t * const & p)
 }
 void			neb::phx::core::scene::base::__release()
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	if(px_scene_)
 	{
@@ -114,12 +112,12 @@ void			neb::phx::core::scene::base::__release()
 }
 void			neb::phx::core::scene::base::create_physics()
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this;
+	printv_func(DEBUG);
 
 	//if(!neb::phx::app::base::is_valid()) return;
 
 	if(px_scene_ != NULL) {
-		LOG(lg, neb::phx::core::scene::sl, debug) << "been here!";
+		printv(DEBUG, "been here!");
 		return;
 	}
 	
@@ -128,7 +126,7 @@ void			neb::phx::core::scene::base::create_physics()
 	auto pxphysics = app->px_physics_;
 	assert(pxphysics);
 
-	LOG(lg, neb::phx::core::scene::sl, debug) << "pxphysics " << pxphysics;
+	printv(DEBUG, "pxphysics %p\n", pxphysics);
 
 	physx::PxSceneDesc scene_desc(pxphysics->getTolerancesScale());
 
@@ -139,7 +137,7 @@ void			neb::phx::core::scene::base::create_physics()
 	int m_nbThreads = 1;
 
 	// cpu dispatcher
-	printf("cpu dispatcher\n");
+	printv(DEBUG, "cpu dispatcher\n");
 	if( !scene_desc.cpuDispatcher )
 	{
 		physx::PxDefaultCpuDispatcher* cpuDispatcher = physx::PxDefaultCpuDispatcherCreate( m_nbThreads );
@@ -151,7 +149,7 @@ void			neb::phx::core::scene::base::create_physics()
 	}
 
 	// filter shader
-	printf("filter shader\n");
+	printv(DEBUG, "filter shader\n");
 	if(!scene_desc.filterShader)
 	{
 		if(px_filter_shader_)
@@ -165,7 +163,7 @@ void			neb::phx::core::scene::base::create_physics()
 	}
 
 	// gpu dispatcher
-	printf("gpu dispatcher\n");
+	printv(DEBUG, "gpu dispatcher\n");
 #ifdef PX_WINDOWS
 	if( !scene_desc.gpuDispatcher && m_cudaContextManager )
 	{
@@ -244,7 +242,8 @@ void			THIS::step(gal::etc::timestep const & ts)
 }
 void			THIS::step_physics(gal::etc::timestep const & ts)
 {
-	LOG(lg, neb::phx::core::scene::sl, debug) << __PRETTY_FUNCTION__ << " " << this << " dt = " << ts.dt;
+	printv_func(DEBUG);
+	printv(DEBUG, "%p dt = %f\n", this, ts.dt);
 
 	//auto app = get_phx_app();
 
@@ -258,38 +257,37 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 
 	typedef neb::fnd::core::actor::util::parent A;
 
-
 	//========================================================================
 	// lock all actors
 
-	A::map_.for_each([&] (A::map_type::pointer p) {
-			auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
-			assert(actor);
-			actor->mutex_.lock();
-			LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
-			});
+	auto lambda_lock = [&] (A::map_type::pointer p) {
+		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
+		assert(actor);
+		actor->mutex_.lock();
+		printv(DEBUG, "actor = %p\n");
+	};
 
-	LOG(lg, neb::phx::core::scene::sl, debug) << "actors locked";
+	A::map_.for_each(lambda_lock);
+
+	printv(DEBUG, "actors locked\n");
 	/*A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
 	  auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(it->ptr_);
 	  assert(actor);
 	  LOG(lg, neb::phx::core::scene::sl, debug) << "actor = " << actor.get();
 	  });*/
 
-	LOG(lg, neb::phx::core::scene::sl, debug) << "simulate";
+	printv(DEBUG, "simulate\n");
 
 	px_scene_->simulate(ts.dt);
 	px_scene_->fetchResults(true);
 
-	LOG(lg, neb::phx::core::scene::sl, debug) << "simulation complete";
+	printv(DEBUG, "simulation complete\n");
 
 	// retrieve array of actors that moved
 	physx::PxU32 nb_active_transforms;
 	const physx::PxActiveTransform* active_transforms = px_scene_->getActiveTransforms(nb_active_transforms);
 
-
-	LOG(lg, neb::phx::core::scene::sl, debug)
-		<< "active transforms: " << nb_active_transforms;
+	printv(DEBUG, "active transforms: %i\n", nb_active_transforms);
 
 	//physx::PxTransform pose;
 	physx::PxTransform pose;
@@ -306,7 +304,7 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 		void* ud = active_transforms[i].userData;
 		assert(ud);
 
-		LOG(lg, neb::phx::core::scene::sl, debug) << "ud = " << ud;
+		printv(DEBUG, "ud = %p\n", ud);
 
 		physx::PxRigidBody* pxrigidbody = pxactor->isRigidBody();
 
@@ -320,11 +318,7 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 
 			actor->v_set_pose_data(phx::util::convert_pose(pose));
 
-			LOG(lg, neb::phx::core::scene::sl, debug)
-				<< ::std::setw(8) << "p"
-				<< ::std::setw(8) << pose.p.x
-				<< ::std::setw(8) << pose.p.y
-				<< ::std::setw(8) << pose.p.z;
+			printv(DEBUG, "p %8f%8f%8f\n", pose.p.x, pose.p.y, pose.p.z);
 
 			// if is rigidbody, also set velocity
 			if(pxrigidbody != NULL) {
@@ -345,14 +339,14 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 		}
 	}
 	// unlock all actors
-	A::map_.for_each([&] (A::map_type::pointer p) {
-			auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
-			assert(actor);
-			actor->mutex_.unlock();
-			});
 
+	auto lambda_unlock = [&] (A::map_type::pointer p) {
+		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
+		assert(actor);
+		actor->mutex_.unlock();
+	};
 
-
+	A::map_.for_each(lambda_unlock);
 
 	// vehicle
 	//physx::PxVec3 g(0,-0.25,0);
@@ -370,26 +364,26 @@ void			THIS::save(boost::archive::polymorphic_oarchive & ar, unsigned int const 
 }
 neb::fnd::DebugBuffer	THIS::get_debug_buffer()
 {
-		const physx::PxRenderBuffer& rb = px_scene_->getRenderBuffer();
+	const physx::PxRenderBuffer& rb = px_scene_->getRenderBuffer();
 
-		physx::PxU32 nblines = rb.getNbLines();
-		const physx::PxDebugLine* lines = rb.getLines();
+	physx::PxU32 nblines = rb.getNbLines();
+	const physx::PxDebugLine* lines = rb.getLines();
 
-		physx::PxU32 nbtriangles = rb.getNbTriangles();
-		const physx::PxDebugTriangle* triangles = rb.getTriangles();
-		
-		assert(sizeof(physx::PxDebugLine) == sizeof(neb::fnd::DebugLine));
-		
-		neb::fnd::DebugBuffer db;
-		
-		db.lines = new neb::fnd::DebugLine[nblines];
-		memcpy(db.lines, lines, sizeof(neb::fnd::DebugLine) * nblines);
-		db.nblines = nblines;
+	physx::PxU32 nbtriangles = rb.getNbTriangles();
+	const physx::PxDebugTriangle* triangles = rb.getTriangles();
 
-		db.triangles = new neb::fnd::DebugTriangle[nbtriangles];
-		memcpy(db.triangles, triangles, sizeof(neb::fnd::DebugTriangle) * nbtriangles);
-		db.nbtriangles = nbtriangles;
-		
-		return db;
+	assert(sizeof(physx::PxDebugLine) == sizeof(neb::fnd::DebugLine));
+
+	neb::fnd::DebugBuffer db;
+
+	db.lines = new neb::fnd::DebugLine[nblines];
+	memcpy(db.lines, lines, sizeof(neb::fnd::DebugLine) * nblines);
+	db.nblines = nblines;
+
+	db.triangles = new neb::fnd::DebugTriangle[nbtriangles];
+	memcpy(db.triangles, triangles, sizeof(neb::fnd::DebugTriangle) * nbtriangles);
+	db.nbtriangles = nbtriangles;
+
+	return db;
 }
 

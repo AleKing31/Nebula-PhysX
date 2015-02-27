@@ -15,8 +15,6 @@
 
 #include <neb/phx/simulation_callback.hh>
 #include <neb/phx/app/base.hpp>
-#include <neb/phx/util/log.hpp>
-#include <neb/phx/app/base.hpp>
 #include <neb/phx/test.hpp>
 
 typedef neb::phx::app::base THIS;
@@ -30,9 +28,8 @@ physx::PxFilterFlags	DefaultFilterShader(
 		const void* constantBlock,
 		physx::PxU32 constantBlockSize )
 {	
-	printf("%s\n",__PRETTY_FUNCTION__);
-	
-	printf("%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
+	//printv(DEBUG, "%s\n", __PRETTY_FUNCTION__);
+	//printv(DEBUG, "%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
 	
 	physx::PxFilterFlags filter_flags = physx::PxFilterFlag::eDEFAULT;
 	
@@ -52,10 +49,10 @@ physx::PxFilterFlags	DefaultFilterShader(
 		
 		filter_flags = physx::PxFilterFlag::eDEFAULT;
 
-		printf("collision\n");
+		//printf("collision\n");
 	} else {
 		filter_flags = physx::PxFilterFlag::eSUPPRESS;
-		printf("suppress\n");
+		//printf("suppress\n");
 	}
 	
 	// notification
@@ -76,19 +73,8 @@ void DefaultErrorCallback::reportError(
 		char const * file,
 		int line)
 {
-	printf("%s:%i: %s\n",file,line,message);
+	printf(/*DEBUG, */"%s:%i: %s\n",file,line,message);
 }
-
-
-
-/*phx::app::base::Physics()
-  {
-//	jess::clog << neb_FUNCSIG << std::endl;
-}
-phx::app::base::~base()
-{
-//	jess::clog << neb_FUNCSIG << std::endl;
-}*/
 THIS::base():
 	px_physics_(NULL)
 {
@@ -138,8 +124,7 @@ void				THIS::__init()
 	PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::Enum::eACCELERATION);
 }
 void						neb::phx::app::base::release() {
-	//jess::clog << neb_FUNCSIG << std::endl;
-	printf("%s\n",__PRETTY_FUNCTION__);
+	printv_func(DEBUG);
 
 	physx::PxCloseVehicleSDK();
 
@@ -148,8 +133,7 @@ void						neb::phx::app::base::release() {
 }
 void						neb::phx::app::base::step(gal::etc::timestep const & ts)
 {
-
-	LOG(lg, neb::phx::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	//neb::phx::game::game::util::parent::step(ts);
 

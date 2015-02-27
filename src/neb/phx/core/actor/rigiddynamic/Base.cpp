@@ -8,20 +8,11 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
 
-/*neb::phx::core::actor::rigiddynamic::base::base(::std::shared_ptr<neb::phx::core::actor::util::parent> parent):
-	neb::fnd::core::actor::base(parent),
-	phx::core::actor::base(parent),
-	phx::core::actor::actor::base(parent),
-	phx::core::actor::rigidactor::base(parent),
-	phx::core::actor::rigidbody::base(parent)
-{
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
-}*/
+
 void			neb::phx::core::actor::rigiddynamic::base::init(parent_t * const & p)
 {
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 	
 	assert(px_actor_);
 	auto pxrd = px_actor_->isRigidDynamic();
@@ -30,10 +21,10 @@ void			neb::phx::core::actor::rigiddynamic::base::init(parent_t * const & p)
 }
 void			neb::phx::core::actor::rigiddynamic::base::create_physics()
 {
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 	
 	if(px_actor_ != NULL) {
-		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
+		printv(DEBUG, "been here!\n");
 		return;
 	}
 	
@@ -54,7 +45,7 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics()
 
 	if (!px_rigid_dynamic)
 	{
-		printf("create actor failed!");
+		printv(DEBUG, "create actor failed!\n");
 		exit(1);
 	}
 
@@ -85,8 +76,9 @@ void			neb::phx::core::actor::rigiddynamic::base::create_physics()
 
 	assert(px_actor_);
 }
-void			neb::phx::core::actor::rigiddynamic::base::init_physics() {
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+void			neb::phx::core::actor::rigiddynamic::base::init_physics()
+{
+	printv_func(DEBUG);
 
 	if(!px_actor_) return;
 

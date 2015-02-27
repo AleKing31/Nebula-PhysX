@@ -5,7 +5,6 @@
 
 //#include <neb/gfx/glsl/attrib.hh>
 
-#include <neb/phx/util/log.hpp>
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/core/shape/base.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
@@ -17,21 +16,19 @@ neb::phx::core::shape::base::base():
 }
 neb::phx::core::shape::base::~base()
 {
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 	assert(px_shape_ == NULL);
 }
 void			neb::phx::core::shape::base::step(gal::etc::timestep const & ts) {
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 }
 void			neb::phx::core::shape::base::init(neb::fnd::core::shape::util::parent * const & p)
 {
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
-	
-
+	printv_func(DEBUG);
 }
 void			neb::phx::core::shape::base::release() {
 	//NEBULA_DEBUG_0_FUNCTION;
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	neb::fnd::core::shape::base::release();
 	
@@ -53,7 +50,7 @@ void			neb::phx::core::shape::base::release() {
 }
 void			neb::phx::core::shape::base::create_physics()
 {
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	if(!hasParent()) return;
@@ -90,8 +87,9 @@ void			neb::phx::core::shape::base::create_physics()
 
   return pxparent;
   }*/
-physx::PxGeometry*	neb::phx::core::shape::base::to_geo() {
-	LOG(lg, neb::phx::core::shape::sl, debug) << __PRETTY_FUNCTION__;
+physx::PxGeometry*	neb::phx::core::shape::base::to_geo()
+{
+	printv_func(DEBUG);
 	return 0;
 }
 

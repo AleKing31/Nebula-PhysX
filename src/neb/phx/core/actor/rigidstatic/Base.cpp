@@ -5,7 +5,6 @@
 
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigidstatic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
@@ -20,12 +19,12 @@
 }*/
 void			neb::phx::core::actor::rigidstatic::base::create_physics()
 {
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	if(!neb::fnd::app::Base::is_valid()) return;
 	
 	if(px_actor_ != NULL) {
-		LOG(lg, neb::phx::core::actor::sl, debug) << "been here!";
+		printv(WARNING, "been here!\n");
 		return;
 	}
 	
@@ -33,7 +32,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	
 	auto p = getPose();
 
-	printv(info, "pos = %16f %16f %16f\n", p.pos_.x, p.pos_.y, p.pos_.z);
+	printv(DEBUG, "pos = %16f %16f %16f\n", p.pos_.x, p.pos_.y, p.pos_.z);
 
 	physx::PxTransform pose(
 			neb::phx::util::convert(glm::vec3(p.pos_)),
@@ -52,7 +51,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 	physx::PxRigidStatic* px_rigid_static = pxph->createRigidStatic(pose);
 	
 	if(px_rigid_static == NULL) {
-		printf("create actor failed!");
+		printv(CRITICAL, "create actor failed!");
 		exit(1);
 	}
 
@@ -72,7 +71,7 @@ void			neb::phx::core::actor::rigidstatic::base::create_physics()
 }
 void			neb::phx::core::actor::rigidstatic::base::init_physics()
 {
-	printf("%s\n", __PRETTY_FUNCTION__);
+	printv_func(DEBUG);
 
 	if(!neb::fnd::app::Base::is_valid()) return;
 
