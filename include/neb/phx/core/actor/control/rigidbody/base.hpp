@@ -10,7 +10,7 @@
 
 #include <gal/etc/timestep.hpp>
 
-#include <neb/fnd/itf/verbosity.hpp>
+#include <gal/stl/verbosity.hpp>
 #include <neb/fnd/core/actor/control/rigidbody/Base.hpp>
 
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -25,11 +25,11 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 	 * force and torque at a given point in time must be stored in raw.
 	 **/
 	class base:
-		public neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>,
+		public gal::tmp::Verbosity<neb::phx::core::actor::control::rigidbody::base>,
 		virtual public neb::fnd::core::actor::control::rigidbody::base
 	{
 		public:
-			using neb::fnd::itf::verbosity<neb::phx::core::actor::control::rigidbody::base>::printv;
+			using gal::tmp::Verbosity<neb::phx::core::actor::control::rigidbody::base>::printv;
 			base();
 			virtual ~base();
 			base&				operator=(base const & base);

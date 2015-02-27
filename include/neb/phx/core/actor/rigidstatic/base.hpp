@@ -3,7 +3,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/fnd/itf/verbosity.hpp>
+#include <gal/stl/verbosity.hpp>
 
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
@@ -11,13 +11,13 @@
 namespace neb { namespace phx { namespace core { namespace actor { namespace rigidstatic {
 	/** @brief base */
 	class base:
-		public neb::fnd::itf::verbosity<neb::phx::core::actor::rigidstatic::base>,
+		public gal::tmp::Verbosity<neb::phx::core::actor::rigidstatic::base>,
 		virtual public neb::phx::core::actor::rigidactor::base
 	{
 
 		public:
 			using CHILD::get_fnd_app;
-			using neb::fnd::itf::verbosity<neb::phx::core::actor::rigidstatic::base>::printv;
+			using gal::tmp::Verbosity<neb::phx::core::actor::rigidstatic::base>::printv;
 			//base(std::shared_ptr<neb::phx::core::actor::util::parent>);
 
 			//virtual void					init() = 0;
