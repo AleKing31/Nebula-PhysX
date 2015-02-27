@@ -7,7 +7,6 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
-#include <neb/phx/util/log.hpp>
 
 neb::phx::core::actor::base::base()
 {

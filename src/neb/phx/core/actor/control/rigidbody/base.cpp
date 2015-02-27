@@ -14,7 +14,6 @@
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
 
 typedef neb::phx::core::actor::control::rigidbody::base THIS;
 

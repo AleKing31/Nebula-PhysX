@@ -29,7 +29,6 @@
 #include <neb/fnd/input/signals.hpp>
 
 #include <neb/phx/util/convert.hpp>
-#include <neb/phx/util/log.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigidbody/base.hpp>
@@ -39,10 +38,11 @@ neb::phx::core::actor::rigidbody::base::base():
 	force_(0.0,0.0,0.0),
 	torque_(0.0,0.0,0.0)
 {
+	printv_func(DEBUG);
 }
-void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
-
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
+void			neb::phx::core::actor::rigidbody::base::add_force(double time)
+{
+	printv_func(DEBUG);
 
 	// body frame
 	glm::vec3 f_body;
@@ -72,22 +72,18 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time) {
 	physx::PxRigidBody* pxrigidbody = px_actor_->isRigidBody();
 	assert(pxrigidbody);
 
-
-	LOG(lg, neb::phx::core::actor::sl, debug)
-		<< ::std::setw(8) << "f_global"
-		<< ::std::setw(8) << f_global.x
-		<< ::std::setw(8) << f_global.y
-		<< ::std::setw(8) << f_global.z
-		<< " mass " << pxrigidbody->getMass();
-
-
+	printv(DEBUG, "f_global %8f%8f%8f mass %8f",
+		f_global.x,
+		f_global.y,
+		f_global.z,
+		pxrigidbody->getMass());
 	
 	pxrigidbody->addForce(phx::util::convert(f_global));
 	pxrigidbody->addTorque(phx::util::convert(t_global));
 }
 void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_ptr<neb::fnd::input::source> src)
 {
-	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;
+	printv_func(DEBUG);
 
 	typedef neb::phx::core::actor::control::rigidbody::manual Control;
 
@@ -116,7 +112,7 @@ void			neb::phx::core::actor::rigidbody::base::createControlManual(std::shared_p
 }
 void			neb::phx::core::actor::rigidbody::base::createControlPD()
 {
-	LOG(lg, neb::phx::core::actor::sl, info) << __PRETTY_FUNCTION__;;
+	printv_func(DEBUG);
 	
 	auto self = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(
 			shared_from_this()
@@ -135,7 +131,7 @@ void			neb::phx::core::actor::rigidbody::base::createControlPD()
 }
 void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts)
 {
-	LOG(lg, neb::phx::core::actor::sl, debug) << __PRETTY_FUNCTION__;;
+	printv_func(DEBUG);
 
 	if(control_) {
 		control_->step(ts);
