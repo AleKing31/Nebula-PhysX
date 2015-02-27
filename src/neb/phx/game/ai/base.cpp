@@ -4,13 +4,12 @@
 #include <neb/phx/core/actor/rigidbody/base.hpp>
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/fnd/game/ai/base.hpp>
-#include <neb/fnd/util/log.hpp>
 
+typedef neb::fnd::game::ai::base THIS;
 
-
-void						neb::fnd::game::ai::base::step(gal::etc::timestep const & ts) {
-
-	LOG(lg, neb::fnd::sl, debug) << __PRETTY_FUNCTION__;
+void			THIS::step(gal::etc::timestep const & ts)
+{
+	printv_func(DEBUG);
 
 	auto actor = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor_.lock());
 	//auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(actor_.lock());
@@ -25,8 +24,6 @@ void						neb::fnd::game::ai::base::step(gal::etc::timestep const & ts) {
 	auto pd = std::dynamic_pointer_cast<neb::phx::core::actor::control::rigidbody::pd>(control);
 
 	if(!pd) return;
-	
-	
 	
 	glm::vec3 look = glm::vec3(target->pose_.pos_ - actor->pose_.pos_);
 	glm::vec3 up(0,0,-1);
@@ -43,18 +40,16 @@ void						neb::fnd::game::ai::base::step(gal::etc::timestep const & ts) {
 	
 	//quat q(up,look);
 	
-	LOG(lg, neb::fnd::sl, debug)
-		<< ::std::setw(16) << "look"
-		<< ::std::setw(16) << look.x
-		<< ::std::setw(16) << look.y
-		<< ::std::setw(16) << look.z;
+	printv(DEBUG, "look %16f%16f%16f\n",
+		look.x,
+		look.y,
+		look.z);
 
-	LOG(lg, neb::fnd::sl, debug)
-		<< ::std::setw(16) << "q"
-		<< ::std::setw(16) << q.w
-		<< ::std::setw(16) << q.x
-		<< ::std::setw(16) << q.y
-		<< ::std::setw(16) << q.z;
+	printv(DEBUG, "q    %16f%16f%16f\n",
+		q.w,
+		q.x,
+		q.y,
+		q.z);
 
 	//LOG(lg, neb::fnd::sl, debug) << __PRETTY_FUNCTION__;
 

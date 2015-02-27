@@ -5,7 +5,6 @@
 #include <neb/fnd/util/cast.hpp>
 #include <neb/fnd/util/debug.hpp>
 #include <neb/fnd/core/scene/util/decl.hpp>
-#include <neb/fnd/util/log.hpp>
 #include <neb/fnd/util/config.hpp>
 #include <neb/fnd/core/light/base.hpp>
 #include <neb/fnd/core/light/util/light_count.hpp>
