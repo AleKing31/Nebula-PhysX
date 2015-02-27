@@ -18,22 +18,22 @@ typedef neb::phx::core::shape::HeightField::Base THIS;
 
 THIS::Base()
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	printv_func(DEBUG);
 }
 void				THIS::__init(THIS::parent_t * const & p)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	printv_func(DEBUG);
 
 	create_physics();
 }
 void				THIS::step(gal::etc::timestep  const & ts)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	printv_func(DEBUG);
 
 }
 void				THIS::create_physics()
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	printv_func(DEBUG);
 
 	if(!neb::fnd::app::Base::is_valid()) return;
 

@@ -28,7 +28,7 @@ physx::PxFilterFlags	DefaultFilterShader(
 		const void* constantBlock,
 		physx::PxU32 constantBlockSize )
 {	
-	//printv(DEBUG, "%s\n", __PRETTY_FUNCTION__);
+	printf(/*DEBUG, */"%s\n", __PRETTY_FUNCTION__);
 	//printv(DEBUG, "%i %i %i %i\n", filterData0.word0, filterData1.word1, filterData1.word0, filterData0.word1);
 	
 	physx::PxFilterFlags filter_flags = physx::PxFilterFlag::eDEFAULT;
@@ -156,10 +156,10 @@ physx::PxConvexMeshGeometry*	THIS::frustrum_geometry(glm::mat4 proj)
 
 	glm::mat4 inv = glm::inverseTranspose(glm::transpose(proj));
 
-	//std::cout << "proj" << std::endl << proj << std::endl;
-	//std::cout << "inv" << std::endl << inv << std::endl;
+	//printv(DEBUG, "proj\n", proj);
+	//printv(DEBUG, "inv \n", inv);
 
-	std::cout << "verts" << std::endl;
+	printv(DEBUG, "verts\n");
 	for(int c = 0; c < 8; c++)
 	{
 		gverts[c] = inv * gverts[c];
@@ -169,7 +169,6 @@ physx::PxConvexMeshGeometry*	THIS::frustrum_geometry(glm::mat4 proj)
 				gverts[c].y,
 				gverts[c].z);
 
-		//std::cout << gverts[c] << std::endl;
 	}
 
 /*	physx::PxHullPolygon polys[6];
@@ -206,34 +205,36 @@ physx::PxConvexMeshGeometry*	THIS::frustrum_geometry(glm::mat4 proj)
 
 	assert(g->isValid());
 
-	auto b = convexMesh->getLocalBounds();
+	//auto b = convexMesh->getLocalBounds();
 
 	const physx::PxVec3* nverts = convexMesh->getVertices();
 	
 	
 
-	std::cout << "convex mesh" << std::endl;
-	std::cout << b.getExtents(0) << std::endl;
-	std::cout << b.getExtents(1) << std::endl;
-	std::cout << b.getExtents(2) << std::endl;
-	std::cout << "num polygons " << convexMesh->getNbPolygons() << std::endl;
-	std::cout << "num verts    " << convexMesh->getNbVertices() << std::endl;
-	//d::cout << "num polygons " << convexMesh->getNbPolygons() << std::endl;
+	printv(DEBUG, "convex mesh\n");
+	//printv(DEBUG, b.getExtents(0));
+	//printv(DEBUG, b.getExtents(1));
+	//printv(DEBUG, b.getExtents(2));
+	printv(DEBUG, "num polygons %i\n", convexMesh->getNbPolygons());
+	printv(DEBUG, "num verts    %i\n", convexMesh->getNbVertices());
+	printv(DEBUG, "num polygons %i\n", convexMesh->getNbPolygons());
 
 	for(unsigned int c = 0; c < convexMesh->getNbVertices(); c++)
 	{
-		std::cout
-			<< std::setw(16) << nverts[c].x
-			<< std::setw(16) << nverts[c].y
-			<< std::setw(16) << nverts[c].z
-			<< std::endl;
+		printv(DEBUG, "%16f%16f%16f\n",
+			nverts[c].x,
+			nverts[c].y,
+			nverts[c].z);
 	}
 
 	//delete convexMesh;
 
 	return g;
 }
-bool		THIS::query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvexMeshGeometry& g1, glm::mat4 v1)
+bool		THIS::query(
+	physx::PxConvexMeshGeometry& g0,
+	glm::mat4 v0, physx::PxConvexMeshGeometry& g1,
+	glm::mat4 v1)
 {
 	assert(g0.isValid());
 	assert(g1.isValid());
@@ -244,32 +245,6 @@ bool		THIS::query(physx::PxConvexMeshGeometry& g0, glm::mat4 v0, physx::PxConvex
 	t0 = t0.getInverse();
 	t1 = t1.getInverse();
 
-/*	std::cout << "t0" << std::endl;
-	std::cout
-		<< std::setw(16) << t0.p.x
-		<< std::setw(16) << t0.p.y
-		<< std::setw(16) << t0.p.z
-		<< std::endl;
-	std::cout
-		<< std::setw(16) << t0.q.x
-		<< std::setw(16) << t0.q.y
-		<< std::setw(16) << t0.q.z
-		<< std::setw(16) << t0.q.w
-		<< std::endl;
-
-	std::cout << "t1" << std::endl;
-	std::cout
-		<< std::setw(16) << t1.p.x
-		<< std::setw(16) << t1.p.y
-		<< std::setw(16) << t1.p.z
-		<< std::endl;
-	std::cout
-		<< std::setw(16) << t1.q.x
-		<< std::setw(16) << t1.q.y
-		<< std::setw(16) << t1.q.z
-		<< std::setw(16) << t1.q.w
-		<< std::endl;
-*/
 	return physx::PxGeometryQuery::overlap(g0, t0, g1, t1);
 }
 /*bool	neb::frustrum_overlap(neb::gfx::environ::base * const e0, neb::gfx::environ::base * const e1)

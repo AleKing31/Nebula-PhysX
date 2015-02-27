@@ -7,7 +7,7 @@ neb::phx::core::shape::box::box()
 }
 void				neb::phx::core::shape::box::init(neb::fnd::core::shape::util::parent * const & p)
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	printv_func(DEBUG);
 
 	create_physics();
 }

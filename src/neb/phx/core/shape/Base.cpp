@@ -81,7 +81,6 @@ void			neb::phx::core::shape::base::create_physics()
   auto pxparent(dynamic_cast<neb::phx::core::shape::util::parent*>(parent));
 
   if(!pxparent) {
-  ::std::cout << typeid(*parent).name() << ::std::endl;
   abort();
   }
 
