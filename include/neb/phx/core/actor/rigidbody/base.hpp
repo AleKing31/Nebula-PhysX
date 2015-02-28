@@ -4,7 +4,7 @@
 #include <PxPhysicsAPI.h>
 
 #include <gal/stl/verbosity.hpp>
-#include <neb/fnd/math/pose.hpp>
+#include <gal/math/pose.hpp>
 
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>

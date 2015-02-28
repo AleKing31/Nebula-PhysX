@@ -53,7 +53,7 @@ void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 
 	delete[] shapes;
 }
-void		neb::phx::core::actor::rigidactor::base::set_pose_global(neb::fnd::math::pose pose)
+void		neb::phx::core::actor::rigidactor::base::set_pose_global(gal::math::pose pose)
 {
 	/** @todo if is nested actor, then this is wrong... */
 	pose_ = pose;

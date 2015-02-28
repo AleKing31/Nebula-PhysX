@@ -74,15 +74,15 @@ glm::mat4			neb::phx::util::convert(physx::PxTransform const & t)
 
 	return rot * tra;
 }
-physx::PxTransform	neb::phx::util::convert_pose(neb::fnd::math::pose const & pose)
+physx::PxTransform	neb::phx::util::convert_pose(gal::math::pose const & pose)
 {
 	return physx::PxTransform(
 			convert(pose.pos_),
 			convert(pose.rot_));
 }
-neb::fnd::math::pose	neb::phx::util::convert_pose(physx::PxTransform const & pose)
+gal::math::pose	neb::phx::util::convert_pose(physx::PxTransform const & pose)
 {
-	return neb::fnd::math::pose(
+	return gal::math::pose(
 			convert(pose.p),
 			convert(pose.q));
 }

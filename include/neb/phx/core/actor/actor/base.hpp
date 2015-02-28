@@ -3,7 +3,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/fnd/math/pose.hpp>
+#include <gal/math/pose.hpp>
 
 #include <neb/phx/core/actor/base.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>

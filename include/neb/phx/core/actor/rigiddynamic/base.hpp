@@ -26,8 +26,8 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace rig
 			//virtual void					add_force(double) = 0;
 			//virtual void					setPose(neb::fnd::pose const & pose);
 /*
-			neb::fnd::math::pose				getPoseGlobal() const;
-			neb::fnd::math::pose				getPose() const;
+			gal::math::pose				getPoseGlobal() const;
+			gal::math::pose				getPose() const;
 			virtual void	load(ba::polymorphic_iarchive & ar, unsigned int const &) = 0;
 			virtual void	save(ba::polymorphic_oarchive & ar, unsigned int const &) const = 0;
 			BOOST_SERIALIZATION_SPLIT_MEMBER();

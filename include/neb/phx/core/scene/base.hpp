@@ -13,7 +13,7 @@
 
 #include <neb/fnd/core/actor/util/parent.hpp>
 #include <neb/fnd/core/scene/Base.hpp>
-#include <neb/fnd/math/serialization/glm.hpp>
+#include <gal/math/serialization/glm.hpp>
 #include <neb/fnd/util/decl.hpp>
 #include <neb/fnd/net/util/decl.hpp>
 #include <neb/fnd/DebugBuffer.hpp>

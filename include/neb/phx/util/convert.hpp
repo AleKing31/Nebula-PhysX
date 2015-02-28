@@ -5,7 +5,7 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/fnd/math/pose.hpp>
+#include <gal/math/pose.hpp>
 
 namespace neb { namespace phx { namespace util {
 
@@ -21,8 +21,8 @@ namespace neb { namespace phx { namespace util {
 	glm::mat4		convert(physx::PxMat44 const & v);
 	glm::mat4		convert(physx::PxTransform const & t);
 	// pose
-	physx::PxTransform	convert_pose(neb::fnd::math::pose const & pose);
-	neb::fnd::math::pose	convert_pose(physx::PxTransform const & pose);
+	physx::PxTransform	convert_pose(gal::math::pose const & pose);
+	gal::math::pose	convert_pose(physx::PxTransform const & pose);
 	
 
 }}}
