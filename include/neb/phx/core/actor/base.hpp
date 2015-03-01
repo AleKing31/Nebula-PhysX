@@ -7,12 +7,11 @@
 #include <neb/phx/core/actor/util/cast.hpp>
 #include <neb/phx/core/actor/util/decl.hpp>
 #include <neb/phx/core/actor/util/parent.hpp>
-#include <neb/phx/core/shape/util/parent.hpp>
+//#include <neb/phx/core/shape/util/parent.hpp>
 //#include <neb/fnd/game/weapon/util/parent.hpp>
 #include <neb/fnd/game/weapon/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor {
-
 	class base:
 		virtual public neb::fnd::core::actor::base,
 		virtual public neb::phx::core::actor::util::cast,

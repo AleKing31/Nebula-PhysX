@@ -6,7 +6,7 @@
 #include <neb/phx/core/actor/util/parent.hpp>
 #include <neb/phx/core/actor/rigidactor/base.hpp>
 
-#include <neb/phx/core/shape/box.hpp>
+//#include <neb/phx/core/shape/box.hpp>
 
 //neb::fnd::actor::rigidactor::base::base() {
 //}
