@@ -16,13 +16,16 @@
 	neb::phx::core::actor::actor::base(parent)
 {
 }*/
-void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
+void		neb::phx::core::actor::rigidactor::base::setupFiltering()
+{
 	std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 
 	assert(px_actor_);
 	physx::PxRigidActor* actor = (physx::PxRigidActor*)px_actor_->isRigidActor();
 	assert(actor);
-	
+
+	// copy actor's filter data into PhysX objects
+
 	physx::PxFilterData coll_data;
 	coll_data.word0 = simulation_.word0;
 	coll_data.word1 = simulation_.word1;
@@ -35,6 +38,7 @@ void		neb::phx::core::actor::rigidactor::base::setupFiltering() {
 	sq_data.word2 = scene_query_.word2;
 	sq_data.word3 = scene_query_.word3;
 
+	// apply that data to each shape
 
 	const physx::PxU32 numShapes = actor->getNbShapes();
 	
