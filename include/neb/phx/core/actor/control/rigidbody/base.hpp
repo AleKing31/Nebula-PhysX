@@ -13,7 +13,7 @@
 #include <gal/stl/verbosity.hpp>
 #include <neb/fnd/core/actor/control/rigidbody/Base.hpp>
 
-#include <neb/phx/core/actor/util/decl.hpp>
+//#include <neb/phx/core/actor/util/decl.hpp>
 
 namespace neb { namespace phx { namespace core { namespace actor { namespace control { namespace rigidbody {
 	/** @brief Rigid Body
@@ -43,7 +43,6 @@ namespace neb { namespace phx { namespace core { namespace actor { namespace con
 			virtual void			serialize(boost::archive::polymorphic_iarchive & ar, unsigned int const & version);
 			virtual void			serialize(boost::archive::polymorphic_oarchive & ar, unsigned int const & version);
 		public:
-			std::weak_ptr<neb::phx::core::actor::rigidbody::base>		actor_;
 			glm::quat				q_target_;
 			glm::vec3				p_target_;
 			glm::vec3				f_;

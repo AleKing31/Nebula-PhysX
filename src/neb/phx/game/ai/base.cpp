@@ -1,9 +1,10 @@
 
 #include <neb/fnd/util/debug.hpp>
-
-#include <neb/phx/core/actor/rigidbody/base.hpp>
-#include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/fnd/game/ai/base.hpp>
+#include <neb/fnd/core/actor/rigidbody/Base.hpp>
+
+#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+
 
 typedef neb::fnd::game::ai::base THIS;
 
@@ -11,8 +12,9 @@ void			THIS::step(gal::etc::timestep const & ts)
 {
 	printv_func(DEBUG);
 
-	auto actor = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor_.lock());
-	//auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(actor_.lock());
+	//auto actor = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor_.lock());
+	auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::rigidbody::base>(actor_.lock());
+	
 	if(!actor) return;
 
 	auto target = target_.lock();

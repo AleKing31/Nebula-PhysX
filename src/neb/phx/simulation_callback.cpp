@@ -1,6 +1,9 @@
+#include <cassert>
 
 #include <neb/phx/simulation_callback.hh>
-#include <neb/phx/core/actor/actor/base.hpp>
+
+#include <neb/fnd/core/actor/actor/Base.hpp>
+//#include <neb/phx/core/actor/actor/base.hpp>
 
 void 	neb::phx::simulation_callback::onConstraintBreak(
 		physx::PxConstraintInfo *constraints, physx::PxU32 count)
@@ -37,14 +40,16 @@ void	neb::phx::simulation_callback::onContact(
 	//auto actor0 = static_cast<phx::core::actor::actor::base*>(pxactor0->userData)->isPxActorActorBase();
 	//auto actor1 = static_cast<phx::core::actor::actor::base*>(pxactor1->userData)->isPxActorActorBase();
 
-	auto actor0 = dynamic_pointer_cast<phx::core::actor::actor::base>(nactor0);
-	auto actor1 = dynamic_pointer_cast<phx::core::actor::actor::base>(nactor1);
+	/*
+	auto actor0 = std::dynamic_pointer_cast<neb::phx::core::actor::actor::base>(nactor0);
+	auto actor1 = std::dynamic_pointer_cast<neb::phx::core::actor::actor::base>(nactor1);
 	
 	printf("actor0 %p\n", actor0.get());
 	printf("actor1 %p\n", actor1.get());
 
 	assert(actor0);
 	assert(actor1);
+	*/
 
 	for(physx::PxU32 i=0; i < nbPairs; i++) {
 		const physx::PxContactPair& cp = pairs[i];
@@ -53,8 +58,10 @@ void	neb::phx::simulation_callback::onContact(
 	
 			printf("hit\n");
 		
-			actor0->hit();
-			actor1->hit();
+			//actor0->hit();
+			//actor1->hit();
+			nactor0->hit();
+			nactor1->hit();
 		}
 	}
 }

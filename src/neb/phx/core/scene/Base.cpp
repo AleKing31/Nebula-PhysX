@@ -13,9 +13,12 @@
 #include <neb/fnd/math/geo/polyhedron.hpp>
 #include <neb/fnd/net/core/scene/Base.hpp>
 
+#include <neb/fnd/core/actor/rigidstatic/base.hpp>
+#include <neb/fnd/core/actor/rigiddynamic/Base.hpp>
+
 #include <neb/phx/app/base.hpp>
-#include <neb/phx/core/actor/rigidstatic/base.hpp>
-#include <neb/phx/core/actor/rigiddynamic/base.hpp>
+//#include <neb/phx/core/actor/rigidstatic/base.hpp>
+//#include <neb/phx/core/actor/rigiddynamic/base.hpp>
 #include <neb/phx/core/scene/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
@@ -322,7 +325,8 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 
 			// if is rigidbody, also set velocity
 			if(pxrigidbody != NULL) {
-				auto rigidbody = ::std::dynamic_pointer_cast<phx::core::actor::rigidbody::base>(actor);
+				//auto rigidbody = std::dynamic_pointer_cast<neb::phx::core::actor::rigidbody::base>(actor);
+				auto rigidbody = std::dynamic_pointer_cast<neb::fnd::core::actor::rigidbody::base>(actor);
 				if(!rigidbody) {
 					std::cout << typeid(*actor).name() << ::std::endl;
 					abort();

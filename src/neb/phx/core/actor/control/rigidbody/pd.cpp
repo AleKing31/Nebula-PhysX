@@ -7,7 +7,9 @@
 
 #include <PxPhysicsAPI.h>
 
-#include <neb/phx/core/actor/rigidbody/base.hpp>
+//#include <neb/phx/core/actor/rigidbody/base.hpp>
+#include <neb/fnd/core/actor/rigidbody/Base.hpp>
+
 #include <neb/phx/core/actor/control/rigidbody/base.hpp>
 #include <neb/phx/util/convert.hpp>
 
@@ -65,7 +67,9 @@ void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep con
 	//auto actor = actor_->isActorActor();
 	assert(actor);
 
-	auto pxrigidbody = actor->px_actor_->isRigidBody();
+	auto rb = actor->is_fnd_actor_rigidbody_base();
+
+	//auto pxrigidbody = actor->px_actor_->isRigidBody();
 
 	// rotation from pose to target pose
 	glm::quat q(actor->pose_.rot_);
@@ -75,11 +79,13 @@ void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep con
 
 
 	// angular velocity
-	glm::vec3 omega = phx::util::convert(pxrigidbody->getAngularVelocity());
+	//glm::vec3 omega = phx::util::convert(pxrigidbody->getAngularVelocity());
+	glm::vec3 omega = actor->get_angular_velocity();
 
 	omega = q * omega;
 
-	physx::PxVec3 Ivec(pxrigidbody->getMassSpaceInertiaTensor());
+	//physx::PxVec3 Ivec(pxrigidbody->getMassSpaceInertiaTensor());
+	glm::vec3 Ivec = rb->get_mass_space_inertia_tensor();
 
 	glm::mat3 I;
 	I[0][0] = Ivec.x;
@@ -100,13 +106,15 @@ void		neb::phx::core::actor::control::rigidbody::pd::step(gal::etc::timestep con
 	{	
 		//vec3 velocity = phx::util::convert(pxrigidbody->getLinearVelocity());
 
-		physx::PxTransform trans = pxrigidbody->getGlobalPose();
+		//physx::PxTransform trans = pxrigidbody->getGlobalPose();
 
+		auto pose = actor->getPoseGlobal();
 
 		float c = 10.0;
 
 
-		glm::vec3 error = p_target_ - phx::util::convert(trans.p);
+		//glm::vec3 error = p_target_ - phx::util::convert(trans.p);
+		glm::vec3 error = p_target_ - pose.pos_;//phx::util::convert(trans.p);
 
 		force_ = c * error; // - c1 * velocity;
 	}

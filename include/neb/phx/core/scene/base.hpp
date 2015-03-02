@@ -19,8 +19,10 @@
 #include <neb/fnd/DebugBuffer.hpp>
 
 #include <neb/phx/tmp/Child.hpp>
-#include <neb/phx/core/actor/util/decl.hpp>
-#include <neb/phx/core/actor/util/parent.hpp>
+
+//#include <neb/phx/core/actor/util/decl.hpp>
+//#include <neb/phx/core/actor/util/parent.hpp>
+
 #include <neb/phx/simulation_callback.hh>
 
 typedef weak_ptr<neb::fnd::core::actor::base> wbase;
