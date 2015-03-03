@@ -31,7 +31,7 @@ void			neb::phx::user::connect(std::shared_ptr<neb::fnd::input::source> src)
 	//
 	*/
 }
-void			neb::phx::user::set_control(std::shared_ptr<neb::phx::core::actor::control::rigidbody::base> control) {
+void			neb::phx::user::set_control(std::shared_ptr<neb::fnd::core::actor::control::rigidbody::base> control) {
 	//NEBULA_DEBUG_0_FUNCTION;
 
 	control_ = control;

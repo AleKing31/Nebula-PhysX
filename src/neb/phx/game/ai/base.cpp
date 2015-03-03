@@ -3,7 +3,7 @@
 #include <neb/fnd/game/ai/base.hpp>
 #include <neb/fnd/core/actor/rigidbody/Base.hpp>
 
-#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+#include <neb/fnd/core/actor/control/rigidbody/PD.hpp>
 
 
 typedef neb::fnd::game::ai::base THIS;
@@ -23,7 +23,7 @@ void			THIS::step(gal::etc::timestep const & ts)
 	auto control = actor->control_;
 	if(!control) return;
 
-	auto pd = std::dynamic_pointer_cast<neb::phx::core::actor::control::rigidbody::pd>(control);
+	auto pd = std::dynamic_pointer_cast<neb::fnd::core::actor::control::rigidbody::PD>(control);
 
 	if(!pd) return;
 	

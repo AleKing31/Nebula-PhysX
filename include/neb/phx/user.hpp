@@ -22,7 +22,7 @@ namespace neb { namespace phx {
 			user();
 			void		init();
 			void		connect(std::shared_ptr<neb::fnd::input::source>);
-			void		set_control(std::shared_ptr<neb::phx::core::actor::control::rigidbody::base>);
+			void		set_control(std::shared_ptr<neb::fnd::core::actor::control::rigidbody::base>);
 			std::shared_ptr<neb::fnd::core::actor::control::rigidbody::base>		control_;
 			
 	};
