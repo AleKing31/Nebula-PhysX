@@ -5,7 +5,7 @@ INCLUDE($ENV{HOME}/.config.cmake)
 
 FIND_PACKAGE(CMakeHelper)
 
-PROJECT(nebula_physx)
+PROJECT(nebula_gfx)
 INCLUDE(../../config.cmake)
 INCLUDE(cmh_build_config)
 
@@ -13,7 +13,6 @@ SET(SHARED True)
 
 FIND_PACKAGE(glfw)
 FIND_PACKAGE(PhysX)
-
 FIND_PACKAGE(galaxy 0 COMPONENTS
 	std
 	log
@@ -49,22 +48,25 @@ SET(libs
 	#galaxy_log_0
 	#galaxy_console_0
 	${Boost_LIBRARIES}
-	${physX_LIBRARIES}
+	${PhysX_LIBRARIES}
+	png
 	)
 
 INCLUDE(cmh_library)
 
-add_subdirectory(test)
+#add_subdirectory(test)
 """
 
-l = Static("nebula_physx")
+l = Dynamic("nebula_plugin_phx1")
 
-l.require("galaxy_std")
-l.require("galaxy_log")
-l.require("galaxy_console")
-l.require("nebula_core")
-l.require("physx")
+l.require("galaxy_std", whole=True)
+l.require("galaxy_log", whole=True)
+l.require("galaxy_console", whole=True)
+l.require("nebula_core", whole=True)
+l.require("nebula_physx", whole=True)
+l.require("physx", whole=True)
 
 l.make()
+
 
 
