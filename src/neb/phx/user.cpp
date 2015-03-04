@@ -3,7 +3,8 @@
 
 #include <neb/fnd/util/config.hpp>
 
-#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+//#include <neb/phx/core/actor/control/rigidbody/base.hpp>
+
 #include <neb/phx/user.hpp>
 
 neb::phx::user::user()

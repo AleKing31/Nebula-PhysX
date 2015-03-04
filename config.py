@@ -63,7 +63,6 @@ l.require("galaxy_std", whole=True)
 l.require("galaxy_log", whole=True)
 l.require("galaxy_console", whole=True)
 l.require("nebula_core", whole=True)
-l.require("nebula_physx", whole=True)
 l.require("physx", whole=True)
 
 l.make()
