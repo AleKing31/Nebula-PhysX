@@ -1,3 +1,5 @@
+#include <neb/fnd/core/shape/base.hpp>
+
 #include <neb/phx/core/shape/Frustrum.hpp>
 /*
 #include <neb/phx/util/convert.hpp>
