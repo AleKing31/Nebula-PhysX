@@ -15,12 +15,12 @@ typedef neb::phx::core::actor::rigiddynamic::base THIS;
 
 void			THIS::release()
 {
-	printv_func(INFO);
+	printv_func(DEBUG);
 	neb::phx::core::actor::actor::base::release();
 }
 void			THIS::init(parent_t * const & p)
 {
-	printv_func(INFO);
+	printv_func(DEBUG);
 
 	setParent(p);
 
@@ -33,6 +33,8 @@ void			THIS::init(parent_t * const & p)
 }
 void			THIS::step(gal::etc::timestep const & ts)
 {
+	printv_func(DEBUG);
+
 	neb::phx::core::actor::rigidbody::base::step(ts);
 }
 void			THIS::create_physics()

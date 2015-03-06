@@ -91,7 +91,7 @@ void			neb::phx::core::actor::rigidbody::base::add_force(double time)
 }
 void		neb::phx::core::actor::rigidbody::base::step(gal::etc::timestep const & ts)
 {
-	printv_func(INFO);
+	printv_func(DEBUG);
 
 	/*
 	if(control_) {

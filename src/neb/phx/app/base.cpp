@@ -14,6 +14,9 @@
 #include <neb/fnd/core/scene/Base.hpp>
 #include <neb/fnd/util/debug.hpp>
 
+#include <neb/phx/core/scene/util/decl.hpp>
+#include <neb/phx/core/actor/util/decl.hpp>
+#include <neb/phx/core/shape/util/decl.hpp>
 #include <neb/phx/simulation_callback.hh>
 #include <neb/phx/app/base.hpp>
 #include <neb/phx/test.hpp>
@@ -83,7 +86,18 @@ THIS::base():
 void				THIS::init(parent_t * const & parent)
 {
 	setParent(parent);
+	
+	typedef gal::tmp::VerbosityRegister VR;
 
+	parent->VR::reg<neb::phx::core::scene::base>(			"neb phx core scene base");
+
+	parent->VR::reg<neb::phx::core::actor::base>(			"neb phx core actor base");
+	parent->VR::reg<neb::phx::core::actor::rigidbody::base>(	"neb phx core actor rigidbody base");
+	parent->VR::reg<neb::phx::core::actor::rigiddynamic::base>(	"neb phx core actor rigiddynamic base");
+	parent->VR::reg<neb::phx::core::actor::rigidstatic::base>(	"neb phx core actor rigidstatic base");
+
+	parent->VR::reg<neb::phx::core::shape::base>(			"neb phx core shape base");
+	
 	// Physx
 	// Foundation
 	px_foundation_ = PxCreateFoundation(

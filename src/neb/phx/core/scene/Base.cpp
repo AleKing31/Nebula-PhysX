@@ -275,7 +275,7 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 		printv(DEBUG, "actor = %p\n");
 	};
 
-	parent->A::map_.for_each(lambda_lock);
+	parent->A::for_each(lambda_lock);
 
 	printv(DEBUG, "actors locked\n");
 	/*A::map_.for_each<0>([&] (A::map_type::iterator<0> it) {
@@ -355,7 +355,7 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 		actor->mutex_.unlock();
 	};
 
-	parent->A::map_.for_each(lambda_unlock);
+	parent->A::for_each(lambda_unlock);
 
 	// vehicle
 	//physx::PxVec3 g(0,-0.25,0);
