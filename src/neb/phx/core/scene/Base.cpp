@@ -268,8 +268,8 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 	//========================================================================
 	// lock all actors
 
-	auto lambda_lock = [&] (A::map_type::pointer p) {
-		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
+	auto lambda_lock = [&] (A::S const & s) {
+		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(s);
 		assert(actor);
 		actor->mutex_.lock();
 		printv(DEBUG, "actor = %p\n");
@@ -349,8 +349,8 @@ void			THIS::step_physics(gal::etc::timestep const & ts)
 	}
 	// unlock all actors
 
-	auto lambda_unlock = [&] (A::map_type::pointer p) {
-		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(p);
+	auto lambda_unlock = [&] (A::S const s) {
+		auto actor = std::dynamic_pointer_cast<neb::fnd::core::actor::base>(s);
 		assert(actor);
 		actor->mutex_.unlock();
 	};
